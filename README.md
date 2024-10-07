@@ -1,12 +1,25 @@
-# WYATT
+# wyatt
+
+When
+You
+Are
+There
+Then ...
 
 ## Steps
 
-- [ ] Ask user to provide a key and store it on the client: [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
+- [x] `flutter create --platforms android,ios wyatt`
+- [ ] Ask user to provide a key (the Google Maps API key) and store it securely on the client: [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
+
+## To do
+
+- [ ] Add intl
+- [ ] Add tests
 
 ## Open
 
-- [ ] [ENVied](https://codewithandrea.com/articles/flutter-api-keys-dart-define-env-files/#enter-envied) up
+- [ ] [ENVied](https://codewithandrea.com/articles/flutter-api-keys-dart-define-env-files/#enter-envied) up?
+- [ ] License?
 
 ## References
 

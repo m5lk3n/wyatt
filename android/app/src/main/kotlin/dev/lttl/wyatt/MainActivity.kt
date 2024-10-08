@@ -1,4 +1,4 @@
-package com.example.wyatt
+package dev.lttl.wyatt
 
 import io.flutter.embedding.android.FlutterActivity
 

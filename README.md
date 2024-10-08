@@ -29,6 +29,10 @@ Then ...
 - [ ] [ENVied](https://codewithandrea.com/articles/flutter-api-keys-dart-define-env-files/#enter-envied) up?
 - [ ] License?
 
-## References
+## WIP
 
 - https://stackoverflow.com/questions/51895194/correct-way-of-storing-api-keys-in-flutter-following-best-practises
+
+## Acknowledgements
+
+- Logo created by Microsoft Copilot

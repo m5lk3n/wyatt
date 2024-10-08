@@ -7,6 +7,7 @@ help:
 ## install: add all required dependencies
 .PHONY: install
 install:
+	flutter pub add google_fonts
 	flutter pub add flutter_secure_storage
 
 ## update: update all dependencies

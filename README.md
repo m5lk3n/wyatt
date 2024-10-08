@@ -22,6 +22,7 @@ Then ...
 
 - [ ] Add intl
 - [ ] Add tests
+- [ ] Fix logo background
 
 ## Open
 

@@ -29,3 +29,8 @@ test:
 .PHONY: run
 run:
 	flutter run
+
+## logo: regenerate app icons (from assets/icon/icon.png)
+.PHONY: logo
+logo:
+	flutter pub run flutter_launcher_icons

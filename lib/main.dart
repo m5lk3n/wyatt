@@ -24,7 +24,7 @@ class WyattApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wyatt',
       theme: theme,
-      home: const WyattSetupScreen(title: 'Wyatt Setup'),
+      home: const WyattSetupScreen(title: 'Set up Wyatt'),
     );
   }
 }

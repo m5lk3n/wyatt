@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
+const _padding = EdgeInsets.all(16);
 
 class WyattSetupScreen extends StatefulWidget {
   const WyattSetupScreen({super.key, required this.title});
@@ -9,12 +13,29 @@ class WyattSetupScreen extends StatefulWidget {
 }
 
 class _WyattSetupScreenState extends State<WyattSetupScreen> {
-  String _key = "";
+  final _keyController = TextEditingController();
 
-  void _setKey() {
-    setState(() {
-      _key = "TODO";
-    });
+  @override
+  void dispose() {
+    _keyController.dispose();
+    super.dispose();
+  }
+
+  _saveKey() {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+    final key = _keyController.text.trim();
+
+    if (key.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Please enter a key')));
+      return;
+    }
+
+    log('Key: $key');
+
+    // TODO: disable floatingActionButton and lose focus
+    // TODO: Save key using flutter_secure_storage
   }
 
   Widget _createAboutDialog() {
@@ -75,26 +96,34 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Enter your key:',
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+            Padding(
+              padding: _padding,
+              child: Text(
+                'Howdy!\n\nPlease obtain a key from [here](TODO), enter it below and save.',
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Text(
-              _key,
-              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+            Padding(
+              padding: _padding,
+              child: TextField(
+                controller: _keyController,
+                decoration: const InputDecoration(label: Text("Key")),
+                maxLength: 40,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _setKey,
+        onPressed: _saveKey,
         tooltip: 'Save',
         child: const Icon(Icons.save),
       ),

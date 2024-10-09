@@ -22,7 +22,8 @@ Then ...
 
 - [ ] Add intl
 - [ ] Add tests
-- [ ] Fix logo background
+- [ ] Use pubspec's app name and version in about box and rest of app
+- [ ] Automate builds
 
 ## Open
 

@@ -17,6 +17,25 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
     });
   }
 
+  Widget _createAboutDialog() {
+    return AboutDialog(
+      applicationName: 'Wyatt',
+      applicationVersion: '0.0.1',
+      applicationIcon: CircleAvatar(
+        child: Image.asset("assets/images/logo.png"),
+      ),
+      applicationLegalese: '${DateTime.now().year} by lttl.dev',
+      children: [
+        Text(
+          '\nWhen You Are There, Then...',
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +57,16 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              // TODO: Show about dialog
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Theme(
+                    data: Theme.of(context)
+                        .copyWith(dialogBackgroundColor: Colors.brown),
+                    child: _createAboutDialog(),
+                  );
+                },
+              );
             },
           )
         ],
@@ -52,6 +80,9 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Text(
               _key,

@@ -33,4 +33,4 @@ run:
 ## icons: regenerate application launcher icons (from assets/icon/icon.png)
 .PHONY: icons
 icons:
-	flutter pub run flutter_launcher_icons
+	dart run flutter_launcher_icons

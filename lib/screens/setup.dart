@@ -23,6 +23,25 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        /*
+        leading: IconButton(
+          onPressed: () {
+            // TODO: Navigate to home screen
+          },
+          icon: Icon(Icons.home),
+        ),
+        */
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // TODO: Show about dialog
+            },
+          )
+        ],
       ),
       body: Center(
         child: Column(

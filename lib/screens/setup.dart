@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const _padding = EdgeInsets.all(16);
 
@@ -61,7 +63,17 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+
         title: Text(widget.title),
         /*
         leading: IconButton(
@@ -98,8 +110,14 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
           children: <Widget>[
             Padding(
               padding: _padding,
-              child: Text(
-                'Howdy!\n\nPlease obtain a key from [here](TODO), enter it below and save.',
+              child: Linkify(
+                onOpen: (link) async {
+                  if (!await launchUrl(Uri.parse(link.url))) {
+                    throw Exception('Could not launch ${link.url}');
+                  }
+                },
+                text:
+                    'Howdy!\n\nPlease obtain a key from http://dev.home/wyatt, enter it below and save.',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),

@@ -8,6 +8,8 @@ help:
 .PHONY: install
 install:
 	flutter pub add google_fonts
+	flutter pub add flutter_linkify
+	flutter pub add url_launcher
 	flutter pub add flutter_secure_storage
 
 ## update: update all dependencies

@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:wyatt/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -117,7 +117,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
                   }
                 },
                 text:
-                    'Howdy!\n\nPlease obtain a key from http://dev.home/wyatt, enter it below and save.',
+                    'Howdy!\n\nPlease obtain a key from ${Constants.keyUrl}, enter it below and save.',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),

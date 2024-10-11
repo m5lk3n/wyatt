@@ -10,7 +10,7 @@
             "type": "dart",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://dev.home/wyatt"
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // http://dev.home/wyatt"
             ]
         },
         {
@@ -20,7 +20,7 @@
             "flutterMode": "profile",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://dev.home/wyatt"
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // http://dev.home/wyatt"
             ]
         },
         {
@@ -30,7 +30,7 @@
             "flutterMode": "release",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://lttl.dev/wyatt"
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // http://lttl.dev/wyatt"
             ]
         }
     ]

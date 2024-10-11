@@ -1,4 +1,4 @@
-import 'package:wyatt/constants.dart';
+import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,11 +41,13 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
 
   IOSOptions _getIOSOptions() => IOSOptions(
         accountName: _getKey(),
+        accessibility: KeychainAccessibility
+            .first_unlock, // running in the background? https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#getting-started
       );
 
   Future<void> _readKey() async {
     final key = await _storage.read(
-      key: Constants.keyKey,
+      key: Common.keyKey,
       iOptions: _getIOSOptions(),
     );
     _keyController.text = key?.trim() ?? '';
@@ -66,7 +68,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
     });
 
     await _storage.write(
-      key: Constants.keyKey,
+      key: Common.keyKey,
       value: keyValue,
       iOptions: _getIOSOptions(),
     );
@@ -79,8 +81,8 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
 
   Widget _createAboutDialog() {
     return AboutDialog(
-      applicationName: Constants.appName,
-      applicationVersion: Constants.appVersion,
+      applicationName: Common.appName,
+      applicationVersion: Common.appVersion,
       applicationIcon: CircleAvatar(
         child: Image.asset("assets/images/logo.png"),
       ),
@@ -154,7 +156,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
                   }
                 },
                 text:
-                    'Howdy!\n\nPlease obtain a key from ${Constants.keyUrl} and enter it below, then save.',
+                    'Howdy!\n\nPlease obtain a key from ${Common.keyUrl} and enter it below, then save.',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),

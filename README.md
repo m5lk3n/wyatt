@@ -35,12 +35,6 @@ Then ...
 
 ## [Bookmarks](BOOKMARKS.md)
 
-## WIP
-
-- https://pub.dev/packages/flutter_secure_storage/example
-- https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage
-- https://github.com/mogol/flutter_secure_storage/blob/develop/flutter_secure_storage/example/lib/main.dart
-
 ## Acknowledgements
 
 - Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)

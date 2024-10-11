@@ -1,7 +1,9 @@
+import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wyatt/screens/setup.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -12,8 +14,25 @@ final theme = ThemeData(
   textTheme: GoogleFonts.latoTextTheme(),
 );
 
-void main() {
+// https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
+extension StringExtensions on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initApp();
+
   runApp(const WyattApp());
+}
+
+Future<void> initApp() async {
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  Common.appName = packageInfo.appName.capitalize();
+  Common.appVersion = packageInfo.version;
 }
 
 class WyattApp extends StatelessWidget {
@@ -22,9 +41,9 @@ class WyattApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Wyatt',
+      title: Common.appName,
       theme: theme,
-      home: const WyattSetupScreen(title: 'Set up Wyatt'),
+      home: WyattSetupScreen(title: 'Set up ${Common.appName}'),
     );
   }
 }

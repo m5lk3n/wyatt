@@ -24,7 +24,7 @@ Then ...
 - [ ] Add tests
 - [ ] Add delete key (and any other local data)
 - [ ] Use pubspec's app name and version in about box and rest of app
-- [ ] Automate builds
+- [ ] Automate builds (with `flutter build apk --obfuscate "--dart-define=KEY_URL=http://lttl.dev/wyatt...`)
 
 ## Open
 
@@ -33,9 +33,13 @@ Then ...
 - [ ] License?
 - [ ] Copyright background?
 
+## [Bookmarks](BOOKMARKS.md)
+
 ## WIP
 
-- https://stackoverflow.com/questions/51895194/correct-way-of-storing-api-keys-in-flutter-following-best-practises
+- https://pub.dev/packages/flutter_secure_storage/example
+- https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage
+- https://github.com/mogol/flutter_secure_storage/blob/develop/flutter_secure_storage/example/lib/main.dart
 
 ## Acknowledgements
 

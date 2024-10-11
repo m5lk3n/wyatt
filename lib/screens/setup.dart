@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:wyatt/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -6,6 +5,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const _padding = EdgeInsets.all(16);
+// https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#note-usage-of-encryptedsharedpreference
+AndroidOptions _getAndroidOptions() => const AndroidOptions(
+      encryptedSharedPreferences: true,
+    );
 
 class WyattSetupScreen extends StatefulWidget {
   const WyattSetupScreen({super.key, required this.title});
@@ -17,49 +20,67 @@ class WyattSetupScreen extends StatefulWidget {
 
 class _WyattSetupScreenState extends State<WyattSetupScreen> {
   final _keyController = TextEditingController();
-  final _storage = const FlutterSecureStorage();
+  final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+  bool _isSaving = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _readKey();
+  }
 
   @override
   void dispose() {
     _keyController.dispose();
+
     super.dispose();
   }
 
-  AndroidOptions _getAndroidOptions() => const AndroidOptions(
-        encryptedSharedPreferences: true,
+  String? _getKey() => _keyController.text.isEmpty ? null : _keyController.text;
+
+  IOSOptions _getIOSOptions() => IOSOptions(
+        accountName: _getKey(),
       );
 
+  Future<void> _readKey() async {
+    final key = await _storage.read(
+      key: Constants.keyKey,
+      iOptions: _getIOSOptions(),
+    );
+    _keyController.text = key?.trim() ?? '';
+  }
+
   _saveKey() async {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
+    scaffold.hideCurrentSnackBar();
 
     final keyValue = _keyController.text.trim();
-
-    final existingKey = await _storage.read(
-        key: Constants.keyKey, aOptions: _getAndroidOptions());
-    log("Old key (if any): $existingKey");
-
     if (keyValue.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Please enter a key')));
+      scaffold.showSnackBar(SnackBar(content: Text('Please enter a key')));
       return;
     }
 
-    log('Entered key: $keyValue');
+    setState(() {
+      _isSaving = true;
+    });
 
-    await _storage.write(key: Constants.keyKey, value: keyValue);
+    await _storage.write(
+      key: Constants.keyKey,
+      value: keyValue,
+      iOptions: _getIOSOptions(),
+    );
+    scaffold.showSnackBar(SnackBar(content: Text('Key saved')));
 
-    final newKey = await _storage.read(
-        key: Constants.keyKey, aOptions: _getAndroidOptions());
-    log("New key: $newKey");
-
-    // TODO: disable floatingActionButton and lose focus
-    // TODO: Save key using flutter_secure_storage
+    setState(() {
+      _isSaving = false;
+    });
   }
 
   Widget _createAboutDialog() {
     return AboutDialog(
-      applicationName: 'Wyatt',
-      applicationVersion: '0.0.1',
+      applicationName: Constants.appName,
+      applicationVersion: Constants.appVersion,
       applicationIcon: CircleAvatar(
         child: Image.asset("assets/images/logo.png"),
       ),
@@ -133,7 +154,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
                   }
                 },
                 text:
-                    'Howdy!\n\nPlease obtain a key from ${Constants.keyUrl}, enter it below and save.',
+                    'Howdy!\n\nPlease obtain a key from ${Constants.keyUrl} and enter it below, then save.',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
@@ -157,8 +178,12 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _saveKey,
-        tooltip: 'Save',
+        onPressed: _isSaving ? null : _saveKey,
+        tooltip: _isSaving ? 'Saving...' : 'Save',
+        backgroundColor: // https://api.flutter.dev/flutter/material/FloatingActionButton-class.html
+            _isSaving
+                ? Theme.of(context).colorScheme.secondary
+                : null /* default */,
         child: const Icon(Icons.save),
       ),
     );

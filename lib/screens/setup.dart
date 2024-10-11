@@ -3,6 +3,7 @@ import 'package:wyatt/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const _padding = EdgeInsets.all(16);
 
@@ -16,6 +17,7 @@ class WyattSetupScreen extends StatefulWidget {
 
 class _WyattSetupScreenState extends State<WyattSetupScreen> {
   final _keyController = TextEditingController();
+  final _storage = const FlutterSecureStorage();
 
   @override
   void dispose() {
@@ -23,18 +25,32 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
     super.dispose();
   }
 
-  _saveKey() {
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+        encryptedSharedPreferences: true,
+      );
+
+  _saveKey() async {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-    final key = _keyController.text.trim();
+    final keyValue = _keyController.text.trim();
 
-    if (key.isEmpty) {
+    final existingKey = await _storage.read(
+        key: Constants.keyKey, aOptions: _getAndroidOptions());
+    log("Old key (if any): $existingKey");
+
+    if (keyValue.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Please enter a key')));
       return;
     }
 
-    log('Key: $key');
+    log('Entered key: $keyValue');
+
+    await _storage.write(key: Constants.keyKey, value: keyValue);
+
+    final newKey = await _storage.read(
+        key: Constants.keyKey, aOptions: _getAndroidOptions());
+    log("New key: $newKey");
 
     // TODO: disable floatingActionButton and lose focus
     // TODO: Save key using flutter_secure_storage

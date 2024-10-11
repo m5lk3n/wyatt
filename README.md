@@ -22,6 +22,7 @@ Then ...
 
 - [ ] Add intl
 - [ ] Add tests
+- [ ] Add delete key (and any other local data)
 - [ ] Use pubspec's app name and version in about box and rest of app
 - [ ] Automate builds
 

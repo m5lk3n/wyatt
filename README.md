@@ -39,4 +39,4 @@ Then ...
 ## Acknowledgements
 
 - Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
-- The Wyatt logo was created by Microsoft Copilot
+- Copilot for the Wyatt logo and the AppBar background

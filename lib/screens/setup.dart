@@ -67,7 +67,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/background.jpg"),
+              image: AssetImage("assets/images/appbar-bg.jpeg"),
               fit: BoxFit.cover,
             ),
           ),

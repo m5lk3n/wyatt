@@ -33,6 +33,7 @@ Future<void> initApp() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   Common.appName = packageInfo.appName.capitalize();
   Common.appVersion = packageInfo.version;
+  Common.packageName = packageInfo.packageName;
 }
 
 class WyattApp extends StatelessWidget {

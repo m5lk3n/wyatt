@@ -5,20 +5,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wyatt/screens/setup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+// https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
+extension StringExtensions on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}
+
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     brightness: Brightness.dark,
     seedColor: const Color.fromARGB(255, 131, 57, 0),
   ),
-  textTheme: GoogleFonts.latoTextTheme(),
+  textTheme: GoogleFonts.robotoSlabTextTheme(), // GoogleFonts.latoTextTheme(),
 );
 
-// https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
-extension StringExtensions on String {
-  String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1)}";
-  }
+Future<void> initApp() async {
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  Common.appName = packageInfo.appName.capitalize();
+  Common.appVersion = packageInfo.version;
+  Common.packageName = packageInfo.packageName;
 }
 
 void main() async {
@@ -27,13 +34,6 @@ void main() async {
   await initApp();
 
   runApp(const WyattApp());
-}
-
-Future<void> initApp() async {
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  Common.appName = packageInfo.appName.capitalize();
-  Common.appVersion = packageInfo.version;
-  Common.packageName = packageInfo.packageName;
 }
 
 class WyattApp extends StatelessWidget {

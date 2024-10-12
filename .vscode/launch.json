@@ -30,7 +30,7 @@
             "flutterMode": "release",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // http://lttl.dev/wyatt"
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // https://developers.google.com/maps/documentation/geocoding/get-api-key
             ]
         }
     ]

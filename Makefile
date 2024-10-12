@@ -12,6 +12,7 @@ install:
 	flutter pub add flutter_linkify
 	flutter pub add url_launcher
 	flutter pub add flutter_secure_storage
+	flutter pub add http
 
 ## update: update all dependencies
 .PHONY: update

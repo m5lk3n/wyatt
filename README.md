@@ -1,4 +1,4 @@
-# wyatt
+# Wyatt
 
 When
 You
@@ -20,19 +20,30 @@ Then ...
 
 - [x] Ask user to provide a key (the Google Maps API key) and store it securely on the client: [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
 
+- [ ] Manage locations
+  - [ ] Add a location
+  - [ ] Delete a location
+
+- [ ] Implement Haversine
+
+- [ ] Implement notification
+
 ## To do
 
-- [ ] Add intl
+- [ ] Clarify permissions
+  - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
+- [ ] Add `intl`
 - [ ] Add tests
 - [ ] Add delete key (and any other local data)
-- [ ] Automate builds (with `flutter build apk --obfuscate "--dart-define=KEY_URL=http://lttl.dev/wyatt...`)
+- [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
+- [ ] Generate `lttl.dev/wyatt/index.html`
+- [ ] Clean up assets
 
 ## Open
 
-- [ ] Support landscape mode?
-- [ ] [ENVied](https://codewithandrea.com/articles/flutter-api-keys-dart-define-env-files/#enter-envied) up?
-- [ ] License?
-- [ ] Copyright background?
+- Merge nearby locations?
+- Support landscape mode?
+- License?
 
 ## [Bookmarks](BOOKMARKS.md)
 
@@ -40,3 +51,4 @@ Then ...
 
 - Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 - Copilot for the Wyatt logo and the AppBar background
+- Google for Maps and font

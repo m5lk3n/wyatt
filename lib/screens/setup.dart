@@ -1,8 +1,13 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:wyatt/models/network.dart';
 
 const _padding = EdgeInsets.all(16);
 // https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#note-usage-of-encryptedsharedpreference
@@ -21,7 +26,7 @@ class WyattSetupScreen extends StatefulWidget {
 class _WyattSetupScreenState extends State<WyattSetupScreen> {
   final _keyController = TextEditingController();
   final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
-  bool _isSaving = false;
+  bool _isProcessing = false;
 
   @override
   void initState() {
@@ -64,7 +69,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
     }
 
     setState(() {
-      _isSaving = true;
+      _isProcessing = true;
     });
 
     await _storage.write(
@@ -72,10 +77,17 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
       value: keyValue,
       iOptions: _getIOSOptions(),
     );
-    scaffold.showSnackBar(SnackBar(content: Text('Key saved')));
+
+    if (await validateKey(keyValue)) {
+      scaffold.showSnackBar(SnackBar(content: Text('The key is valid.')));
+    } else {
+      scaffold.showSnackBar(SnackBar(
+          backgroundColor: Colors.deepOrange,
+          content: Text('The key is invalid, the app won\'t work.')));
+    }
 
     setState(() {
-      _isSaving = false;
+      _isProcessing = false;
     });
   }
 
@@ -180,14 +192,33 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _isSaving ? null : _saveKey,
-        tooltip: _isSaving ? 'Saving...' : 'Save',
+        onPressed: _isProcessing ? null : _saveKey,
+        tooltip: _isProcessing ? 'Saving...' : 'Save',
         backgroundColor: // https://api.flutter.dev/flutter/material/FloatingActionButton-class.html
-            _isSaving
+            _isProcessing
                 ? Theme.of(context).colorScheme.secondary
                 : null /* default */,
         child: const Icon(Icons.save),
       ),
     );
+  }
+
+  Future<bool> validateKey(String key) async {
+    final response = await http.get(Uri.parse(
+        // https://developers.google.com/maps/documentation/geocoding/start
+        'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=$key'));
+    if (response.statusCode == 200) {
+      try {
+        GeocodeAddress.fromJson(
+            jsonDecode(response.body) as Map<String, dynamic>);
+        log('Key validation successful');
+
+        return true;
+      } catch (e) {
+        log('Key validation failed with: $e');
+      }
+    }
+
+    return false;
   }
 }

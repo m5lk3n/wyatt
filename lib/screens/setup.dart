@@ -60,7 +60,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
 
   _saveKey() async {
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
-    scaffold.hideCurrentSnackBar();
+    scaffold.clearSnackBars();
 
     final keyValue = _keyController.text.trim();
     if (keyValue.isEmpty) {

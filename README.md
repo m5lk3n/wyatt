@@ -23,6 +23,8 @@ Then ...
 - [ ] Manage locations
   - [ ] Add a location
   - [ ] Delete a location
+  - [ ] Load locations into an overview grid ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
+  - [ ] Sort locations overview by (due) date
 
 - [ ] Implement Haversine
 

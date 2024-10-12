@@ -40,9 +40,10 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   package_info_plus: ^8.0.3
   http: ^1.2.2
+  uuid: ^4.5.1
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.1
   flutter_test:
     sdk: flutter
 

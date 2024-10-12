@@ -1,5 +1,6 @@
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wyatt/screens/setup.dart';
@@ -33,7 +34,11 @@ void main() async {
 
   await initApp();
 
-  runApp(const WyattApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, // TODO
+  ]).then((fn) {
+    runApp(const WyattApp());
+  });
 }
 
 class WyattApp extends StatelessWidget {

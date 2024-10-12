@@ -13,6 +13,7 @@ install:
 	flutter pub add url_launcher
 	flutter pub add flutter_secure_storage
 	flutter pub add http
+	flutter pub add uuid
 
 ## update: update all dependencies
 .PHONY: update

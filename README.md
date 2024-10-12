@@ -6,6 +6,14 @@ Are
 There
 Then ...
 
+A location-based To-Do app for iOS and Android.
+
+:construction_worker:
+
+## Tips
+
+- If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100m from the center of the mall as this probably doesn't trigger a notification around the mall.
+
 ## Steps
 
 - [x] `flutter create --platforms android,ios --org dev.lttl wyatt`
@@ -26,14 +34,20 @@ Then ...
   - [ ] Load locations into an overview grid ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
   - [ ] Sort locations overview by (due) date
 
-- [ ] Implement Haversine
+- [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
+
+- [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - [ ] Implement notification
 
 ## To do
 
+- [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
+- [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
+  - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
+  - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
 - [ ] Add `intl`
 - [ ] Add tests
 - [ ] Add delete key (and any other local data)
@@ -43,6 +57,8 @@ Then ...
 
 ## Open
 
+- Suspend app, wake up?
+- Recover from "panic"/exception (loss of connectivity in a tunnel?)
 - Merge nearby locations?
 - Support landscape mode?
 - License?

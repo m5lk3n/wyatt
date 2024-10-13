@@ -9,21 +9,20 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:wyatt/models/network.dart';
 
-const _padding = EdgeInsets.all(16);
 // https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#note-usage-of-encryptedsharedpreference
 AndroidOptions _getAndroidOptions() => const AndroidOptions(
       encryptedSharedPreferences: true,
     );
 
-class WyattSetupScreen extends StatefulWidget {
-  const WyattSetupScreen({super.key, required this.title});
+class SetupScreen extends StatefulWidget {
+  const SetupScreen({super.key, required this.title});
   final String title;
 
   @override
-  State<WyattSetupScreen> createState() => _WyattSetupScreenState();
+  State<SetupScreen> createState() => _SetupScreenState();
 }
 
-class _WyattSetupScreenState extends State<WyattSetupScreen> {
+class _SetupScreenState extends State<SetupScreen> {
   final _keyController = TextEditingController();
   final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
   bool _isProcessing = false;
@@ -160,7 +159,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: _padding,
+              padding: padding,
               child: Linkify(
                 onOpen: (link) async {
                   if (!await launchUrl(Uri.parse(link.url))) {
@@ -178,7 +177,7 @@ class _WyattSetupScreenState extends State<WyattSetupScreen> {
               height: 10,
             ),
             Padding(
-              padding: _padding,
+              padding: padding,
               child: TextField(
                 controller: _keyController,
                 decoration: const InputDecoration(label: Text("Key")),

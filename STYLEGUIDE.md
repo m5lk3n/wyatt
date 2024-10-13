@@ -7,3 +7,5 @@
 - [Material 3 style template](https://flutter.github.io/samples/web/material_3_demo/)
 
 - [Icons (class)](https://api.flutter.dev/flutter/material/Icons-class.html)
+
+- [Dialogs](https://m3.material.io/components/dialogs/specs)

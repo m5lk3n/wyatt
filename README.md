@@ -6,7 +6,7 @@ Are
 There
 Then ...
 
-A location-based To-Do app for iOS and Android.
+A location-based To-do app for iOS and Android.
 
 :construction_worker:
 
@@ -58,6 +58,7 @@ A location-based To-Do app for iOS and Android.
 
 - [ ] Settings
   - [ ] Save a key
+  - [ ] Metric/Imperial units (?)
   - [ ] Reset to factory settings
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)

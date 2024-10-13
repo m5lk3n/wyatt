@@ -182,7 +182,7 @@ class _SetupScreenState extends State<SetupScreen> {
                 controller: _keyController,
                 decoration: const InputDecoration(label: Text("Key")),
                 maxLength: 40,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),

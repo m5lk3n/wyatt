@@ -15,7 +15,7 @@ class LtdGridItem extends StatelessWidget {
         "${ltd.message} at ${ltd.locationName}",
         style: Theme.of(context)
             .textTheme
-            .titleLarge!
+            .titleMedium!
             .copyWith(color: Theme.of(context).colorScheme.onSurface),
       ),
     );

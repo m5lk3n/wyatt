@@ -28,11 +28,37 @@ A location-based To-Do app for iOS and Android.
 
 - [x] Ask user to provide a key (the Google Maps API key) and store it securely on the client: [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
 
-- [ ] Manage locations
-  - [ ] Add a location
-  - [ ] Delete a location
+- [ ] Splashcreen / Loading
+
+- [ ] Getting started (Set up Wyatt) (default if there's no key)
+
+- [ ] Home (default it there are no locations)
+  - [ ] Intro text
+    - [ ] Animate text (?)
+    - [ ] Getting Started button at the bottom
+  - [ ] Add location button right upper corner
+  - [ ] Left drawer with
+      - [Home](https://api.flutter.dev/flutter/material/Icons/home-constant.html)
+      - [Locations](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html) ([alternative icon](https://api.flutter.dev/flutter/material/Icons/pin_drop-constant.html))
+      - [Settings](https://api.flutter.dev/flutter/material/Icons/settings-constant.html)
+      - [About](https://api.flutter.dev/flutter/material/Icons/info-constant.html)
+
+- [ ] Locations (default if there are locations)
   - [ ] Load locations into an overview grid ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
-  - [ ] Sort locations overview by (due) date
+    - [ ] Pre-seed (?)
+  - [ ] Sort locations overview by (due) date or by city name
+  - [ ] Filter locations (?)
+
+  - [ ] Manage locations (through dots menu)
+    - [ ] [Add a location](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
+    - [ ] [Edit a location](https://api.flutter.dev/flutter/material/Icons/edit-constant.html)
+    - [ ] [Delete a location](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
+    - [ ] [Turn off a location](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a location](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
+    - [ ] [Turn on a location](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a location](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
+
+- [ ] Settings
+  - [ ] Save a key
+  - [ ] Reset to factory settings
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
 
@@ -62,6 +88,11 @@ A location-based To-Do app for iOS and Android.
 - Merge nearby locations?
 - Support landscape mode?
 - License?
+
+## Backlog
+
+- [ ] Sort locations overview by continent name
+- [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 
 ## [Bookmarks](BOOKMARKS.md)
 

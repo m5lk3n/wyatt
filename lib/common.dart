@@ -10,6 +10,10 @@ abstract class Common {
     defaultValue:
         'support@lttl.dev', // supposed to be a real URL, see launch configuration
   );
+  static const String screenHome = 'Home';
+  static const String screenLtds = 'Locations & To-dos';
+  static const String screenSettings = 'Settings';
+  static const String screenAbout = 'About';
 }
 
 const space = 20.0;

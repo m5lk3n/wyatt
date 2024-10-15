@@ -50,7 +50,9 @@ class WyattApp extends StatelessWidget {
     return MaterialApp(
         title: Common.appName,
         theme: theme,
-        home: LtdsScreen() // SetupScreen(title: 'Set up ${Common.appName}'),
+        home: LtdsScreen(
+            title: Common
+                .screenLtds) // SetupScreen(title: 'Set up ${Common.appName}'),
         );
   }
 }

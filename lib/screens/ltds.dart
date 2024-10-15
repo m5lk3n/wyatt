@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/data/seed.dart';
 import 'package:wyatt/widgets/common.dart';
+import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/ltd.dart';
 
 class LtdsScreen extends StatelessWidget {
-  const LtdsScreen({super.key});
+  const LtdsScreen({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +48,9 @@ class LtdsScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: getWyattAppBar(context, 'Locations & To-dos'),
+      appBar: getWyattAppBar(context, title),
       body: content,
+      drawer: WyattDrawer(),
     );
   }
 }

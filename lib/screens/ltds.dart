@@ -9,26 +9,45 @@ class LtdsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: getWyattAppBar(context, 'Locations & To-dos'),
-      body: GridView(
-        /* TODO use builder and itemBuilder (loads as much as needed) here instead of children (always everything) below */
+    Widget content = Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Nothing to do',
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+          ),
+          const SizedBox(height: space / 2),
+          Text(
+            'Add some to-dos to get started',
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+          ),
+        ],
+      ),
+    );
+
+    if (seedLtds.isNotEmpty) {
+      content = GridView.builder(
+        itemCount: seedLtds.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 2 columns horizontally
           childAspectRatio: 3 / 2,
           crossAxisSpacing: space, // 20 pixels between columns
           mainAxisSpacing: space, // 20 pixels between rows
         ),
-        children: [
-          for (final ltd in seedLtds) LtdGridItem(ltd: ltd),
-        ], /*
-        body: GridView.builder(
-          itemCount: seedLtds.length,
-          itemBuilder: (context, index) {
-            return LtdGridItem(ltd: seedLtds[index]);
-          },
-      ),*/
-      ),
+        itemBuilder: (context, index) {
+          return LtdGridItem(ltd: seedLtds[index]);
+        },
+      );
+    }
+
+    return Scaffold(
+      appBar: getWyattAppBar(context, 'Locations & To-dos'),
+      body: content,
     );
   }
 }

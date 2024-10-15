@@ -18,7 +18,6 @@ class LtdGridItem extends StatelessWidget {
         },
         splashColor: Theme.of(context).primaryColor,
         child: GridTile(
-          //padding: padding,
           child: Expanded(
             child: Text(
               "${ltd.message} at ${ltd.locationName}",

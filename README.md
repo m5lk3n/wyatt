@@ -6,7 +6,7 @@ Are
 There
 Then ...
 
-A location-based To-do app for iOS and Android.
+A location- and time-based To-do app for iOS and Android.
 
 :construction_worker:
 

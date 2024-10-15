@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:wyatt/models/network.dart';
+import 'package:wyatt/widgets/common.dart';
 
 // https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#note-usage-of-encryptedsharedpreference
 AndroidOptions _getAndroidOptions() => const AndroidOptions(
@@ -90,25 +91,6 @@ class _SetupScreenState extends State<SetupScreen> {
     });
   }
 
-  Widget _createAboutDialog() {
-    return AboutDialog(
-      applicationName: Common.appName,
-      applicationVersion: Common.appVersion,
-      applicationIcon: CircleAvatar(
-        child: Image.asset("assets/images/logo.png"),
-      ),
-      applicationLegalese: '${DateTime.now().year} by lttl.dev',
-      children: [
-        Text(
-          '\nWhen You Are There, Then...',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +128,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   return Theme(
                     data: Theme.of(context)
                         .copyWith(dialogBackgroundColor: Colors.brown),
-                    child: _createAboutDialog(),
+                    child: createAboutDialog(context),
                   );
                 },
               );

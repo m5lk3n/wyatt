@@ -48,7 +48,7 @@ class LtdsScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: getWyattAppBar(context, title),
+      appBar: createWyattAppBar(context, title),
       body: content,
       drawer: WyattDrawer(),
     );

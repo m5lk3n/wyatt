@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/widgets/common.dart';
 
 class WyattDrawer extends StatelessWidget {
   const WyattDrawer({super.key});
@@ -12,7 +13,7 @@ class WyattDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
             child: Row(children: [
               ClipOval(
@@ -65,6 +66,16 @@ class WyattDrawer extends StatelessWidget {
             title: const Text(Common.screenAbout),
             onTap: () {
               Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Theme(
+                    data: Theme.of(context)
+                        .copyWith(dialogBackgroundColor: Colors.brown),
+                    child: createAboutDialog(context),
+                  );
+                },
+              );
             },
           ),
         ],

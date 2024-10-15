@@ -9,14 +9,26 @@ class LtdGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      child: Text(
-        "${ltd.message} at ${ltd.locationName}",
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: Theme.of(context).colorScheme.onSurface),
+    return Padding(
+      padding: const EdgeInsets.all(space),
+      child:
+          InkWell /* provides a visual feedback when the user taps the item*/ (
+        onTap: () {
+          // TODO
+        },
+        splashColor: Theme.of(context).primaryColor,
+        child: GridTile(
+          //padding: padding,
+          child: Expanded(
+            child: Text(
+              "${ltd.message} at ${ltd.locationName}",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.onSurface),
+            ),
+          ),
+        ),
       ),
     );
   }

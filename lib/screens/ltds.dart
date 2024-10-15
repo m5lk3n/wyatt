@@ -13,7 +13,7 @@ class LtdsScreen extends StatelessWidget {
       appBar: getWyattAppBar(context, 'Locations & To-dos'),
       body: GridView(
         /* TODO use builder and itemBuilder (loads as much as needed) here instead of children (always everything) below */
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 2 columns horizontally
           childAspectRatio: 3 / 2,
           crossAxisSpacing: space, // 20 pixels between columns
@@ -21,7 +21,13 @@ class LtdsScreen extends StatelessWidget {
         ),
         children: [
           for (final ltd in seedLtds) LtdGridItem(ltd: ltd),
-        ],
+        ], /*
+        body: GridView.builder(
+          itemCount: seedLtds.length,
+          itemBuilder: (context, index) {
+            return LtdGridItem(ltd: seedLtds[index]);
+          },
+      ),*/
       ),
     );
   }

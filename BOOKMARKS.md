@@ -1,5 +1,9 @@
 # Bookmarks
 
+## Requirements
+
+-[ ] https://github.com/mohesu/map_location_picker
+
 ## Secure Storage
 
 - [x] https://pub.dev/packages/flutter_secure_storage/example

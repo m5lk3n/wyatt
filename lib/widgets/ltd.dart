@@ -18,17 +18,17 @@ class LtdGridItem extends StatelessWidget {
         },
         splashColor: Theme.of(context).primaryColor,
         child: GridTile(
-          child: Expanded(
-            child: Text(
-              "${ltd.message} at ${ltd.locationName}",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Theme.of(context).colorScheme.onSurface),
-            ),
+          //child: Expanded(
+          child: Text(
+            "${ltd.message} at ${ltd.locationName}",
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Theme.of(context).colorScheme.onSurface),
           ),
         ),
       ),
+      //),
     );
   }
 }

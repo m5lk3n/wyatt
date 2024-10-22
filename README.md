@@ -37,7 +37,7 @@ A location- and time-based To-do app for iOS and Android.
     - [ ] Animate text (?)
     - [ ] Getting Started button at the bottom
   - [ ] Add location button right upper corner
-  - [ ] Left drawer with
+  - [x] Left drawer with
       - [Home](https://api.flutter.dev/flutter/material/Icons/home-constant.html)
       - [Locations](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html) ([alternative icon](https://api.flutter.dev/flutter/material/Icons/pin_drop-constant.html))
       - [Settings](https://api.flutter.dev/flutter/material/Icons/settings-constant.html)
@@ -51,6 +51,10 @@ A location- and time-based To-do app for iOS and Android.
 
   - [ ] Manage locations (through dots menu)
     - [ ] [Add a location](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
+      - [ ] Evaluate and use a location picker:
+            - [map_location_picker](https://pub.dev/packages/map_location_picker)
+            - [Custom Map For Location Picker](https://community.flutterflow.io/c/community-custom-widgets/post/custom-map-for-location-picker-kPu8C7qdo1eSy0h)
+            - [how to pick an address from map in flutter](https://stackoverflow.com/questions/69443353/how-to-pick-an-address-from-map-in-flutter)
     - [ ] [Edit a location](https://api.flutter.dev/flutter/material/Icons/edit-constant.html)
     - [ ] [Delete a location](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
     - [ ] [Turn off a location](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a location](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)

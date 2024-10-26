@@ -36,7 +36,7 @@ A location- and time-based To-do app for iOS and Android.
   - [ ] Intro text
     - [ ] Animate text (?)
     - [ ] Getting Started button at the bottom
-  - [ ] Add location button right upper corner
+  - [ ] Add help button right upper corner (?)
   - [x] Left drawer with
       - [Home](https://api.flutter.dev/flutter/material/Icons/home-constant.html)
       - [Locations](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html) ([alternative icon](https://api.flutter.dev/flutter/material/Icons/pin_drop-constant.html))
@@ -47,6 +47,7 @@ A location- and time-based To-do app for iOS and Android.
   - [ ] Load locations into an overview grid ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
     - [ ] Pre-seed (?)
   - [ ] Sort locations overview by (due) date or by city name
+  - [ ] Search locations (?)
   - [ ] Filter locations (?)
 
   - [ ] Manage locations (through dots menu)
@@ -61,15 +62,21 @@ A location- and time-based To-do app for iOS and Android.
     - [ ] [Turn on a location](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a location](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
 
 - [ ] Settings
-  - [ ] Save a key
-  - [ ] Metric/Imperial units (?)
+  - [ ] Save key
+  - [ ] Choose Metric/Imperial units (?)
+  - [ ] Choose Language
+  - [ ] Default notification distance (500m)
   - [ ] Reset to factory settings
+
+- [ ] Download my data (?)
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
 
 - [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - [ ] Implement notification
+
+## [Wireframe](wireframe.pdf)
 
 ## To do
 
@@ -98,6 +105,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] Sort locations overview by continent name
 - [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
+- [ ] OpenStreetMap version
 
 ## [Bookmarks](BOOKMARKS.md)
 
@@ -105,4 +113,5 @@ A location- and time-based To-do app for iOS and Android.
 
 - Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 - Copilot for the Wyatt logo and the AppBar background
-- Google for Maps and font
+- Google for Maps and font(s)
+- [Moqups](https://app.moqups.com) for the wireframe

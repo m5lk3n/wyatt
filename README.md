@@ -76,7 +76,15 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] Implement notification
 
-## [Wireframe](wireframe.pdf)
+## Wireframe
+
+<details>
+<summary>
+Mockups
+</summary>
+
+![](docs/wireframe.png)
+</details>
 
 ## To do
 
@@ -107,7 +115,7 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] OpenStreetMap version
 
-## [Bookmarks](BOOKMARKS.md)
+## [Bookmarks](docs/BOOKMARKS.md)
 
 ## Acknowledgements
 

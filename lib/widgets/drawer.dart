@@ -8,8 +8,7 @@ class WyattDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
@@ -28,55 +27,65 @@ class WyattDrawer extends StatelessWidget {
               ),
             ]),
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.home,
-              size: 32, // half the size of the icon
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.home,
+                    size: 32, // half the size of the icon
+                  ),
+                  title: const Text(Common.screenHome),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.location_on,
+                    size: 32, // half the size of the icon
+                  ),
+                  title: const Text(Common.screenLtds),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.settings,
+                    size: 32, // half the size of the icon
+                  ),
+                  title: const Text(Common.screenSettings),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ),
-            title: const Text(Common.screenHome),
-            onTap: () {
-              Navigator.pop(context);
-            },
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.location_on,
-              size: 32, // half the size of the icon
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ListTile(
+              leading: const Icon(
+                Icons.info,
+                size: 32, // half the size of the icon
+              ),
+              title: const Text(Common.screenAbout),
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Theme(
+                      data: Theme.of(context)
+                          .copyWith(dialogBackgroundColor: Colors.brown),
+                      child: createAboutDialog(context),
+                    );
+                  },
+                );
+              },
             ),
-            title: const Text(Common.screenLtds),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.settings,
-              size: 32, // half the size of the icon
-            ),
-            title: const Text(Common.screenSettings),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.info,
-              size: 32, // half the size of the icon
-            ),
-            title: const Text(Common.screenAbout),
-            onTap: () {
-              Navigator.pop(context);
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return Theme(
-                    data: Theme.of(context)
-                        .copyWith(dialogBackgroundColor: Colors.brown),
-                    child: createAboutDialog(context),
-                  );
-                },
-              );
-            },
           ),
         ],
       ),

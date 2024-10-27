@@ -14,6 +14,20 @@ A location- and time-based To-do app for iOS and Android.
 
 - If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100m from the center of the mall as this probably doesn't trigger a notification around the mall.
 
+## Structure
+
+```
+.
+├── .vscode  # me: app launch configs
+├── android  # Flutter
+├── assets   # me: app icons and images
+├── docs     # me
+├── ios      # Flutter
+├── lib      # Flutter
+├── lttl.dev # me: app supporting web page 
+└── test     # Flutter
+```
+
 ## Steps
 
 - [x] `flutter create --platforms android,ios --org dev.lttl wyatt`
@@ -115,7 +129,12 @@ Mockups
 - [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] OpenStreetMap version
 
-## [Bookmarks](docs/BOOKMARKS.md)
+## Docs
+
+- [Styleguide](docs/STYLEGUIDE.md)
+- [Bookmarks](docs/BOOKMARKS.md)
+- [Ideas](docs/IDEAS.md) (partially outdated, archivable)
+- [Appendix](docs/APPENDIX.md) (not app-specific)
 
 ## Acknowledgements
 

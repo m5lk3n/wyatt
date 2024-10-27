@@ -1,10 +1,8 @@
 # Wyatt
 
-When
-You
-Are
-There
-Then ...
+![](assets/icon/icon-small.png)
+
+"*W*hen *Y*ou *A*re *T*here *T*hen ..."
 
 A location- and time-based To-do app for iOS and Android.
 

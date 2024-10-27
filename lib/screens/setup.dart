@@ -156,13 +156,16 @@ class _SetupScreenState extends State<SetupScreen> {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: space / 2,
             ),
             Padding(
               padding: padding,
               child: TextField(
                 controller: _keyController,
-                decoration: const InputDecoration(label: Text("Key")),
+                decoration: const InputDecoration(
+                  hintText: 'Enter a key',
+                  label: Text("Key"),
+                ),
                 maxLength: 40,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,

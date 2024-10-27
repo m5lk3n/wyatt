@@ -6,8 +6,7 @@ import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/ltd.dart';
 
 class LtdsScreen extends StatelessWidget {
-  const LtdsScreen({super.key, required this.title});
-  final String title;
+  const LtdsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class LtdsScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: createWyattAppBar(context, title),
+      appBar: createWyattAppBar(context, Common.screenLtds),
       body: content,
       drawer: WyattDrawer(),
     );

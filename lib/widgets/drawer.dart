@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/screens/ltds.dart';
+import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/widgets/common.dart';
 
 class WyattDrawer extends StatelessWidget {
@@ -38,7 +40,7 @@ class WyattDrawer extends StatelessWidget {
                   ),
                   title: const Text(Common.screenHome),
                   onTap: () {
-                    Navigator.pop(context);
+                    // TODO
                   },
                 ),
                 ListTile(
@@ -48,7 +50,11 @@ class WyattDrawer extends StatelessWidget {
                   ),
                   title: const Text(Common.screenLtds),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LtdsScreen()),
+                    );
                   },
                 ),
                 ListTile(
@@ -58,7 +64,11 @@ class WyattDrawer extends StatelessWidget {
                   ),
                   title: const Text(Common.screenSettings),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => SettingsScreen()),
+                    );
                   },
                 ),
               ],

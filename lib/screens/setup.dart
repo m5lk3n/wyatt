@@ -126,8 +126,9 @@ class _SetupScreenState extends State<SetupScreen> {
                 context: context,
                 builder: (context) {
                   return Theme(
-                    data: Theme.of(context)
-                        .copyWith(dialogBackgroundColor: Colors.brown),
+                    data: Theme.of(context).copyWith(
+                        dialogBackgroundColor: Colors
+                            .brown), // TODO: get color from theme, brown is seed color
                     child: createAboutDialog(context),
                   );
                 },

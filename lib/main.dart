@@ -14,12 +14,14 @@ extension StringExtensions on String {
   }
 }
 
+// see https://appainter.dev/
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    brightness: Brightness.dark,
-    seedColor: const Color.fromARGB(255, 131, 57, 0),
-  ),
+      brightness: Brightness.dark,
+      seedColor: const Color.fromARGB(255, 121, 85,
+          72) // = fully opaque (255) "Brown [500] Roman Coffee" with #795548 = 121, 85, 72
+      ),
   textTheme: GoogleFonts.robotoSlabTextTheme(), // GoogleFonts.latoTextTheme(),
 );
 

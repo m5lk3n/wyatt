@@ -140,3 +140,4 @@ Mockups
 - Copilot for the Wyatt logo and the AppBar background
 - Google for Maps and font(s)
 - [Moqups](https://app.moqups.com) for the wireframe
+- [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)

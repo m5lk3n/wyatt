@@ -60,11 +60,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   _saveKeyToStorage() async {
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
+    final ThemeData themeData = Theme.of(context);
     scaffold.clearSnackBars();
 
     final keyValue = _keyController.text.trim();
     if (keyValue.isEmpty) {
-      scaffold.showSnackBar(SnackBar(content: Text('Please enter a key')));
+      scaffold.showSnackBar(SnackBar(
+        backgroundColor: themeData.colorScheme.onErrorContainer,
+        content: Text('Please enter a key'),
+      ));
       return;
     }
 
@@ -83,8 +87,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       scaffold.showSnackBar(SnackBar(content: Text('The key is valid.')));
     } else {
       scaffold.showSnackBar(SnackBar(
-          backgroundColor: Colors.deepOrange,
-          content: Text('The key is invalid, the app won\'t work.')));
+          backgroundColor: themeData.colorScheme.error,
+          content: Text('The key is invalid, the app won\'t work!')));
     }
 
     setState(() {
@@ -172,7 +176,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Divider(
-            color: Colors.brown,
             indent: space,
             endIndent: space,
           ),
@@ -180,13 +183,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.all(space),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-                backgroundColor: Theme.of(context).colorScheme.secondary,
+                foregroundColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
               ),
               onPressed: _isProcessing ? null : () => _resetSettings(context),
               child: Align(
                 alignment: Alignment.center,
-                child: Text('Reset app to factory settings'),
+                child: Text('Reset to factory settings'),
               ),
             ),
           ),
@@ -220,31 +223,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return AlertDialog(
-            title: Text(
-              'Please Confirm',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                  ),
+          return Theme(
+            data: Theme.of(context).copyWith(
+                dialogBackgroundColor: Colors
+                    .brown), // TODO: get color from theme, brown is seed color
+            child: AlertDialog(
+              title: Text(
+                'Please Confirm',
+              ),
+              content: Text(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                  'Are you sure to reset the application?\n\nThis will set all settings back to their defaults and remove all data.\n\nThis action cannot be undone.'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      _removeKeyFromStorage();
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Yes')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('No'))
+              ],
             ),
-            content: Text(
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                'Are you sure to reset the application?\n\nThis will set all settings back to their defaults and remove all data.\n\nThis action cannot be undone.'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    _removeKeyFromStorage();
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Yes')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('No'))
-            ],
           );
         });
   }

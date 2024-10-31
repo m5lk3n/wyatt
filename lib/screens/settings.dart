@@ -170,7 +170,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                 suffixIcon: Tooltip(
-                  message: 'There\'s currently no other language available',
+                  message: 'Another language is not yet available',
                   child: Icon(Icons.info_outline),
                 ),
               ),
@@ -185,6 +185,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 );
               }).toList(),
               onChanged: null, // disabled, TODO: implement
+            ),
+          ),
+          Divider(
+            indent: space,
+            endIndent: space,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(space, space, space, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'System',
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: RadioListTile<String>(
+                          title: Text('Metric'),
+                          value: 'Metric',
+                          groupValue: 'Metric',
+                          onChanged: (context) {
+                            /* TODO: implement */
+                          }),
+                    ),
+                    Expanded(
+                      child: RadioListTile<String>(
+                        title: Text('Imperial'),
+                        value: 'Imperial',
+                        groupValue: 'Metric',
+                        onChanged: (context) {/* TODO: implement */},
+                        secondary: Tooltip(
+                          message: 'This choice is not yet supported',
+                          child: Icon(Icons.info_outline),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           Divider(

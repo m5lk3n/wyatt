@@ -74,11 +74,11 @@ A location- and time-based To-do app for iOS and Android.
     - [ ] [Turn on a location](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a location](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
 
 - [ ] Settings
-  - [ ] Save key
-  - [ ] Choose Metric/Imperial units (?)
-  - [ ] Choose Language
+  - [x] Save key
+  - [x] Choose Language (foreseen)
+  - [x] Choose Metric/Imperial units (foreseen)
   - [ ] Default notification distance (500m)
-  - [ ] Reset to factory settings
+  - [x] Reset to factory settings
 
 - [ ] Download my data (?)
 

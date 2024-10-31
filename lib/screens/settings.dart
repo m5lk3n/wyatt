@@ -157,6 +157,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
             ),
           ),
+          Divider(
+            indent: space,
+            endIndent: space,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(space),
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: 'Language',
+                labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                suffixIcon: Tooltip(
+                  message: 'There\'s currently no other language available',
+                  child: Icon(Icons.info_outline),
+                ),
+              ),
+              value: 'English',
+              items: <String>['English', 'German'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value,
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          )),
+                );
+              }).toList(),
+              onChanged: null, // disabled, TODO: implement
+            ),
+          ),
+          Divider(
+            indent: space,
+            endIndent: space,
+          ),
           Padding(
             padding: const EdgeInsets.all(space),
             child: Row(

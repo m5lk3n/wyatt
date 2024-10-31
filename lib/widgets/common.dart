@@ -51,7 +51,7 @@ String _getLegalese() {
 
   final prefix = (startYear == currentYear) ? '' : '$startYear-';
 
-  return /* TODO '© '? */ '$prefix$currentYear by';
+  return /* TODO '© '? unicode? */ '$prefix$currentYear by';
 }
 
 Widget createAboutDialog(BuildContext context) => AboutDialog(

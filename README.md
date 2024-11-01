@@ -107,6 +107,7 @@ Mockups
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
   - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
 - [ ] Add `intl`
+  - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
 - [ ] Add tests
 - [ ] Add delete key (and any other local data)
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)

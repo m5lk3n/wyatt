@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final _keyController = TextEditingController();
+  final _distanceController = TextEditingController();
   final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
   bool _isProcessing = false;
   bool _isObscured = true;
@@ -36,6 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void dispose() {
     _keyController.dispose();
+    _distanceController.dispose();
 
     super.dispose();
   }
@@ -161,6 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             indent: space,
             endIndent: space,
           ),
+          /*
           Padding(
             padding: const EdgeInsets.all(space),
             child: DropdownButtonFormField<String>(
@@ -228,6 +232,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
               ],
+            ),
+          ),
+          Divider(
+            indent: space,
+            endIndent: space,
+          ),
+          */
+          Padding(
+            padding: const EdgeInsets.all(space),
+            child: TextField(
+              keyboardType: TextInputType.numberWithOptions(
+                signed: false,
+                decimal: false,
+              ),
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter
+                    .digitsOnly // no decimal point, no sign
+              ],
+              enabled: !_isProcessing,
+              // causes keyboard to slide up: autofocus: true,
+              controller: _distanceController,
+              decoration: InputDecoration(
+                labelText: 'Default Notification Distance',
+                hintText: 'Enter distance in meters',
+                //suffixIcon: Icon(Icons.directions),
+              ),
+              maxLength: 4,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
             ),
           ),
           Divider(

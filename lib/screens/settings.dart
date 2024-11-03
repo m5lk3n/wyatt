@@ -79,10 +79,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       return;
     }
 
-    setState(() {
-      _isProcessing = true;
-    });
-
     await _storage.write(
       key: Common.keyKey,
       value: keyValue,
@@ -97,10 +93,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           backgroundColor: themeData.colorScheme.error,
           content: Text('The key is invalid, the app won\'t work!')));
     }
-
-    setState(() {
-      _isProcessing = false;
-    });
   }
 
   Future<void> _readDefaultNotificationDistance() async {
@@ -319,7 +311,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 foregroundColor: Theme.of(context).colorScheme.secondary,
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
               ),
-              onPressed: _isProcessing ? null : () => _resetSettings(context),
+              onPressed: _isProcessing ? null : () => _confirmReset(context),
               child: Align(
                 alignment: Alignment.center,
                 child: Text('Reset to factory settings'),
@@ -353,11 +345,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _save() {
+    setState(() {
+      _isProcessing = true;
+    });
+
     _saveKeyToStorage();
     _saveDefaultNotificationDistance();
+
+    setState(() {
+      _isProcessing = false;
+    });
   }
 
-  void _resetSettings(BuildContext context) {
+  void _confirmReset(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
@@ -377,7 +377,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               actions: [
                 TextButton(
                     onPressed: () {
-                      _removeKeyFromStorage();
+                      _reset();
                       Navigator.of(context).pop();
                     },
                     child: const Text('Yes')),
@@ -393,10 +393,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _removeKeyFromStorage() {
-    setState(() {
-      _isProcessing = true;
-    });
-
     _storage.delete(
       key: Common.keyKey,
       iOptions: _getIOSOptions(),
@@ -404,9 +400,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
 
     _keyController.clear();
+  }
+
+  void _reset() {
+    setState(() {
+      _isProcessing = true;
+    });
+
+    _removeKeyFromStorage();
+    _clearSettings();
 
     setState(() {
       _isProcessing = false;
     });
+  }
+
+  void _clearSettings() {
+    final settings = ref.read(settingsNotifierProvider.notifier);
+    settings.clearSettings();
+
+    _distanceController.clear();
   }
 }

@@ -23,6 +23,12 @@ class SettingsNotifier extends StateNotifier<Settings> {
     await prefs.setInt('cfgDefaultNotificationDistance', distance);
     state.defaultNotificationDistance = distance;
   }
+
+  Future<bool> clearSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.clear();
+  }
 }
 
 final settingsNotifierProvider =

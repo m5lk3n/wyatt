@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +41,9 @@ void main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // TODO
   ]).then((fn) {
-    runApp(const WyattApp());
+    runApp(const ProviderScope(
+      child: WyattApp(),
+    ));
   });
 }
 

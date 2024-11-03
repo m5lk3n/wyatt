@@ -14,6 +14,15 @@ install:
 	flutter pub add flutter_secure_storage
 	flutter pub add http
 	flutter pub add uuid
+	flutter pub add shared_preferences
+	flutter pub add flutter_riverpod
+	flutter pub add flutter_lints --dev
+	flutter pub add flutter_launcher_icons --dev
+
+## clean: remove all dependencies and install them again
+.PHONY: clean
+clean:
+	flutter pub get
 
 ## update: update all dependencies
 .PHONY: update
@@ -24,6 +33,11 @@ update:
 .PHONY: upgrade
 upgrade:
 	flutter pub upgrade --major-versions
+
+# generate: generate code
+#.PHONY: generate
+#generate:
+#	dart run build_runner build --delete-conflicting-outputs
 
 ## test: test the application
 .PHONY: test

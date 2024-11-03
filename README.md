@@ -112,7 +112,13 @@ Mockups
 - [ ] Add delete key (and any other local data)
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 - [ ] Generate `lttl.dev/wyatt/index.html`
+- [ ] Godoc
 - [ ] Clean up assets
+
+## Doing
+
+- [Onboarding with routes and riverpod](https://flutterexplained.com/p/flutter-onboarding-with-riverpod)?
+
 
 ## Open
 

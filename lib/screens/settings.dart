@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
@@ -9,20 +10,21 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:wyatt/models/network.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:wyatt/providers/settings_provider.dart';
 
 // https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#note-usage-of-encryptedsharedpreference
 AndroidOptions _getAndroidOptions() => const AndroidOptions(
       encryptedSharedPreferences: true,
     );
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final _keyController = TextEditingController();
   final _distanceController = TextEditingController();
   final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
@@ -32,7 +34,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+
     _readKeyFromStorage();
+    _readDefaultNotificationDistance();
   }
 
   @override
@@ -97,6 +101,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _isProcessing = false;
     });
+  }
+
+  Future<void> _readDefaultNotificationDistance() async {
+    final settings = ref.read(settingsNotifierProvider.notifier);
+
+    int distance = await settings.getDefaultNotificationDistance();
+
+    _distanceController.text = distance.toString();
+  }
+
+  Future<void> _saveDefaultNotificationDistance() async {
+    if (_distanceController.text.trim().isEmpty) {
+      return;
+    }
+
+    final settings = ref.read(settingsNotifierProvider.notifier);
+    settings
+        .setDefaultNotificationDistance(int.parse(_distanceController.text));
   }
 
   @override
@@ -279,7 +301,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor:
                         Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  onPressed: _isProcessing ? null : _saveKeyToStorage,
+                  onPressed: _isProcessing ? null : _save,
                   autofocus: true,
                   child: Text('Save'),
                 ),
@@ -328,6 +350,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     return false;
+  }
+
+  void _save() {
+    _saveKeyToStorage();
+    _saveDefaultNotificationDistance();
   }
 
   void _resetSettings(BuildContext context) {

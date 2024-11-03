@@ -16,6 +16,8 @@
 
 ## Backlog / Research
 
+- https://medium.com/@emanyaqoob/flutter-localization-with-riverpod-and-sharedpreferences-d3919fb9bb02
+
 - https://stackoverflow.com/questions/52160746/flutter-appbar-background-image
 
 - https://stackoverflow.com/questions/51895194/correct-way-of-storing-api-keys-in-flutter-following-best-practises

@@ -116,6 +116,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // avoid bottom overflow
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -128,7 +129,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         backgroundColor: Colors.transparent,
         title: Text(Common.screenSettings),
       ),
-      body: Column(
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(space, space, space, 0),

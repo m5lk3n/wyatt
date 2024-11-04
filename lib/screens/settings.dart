@@ -1,21 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
-import 'package:wyatt/models/network.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
-
-// https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#note-usage-of-encryptedsharedpreference
-AndroidOptions _getAndroidOptions() => const AndroidOptions(
-      encryptedSharedPreferences: true,
-    );
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -27,7 +17,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final _keyController = TextEditingController();
   final _distanceController = TextEditingController();
-  final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+
   bool _isProcessing = false;
   bool _isObscured = true;
 
@@ -35,7 +25,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   void initState() {
     super.initState();
 
-    _readKeyFromStorage();
+    _readKey();
     _readDefaultNotificationDistance();
   }
 
@@ -47,25 +37,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     super.dispose();
   }
 
-  String? _getKeyFormValue() =>
-      _keyController.text.isEmpty ? null : _keyController.text;
+  Future<void> _readKey() async {
+    final settings = ref.read(settingsNotifierProvider.notifier);
 
-  IOSOptions _getIOSOptions() => IOSOptions(
-        accountName: _getKeyFormValue(),
-        accessibility: KeychainAccessibility
-            .first_unlock, // running in the background? https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage#getting-started
-      );
+    String key = await settings.getKey();
 
-  Future<void> _readKeyFromStorage() async {
-    final key = await _storage.read(
-      key: Common.keyKey,
-      iOptions: _getIOSOptions(),
-      // see above for aOptions
-    );
-    _keyController.text = key?.trim() ?? '';
+    _keyController.text = key;
   }
 
-  _saveKeyToStorage() async {
+  Future<void> _saveKey() async {
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
     final ThemeData themeData = Theme.of(context);
     scaffold.clearSnackBars();
@@ -79,19 +59,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       return;
     }
 
-    await _storage.write(
-      key: Common.keyKey,
-      value: keyValue,
-      iOptions: _getIOSOptions(),
-      // see above for aOptions
-    );
+    final settings = ref.read(settingsNotifierProvider.notifier);
+    settings.setKey(keyValue);
 
-    if (await _validateKey(keyValue)) {
-      scaffold.showSnackBar(SnackBar(content: Text('The key is valid.')));
+    if (await KeyValidator.validateKey(keyValue)) {
+      //scaffold.showSnackBar(SnackBar(content: Text('The saved key is valid.')));
     } else {
       scaffold.showSnackBar(SnackBar(
           backgroundColor: themeData.colorScheme.error,
-          content: Text('The key is invalid, the app won\'t work!')));
+          content: Text('The saved key is invalid, the app won\'t work!')));
     }
   }
 
@@ -112,11 +88,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     settings
         .setDefaultNotificationDistance(int.parse(_distanceController.text));
 
-    _readDefaultNotificationDistance(); // show parsed value
+    setState(() {
+      _readDefaultNotificationDistance(); // show parsed value, e.g. 0500 -> 500
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    //final Settings = ref.watch(settingsNotifierProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
       appBar: AppBar(
@@ -326,27 +306,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Future<bool> _validateKey(String key) async {
-    final response = await http.get(Uri.parse(
-        // https://developers.google.com/maps/documentation/geocoding/start
-        'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=$key'));
-    if (response.statusCode == 200) {
-      try {
-        GeocodeAddress geocodeAddress = GeocodeAddress.fromJson(
-            jsonDecode(response.body) as Map<String, dynamic>);
-        if (geocodeAddress.status == 'OK') {
-          log('Key validation successful');
-
-          return true;
-        }
-      } catch (e) {
-        log('Key validation failed with: $e');
-      }
-    }
-
-    return false;
-  }
-
   void _save() {
     FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
 
@@ -354,7 +313,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       _isProcessing = true;
     });
 
-    _saveKeyToStorage();
+    _saveKey();
     _saveDefaultNotificationDistance();
 
     setState(() {
@@ -397,33 +356,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         });
   }
 
-  void _removeKeyFromStorage() {
-    _storage.delete(
-      key: Common.keyKey,
-      iOptions: _getIOSOptions(),
-      // see above for aOptions
-    );
-
-    _keyController.clear();
-  }
-
   void _reset() {
     setState(() {
       _isProcessing = true;
     });
 
-    _removeKeyFromStorage();
-    _clearSettings();
+    final settings = ref.read(settingsNotifierProvider.notifier);
+    settings.clearSettings();
+
+    _keyController.clear();
+    _distanceController.clear();
 
     setState(() {
       _isProcessing = false;
     });
-  }
-
-  void _clearSettings() {
-    final settings = ref.read(settingsNotifierProvider.notifier);
-    settings.clearSettings();
-
-    _distanceController.clear();
   }
 }

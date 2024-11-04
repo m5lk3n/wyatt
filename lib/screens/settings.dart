@@ -111,6 +111,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final settings = ref.read(settingsNotifierProvider.notifier);
     settings
         .setDefaultNotificationDistance(int.parse(_distanceController.text));
+
+    _readDefaultNotificationDistance(); // show parsed value
   }
 
   @override
@@ -346,6 +348,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _save() {
+    FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
+
     setState(() {
       _isProcessing = true;
     });

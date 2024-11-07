@@ -95,8 +95,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final Settings = ref.watch(settingsNotifierProvider);
-
+    // final Settings = ref.watch(settingsNotifierProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
       appBar: AppBar(
@@ -315,6 +314,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     _saveKey();
     _saveDefaultNotificationDistance();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Settings saved.')));
 
     setState(() {
       _isProcessing = false;

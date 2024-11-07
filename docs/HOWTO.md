@@ -12,4 +12,4 @@
    - No Background Graphics
 5. Save as `wireframe.pdf` to download the PDF
 
-On Linux, run `pdftoppm -png wireframe.pdf wireframe` to create the PNG file.
+Optional: On Linux, run `pdftoppm -png wireframe.pdf wireframe` to create the PNG file(s).

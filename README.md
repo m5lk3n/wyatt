@@ -90,13 +90,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Wireframe
 
-<details>
-<summary>
-Mockups
-</summary>
-
-![](docs/wireframe.png)
-</details>
+[Mockup](docs/wireframe.pdf)
 
 ## To do
 
@@ -137,6 +131,7 @@ Mockups
 ## Docs
 
 - [Styleguide](docs/STYLEGUIDE.md)
+- [How-to](docs/HOWTO.md)
 - [Bookmarks](docs/BOOKMARKS.md)
 - [Ideas](docs/IDEAS.md) (partially outdated, archivable)
 - [Appendix](docs/APPENDIX.md) (not app-specific)

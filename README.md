@@ -40,7 +40,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - [x] Ask user to provide a key (the Google Maps API key) and store it securely on the client: [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
 
-- [ ] Splashcreen / Loading
+- [x] Splashcreen / Loading
 
 - [ ] Getting started (Set up Wyatt) (default if there's no key)
 
@@ -73,11 +73,11 @@ A location- and time-based To-do app for iOS and Android.
     - [ ] [Turn off a location](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a location](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
     - [ ] [Turn on a location](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a location](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
 
-- [ ] Settings
+- [x] Settings
   - [x] Save key
   - [x] Choose Language (foreseen)
   - [x] Choose Metric/Imperial units (foreseen)
-  - [ ] Default notification distance (500m)
+  - [x] Default notification distance (500m)
   - [x] Reset to factory settings
 
 - [ ] Download my data (?)

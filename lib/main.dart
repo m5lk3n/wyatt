@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wyatt/screens/ltds.dart';
+//import 'package:wyatt/screens/ltds.dart';
 //import 'package:wyatt/screens/setup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:wyatt/screens/splash.dart';
 
 // https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
 extension StringExtensions on String {
@@ -52,10 +53,13 @@ class WyattApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const Widget screen = SplashScreen();
+
     return MaterialApp(
         title: Common.appName,
         theme: theme,
-        home: LtdsScreen() // SetupScreen(title: 'Set up ${Common.appName}'),
+        home:
+            screen // LtdsScreen() // SetupScreen(title: 'Set up ${Common.appName}'),
         );
   }
 }

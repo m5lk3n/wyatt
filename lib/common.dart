@@ -16,5 +16,6 @@ abstract class Common {
   static const String screenAbout = 'About';
 }
 
+const bigSpace = 50.0;
 const space = 20.0;
 const padding = EdgeInsets.all(space);

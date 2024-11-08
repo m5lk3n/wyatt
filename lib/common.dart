@@ -19,3 +19,4 @@ abstract class Common {
 const bigSpace = 50.0;
 const space = 20.0;
 const padding = EdgeInsets.all(space);
+const seedColor = Colors.brown;

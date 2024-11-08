@@ -9,14 +9,13 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          color:
-              Colors.brown, // TODO: get color from theme, brown is seed color
+          color: seedColor,
           child: Column(
             children: [
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 3 * bigSpace),
+                  padding: const EdgeInsets.only(top: 2 * bigSpace),
                   child: ClipOval(
                     child: Image.asset('assets/icon/icon.png', height: 100),
                   ),

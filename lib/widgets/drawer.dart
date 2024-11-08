@@ -88,9 +88,8 @@ class WyattDrawer extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return Theme(
-                      data: Theme.of(context).copyWith(
-                          dialogBackgroundColor: Colors
-                              .brown), // TODO: get color from theme, brown is seed color
+                      data: Theme.of(context)
+                          .copyWith(dialogBackgroundColor: seedColor),
                       child: createAboutDialog(context),
                     );
                   },

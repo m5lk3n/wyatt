@@ -116,6 +116,8 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Open
 
+- Theme.of vs. Theme.of.copyWith?
+- What if navigation back from Settings happens during saving?
 - Suspend app, wake up?
 - Recover from "panic"/exception (loss of connectivity in a tunnel?)
 - Merge nearby locations?

@@ -35,7 +35,7 @@ PreferredSizeWidget createWyattAppBar(BuildContext context, String title) =>
             builder: (context) {
               return Theme(
                 data: Theme.of(context)
-                    .copyWith(dialogBackgroundColor: Colors.brown),
+                    .copyWith(dialogBackgroundColor: seedColor),
                 child: _createAboutDialog(),
               );
             },

@@ -327,9 +327,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         context: context,
         builder: (BuildContext ctx) {
           return Theme(
-            data: Theme.of(context).copyWith(
-                dialogBackgroundColor: Colors
-                    .brown), // TODO: get color from theme, brown is seed color
+            data: Theme.of(context).copyWith(dialogBackgroundColor: seedColor),
             child: AlertDialog(
               title: Text(
                 'Please Confirm',

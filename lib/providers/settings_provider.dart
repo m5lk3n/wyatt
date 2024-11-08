@@ -8,8 +8,8 @@ const cfgDefaultNotificationDistance = 'cfgDefaultNotificationDistance';
 const defaultDefaultNotificationDistance = 500;
 
 class SettingsNotifier extends StateNotifier<Settings> {
-  final _secureStorage = SecureStorage();
-  final _storage = Storage();
+  final _secureStorage = SecurePersistentLocalStorage();
+  final _storage = PersistentLocalStorage();
 
   SettingsNotifier() : super(Settings());
 

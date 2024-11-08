@@ -5,7 +5,7 @@ AndroidOptions _getAndroidOptions() => const AndroidOptions(
       encryptedSharedPreferences: true,
     );
 
-class SecureStorage {
+class SecurePersistentLocalStorage {
   final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
   IOSOptions _getIOSOptions() => IOSOptions(

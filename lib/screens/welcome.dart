@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
-import 'package:wyatt/screens/setup.dart';
+import 'package:wyatt/screens/setup_new.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -105,7 +106,13 @@ class WelcomeScreen extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: bigSpace),
-                  child: Image.asset('assets/images/logo.png', height: 50),
+                  child: GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse('https://lttl.dev'));
+                    },
+                    child:
+                        Image.asset('assets/images/logo.png', height: bigSpace),
+                  ),
                 ),
               ),
             ],

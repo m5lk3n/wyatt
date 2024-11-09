@@ -43,6 +43,7 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Splashcreen / Loading
 
 - [ ] Getting started (Set up Wyatt) (default if there's no key)
+  - [ ] Squared background color
 
 - [ ] Home (default it there are no locations)
   - [ ] Intro text
@@ -94,6 +95,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
+- [ ] DRY
 - [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -44,7 +45,13 @@ class SplashScreen extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: bigSpace),
-                  child: Image.asset('assets/images/logo.png', height: 50),
+                  child: GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse('https://lttl.dev'));
+                    },
+                    child:
+                        Image.asset('assets/images/logo.png', height: bigSpace),
+                  ),
                 ),
               ),
             ],

@@ -16,8 +16,7 @@ AndroidOptions _getAndroidOptions() => const AndroidOptions(
     );
 
 class SetupScreen extends StatefulWidget {
-  const SetupScreen({super.key, required this.title});
-  final String title;
+  const SetupScreen({super.key});
 
   @override
   State<SetupScreen> createState() => _SetupScreenState();
@@ -106,7 +105,7 @@ class _SetupScreenState extends State<SetupScreen> {
         ),
         backgroundColor: Colors.transparent,
 
-        title: Text(widget.title),
+        title: Text(Common.appName),
         /*
         leading: IconButton(
           onPressed: () {

@@ -14,13 +14,11 @@ class PersistentLocalStorage {
 
   Future<void> delete({required String key}) async {
     final prefs = await SharedPreferences.getInstance();
-
     prefs.remove(key);
   }
 
   Future<void> deleteAll() async {
     final prefs = await SharedPreferences.getInstance();
-
     prefs.clear();
   }
 }

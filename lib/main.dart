@@ -6,8 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:wyatt/screens/ltds.dart';
 //import 'package:wyatt/screens/setup.dart';
+//import 'package:wyatt/screens/splash.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:wyatt/screens/splash.dart';
+import 'package:wyatt/screens/welcome.dart';
 
 // https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
 extension StringExtensions on String {
@@ -53,7 +54,7 @@ class WyattApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Widget screen = SplashScreen();
+    const Widget screen = WelcomeScreen();
 
     return MaterialApp(
         title: Common.appName,

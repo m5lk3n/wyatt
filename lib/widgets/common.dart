@@ -69,8 +69,8 @@ Widget createAboutDialog(BuildContext context) => AboutDialog(
         Text(
           '\nWhen You Are There, Then...',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
+              color: Theme.of(context).colorScheme.onSurface,
+              fontStyle: FontStyle.italic),
         ),
       ],
     );

@@ -74,3 +74,43 @@ Widget createAboutDialog(BuildContext context) => AboutDialog(
         ),
       ],
     );
+
+Widget createBackground(context) {
+  const Color color1 = seedColor;
+  final Color color2 = Theme.of(context).colorScheme.outlineVariant;
+  final double screenWidth = MediaQuery.of(context).size.width;
+  final double screenHeight = MediaQuery.of(context).size.height;
+
+  return Column(
+    children: [
+      Row(
+        children: [
+          Container(
+            color: color1,
+            width: screenWidth / 2,
+            height: screenHeight / 2,
+          ),
+          Container(
+            color: color2,
+            width: screenWidth / 2,
+            height: screenHeight / 2,
+          ),
+        ],
+      ),
+      Row(
+        children: [
+          Container(
+            color: color2,
+            width: screenWidth / 2,
+            height: screenHeight / 2,
+          ),
+          Container(
+            color: color1,
+            width: screenWidth / 2,
+            height: screenHeight / 2,
+          ),
+        ],
+      ),
+    ],
+  );
+}

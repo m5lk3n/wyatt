@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/screens/setup_new.dart';
+import 'package:wyatt/widgets/common.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          color: seedColor,
+    return Stack(
+      children: [
+        createBackground(context),
+        Center(
           child: Column(
             children: [
               Align(
@@ -118,7 +119,7 @@ class WelcomeScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }

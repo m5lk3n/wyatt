@@ -42,8 +42,8 @@ A location- and time-based To-do app for iOS and Android.
 
 - [x] Splashcreen / Loading
 
-- [ ] Getting started (Set up Wyatt) (default if there's no key)
-  - [ ] Squared background color
+- [x] Getting started (Set up Wyatt) (default if there's no key)
+  - [x] Squared background color
 
 - [ ] Home (default it there are no locations)
   - [ ] Intro text

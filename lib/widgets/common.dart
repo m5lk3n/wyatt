@@ -77,7 +77,9 @@ Widget createAboutDialog(BuildContext context) => AboutDialog(
 
 Widget createBackground(context) {
   const Color color1 = seedColor;
-  final Color color2 = Theme.of(context).colorScheme.outlineVariant;
+  final Color color2 = Theme.of(context)
+      .colorScheme
+      .surface; // Theme.of(context).colorScheme.outlineVariant;
   final double screenWidth = MediaQuery.of(context).size.width;
   final double screenHeight = MediaQuery.of(context).size.height;
 

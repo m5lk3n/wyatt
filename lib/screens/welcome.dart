@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
-import 'package:wyatt/screens/setup_new.dart';
+import 'package:wyatt/screens/setup.dart';
 import 'package:wyatt/widgets/common.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -82,7 +82,10 @@ class WelcomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SetupScreen(),
+                                  builder: (context) => SettingsScreen(
+                                    title: Common.screenSetup,
+                                    inSetupMode: true,
+                                  ),
                                 ),
                               );
                             },

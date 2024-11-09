@@ -10,6 +10,10 @@
 
 - https://stackoverflow.com/questions/49577781/how-to-create-number-input-field-in-flutter
 
+## Widgets
+
+- https://stackoverflow.com/questions/53455358/how-to-present-an-empty-view-in-flutter
+
 ## Requirements
 
 - [ ] https://github.com/mohesu/map_location_picker

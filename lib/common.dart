@@ -12,6 +12,7 @@ abstract class Common {
   );
   static const String screenHome = 'Home';
   static const String screenLtds = 'Locations & To-dos';
+  static const String screenSetup = 'Saddle Up';
   static const String screenSettings = 'Settings';
   static const String screenAbout = 'About';
 }

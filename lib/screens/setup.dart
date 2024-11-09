@@ -8,8 +8,13 @@ import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
-  const SettingsScreen({super.key, required this.inSetupMode});
+  const SettingsScreen({
+    super.key,
+    required this.title,
+    required this.inSetupMode,
+  });
 
+  final String title;
   final bool inSetupMode;
 
   @override
@@ -31,7 +36,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     _isSettingUp = widget.inSetupMode;
 
     _readKey();
-    _readDefaultNotificationDistance();
+    if (!_isSettingUp) {
+      _readDefaultNotificationDistance();
+    }
   }
 
   @override
@@ -113,7 +120,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
         ),
         backgroundColor: Colors.transparent,
-        title: Text(Common.screenSettings),
+        title: Text(widget.title),
       ),
       body: ListView(
         children: [
@@ -134,6 +141,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
             ),
           ),
+          _isSettingUp
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(space, space, space, 0),
+                  child: Linkify(
+                    linkStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                    onOpen: (link) async {
+                      if (!await launchUrl(Uri.parse(link.url))) {
+                        throw Exception('Could not launch ${link.url}');
+                      }
+                    },
+                    text:
+                        'What is this and why is this needed?\nYou can change the key later in Settings.',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                  ),
+                )
+              : SizedBox.shrink(),
           Padding(
             padding: padding,
             child: TextField(
@@ -161,35 +188,39 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
             ),
           ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(space),
-            child: TextField(
-              keyboardType: TextInputType.numberWithOptions(
-                signed: false,
-                decimal: false,
-              ),
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter
-                    .digitsOnly // no decimal point, no sign
-              ],
-              enabled: !_isProcessing,
-              // causes keyboard to slide up: autofocus: true,
-              controller: _distanceController,
-              decoration: InputDecoration(
-                labelText: 'Default Notification Distance',
-                hintText: 'Enter distance in meters',
-                //suffixIcon: Icon(Icons.directions),
-              ),
-              maxLength: 4,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Divider(
+                  indent: space,
+                  endIndent: space,
+                ),
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.all(space),
+                  child: TextField(
+                    keyboardType: TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: false,
+                    ),
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter
+                          .digitsOnly // no decimal point, no sign
+                    ],
+                    enabled: !_isProcessing,
+                    // causes keyboard to slide up: autofocus: true,
+                    controller: _distanceController,
+                    decoration: InputDecoration(
+                      labelText: 'Default Notification Distance',
+                      hintText: 'Enter distance in meters',
+                      //suffixIcon: Icon(Icons.directions),
+                    ),
+                    maxLength: 4,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
-            ),
-          ),
+                ),
           Divider(
             indent: space,
             endIndent: space,
@@ -212,26 +243,30 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ],
             ),
           ),
-          !_isSettingUp
-              ? Divider(
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Divider(
                   indent: space,
                   endIndent: space,
-                )
-              : Container(),
-          Padding(
-            padding: const EdgeInsets.all(space),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.secondary,
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              ),
-              onPressed: _isProcessing ? null : () => _confirmReset(context),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text('Reset to factory settings'),
-              ),
-            ),
-          ),
+                ),
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.all(space),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.secondary,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                    onPressed:
+                        _isProcessing ? null : () => _confirmReset(context),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('Reset to factory settings'),
+                    ),
+                  ),
+                ),
         ],
       ),
     );
@@ -245,9 +280,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     });
 
     _saveKey();
-    _saveDefaultNotificationDistance();
+    String savedMsg = 'Key saved.';
+    if (!_isSettingUp) {
+      _saveDefaultNotificationDistance();
+      savedMsg = 'Settings saved.';
+    }
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Settings saved.')));
+        .showSnackBar(SnackBar(content: Text(savedMsg)));
 
     setState(() {
       _isProcessing = false;

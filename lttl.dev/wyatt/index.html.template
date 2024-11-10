@@ -38,13 +38,13 @@
     <hr/>
 
     <h2>Disclaimer</h2>
-    <p>Wyatt is a location- and time-based to-do list application that uses the Google Maps API, e.g., Geocoding to convert geographic coordinates into human-readable addresses.</p>
+    <p>Wyatt is a location- and time-based reminder application that uses the Google Maps API, e.g., Geocoding to convert geographic coordinates into human-readable addresses.</p>
     <p><b>Using Google APIs is NOT free of charge!</b> Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
     <p>The application is provided as is and without warranty of any kind. The author is not responsible for any costs, damages or losses that may result from the use of the application or the Google APIs. By using the application, you agree to this disclaimer.</p>
     <hr/>
 
     <h2>Privacy Policy</h2>
-    <p>Wyatt itself does not collect any personal data. The application does not store any data on the server. The user's (API) key is stored securely on the client along with the user's to-do list data (that's the data entered by the user through the application's user interface). The application itself does not use cookies or any other tracking technologies.</p>
+    <p>Wyatt itself does not collect any personal data. The application does not store any data on the server. The user's (API) key is stored securely on the client along with the user's reminder data (that's the data entered by the user through the application's user interface). The application itself does not use cookies or any other tracking technologies.</p>
     <p>Please note that, through the usage of Google Maps, [Google Privacy Policy](https://www.google.com/policies/privacy/) and [Google Controller-Controller Data Protection Terms](https://cloud.google.com/maps-platform/terms/maps-controller-terms) apply.</p>
     <hr/>
 
@@ -60,7 +60,7 @@
     Here's the list of permissions and why they are required:
     <ul>
         <li>Internet (?): Required to make HTTPS calls to Google APIs.</li>
-        <li>Location: Required to know the user's current location to be able to notify about a to-do.</li>
+        <li>Location: Required to know the user's current location to be able to notify.</li>
         <li>Storage (?): Required to store the user's to-do list data on the client.</li>
     </ul>
 
@@ -68,7 +68,7 @@
     Wyatt is open-source software. The source code is available on <a href="https://github.com/m5lk3n/wyatt">GitHub</a>.
 
     <h2>Change Notes</h2>
-    <p>Version 0.0.1</p>
+    <p>Version __VERSION__</p>
     <p>
         <ul>
             <li>Initial release</li>

@@ -52,3 +52,8 @@ run:
 .PHONY: icons
 icons:
 	dart run flutter_launcher_icons
+
+## generate_lttl_dev: generate lttl.dev/wyatt
+.PHONY: generate_lttl_dev
+generate_lttl_dev:
+	lttl.dev/generate.sh

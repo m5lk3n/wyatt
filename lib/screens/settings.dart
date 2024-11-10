@@ -1,14 +1,20 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
+import 'package:wyatt/widgets/link_button.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({
+    super.key,
+    this.title = Common.screenSettings,
+    this.inSetupMode = false,
+  });
+
+  final String title;
+  final bool inSetupMode;
 
   @override
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
@@ -18,6 +24,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final _keyController = TextEditingController();
   final _distanceController = TextEditingController();
 
+  late final bool _isSettingUp;
   bool _isProcessing = false;
   bool _isObscured = true;
 
@@ -25,8 +32,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   void initState() {
     super.initState();
 
+    _isSettingUp = widget.inSetupMode;
+
     _readKey();
-    _readDefaultNotificationDistance();
+    if (!_isSettingUp) {
+      _readDefaultNotificationDistance();
+    }
   }
 
   @override
@@ -108,27 +119,105 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
         ),
         backgroundColor: Colors.transparent,
-        title: Text(Common.screenSettings),
+        title: Text(widget.title),
       ),
       body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(space, space, space, 0),
-            child: Linkify(
-              linkStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.inversePrimary,
+            child: Text.rich(
+              // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+              TextSpan(children: [
+                TextSpan(
+                  text: _isSettingUp
+                      ? 'A key is needed. Please obtain one from '
+                      : 'If needed, please obtain a key from ',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                ),
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.baseline,
+                  baseline: TextBaseline.alphabetic,
+                  child: LinkButton(
+                    urlLabel: 'this page',
+                    url: Common.keyUrl,
                   ),
-              onOpen: (link) async {
-                if (!await launchUrl(Uri.parse(link.url))) {
-                  throw Exception('Could not launch ${link.url}');
-                }
-              },
-              text: 'Please obtain a key from ${Common.keyUrl}.',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                ),
+                TextSpan(
+                  text: '.',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                ),
+              ]),
             ),
           ),
+          _isSettingUp
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(space, space, space, 0),
+                  child: Text.rich(
+                    // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                    TextSpan(
+                      children: [
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.baseline,
+                          baseline: TextBaseline.alphabetic,
+                          child: LinkButton(
+                            urlLabel: 'What',
+                            url: Common.keyWhatUrl,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' is this and ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.baseline,
+                          baseline: TextBaseline.alphabetic,
+                          child: LinkButton(
+                            urlLabel: 'why',
+                            url: Common.keyWhyUrl,
+                          ),
+                        ),
+                        TextSpan(
+                          text:
+                              ' is this needed?\nYou can change the key later in ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                        TextSpan(
+                          text: 'Settings',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                  ),
+                        ),
+                        TextSpan(
+                          text: '.',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : SizedBox.shrink(),
           Padding(
             padding: padding,
             child: TextField(
@@ -156,110 +245,39 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
             ),
           ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-          /*
-          Padding(
-            padding: const EdgeInsets.all(space),
-            child: DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                labelText: 'Language',
-                labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                suffixIcon: Tooltip(
-                  message: 'Another language is not yet available',
-                  child: Icon(Icons.info_outline),
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Divider(
+                  indent: space,
+                  endIndent: space,
                 ),
-              ),
-              value: 'English',
-              items: <String>['English', 'German'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          )),
-                );
-              }).toList(),
-              onChanged: null, // disabled, TODO: implement
-            ),
-          ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(space, space, space, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'System',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: RadioListTile<String>(
-                          title: Text('Metric'),
-                          value: 'Metric',
-                          groupValue: 'Metric',
-                          onChanged: (context) {
-                            /* TODO: implement */
-                          }),
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.all(space),
+                  child: TextField(
+                    keyboardType: TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: false,
                     ),
-                    Expanded(
-                      child: RadioListTile<String>(
-                        title: Text('Imperial'),
-                        value: 'Imperial',
-                        groupValue: 'Metric',
-                        onChanged: (context) {/* TODO: implement */},
-                        secondary: Tooltip(
-                          message: 'This choice is not yet supported',
-                          child: Icon(Icons.info_outline),
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter
+                          .digitsOnly // no decimal point, no sign
+                    ],
+                    enabled: !_isProcessing,
+                    // causes keyboard to slide up: autofocus: true,
+                    controller: _distanceController,
+                    decoration: InputDecoration(
+                      labelText: 'Default Notification Distance',
+                      hintText: 'Enter distance in meters',
+                      //suffixIcon: Icon(Icons.directions),
+                    ),
+                    maxLength: 4,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-          */
-          Padding(
-            padding: const EdgeInsets.all(space),
-            child: TextField(
-              keyboardType: TextInputType.numberWithOptions(
-                signed: false,
-                decimal: false,
-              ),
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter
-                    .digitsOnly // no decimal point, no sign
-              ],
-              enabled: !_isProcessing,
-              // causes keyboard to slide up: autofocus: true,
-              controller: _distanceController,
-              decoration: InputDecoration(
-                labelText: 'Default Notification Distance',
-                hintText: 'Enter distance in meters',
-                //suffixIcon: Icon(Icons.directions),
-              ),
-              maxLength: 4,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
                   ),
-            ),
-          ),
+                ),
           Divider(
             indent: space,
             endIndent: space,
@@ -282,24 +300,30 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ],
             ),
           ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(space),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.secondary,
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              ),
-              onPressed: _isProcessing ? null : () => _confirmReset(context),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text('Reset to factory settings'),
-              ),
-            ),
-          ),
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Divider(
+                  indent: space,
+                  endIndent: space,
+                ),
+          _isSettingUp
+              ? SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.all(space),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.secondary,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                    onPressed:
+                        _isProcessing ? null : () => _confirmReset(context),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('Reset to factory settings'),
+                    ),
+                  ),
+                ),
         ],
       ),
     );
@@ -313,9 +337,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     });
 
     _saveKey();
-    _saveDefaultNotificationDistance();
+    String savedMsg = 'Key saved.';
+    if (!_isSettingUp) {
+      _saveDefaultNotificationDistance();
+      savedMsg = 'Settings saved.';
+    }
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Settings saved.')));
+        .showSnackBar(SnackBar(content: Text(savedMsg)));
 
     setState(() {
       _isProcessing = false;

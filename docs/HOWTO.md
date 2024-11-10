@@ -1,6 +1,6 @@
-# How to
+# How to ...
 
-## Print the Wireframe (to PDF/PNG)
+## ... print the wireframe to PDF
 
 1. Open "moqup" in Chrome (not Firefox) to properly print it to PDF
 2. -> Preview (make sure it's set to 100% zoom, but so that the zoom widget (lower left corner) is hidden)
@@ -12,4 +12,8 @@
    - No Background Graphics
 5. Save as `wireframe.pdf` to download the PDF
 
-Optional: On Linux, run `pdftoppm -png wireframe.pdf wireframe` to create the PNG file(s).
+## ... convert the wireframe from PDF to PNG
+
+Option 1: On Linux, run `pdftoppm -png wireframe.pdf wireframe` to create the PNG file(s).
+
+Option 2: Browse to https://github.com/m5lk3n/wyatt/blob/main/docs/wireframe.pdf and right-click the preview image -> "Save Image As..."

@@ -47,7 +47,7 @@ class SplashScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: bigSpace),
                   child: GestureDetector(
                     onTap: () {
-                      launchUrl(Uri.parse('https://lttl.dev'));
+                      launchUrl(Uri.parse(Common.devUrl));
                     },
                     child:
                         Image.asset('assets/images/logo.png', height: bigSpace),

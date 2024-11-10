@@ -9,7 +9,6 @@ help:
 install:
 	flutter pub add package_info_plus
 	flutter pub add google_fonts
-	flutter pub add flutter_linkify
 	flutter pub add url_launcher
 	flutter pub add flutter_secure_storage
 	flutter pub add http

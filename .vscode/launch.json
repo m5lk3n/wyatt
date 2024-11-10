@@ -10,7 +10,9 @@
             "type": "dart",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // http://dev.home/wyatt"
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev/key
+                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev/what
+                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why" // https://wyatt.lttl.dev/why
             ]
         },
         {
@@ -20,7 +22,9 @@
             "flutterMode": "profile",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // http://dev.home/wyatt"
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev/key
+                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev/what
+                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why" // https://wyatt.lttl.dev/why
             ]
         },
         {
@@ -30,7 +34,9 @@
             "flutterMode": "release",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt" // https://developers.google.com/maps/documentation/geocoding/get-api-key
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev/key
+                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev/what
+                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why" // https://wyatt.lttl.dev/why
             ]
         }
     ]

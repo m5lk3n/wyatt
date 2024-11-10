@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
-import 'package:wyatt/screens/setup.dart';
+import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/widgets/common.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -26,7 +26,9 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Text(Common.appName,
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondary,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary, //onSecondary,
                       )),
               Expanded(
                 child: Column(
@@ -112,7 +114,7 @@ class WelcomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: bigSpace),
                   child: GestureDetector(
                     onTap: () {
-                      launchUrl(Uri.parse('https://lttl.dev'));
+                      launchUrl(Uri.parse(Common.devUrl));
                     },
                     child:
                         Image.asset('assets/images/logo.png', height: bigSpace),

@@ -46,9 +46,9 @@ A location- and time-based To-do app for iOS and Android.
   - [x] Squared background color
 
 - [ ] Home (default it there are no locations)
-  - [ ] Intro text
+  - [x] Intro text
     - [ ] Animate text (?)
-    - [ ] Getting Started button at the bottom
+    - [x] Getting Started button at the bottom
   - [ ] Add help button right upper corner (?)
   - [x] Left drawer with
       - [Home](https://api.flutter.dev/flutter/material/Icons/home-constant.html)
@@ -95,6 +95,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
+- [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
 - [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
@@ -105,7 +106,8 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Add `intl`
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
 - [ ] Add tests
-- [ ] Add delete key (and any other local data)
+- [x] Add delete key (and any other local data)
+- [ ] To-dos in code
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 - [ ] Generate `lttl.dev/wyatt/index.html`
 - [ ] Godoc

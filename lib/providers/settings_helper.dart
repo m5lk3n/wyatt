@@ -6,6 +6,8 @@ import 'package:wyatt/models/network.dart';
 
 class KeyValidator {
   static Future<bool> validateKey(String key) async {
+    log('Validating key');
+
     final response = await http.get(Uri.parse(
         // https://developers.google.com/maps/documentation/geocoding/start
         'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=$key'));
@@ -21,6 +23,8 @@ class KeyValidator {
       } catch (e) {
         log('Key validation failed with: $e');
       }
+    } else {
+      log('Key validation failed with status code: ${response.statusCode}');
     }
 
     return false;

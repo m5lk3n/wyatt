@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
 import 'package:wyatt/widgets/link_button.dart';
+import 'package:restart_app/restart_app.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({
@@ -268,7 +269,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     // causes keyboard to slide up: autofocus: true,
                     controller: _distanceController,
                     decoration: InputDecoration(
-                      labelText: 'Default Notification Distance',
+                      labelText: 'Default Notification Distance (m)',
                       hintText: 'Enter distance in meters',
                       //suffixIcon: Icon(Icons.directions),
                     ),
@@ -364,12 +365,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
-                  'Are you sure to reset the application?\n\nThis will set all settings back to their defaults and remove all data.\n\nThis action cannot be undone.'),
+                  'Are you sure to reset the application?\n\nThis will set all settings back to their defaults and remove all data.\n\nThis action cannot be undone.\n\nAlso, the application will restart (reopen on iOS).'),
               actions: [
                 TextButton(
                     onPressed: () {
                       _reset();
-                      Navigator.of(context).pop();
+                      Restart.restartApp(
+                        // customize restart notification message for iOS:
+                        notificationTitle: 'Restarting ${Common.appName}',
+                        notificationBody:
+                            'Please tap here to open the app again.',
+                      );
                     },
                     child: const Text('Yes')),
                 TextButton(

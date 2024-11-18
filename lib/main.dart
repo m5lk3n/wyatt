@@ -1,14 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-//import 'package:wyatt/screens/ltds.dart';
-//import 'package:wyatt/screens/setup.dart';
-//import 'package:wyatt/screens/splash.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:wyatt/screens/welcome.dart';
 
 // https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
 extension StringExtensions on String {
@@ -49,18 +46,19 @@ void main() async {
   });
 }
 
-class WyattApp extends StatelessWidget {
+class WyattApp extends ConsumerWidget {
   const WyattApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    const Widget screen = WelcomeScreen();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = AppRoutes().createRouter(ref);
 
-    return MaterialApp(
+    return MaterialApp.router(
+        // TODO: CupertinoApp.router?
         title: Common.appName,
         theme: theme,
-        home:
-            screen // LtdsScreen() // SetupScreen(title: 'Set up ${Common.appName}'),
-        );
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider);
   }
 }

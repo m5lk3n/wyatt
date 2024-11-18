@@ -86,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => SettingsScreen(
                                     title: Common.screenSetup,
-                                    inSetupMode: true,
+                                    inSetupMode: false,
                                   ),
                                 ),
                               );

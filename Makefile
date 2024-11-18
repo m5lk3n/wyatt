@@ -15,6 +15,8 @@ install:
 	flutter pub add uuid
 	flutter pub add shared_preferences
 	flutter pub add flutter_riverpod
+	flutter pub add go_router
+	flutter pub add restart_app
 	flutter pub add flutter_lints --dev
 	flutter pub add flutter_launcher_icons --dev
 

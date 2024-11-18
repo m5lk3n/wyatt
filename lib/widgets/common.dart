@@ -14,35 +14,17 @@ PreferredSizeWidget createWyattAppBar(BuildContext context, String title) =>
       ),
       backgroundColor: Colors.transparent,
       title: Text(title),
-      /*
-        leading: IconButton(
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.lightbulb,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
           onPressed: () {
-            // TODO: Navigate to home screen
+            // TODO: seed
           },
-          icon: Icon(Icons.home),
-        ),
-        */
-      /*
-    actions: <Widget>[
-      IconButton(
-        icon: Icon(
-          Icons.info,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return Theme(
-                data: Theme.of(context)
-                    .copyWith(dialogBackgroundColor: seedColor),
-                child: _createAboutDialog(),
-              );
-            },
-          );
-        },
-      )
-    ],*/
+        )
+      ],
     );
 
 String _getLegalese() {

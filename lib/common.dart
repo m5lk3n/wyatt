@@ -19,7 +19,7 @@ abstract class Common {
     defaultValue: 'https://wyatt.lttl.dev/why', // TODO
   );
   static const String screenHome = 'Home';
-  static const String screenLtds = 'Reminders';
+  static const String screenReminders = 'Reminders';
   static const String screenSetup = 'Saddle Up';
   static const String screenSettings = 'Settings';
   static const String screenAbout = 'About';
@@ -29,3 +29,5 @@ const bigSpace = 50.0;
 const space = 20.0;
 const padding = EdgeInsets.all(space);
 const seedColor = Colors.brown;
+
+const magicalWaitTimeInSeconds = 2;

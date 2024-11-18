@@ -4,7 +4,7 @@ class Startup {
       false; // key == null && empty + && isNotLoading -> WelcomeScreen
   bool hasInvalidKey =
       false; // key != null && !isValid + && isNotLoading -> WelcomeScreen
-  // TODO: add check for reminders/LTDs
+  // TODO: add check for reminders
 
   Startup({
     this.isLoading = true,

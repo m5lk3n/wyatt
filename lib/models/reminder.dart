@@ -2,7 +2,7 @@ import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
 
-class LocationToDo {
+class Reminder {
 /*
 - Input:
   - Location coordinates (widget, maps picker) -> used to calculate distance & to get name for from Geocode API
@@ -19,7 +19,7 @@ class LocationToDo {
     - Recurring (interval)
     - Action (Check/Done, Snooze, Cancel)
 */
-  LocationToDo(
+  Reminder(
       {required this.locationCoordinates,
       required this.locationName,
       required this.message,

@@ -8,6 +8,7 @@
 4. Chrome -> Print -> Save as PDF
    - Portrait
    - A3
+   - Margin: None
    - Scale: Custom: 46 (or whatever makes the picture fit fully)
    - No Background Graphics
 5. Save as `wireframe.pdf` to download the PDF

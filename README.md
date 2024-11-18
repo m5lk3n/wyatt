@@ -81,6 +81,8 @@ A location- and time-based To-do app for iOS and Android.
   - [x] Default notification distance (500m)
   - [x] Reset to factory settings
 
+- [ ] Indicate invalid key in appbar
+
 - [ ] Download my data (?)
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
@@ -107,7 +109,7 @@ A location- and time-based To-do app for iOS and Android.
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
 - [ ] Add tests
 - [x] Add delete key (and any other local data)
-- [ ] To-dos in code
+- [ ] TODOs in code
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 - [ ] Generate `lttl.dev/wyatt/index.html`
 - [ ] Godoc

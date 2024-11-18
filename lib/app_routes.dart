@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wyatt/screens/ltds.dart';
+import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/screens/splash.dart';
 import 'package:wyatt/screens/welcome.dart';
@@ -20,7 +20,7 @@ class AppRoutes {
         ),
         GoRoute(
           path: '/reminders',
-          builder: (context, state) => LtdsScreen(),
+          builder: (context, state) => RemindersScreen(),
         ),
         GoRoute(
           path: '/settings',

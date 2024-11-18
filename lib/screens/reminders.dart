@@ -3,10 +3,10 @@ import 'package:wyatt/common.dart';
 import 'package:wyatt/data/seed.dart';
 import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/drawer.dart';
-import 'package:wyatt/widgets/ltd.dart';
+import 'package:wyatt/widgets/reminder.dart';
 
-class LtdsScreen extends StatelessWidget {
-  const LtdsScreen({super.key});
+class RemindersScreen extends StatelessWidget {
+  const RemindersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class LtdsScreen extends StatelessWidget {
           ),
           const SizedBox(height: space / 2),
           Text(
-            'Add some to-dos to get started',
+            'Add some reminders to get started',
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
@@ -31,9 +31,9 @@ class LtdsScreen extends StatelessWidget {
       ),
     );
 
-    if (seedLtds.isNotEmpty) {
+    if (seedReminders.isNotEmpty) {
       content = GridView.builder(
-        itemCount: seedLtds.length,
+        itemCount: seedReminders.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 2 columns horizontally
           childAspectRatio: 3 / 2,
@@ -41,13 +41,13 @@ class LtdsScreen extends StatelessWidget {
           mainAxisSpacing: space, // 20 pixels between rows
         ),
         itemBuilder: (context, index) {
-          return LtdGridItem(ltd: seedLtds[index]);
+          return ReminderGridItem(reminder: seedReminders[index]);
         },
       );
     }
 
     return Scaffold(
-      appBar: createWyattAppBar(context, Common.screenLtds),
+      appBar: createWyattAppBar(context, Common.screenReminders),
       body: content,
       drawer: WyattDrawer(),
     );

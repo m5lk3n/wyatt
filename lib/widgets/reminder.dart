@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
-import 'package:wyatt/models/ltd.dart';
+import 'package:wyatt/models/reminder.dart';
 
-class LtdGridItem extends StatelessWidget {
-  const LtdGridItem({super.key, required this.ltd});
+class ReminderGridItem extends StatelessWidget {
+  const ReminderGridItem({super.key, required this.reminder});
 
-  final LocationToDo ltd;
+  final Reminder reminder;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LtdGridItem extends StatelessWidget {
         child: GridTile(
           //child: Expanded(
           child: Text(
-            "${ltd.message} at ${ltd.locationName}",
+            "${reminder.message} at ${reminder.locationName}",
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!

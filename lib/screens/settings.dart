@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/providers/settings_helper.dart';
@@ -294,7 +295,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     backgroundColor:
                         Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  onPressed: _isProcessing ? null : _save,
+                  onPressed: _isProcessing ? null : () => _save(context),
                   autofocus: true,
                   child: Text('Save'),
                 ),
@@ -330,7 +331,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  void _save() {
+  void _save(BuildContext context) {
     FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
 
     setState(() {
@@ -349,6 +350,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     setState(() {
       _isProcessing = false;
     });
+
+    context.go('/reminders');
   }
 
   void _confirmReset(BuildContext context) {

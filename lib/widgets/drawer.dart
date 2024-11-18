@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
-import 'package:wyatt/screens/ltds.dart';
+import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/widgets/common.dart';
 
@@ -48,12 +48,12 @@ class WyattDrawer extends StatelessWidget {
                     Icons.location_on,
                     size: 32, // half the size of the icon
                   ),
-                  title: const Text(Common.screenLtds),
+                  title: const Text(Common.screenReminders),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => LtdsScreen()),
+                          builder: (BuildContext context) => RemindersScreen()),
                     );
                   },
                 ),

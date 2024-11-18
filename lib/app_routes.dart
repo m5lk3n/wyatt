@@ -6,24 +6,29 @@ import 'package:wyatt/screens/splash.dart';
 import 'package:wyatt/screens/welcome.dart';
 
 class AppRoutes {
+  static const welcome = '/welcome';
+  static const splash = '/splash';
+  static const reminders = '/reminders';
+  static const settings = '/settings';
+
   GoRouter createRouter(WidgetRef ref) {
     return GoRouter(
-      initialLocation: '/splash',
+      initialLocation: splash,
       routes: [
         GoRoute(
-          path: '/splash',
+          path: splash,
           builder: (context, state) => SplashScreen(),
         ),
         GoRoute(
-          path: '/welcome',
+          path: welcome,
           builder: (context, state) => WelcomeScreen(),
         ),
         GoRoute(
-          path: '/reminders',
+          path: reminders,
           builder: (context, state) => RemindersScreen(),
         ),
         GoRoute(
-          path: '/settings',
+          path: settings,
           builder: (context, state) => SettingsScreen(),
         ),
       ],

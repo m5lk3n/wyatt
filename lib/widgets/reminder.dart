@@ -10,7 +10,7 @@ class ReminderGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(space),
+      padding: const EdgeInsets.all(Common.space),
       child:
           InkWell /* provides a visual feedback when the user taps the item*/ (
         onTap: () {

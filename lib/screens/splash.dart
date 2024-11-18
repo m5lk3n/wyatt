@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/providers/startup_provider.dart';
 
@@ -22,13 +23,13 @@ class SplashScreen extends ConsumerWidget {
       if (!startup.isLoading) {
         if (startup.hasNoKey) {
           log('SplashScreen: no key -> welcome');
-          context.go('/welcome');
+          context.go(AppRoutes.welcome);
         } else if (startup.hasInvalidKey) {
           log('SplashScreen: invalid key -> settings');
-          context.go('/settings');
+          context.go(AppRoutes.settings);
         } else {
           log('SplashScreen: else -> reminders');
-          context.go('/reminders');
+          context.go(AppRoutes.reminders);
         }
       }
     });
@@ -36,13 +37,13 @@ class SplashScreen extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          color: seedColor,
+          color: Common.seedColor,
           child: Column(
             children: [
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 2 * bigSpace),
+                  padding: const EdgeInsets.only(top: 2 * Common.bigSpace),
                   child: ClipOval(
                     child: Image.asset('assets/icon/icon.png', height: 100),
                   ),
@@ -70,13 +71,13 @@ class SplashScreen extends ConsumerWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: bigSpace),
+                  padding: const EdgeInsets.only(bottom: Common.bigSpace),
                   child: GestureDetector(
                     onTap: () {
                       launchUrl(Uri.parse(Common.devUrl));
                     },
-                    child:
-                        Image.asset('assets/images/logo.png', height: bigSpace),
+                    child: Image.asset('assets/images/logo.png',
+                        height: Common.bigSpace),
                   ),
                 ),
               ),

@@ -21,8 +21,8 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
 
   Future<void> _loadStartupStatus() async {
     await Future.delayed(const Duration(
-        seconds:
-            magicalWaitTimeInSeconds)); // simulate loading, give splash screen time to show
+        seconds: Common
+            .magicalWaitTimeInSeconds)); // simulate loading, give splash screen time to show
 
     Startup startup = Startup(); // TODO: should this be a member?
     state = startup;

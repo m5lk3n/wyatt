@@ -20,7 +20,7 @@ class WyattDrawer extends StatelessWidget {
               ClipOval(
                 child: Image.asset("assets/icon/icon-small.png"),
               ),
-              SizedBox(width: space / 2),
+              SizedBox(width: Common.space / 2),
               Text(
                 Common.appName,
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
@@ -38,7 +38,7 @@ class WyattDrawer extends StatelessWidget {
                     Icons.home,
                     size: 32, // half the size of the icon
                   ),
-                  title: const Text(Common.screenHome),
+                  title: const Text(Screen.home),
                   onTap: () {
                     // TODO
                   },
@@ -48,7 +48,7 @@ class WyattDrawer extends StatelessWidget {
                     Icons.location_on,
                     size: 32, // half the size of the icon
                   ),
-                  title: const Text(Common.screenReminders),
+                  title: const Text(Screen.reminders),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -62,7 +62,7 @@ class WyattDrawer extends StatelessWidget {
                     Icons.settings,
                     size: 32, // half the size of the icon
                   ),
-                  title: const Text(Common.screenSettings),
+                  title: const Text(Screen.settings),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -81,7 +81,7 @@ class WyattDrawer extends StatelessWidget {
                 Icons.info,
                 size: 32, // half the size of the icon
               ),
-              title: const Text(Common.screenAbout),
+              title: const Text(Screen.about),
               onTap: () {
                 Navigator.pop(context);
                 showDialog(
@@ -89,7 +89,7 @@ class WyattDrawer extends StatelessWidget {
                   builder: (context) {
                     return Theme(
                       data: Theme.of(context)
-                          .copyWith(dialogBackgroundColor: seedColor),
+                          .copyWith(dialogBackgroundColor: Common.seedColor),
                       child: createAboutDialog(context),
                     );
                   },

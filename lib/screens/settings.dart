@@ -1,17 +1,19 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
+import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/link_button.dart';
 import 'package:restart_app/restart_app.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({
     super.key,
-    this.title = Common.screenSettings,
+    this.title = Screen.settings,
     this.inSetupMode = false,
   });
 
@@ -111,22 +113,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     // final Settings = ref.watch(settingsNotifierProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/appbar-bg.jpeg"),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        title: Text(widget.title),
-      ),
+      appBar: createWyattAppBar(context, widget.title),
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(space, space, space, 0),
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              Common.space,
+              Common.space,
+              0,
+            ),
             child: Text.rich(
               // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
               TextSpan(children: [
@@ -157,7 +153,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           _isSettingUp
               ? Padding(
-                  padding: const EdgeInsets.fromLTRB(space, space, space, 0),
+                  padding: const EdgeInsets.fromLTRB(
+                    Common.space,
+                    Common.space,
+                    Common.space,
+                    0,
+                  ),
                   child: Text.rich(
                     // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
                     TextSpan(
@@ -221,7 +222,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 )
               : SizedBox.shrink(),
           Padding(
-            padding: padding,
+            padding: Common.padding,
             child: TextField(
               obscureText: _isObscured,
               enableSuggestions: false,
@@ -250,13 +251,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _isSettingUp
               ? SizedBox.shrink()
               : Divider(
-                  indent: space,
-                  endIndent: space,
+                  indent: Common.space,
+                  endIndent: Common.space,
                 ),
           _isSettingUp
               ? SizedBox.shrink()
               : Padding(
-                  padding: const EdgeInsets.all(space),
+                  padding: const EdgeInsets.all(Common.space),
                   child: TextField(
                     keyboardType: TextInputType.numberWithOptions(
                       signed: false,
@@ -281,11 +282,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                 ),
           Divider(
-            indent: space,
-            endIndent: space,
+            indent: Common.space,
+            endIndent: Common.space,
           ),
           Padding(
-            padding: const EdgeInsets.all(space),
+            padding: const EdgeInsets.all(Common.space),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -305,13 +306,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _isSettingUp
               ? SizedBox.shrink()
               : Divider(
-                  indent: space,
-                  endIndent: space,
+                  indent: Common.space,
+                  endIndent: Common.space,
                 ),
           _isSettingUp
               ? SizedBox.shrink()
               : Padding(
-                  padding: const EdgeInsets.all(space),
+                  padding: const EdgeInsets.all(Common.space),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.secondary,
@@ -351,7 +352,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       _isProcessing = false;
     });
 
-    context.go('/reminders');
+    context.go(AppRoutes.reminders);
   }
 
   void _confirmReset(BuildContext context) {
@@ -359,7 +360,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         context: context,
         builder: (BuildContext ctx) {
           return Theme(
-            data: Theme.of(context).copyWith(dialogBackgroundColor: seedColor),
+            data: Theme.of(context)
+                .copyWith(dialogBackgroundColor: Common.seedColor),
             child: AlertDialog(
               title: Text(
                 'Please Confirm',

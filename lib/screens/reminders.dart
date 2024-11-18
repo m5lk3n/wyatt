@@ -20,7 +20,7 @@ class RemindersScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
-          const SizedBox(height: space / 2),
+          const SizedBox(height: Common.space / 2),
           Text(
             'Add some reminders to get started',
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
@@ -37,8 +37,8 @@ class RemindersScreen extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 2 columns horizontally
           childAspectRatio: 3 / 2,
-          crossAxisSpacing: space, // 20 pixels between columns
-          mainAxisSpacing: space, // 20 pixels between rows
+          crossAxisSpacing: Common.space, // 20 pixels between columns
+          mainAxisSpacing: Common.space, // 20 pixels between rows
         ),
         itemBuilder: (context, index) {
           return ReminderGridItem(reminder: seedReminders[index]);
@@ -47,7 +47,7 @@ class RemindersScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: createWyattAppBar(context, Common.screenReminders),
+      appBar: createWyattAppBar(context, Screen.reminders),
       body: content,
       drawer: WyattDrawer(),
     );

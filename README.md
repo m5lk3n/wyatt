@@ -81,7 +81,7 @@ A location- and time-based To-do app for iOS and Android.
   - [x] Default notification distance (500m)
   - [x] Reset to factory settings
 
-- [ ] Indicate invalid key in appbar
+- [x] Indicate invalid key in appbar
 
 - [ ] Download my data (?)
 
@@ -119,8 +119,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- [Onboarding with routes and riverpod](https://flutterexplained.com/p/flutter-onboarding-with-riverpod)?
-
+- Seeding?
 
 ## Open
 

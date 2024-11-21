@@ -6,9 +6,10 @@
 - [x] https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage
 - [x] https://github.com/mogol/flutter_secure_storage/blob/develop/flutter_secure_storage/example/lib/main.dart
 
-## State Management
+## State Management / Routing
 
 - https://codewithandrea.com/articles/flutter-state-management-riverpod/
+- [Onboarding with routes and riverpod](https://flutterexplained.com/p/flutter-onboarding-with-riverpod)
 
 ## Input Fields
 

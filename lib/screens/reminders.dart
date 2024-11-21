@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/data/seed.dart';
-import 'package:wyatt/widgets/common.dart';
+import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/reminder.dart';
 
@@ -47,7 +47,7 @@ class RemindersScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: createWyattAppBar(context, Screen.reminders),
+      appBar: WyattAppBar(context, Screen.reminders),
       body: content,
       drawer: WyattDrawer(),
     );

@@ -87,6 +87,8 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
 
+- [ ] Check Internet connectivity
+
 - [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - [ ] Implement notification

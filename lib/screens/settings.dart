@@ -1,12 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
+import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
-import 'package:wyatt/widgets/common.dart';
+import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/link_button.dart';
 import 'package:restart_app/restart_app.dart';
 
@@ -46,10 +49,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   void dispose() {
+    log('_SettingsScreenState: dispose');
     _keyController.dispose();
     _distanceController.dispose();
 
     super.dispose();
+    log('_SettingsScreenState: disposed');
   }
 
   Future<void> _readKey() async {
@@ -60,7 +65,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     _keyController.text = key;
   }
 
-  Future<void> _saveKey() async {
+  Future<bool> _saveKey() async {
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
     final ThemeData themeData = Theme.of(context);
     scaffold.clearSnackBars();
@@ -71,19 +76,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         backgroundColor: themeData.colorScheme.onErrorContainer,
         content: Text('Please enter a key'),
       ));
-      return;
+      return false;
     }
 
     final settings = ref.read(settingsNotifierProvider.notifier);
     settings.setKey(keyValue);
 
     if (await KeyValidator.validateKey(keyValue)) {
-      //scaffold.showSnackBar(SnackBar(content: Text('The saved key is valid.')));
+      scaffold.showSnackBar(SnackBar(content: Text('The saved key is valid.')));
+      ref.read(isKeyValidStateProvider.notifier).state = true;
+      return true;
     } else {
+      ref.read(isKeyValidStateProvider.notifier).state = false;
       scaffold.showSnackBar(SnackBar(
           backgroundColor: themeData.colorScheme.error,
           content: Text('The saved key is invalid, the app won\'t work!')));
     }
+
+    return false;
   }
 
   Future<void> _readDefaultNotificationDistance() async {
@@ -110,10 +120,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final Settings = ref.watch(settingsNotifierProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
-      appBar: createWyattAppBar(context, widget.title),
+      appBar: WyattAppBar(context, widget.title),
       body: ListView(
         children: [
           Padding(
@@ -332,27 +341,37 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  void _save(BuildContext context) {
+  Future<bool> _saveSettings(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
+
+    final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
 
     setState(() {
       _isProcessing = true;
     });
 
-    _saveKey();
+    bool result =
+        await _saveKey(); // we need to wait for this to finish, otherwise the ref in `ref.read(isKeyValidStateProvider.notifier).state = ...` will be called after the widget is disposed on an invalidated ref, causing an error
     String savedMsg = 'Key saved.';
     if (!_isSettingUp) {
       _saveDefaultNotificationDistance();
       savedMsg = 'Settings saved.';
     }
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(savedMsg)));
+
+    scaffold.showSnackBar(SnackBar(content: Text(savedMsg)));
 
     setState(() {
       _isProcessing = false;
     });
 
-    context.go(AppRoutes.reminders);
+    return result;
+  }
+
+  void _save(BuildContext context) async {
+    if (await _saveSettings(context)) {
+      // ignore: use_build_context_synchronously
+      context.go(AppRoutes.reminders);
+    }
   }
 
   void _confirmReset(BuildContext context) {

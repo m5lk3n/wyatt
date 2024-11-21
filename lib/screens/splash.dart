@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/startup_provider.dart';
 
 class SplashScreen extends ConsumerWidget {
@@ -23,12 +24,15 @@ class SplashScreen extends ConsumerWidget {
       if (!startup.isLoading) {
         if (startup.hasNoKey) {
           log('SplashScreen: no key -> welcome');
+          ref.read(isKeyValidStateProvider.notifier).state = false;
           context.go(AppRoutes.welcome);
         } else if (startup.hasInvalidKey) {
           log('SplashScreen: invalid key -> settings');
+          ref.read(isKeyValidStateProvider.notifier).state = false;
           context.go(AppRoutes.settings);
         } else {
           log('SplashScreen: else -> reminders');
+          ref.read(isKeyValidStateProvider.notifier).state = true;
           context.go(AppRoutes.reminders);
         }
       }

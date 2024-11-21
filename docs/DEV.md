@@ -2,7 +2,7 @@
 
 ## Working snippets
 
-startup_provider.dart:
+`startup_provider.dart:`
 
 ```
 import 'dart:developer';
@@ -39,4 +39,32 @@ class StartupNotifier extends AutoDisposeNotifier<bool> {
     log('StartupNotifier: state = $state');
   }
 }
+```
+
+During start-up/splash, add this check ([source](https://medium.com/@piyushhh01/comprehensive-guide-to-error-handling-in-flutter-strategies-and-code-examples-2929071e5716)):
+
+```
+class MyHomePage extends StatelessWidget {
+  Future<void> checkInternetConnection(BuildContext context) async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      // Display a "No Internet Connection" message
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('No Internet Connection'),
+          content: Text('Please check your internet connection and try again.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Perform the network request
+      // ...
+    }
+  }
 ```

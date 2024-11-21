@@ -6,6 +6,10 @@
 - [x] https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage
 - [x] https://github.com/mogol/flutter_secure_storage/blob/develop/flutter_secure_storage/example/lib/main.dart
 
+## State Management
+
+- https://codewithandrea.com/articles/flutter-state-management-riverpod/
+
 ## Input Fields
 
 - https://stackoverflow.com/questions/49577781/how-to-create-number-input-field-in-flutter

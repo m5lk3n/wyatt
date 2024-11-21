@@ -26,8 +26,6 @@ abstract class Common {
   static const seedColor = Colors.brown;
 
   static const magicalWaitTimeInSeconds = 2;
-
-  static const isKeyValid = true; // TODO: set/align
 }
 
 abstract class Screen {

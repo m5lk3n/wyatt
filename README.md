@@ -130,6 +130,7 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Add tests
 - [x] Add delete key (and any other local data)
 - [ ] TODOs in code
+- [ ] Rename members to start with an underscore
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 - [ ] Generate `lttl.dev/wyatt/index.html`
 - [ ] Godoc

@@ -25,6 +25,9 @@
 
 ## Backlog / Research
 
+- https://stackoverflow.com/questions/78392222/flutter-how-to-set-font-size-larger-bigger
+- https://reinhart1010.id/blog/2023/02/11/why-text-labels-on-flutters-materialapp-looks-worse-on-ios-and-macos
+
 - https://medium.com/@emanyaqoob/flutter-localization-with-riverpod-and-sharedpreferences-d3919fb9bb02
 
 - https://stackoverflow.com/questions/52160746/flutter-appbar-background-image

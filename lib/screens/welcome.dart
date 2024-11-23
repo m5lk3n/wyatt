@@ -108,19 +108,22 @@ class WelcomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: Common.bigSpace),
-                  child: GestureDetector(
-                    onTap: () {
-                      launchUrl(Uri.parse(Common.devUrl));
-                    },
-                    child: Image.asset('assets/images/logo.png',
-                        height: Common.bigSpace),
-                  ),
-                ),
-              ),
+              Common.isIOS(
+                      context) // TODO/FIXME: fix font size for iOS, and put the bottom back in
+                  ? SizedBox.shrink()
+                  : Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: Common.bigSpace),
+                        child: GestureDetector(
+                          onTap: () {
+                            launchUrl(Uri.parse(Common.devUrl));
+                          },
+                          child: Image.asset('assets/images/logo.png',
+                              height: Common.bigSpace),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),

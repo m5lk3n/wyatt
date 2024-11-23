@@ -11,6 +11,7 @@ import 'package:wyatt/screens/settings.dart';
 class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String title;
   bool isOnSettingsScreen = false;
+  bool isSettingUp = false;
 
   WyattAppBar(
     BuildContext context,
@@ -18,6 +19,10 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
     super.key,
   }) {
     isOnSettingsScreen = context.widget is SettingsScreen;
+    if (isOnSettingsScreen) {
+      final screen = context.widget as SettingsScreen;
+      isSettingUp = screen.inSetupMode;
+    }
   }
 
   @override
@@ -41,7 +46,7 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.transparent,
       title: Text(title),
-      actions: isKeyValid
+      actions: isKeyValid || isSettingUp
           ? null
           : <Widget>[
               // TODO: lightbulb icon to seed

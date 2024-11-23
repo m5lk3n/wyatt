@@ -26,6 +26,9 @@ abstract class Common {
   static const seedColor = Colors.brown;
 
   static const magicalWaitTimeInSeconds = 2;
+
+  static bool isIOS(context) =>
+      Theme.of(context).platform == TargetPlatform.iOS;
 }
 
 abstract class Screen {

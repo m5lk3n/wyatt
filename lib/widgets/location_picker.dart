@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geocoding/geocoding.dart' as geo;
 import 'package:location/location.dart';
+import 'package:wyatt/widgets/location_helper.dart';
 
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
 class GetLocationWidget extends StatefulWidget {
   const GetLocationWidget({super.key});
 
   @override
-  _GetLocationState createState() => _GetLocationState();
+  State<GetLocationWidget> createState() => _GetLocationState();
 }
 
 class _GetLocationState extends State<GetLocationWidget> {
@@ -27,7 +27,7 @@ class _GetLocationState extends State<GetLocationWidget> {
     });
     try {
       final locationResult = await location.getLocation();
-      final locationAddress = await determineAddress();
+      final locationAddress = await determineAddress(locationResult);
       setState(() {
         _location = locationResult;
         _address = locationAddress;
@@ -81,26 +81,5 @@ class _GetLocationState extends State<GetLocationWidget> {
         ),
       ],
     );
-  }
-
-  Future<String> determineAddress() async {
-    String address = 'unknown';
-    if (_location == null) {
-      return address;
-    }
-
-    List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
-      _location!.latitude!,
-      _location!.longitude!,
-    );
-
-    if (placemarks.isNotEmpty) {
-      geo.Placemark placemark = placemarks.first;
-
-      address =
-          '${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}';
-    }
-
-    return address;
   }
 }

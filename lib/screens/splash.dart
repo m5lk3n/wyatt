@@ -33,7 +33,7 @@ class SplashScreen extends ConsumerWidget {
         } else {
           log('SplashScreen: else -> reminders');
           ref.read(isKeyValidStateProvider.notifier).state = true;
-          context.go(AppRoutes.reminders);
+          context.go(AppRoutes.location); // TODO/FIXME: AppRoutes.reminders
         }
       }
     });

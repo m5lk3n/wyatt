@@ -7,6 +7,8 @@ help:
 ## install: add all required dependencies
 .PHONY: install
 install:
+	flutter pub add flutter_lints --dev
+	flutter pub add flutter_launcher_icons --dev
 	flutter pub add package_info_plus
 	flutter pub add google_fonts
 	flutter pub add url_launcher
@@ -17,8 +19,9 @@ install:
 	flutter pub add flutter_riverpod
 	flutter pub add go_router
 	flutter pub add restart_app
-	flutter pub add flutter_lints --dev
-	flutter pub add flutter_launcher_icons --dev
+	flutter pub add google_maps_flutter
+	flutter pub add location
+	flutter pub add geocoding
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean

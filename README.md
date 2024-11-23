@@ -104,6 +104,8 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
+- [ ] Document permissions
+  - e.g., [location](https://pub.dev/packages/location) package: "Remember that the user has to accept the location permission to always allow to use the background location."
 - [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
   - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
@@ -120,6 +122,7 @@ A location- and time-based To-do app for iOS and Android.
 ## Doing
 
 - Seeding?
+- Location picker
 
 ## Open
 

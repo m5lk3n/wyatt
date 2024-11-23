@@ -13,6 +13,33 @@ import 'package:wyatt/providers/startup_provider.dart';
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});
 
+  /* TODO: add checks
+
+  check internet connectivity
+
+  check https://pub.dev/packages/location
+
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _locationData;
+
+  _serviceEnabled = await location.serviceEnabled();
+  if (!_serviceEnabled) {
+    _serviceEnabled = await location.requestService();
+    if (!_serviceEnabled) {
+      return;
+    }
+  }
+
+  _permissionGranted = await location.hasPermission();
+  if (_permissionGranted == PermissionStatus.denied) {
+    _permissionGranted = await location.requestPermission();
+    if (_permissionGranted != PermissionStatus.granted) {
+      return;
+    }
+  }
+  */
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final startup = ref.watch(startupNotifierProvider);

@@ -93,6 +93,22 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] Implement notification
 
+      https://pub.dev/packages/location:
+
+      *You can also get continuous callbacks when your position is changing:*
+
+      ```
+      location.onLocationChanged.listen((LocationData currentLocation) {
+        // Use current location
+      });
+      ```
+
+      *To receive location when application is in background you have to enable it:*
+
+      ```
+      location.enableBackgroundMode(enable: true)
+      ```
+
 ## Wireframe
 
 [Mockup](docs/wireframe.pdf)

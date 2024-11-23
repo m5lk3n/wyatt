@@ -18,3 +18,16 @@
 Option 1: On Linux, run `pdftoppm -png wireframe.pdf wireframe` to create the PNG file(s).
 
 Option 2: Browse to https://github.com/m5lk3n/wyatt/blob/main/docs/wireframe.pdf and right-click the preview image -> "Save Image As..."
+
+## ... run on Xcode
+
+```
+cd ios
+pod install
+```
+
+Open `ios` folder in Xcode.
+
+Plug in test iPhone.
+
+In Xcode, open `Runner.xcodeproj`, and hit the play button to build the project.

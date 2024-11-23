@@ -61,8 +61,8 @@
 		<key>CFBundleTypeRole</key>
 		<string>Editor</string>
 		<key>CFBundleURLName</key>
-		<!-- TODO: You can find it on /ios/project.pbxproj - 'PRODUCT_BUNDLE_IDENTIFIER' -->
-		<string>[Your project PRODUCT_BUNDLE_IDENTIFIER value]</string>
+		<!-- see PRODUCT_BUNDLE_IDENTIFIER in ../Runner.xcodeproj/project.pbxproj -->
+		<string>dev.lttl.wyatt</string>
 		<key>CFBundleURLSchemes</key>
 		<array>
 		<string>Wyatt</string>

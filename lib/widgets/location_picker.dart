@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
@@ -10,20 +12,18 @@ class LocationPicker extends StatefulWidget {
     this.locationData,
   });
 
-  final LocationData? locationData;
+  final LocationData? locationData; // input location data
 
   @override
   State<LocationPicker> createState() => _LocationPickerState();
 }
 
 class _LocationPickerState extends State<LocationPicker> {
-  final Location location = Location();
-
-  bool _loading = false;
-
-  LocationData? _locationData;
+  final Location location = Location(); // location data retriever
+  final _addressController = TextEditingController();
+  bool _isLoading = false;
+  LocationData? _currentLocationData;
   String? _error;
-  String? _address;
 
   @override
   void initState() {
@@ -32,66 +32,54 @@ class _LocationPickerState extends State<LocationPicker> {
     _updateLocation(locationData: widget.locationData);
   }
 
+  @override
+  void dispose() {
+    _addressController.dispose();
+
+    super.dispose();
+  }
+
   Future<void> _updateLocation({LocationData? locationData}) async {
     setState(() {
       _error = null;
-      _loading = true;
+      _isLoading = true;
     });
     try {
       final locationResult = locationData ?? await location.getLocation();
       final locationAddress = await determineAddress(locationResult);
       setState(() {
-        _locationData = locationResult;
-        _address = locationAddress;
-        _loading = false;
+        _currentLocationData = locationResult;
+        _addressController.text = locationAddress;
+        _isLoading = false;
       });
     } on PlatformException catch (err) {
       setState(() {
         _error = err.code;
-        _loading = false;
+        _isLoading = false;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 100,
-        ),
-        Center(
-          child: Text(
-            'Location: ${_error ?? '${_locationData ?? "unknown"}'}',
-            style: TextStyle(
-              fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-              color: Colors.white,
-            ),
+    log('LocationPicker: location: ${_error ?? '${_currentLocationData ?? "unknown"}'}');
+
+    String hintText = _isLoading ? 'Loading...' : 'Unknown';
+    if (_error != null) {
+      hintText = 'Error: $_error';
+    }
+
+    return TextField(
+      readOnly: true,
+      maxLines: null, // enables multiline
+      controller: _addressController,
+      decoration: InputDecoration(
+        label: const Text("Address"),
+        hintText: hintText,
+      ),
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
           ),
-        ),
-        Center(
-          child: Text(
-            'Address: ${_error ?? _address ?? "unknown"}',
-            style: TextStyle(
-              fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Row(
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: _updateLocation,
-              child: _loading
-                  ? const CircularProgressIndicator(
-                      color: Colors.white,
-                    )
-                  : const Text('Update'),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

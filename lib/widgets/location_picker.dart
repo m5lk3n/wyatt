@@ -4,32 +4,44 @@ import 'package:location/location.dart';
 import 'package:wyatt/widgets/location_helper.dart';
 
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
-class GetLocationWidget extends StatefulWidget {
-  const GetLocationWidget({super.key});
+class LocationPicker extends StatefulWidget {
+  const LocationPicker({
+    super.key,
+    this.locationData,
+  });
+
+  final LocationData? locationData;
 
   @override
-  State<GetLocationWidget> createState() => _GetLocationState();
+  State<LocationPicker> createState() => _LocationPickerState();
 }
 
-class _GetLocationState extends State<GetLocationWidget> {
+class _LocationPickerState extends State<LocationPicker> {
   final Location location = Location();
 
   bool _loading = false;
 
-  LocationData? _location;
+  LocationData? _locationData;
   String? _error;
   String? _address;
 
-  Future<void> _getLocation() async {
+  @override
+  void initState() {
+    super.initState();
+
+    _updateLocation(locationData: widget.locationData);
+  }
+
+  Future<void> _updateLocation({LocationData? locationData}) async {
     setState(() {
       _error = null;
       _loading = true;
     });
     try {
-      final locationResult = await location.getLocation();
+      final locationResult = locationData ?? await location.getLocation();
       final locationAddress = await determineAddress(locationResult);
       setState(() {
-        _location = locationResult;
+        _locationData = locationResult;
         _address = locationAddress;
         _loading = false;
       });
@@ -51,7 +63,7 @@ class _GetLocationState extends State<GetLocationWidget> {
         ),
         Center(
           child: Text(
-            'Location: ${_error ?? '${_location ?? "unknown"}'}',
+            'Location: ${_error ?? '${_locationData ?? "unknown"}'}',
             style: TextStyle(
               fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
               color: Colors.white,
@@ -70,12 +82,12 @@ class _GetLocationState extends State<GetLocationWidget> {
         Row(
           children: <Widget>[
             ElevatedButton(
-              onPressed: _getLocation,
+              onPressed: _updateLocation,
               child: _loading
                   ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
-                  : const Text('Get'),
+                  : const Text('Update'),
             ),
           ],
         ),

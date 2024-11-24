@@ -131,6 +131,7 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Add delete key (and any other local data)
 - [ ] TODOs in code
 - [ ] Rename members to start with an underscore
+- [ ] Adhere to conventions, lie *widget constructors only use named arguments. Also by convention, the first argument is key, and the last argument is child, children, or the equivalent.*
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 - [ ] Generate `lttl.dev/wyatt/index.html`
 - [ ] Godoc

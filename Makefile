@@ -22,6 +22,7 @@ install:
 	flutter pub add google_maps_flutter
 	flutter pub add location
 	flutter pub add geocoding
+	flutter pub add google_map_dynamic_key
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean

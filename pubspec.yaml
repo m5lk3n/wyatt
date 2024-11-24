@@ -49,6 +49,7 @@ dependencies:
   google_maps_flutter: ^2.10.0
   location: ^7.0.1
   geocoding: ^3.0.0
+  google_map_dynamic_key: ^1.0.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1

@@ -117,6 +117,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
+- [ ] Recover from crash
 - [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)

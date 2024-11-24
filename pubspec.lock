@@ -272,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.1"
+  google_map_dynamic_key:
+    dependency: "direct main"
+    description:
+      name: google_map_dynamic_key
+      sha256: "21c7dbc213fd0360720d38bf78ea46d5cb70252947a837335d13ec6abebb4636"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   google_maps:
     dependency: transitive
     description:

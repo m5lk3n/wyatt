@@ -25,6 +25,8 @@
 
 ## Backlog / Research
 
+- https://stackoverflow.com/questions/53295361/google-map-fatal-exception-on-android
+
 - https://stackoverflow.com/questions/78392222/flutter-how-to-set-font-size-larger-bigger
 - https://reinhart1010.id/blog/2023/02/11/why-text-labels-on-flutters-materialapp-looks-worse-on-ios-and-macos
 

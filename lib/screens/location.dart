@@ -25,7 +25,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
-      appBar: WyattAppBar(context, "Edit Location"),
+      appBar: WyattAppBar(context, Screen.editLocation),
       body: ListView(
         children: [
           Padding(

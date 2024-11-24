@@ -6,7 +6,7 @@ import 'package:wyatt/models/network.dart';
 
 class KeyValidator {
   static Future<bool> validateKey(String key) async {
-    log('KeyValidator: Validating key');
+    log('validating key', name: 'KeyValidator');
 
     final response = await http.get(Uri.parse(
         // https://developers.google.com/maps/documentation/geocoding/start
@@ -16,15 +16,16 @@ class KeyValidator {
         GeocodeAddress geocodeAddress = GeocodeAddress.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
         if (geocodeAddress.status == 'OK') {
-          log('KeyValidator: Key validation successful');
+          log('key validation successful', name: 'KeyValidator');
 
           return true;
         }
       } catch (e) {
-        log('KeyValidator: Key validation failed with: $e');
+        log('key validation failed with: $e', name: 'KeyValidator');
       }
     } else {
-      log('KeyValidator: Key validation failed with status code: ${response.statusCode}');
+      log('key validation failed with status code: ${response.statusCode}',
+          name: 'KeyValidator');
     }
 
     return false;

@@ -33,7 +33,7 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
         ? "\n\nPlease obtain a new key."
         : "\n\nYou can change the key in Settings.";
 
-    log("WyattAppBar: context.widget = ${context.widget}");
+    log("context.widget = ${context.widget}", name: "WyattAppBar");
 
     return AppBar(
       flexibleSpace: Container(

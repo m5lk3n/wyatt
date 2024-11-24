@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
 import 'package:wyatt/widgets/location_helper.dart';
+import 'package:wyatt/widgets/location_picker.dart';
 
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
 class AddressLoader extends StatefulWidget {
@@ -60,18 +61,34 @@ class _AddressLoaderState extends State<AddressLoader> {
 
   @override
   Widget build(BuildContext context) {
-    log('AddressLoader: location: ${_error ?? '${_currentLocationData ?? "unknown"}'}');
+    log('location: ${_error ?? '${_currentLocationData ?? "unknown"}'}',
+        name: 'AddressLoader');
 
     return TextField(
+      onTap: () {
+        pickLocation(context);
+      },
       readOnly: true,
       maxLines: null, // enables multiline
       controller: _addressController,
       decoration: InputDecoration(
         label: const Text("Address"),
+        suffixIcon: IconButton(
+            icon: Icon(Icons.directions),
+            onPressed: () {
+              pickLocation(context);
+            }),
       ),
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSurface,
           ),
+    );
+  }
+
+  void pickLocation(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LocationPicker()),
     );
   }
 }

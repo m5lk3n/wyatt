@@ -43,22 +43,22 @@ class SplashScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final startup = ref.watch(startupNotifierProvider);
-    log('SplashScreen: startup = $startup');
+    log('startup = $startup', name: 'SplashScreen');
 
     // schedule a callback to run after the frame has been rendered to avoid "setState() ... called during build" error
     // https://stackoverflow.com/questions/47592301/setstate-or-markneedsbuild-called-during-build
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (!startup.isLoading) {
         if (startup.hasNoKey) {
-          log('SplashScreen: no key -> welcome');
+          log('no key -> welcome', name: 'SplashScreen');
           ref.read(isKeyValidStateProvider.notifier).state = false;
           context.go(AppRoutes.welcome);
         } else if (startup.hasInvalidKey) {
-          log('SplashScreen: invalid key -> settings');
+          log('invalid key -> settings', name: 'SplashScreen');
           ref.read(isKeyValidStateProvider.notifier).state = false;
           context.go(AppRoutes.settings);
         } else {
-          log('SplashScreen: else -> reminders');
+          log('else -> reminders', name: 'SplashScreen');
           ref.read(isKeyValidStateProvider.notifier).state = true;
           context.go(AppRoutes.location); // TODO/FIXME: AppRoutes.reminders
         }

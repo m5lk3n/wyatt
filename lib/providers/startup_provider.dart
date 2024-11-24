@@ -28,7 +28,7 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
     state = startup;
 
     final keyValue = await _secureStorage.read(key: Common.keyKey);
-    log('StartupNotifier: key = $keyValue');
+    log('key = $keyValue', name: 'StartupNotifier');
 
     if (keyValue == null || keyValue.isEmpty) {
       state = startup.copyWith(isLoading: false, hasNoKey: true);
@@ -39,6 +39,6 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
       state = startup.copyWith(isLoading: false, hasInvalidKey: !isValid);
     });
 
-    log('StartupNotifier: state = $state');
+    log('state = $state', name: 'StartupNotifier');
   }
 }

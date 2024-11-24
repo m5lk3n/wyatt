@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -49,12 +47,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   void dispose() {
-    log('_SettingsScreenState: dispose');
     _keyController.dispose();
     _distanceController.dispose();
 
     super.dispose();
-    log('_SettingsScreenState: disposed');
   }
 
   Future<void> _readKey() async {

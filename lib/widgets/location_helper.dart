@@ -10,8 +10,8 @@ Future<String> determineAddress(LocationData locationData) async {
   );
 
   if (placemarks.isEmpty) {
-    log('Location picker: no placemarks');
-    return 'unknown';
+    log('no placemarks', name: 'determineAddress');
+    return 'Unknown';
   }
 
   Placemark placemark = placemarks.first;

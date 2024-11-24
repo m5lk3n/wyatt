@@ -140,7 +140,13 @@ A location- and time-based To-do app for iOS and Android.
 ## Doing
 
 - Seeding?
-- Location picker
+- Location picker:
+
+  Dynamic version of `AndroidManifest.xml`'s:
+
+  ```
+  <meta-data android:name="com.google.android.geo.API_KEY" android:value="your API key"/>
+  ```
 
 ## Open
 

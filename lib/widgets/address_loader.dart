@@ -6,8 +6,8 @@ import 'package:location/location.dart';
 import 'package:wyatt/widgets/location_helper.dart';
 
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
-class LocationPicker extends StatefulWidget {
-  const LocationPicker({
+class AddressLoader extends StatefulWidget {
+  const AddressLoader({
     super.key,
     this.locationData,
   });
@@ -15,13 +15,12 @@ class LocationPicker extends StatefulWidget {
   final LocationData? locationData; // input location data
 
   @override
-  State<LocationPicker> createState() => _LocationPickerState();
+  State<AddressLoader> createState() => _AddressLoaderState();
 }
 
-class _LocationPickerState extends State<LocationPicker> {
+class _AddressLoaderState extends State<AddressLoader> {
   final Location location = Location(); // location data retriever
   final _addressController = TextEditingController();
-  bool _isLoading = false;
   LocationData? _currentLocationData;
   String? _error;
 
@@ -29,7 +28,7 @@ class _LocationPickerState extends State<LocationPicker> {
   void initState() {
     super.initState();
 
-    _updateLocation(locationData: widget.locationData);
+    _updateAddress(locationData: widget.locationData);
   }
 
   @override
@@ -39,10 +38,10 @@ class _LocationPickerState extends State<LocationPicker> {
     super.dispose();
   }
 
-  Future<void> _updateLocation({LocationData? locationData}) async {
+  Future<void> _updateAddress({LocationData? locationData}) async {
     setState(() {
       _error = null;
-      _isLoading = true;
+      _addressController.text = 'Loading...';
     });
     try {
       final locationResult = locationData ?? await location.getLocation();
@@ -50,24 +49,18 @@ class _LocationPickerState extends State<LocationPicker> {
       setState(() {
         _currentLocationData = locationResult;
         _addressController.text = locationAddress;
-        _isLoading = false;
       });
     } on PlatformException catch (err) {
       setState(() {
         _error = err.code;
-        _isLoading = false;
+        _addressController.text = 'Error: $_error';
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    log('LocationPicker: location: ${_error ?? '${_currentLocationData ?? "unknown"}'}');
-
-    String hintText = _isLoading ? 'Loading...' : 'Unknown';
-    if (_error != null) {
-      hintText = 'Error: $_error';
-    }
+    log('AddressLoader: location: ${_error ?? '${_currentLocationData ?? "unknown"}'}');
 
     return TextField(
       readOnly: true,
@@ -75,7 +68,6 @@ class _LocationPickerState extends State<LocationPicker> {
       controller: _addressController,
       decoration: InputDecoration(
         label: const Text("Address"),
-        hintText: hintText,
       ),
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSurface,

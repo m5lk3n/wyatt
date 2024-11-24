@@ -2,10 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/widgets/appbar.dart';
-import 'package:wyatt/widgets/location_picker.dart';
+import 'package:wyatt/widgets/address_loader.dart';
 
-class LocationScreen extends StatelessWidget {
+class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
+
+  @override
+  State<LocationScreen> createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends State<LocationScreen> {
+  final _aliasController = TextEditingController();
+
+  @override
+  void dispose() {
+    _aliasController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +35,50 @@ class LocationScreen extends StatelessWidget {
               Common.space,
               0,
             ),
-            child: LocationPicker(
+            child: AddressLoader(
               locationData: LocationData.fromMap({
                 'latitude': 52.0892639,
                 'longitude': 4.3840610,
               }),
+            ),
+          ),
+          Padding(
+            padding: Common.padding,
+            child: TextField(
+              enableSuggestions: false,
+              autocorrect: false,
+              // causes keyboard to slide up: autofocus: true,
+              controller: _aliasController,
+              decoration: InputDecoration(
+                label: const Text("Location Alias"),
+                hintText: "Enter a location alias here",
+              ),
+              maxLength: 40,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+          ),
+          Divider(
+            indent: Common.space,
+            endIndent: Common.space,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(Common.space),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.secondary,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  onPressed: null,
+                  autofocus: true,
+                  child: Text('Save'),
+                ),
+              ],
             ),
           ),
         ],

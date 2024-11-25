@@ -5,10 +5,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_map_dynamic_key/google_map_dynamic_key.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:wyatt/common.dart';
 import 'package:wyatt/providers/settings_provider.dart';
+import 'package:wyatt/widgets/appbar.dart';
 
 class LocationPicker extends ConsumerStatefulWidget {
-  const LocationPicker({super.key});
+  const LocationPicker({
+    super.key,
+    required this.locationData,
+  });
+
+  final LocationData
+      locationData; // input location data // TODO/WIP: use this to set the initial location
 
   @override
   ConsumerState<LocationPicker> createState() => _LocationPickerState();
@@ -16,20 +24,27 @@ class LocationPicker extends ConsumerStatefulWidget {
 
 class _LocationPickerState extends ConsumerState<LocationPicker> {
   final _googleMapDynamicKeyPlugin = GoogleMapDynamicKey();
-  late GoogleMapController _controller;
-  late LatLng _pickedLocation;
+  late GoogleMapController _controller; // TODO: use takeSnapshot()
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
   void _pickLocation(LatLng position) {
-    setState(() {
-      _pickedLocation = position;
-      log("picked location: $_pickedLocation", name: "LocationPicker");
-      Navigator.of(context).pop(
-          _pickedLocation); // TODO/WIP: pass picked location back to caller
+    // return value
+    LocationData pickedLocation = LocationData.fromMap({
+      "latitude": position.latitude,
+      "longitude": position.longitude,
     });
+    log("picked location: $pickedLocation", name: "LocationPicker");
+    Navigator.of(context).pop(pickedLocation);
   }
 
   @override
@@ -45,7 +60,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
     String key = await settings.getKey();
     log('key = $key',
         name:
-            'LocationPicker'); // if key is empty, the app will crash with a fatal error
+            'LocationPicker'); // if key is empty, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
     // TODO: complain if key is invalid
 
     await _googleMapDynamicKeyPlugin.setGoogleApiKey(key).then((value) {
@@ -56,24 +71,33 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   @override
   Widget build(BuildContext context) {
     log("build", name: "LocationPicker");
-    return FutureBuilder(
-      future: Location().getLocation(),
-      builder: (ctx, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final userLocation = snapshot.data as LocationData;
-        return GoogleMap(
-          myLocationEnabled: true,
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: LatLng(userLocation.latitude!, userLocation.longitude!),
-            zoom: 12,
-            // TODO: drop a pin on the user's location
-          ),
-          onTap: _pickLocation,
-        );
-      },
+    final latLngLocation =
+        LatLng(widget.locationData.latitude!, widget.locationData.longitude!);
+
+    return Scaffold(
+      appBar: WyattAppBar(context, Screen.pickLocation),
+      body: GoogleMap(
+        mapToolbarEnabled: false,
+        myLocationEnabled: true,
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          //target: LatLng(userLocation.latitude!, userLocation.longitude!),
+          target: latLngLocation,
+          zoom: 12,
+        ),
+        markers: {
+          Marker(
+            position: latLngLocation,
+            markerId: MarkerId(
+                'TODO'), // TODO/FIXME: use a unique ID? or a random one? or the reminder text?
+            infoWindow: InfoWindow(
+              title: "Reminder location",
+              snippet: "Buy coffee", // TODO/FIXME: use the reminder text
+            ), // InfoWindo
+          )
+        },
+        onTap: _pickLocation,
+      ),
     );
   }
 }

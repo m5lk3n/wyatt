@@ -16,6 +16,7 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
   WyattAppBar(
     BuildContext context,
     this.title, {
+    // TODO: make named parameters
     super.key,
   }) {
     isOnSettingsScreen = context.widget is SettingsScreen;

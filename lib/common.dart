@@ -38,4 +38,5 @@ abstract class Screen {
   static const String settings = 'Settings';
   static const String about = 'About';
   static const String editLocation = 'Edit Location';
+  static const String pickLocation = 'Pick a Location';
 }

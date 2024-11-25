@@ -47,7 +47,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] Home (default it there are no locations)
   - [x] Intro text
-    - [ ] Animate text (?)
+    - [ ] Animate text (?) (see `flutter_animate`)
     - [x] Getting Started button at the bottom
   - [ ] Add help button right upper corner (?)
   - [x] Left drawer with
@@ -141,13 +141,7 @@ A location- and time-based To-do app for iOS and Android.
 ## Doing
 
 - Seeding?
-- Location picker:
-
-  Dynamic version of `AndroidManifest.xml`'s:
-
-  ```
-  <meta-data android:name="com.google.android.geo.API_KEY" android:value="your API key"/>
-  ```
+- Location picker refinement
 
 ## Open
 
@@ -164,6 +158,12 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Sort locations overview by continent name
 - [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] OpenStreetMap version
+      - https://switch2osm.org/the-basics/
+      - https://pub.dev/packages/flutter_osm_plugin
+      - https://github.com/liodali/osm_flutter
+      - https://help.openstreetmap.org/questions/9367/can-i-use-openstreetmaps-openstreetmaps-api-for-commercial-apps-on-android
+      - https://stackoverflow.com/questions/51842695/openstreetmap-in-flutter
+      - https://leafletjs.com/
 
 ## Docs
 

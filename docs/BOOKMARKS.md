@@ -25,6 +25,10 @@
 
 ## Backlog / Research
 
+- https://mobikul.com/flutteradd-google-maps-api-key-dynamically/
+- https://pub.dev/packages/google_map_dynamic_key/
+- https://github.com/flutter/flutter/issues/41244
+
 - https://stackoverflow.com/questions/53295361/google-map-fatal-exception-on-android
 
 - https://stackoverflow.com/questions/78392222/flutter-how-to-set-font-size-larger-bigger

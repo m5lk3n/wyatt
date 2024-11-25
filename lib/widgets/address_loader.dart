@@ -8,12 +8,13 @@ import 'package:wyatt/widgets/location_picker.dart';
 
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
 class AddressLoader extends StatefulWidget {
-  const AddressLoader({
+  AddressLoader({
     super.key,
     this.locationData,
   });
 
-  final LocationData? locationData; // input location data
+  LocationData?
+      locationData; // input location data // TODO/FIXME: restore on LocationPicker back
 
   @override
   State<AddressLoader> createState() => _AddressLoaderState();
@@ -22,7 +23,7 @@ class AddressLoader extends StatefulWidget {
 class _AddressLoaderState extends State<AddressLoader> {
   final Location location = Location(); // location data retriever
   final _addressController = TextEditingController();
-  LocationData? _currentLocationData;
+  LocationData? _currentLocationData; // TODO: check if needed
   String? _error;
 
   @override
@@ -42,6 +43,7 @@ class _AddressLoaderState extends State<AddressLoader> {
   Future<void> _updateAddress({LocationData? locationData}) async {
     setState(() {
       _error = null;
+      _currentLocationData = null;
       _addressController.text = 'Loading...';
     });
     try {
@@ -85,10 +87,23 @@ class _AddressLoaderState extends State<AddressLoader> {
     );
   }
 
-  void pickLocation(BuildContext context) {
-    Navigator.push(
+  Future<void> pickLocation(BuildContext context) async {
+    if (_currentLocationData == null) {
+      log('no location data', name: 'AddressLoader');
+      return;
+    }
+
+    final LocationData? location = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const LocationPicker()),
+      MaterialPageRoute(
+          builder: (context) =>
+              LocationPicker(locationData: _currentLocationData!)),
     );
+    log('location picked: $location', name: 'AddressLoader');
+    if (location == null) {
+      return;
+    }
+    widget.locationData = location;
+    _updateAddress(locationData: location);
   }
 }

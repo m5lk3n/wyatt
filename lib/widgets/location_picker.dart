@@ -25,6 +25,7 @@ class LocationPicker extends ConsumerStatefulWidget {
 class _LocationPickerState extends ConsumerState<LocationPicker> {
   final _googleMapDynamicKeyPlugin = GoogleMapDynamicKey();
   late GoogleMapController _controller; // TODO: use takeSnapshot()
+  late String _key;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
@@ -57,13 +58,13 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   Future<void> initGoogleMapKey() async {
     final settings = ref.read(settingsNotifierProvider.notifier);
 
-    String key = await settings.getKey();
-    log('key = $key',
+    _key = await settings.getKey();
+    log('key = $_key',
         name:
             'LocationPicker'); // if key is empty, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
     // TODO: complain if key is invalid
 
-    await _googleMapDynamicKeyPlugin.setGoogleApiKey(key).then((value) {
+    await _googleMapDynamicKeyPlugin.setGoogleApiKey(_key).then((value) {
       log("GoogleMap key set dynamically", name: "LocationPicker");
     });
   }

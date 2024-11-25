@@ -55,6 +55,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
     initGoogleMapKey();
   }
 
+  // initializes _key as a side effect
   Future<void> initGoogleMapKey() async {
     final settings = ref.read(settingsNotifierProvider.notifier);
 

@@ -28,7 +28,7 @@
         <!-- requried dummy for google_map_dynamic_key flutter package to avoid sporadic FATAL_EXCEPTION -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value= ""/>
+            android:value= "WillBeReplacedAtRuntime"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -46,7 +46,10 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
-    <!-- https://pub.dev/packages/location -->
+    <!-- https://pub.dev/packages/location / permission group location -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-</manifest>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+=</manifest>

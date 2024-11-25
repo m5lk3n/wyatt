@@ -142,9 +142,8 @@ A location- and time-based To-do app for iOS and Android.
 
 - Seeding?
 - Location picker refinement
-  - https://www.fluttercampus.com/guide/254/google-map-autocomplete-place-search-flutter/
-  - https://stackoverflow.com/questions/55870508/how-to-create-a-simple-google-maps-address-search-with-autocomplete-in-flutter-a
-
+  - https://www.youtube.com/watch?v=hCOU8Fe3Ezk
+  
 ## Open
 
 - Theme.of vs. Theme.of.copyWith?

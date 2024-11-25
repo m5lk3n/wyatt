@@ -38,6 +38,13 @@ class SplashScreen extends ConsumerWidget {
       return;
     }
   }
+
+  import 'package:permission_handler/permission_handler.dart';
+
+  void setPermissions() async{
+   Map<PermissionGroup, PermissionStatus> permissions = 
+   await PermissionHandler().requestPermissions([PermissionGroup.location]);
+  }
   */
 
   @override

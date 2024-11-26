@@ -120,6 +120,8 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Recover from crash
 - [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
+  - [ ] https://developer.android.com/develop/sensors-and-location/location/retrieve-current#permissions
+  - [ ] See "Permissions" under https://github.com/Michael-M-aher/location_picker_flutter_map/tree/main?tab=readme-ov-file#setup
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
 - [ ] Document permissions
   - e.g., [location](https://pub.dev/packages/location) package: "Remember that the user has to accept the location permission to always allow to use the background location."
@@ -159,6 +161,7 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Sort locations overview by continent name
 - [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] OpenStreetMap version
+      - https://github.com/Michael-M-aher/location_picker_flutter_map/
       - https://switch2osm.org/the-basics/
       - https://pub.dev/packages/flutter_osm_plugin
       - https://github.com/liodali/osm_flutter

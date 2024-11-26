@@ -161,13 +161,13 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Sort locations overview by continent name
 - [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] OpenStreetMap version
-      - https://github.com/Michael-M-aher/location_picker_flutter_map/
-      - https://switch2osm.org/the-basics/
-      - https://pub.dev/packages/flutter_osm_plugin
-      - https://github.com/liodali/osm_flutter
-      - https://help.openstreetmap.org/questions/9367/can-i-use-openstreetmaps-openstreetmaps-api-for-commercial-apps-on-android
-      - https://stackoverflow.com/questions/51842695/openstreetmap-in-flutter
-      - https://leafletjs.com/
+  - https://github.com/Michael-M-aher/location_picker_flutter_map/
+  - https://switch2osm.org/the-basics/
+  - https://pub.dev/packages/flutter_osm_plugin
+  - https://github.com/liodali/osm_flutter
+  - https://help.openstreetmap.org/questions/9367/can-i-use-openstreetmaps-openstreetmaps-api-for-commercial-apps-on-android
+  - https://stackoverflow.com/questions/51842695/openstreetmap-in-flutter
+  - https://leafletjs.com/
 
 ## Docs
 

@@ -181,6 +181,9 @@ A location- and time-based To-do app for iOS and Android.
 
 - Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 - Copilot for the Wyatt logo and the AppBar background
-- Google for Maps and font(s)
+- Google for the font(s)
 - [Moqups](https://app.moqups.com) for the wireframe
 - [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)
+- Map theme and tile by
+
+  [![](https://maptiler.com/styles/style/logo/maptiler-logo-adaptive.svg?123#maptilerLogo)](https://maptiler.com/)

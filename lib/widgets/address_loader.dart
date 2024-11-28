@@ -76,7 +76,7 @@ class _AddressLoaderState extends State<AddressLoader> {
       decoration: InputDecoration(
         label: const Text("Address"),
         suffixIcon: IconButton(
-            icon: Icon(Icons.directions),
+            icon: Icon(Icons.location_pin),
             onPressed: () {
               pickLocation(context);
             }),

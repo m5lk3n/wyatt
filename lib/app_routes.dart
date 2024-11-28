@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wyatt/screens/address_loader_autocomplete.dart';
 import 'package:wyatt/screens/location.dart';
 import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
@@ -35,7 +36,7 @@ class AppRoutes {
         ),
         GoRoute(
           path: location,
-          builder: (context, state) => LocationScreen(),
+          builder: (context, state) => LocationAutoCompleteScreen(),
         ),
       ],
     );

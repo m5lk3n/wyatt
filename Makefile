@@ -64,14 +64,29 @@ icons:
 generate_lttl_dev:
 	lttl.dev/generate.sh
 
+.PHONY: needs-clean-build
+needs-clean-build:
+	rm -rf build
+
+## android-debug: build the apk in debug mode
+.PHONY: android-debug
+android-debug: needs-clean-build
+	flutter build apk --debug
+
 ## ios-debug: regenerate dependencies for iOS and build the application in debug mode
 .PHONY: ios-debug
-ios-debug:
+ios-debug: needs-clean-build
 	cd ios && pod install
 	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key --dart-define=KEY_WHAT_URL=https://wyatt.lttl.dev/what --dart-define=KEY_WHY_URL=https://wyatt.lttl.dev/why
 
+# ios-debug: regenerate dependencies for iOS and build the application in debug mode
+#.PHONY: ios-release
+#ios-debug: needs-clean-build
+#	cd ios && pod install
+#	flutter build ios --debug
+
 # TODO: ios-release: regenerate dependencies for iOS and build the application in release mode
 #.PHONY: ios-release
-#ios-release:
+#ios-release: needs-clean-build
 #	cd ios && pod install
 #	flutter build ios --release --obfuscate?

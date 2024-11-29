@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
@@ -9,6 +10,7 @@ import 'package:wyatt/common.dart';
 import 'package:wyatt/providers/settings_provider.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:http/http.dart' as http;
+import 'package:wyatt/widgets/location_helper.dart';
 
 // https://www.youtube.com/watch?v=hCOU8Fe3Ezk
 class LocationAutoCompleteScreen extends ConsumerStatefulWidget {
@@ -28,15 +30,16 @@ class _LocationAutoCompleteScreenState
     extends ConsumerState<LocationAutoCompleteScreen> {
   final Location location = Location(); // location data retriever
 
-  final searchController = TextEditingController();
+  final _searchController = TextEditingController();
   var uuid = const Uuid();
   List<dynamic> listOfLocations = [];
   late String _key;
   late String _sessionToken;
+  bool _isLoading = false;
 
   @override
   void dispose() {
-    searchController.dispose();
+    _searchController.dispose();
 
     super.dispose();
   }
@@ -48,16 +51,25 @@ class _LocationAutoCompleteScreenState
     _readKey();
     _sessionToken = uuid.v4();
 
-    searchController.addListener(() {
+    _searchController.addListener(() {
       _onChange();
     });
   }
 
   _onChange() {
-    placeSuggestion(searchController.text);
+    log('search: ${_searchController.text}, isLoading: $_isLoading',
+        name: 'LocationAutoComplete');
+    if (_isLoading) {
+      return;
+    }
+    placeSuggestion(_searchController.text);
   }
 
   void placeSuggestion(String input) async {
+    if (input.trim().length < 3) {
+      return;
+    }
+
     try {
       String request =
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$_key&sessiontoken=$_sessionToken';
@@ -97,21 +109,17 @@ class _LocationAutoCompleteScreenState
           child: Column(
             children: [
               TextField(
-                controller: searchController,
+                enabled: !_isLoading,
+                controller: _searchController,
                 decoration: InputDecoration(
                   hintText: "Search place...",
                 ),
-                onChanged: (value) {
-                  //setState() {
-                  //_onChange();
-                  //}
-                },
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
               Visibility(
-                visible: searchController.text.isNotEmpty,
+                visible: !_isLoading && _searchController.text.isNotEmpty,
                 child: Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -119,7 +127,15 @@ class _LocationAutoCompleteScreenState
                     itemCount: listOfLocations.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          // TODO
+                          log('selected: ${listOfLocations[index]}',
+                              name: 'LocationAutoComplete');
+                          setState(() {
+                            _searchController.text =
+                                listOfLocations[index]["description"];
+                          });
+                        },
                         child: ListTile(
                           // TODO: beautify
                           title: Text(listOfLocations[index]["description"],
@@ -136,13 +152,13 @@ class _LocationAutoCompleteScreenState
                   ),
                 ),
               ),
-              Visibility(
-                visible: searchController.text.isEmpty,
+              Expanded(
                 child: Container(
+                  alignment: FractionalOffset.bottomCenter,
                   margin: EdgeInsets.only(top: Common.space),
                   child: ElevatedButton(
                       onPressed: () {
-                        // TODO: implement
+                        _useCurrentLocation();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -163,5 +179,25 @@ class _LocationAutoCompleteScreenState
             ],
           ),
         ));
+  }
+
+  Future<void> _useCurrentLocation() async {
+    setState(() {
+      _isLoading = true;
+      _searchController.text = 'Loading...';
+    });
+    try {
+      final locationResult = await location.getLocation();
+      final locationAddress = await determineAddress(locationResult);
+      setState(() {
+        _searchController.text = locationAddress;
+        _isLoading = false;
+      });
+    } on PlatformException catch (err) {
+      setState(() {
+        _isLoading = false;
+        _searchController.text = 'Error: $err';
+      });
+    }
   }
 }

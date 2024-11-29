@@ -8,12 +8,12 @@ import 'package:wyatt/widgets/location_picker.dart';
 
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
 class AddressLoader extends StatefulWidget {
-  AddressLoader({
+  const AddressLoader({
     super.key,
     this.locationData,
   });
 
-  LocationData?
+  final LocationData?
       locationData; // input location data // TODO/FIXME: restore on LocationPicker back
 
   @override
@@ -21,9 +21,10 @@ class AddressLoader extends StatefulWidget {
 }
 
 class _AddressLoaderState extends State<AddressLoader> {
-  final Location location = Location(); // location data retriever // TODO: shows several deprecated warnings when compiled. usage? update?
+  final Location location =
+      Location(); // location data retriever // TODO: shows several deprecated warnings when compiled. usage? update?
   final _addressController = TextEditingController();
-  LocationData? _currentLocationData; // TODO: check if needed
+  LocationData? _currentLocationData;
   String? _error;
 
   @override
@@ -103,7 +104,7 @@ class _AddressLoaderState extends State<AddressLoader> {
     if (location == null) {
       return;
     }
-    widget.locationData = location;
+    _currentLocationData = location;
     _updateAddress(locationData: location);
   }
 }

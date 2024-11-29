@@ -16,14 +16,15 @@ A location- and time-based To-do app for iOS and Android.
 
 ```
 .
-├── .vscode  # me: app launch configs
-├── android  # Flutter
-├── assets   # me: app icons and images
-├── docs     # me
-├── ios      # Flutter
-├── lib      # Flutter
-├── lttl.dev # me: app supporting web page 
-└── test     # Flutter
+├── .vscode     # me: app launch configs
+├── android     # Flutter
+├── assets      # me: app icons and images
+├── docs        # me
+├── ios         # Flutter
+├── lib         # Flutter
+├── lttl.dev    # me: app supporting web page 
+├── screenshots # me: app screenshots 
+└── test        # Flutter
 ```
 
 ## Steps
@@ -143,9 +144,8 @@ A location- and time-based To-do app for iOS and Android.
 ## Doing
 
 - Seeding?
-- Location picker refinement
-  - https://www.youtube.com/watch?v=hCOU8Fe3Ezk
-  
+- Add/Edit Location
+
 ## Open
 
 - Theme.of vs. Theme.of.copyWith?
@@ -181,9 +181,12 @@ A location- and time-based To-do app for iOS and Android.
 
 - Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 - Copilot for the Wyatt logo and the AppBar background
-- Google for the font(s)
+- Google for Maps and the font(s)
 - [Moqups](https://app.moqups.com) for the wireframe
 - [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)
+
+### Future Acknowledgements
+
 - Map theme and tile by
 
   [![](https://maptiler.com/styles/style/logo/maptiler-logo-adaptive.svg?123#maptilerLogo)](https://maptiler.com/)

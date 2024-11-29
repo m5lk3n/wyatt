@@ -36,6 +36,7 @@ class _LocationAutoCompleteScreenState
   late String _key;
   late String _sessionToken;
   bool _isLoading = false;
+  static const _minSearchTextLength = 3;
 
   @override
   void dispose() {
@@ -62,11 +63,12 @@ class _LocationAutoCompleteScreenState
     if (_isLoading) {
       return;
     }
-    placeSuggestion(_searchController.text);
+    _loadLocationPredictions(_searchController.text);
   }
 
-  void placeSuggestion(String input) async {
-    if (input.trim().length < 3) {
+  void _loadLocationPredictions(String input) async {
+    if (input.trim().length < _minSearchTextLength) {
+      listOfLocations.clear();
       return;
     }
 
@@ -111,15 +113,20 @@ class _LocationAutoCompleteScreenState
               TextField(
                 enabled: !_isLoading,
                 controller: _searchController,
+                maxLines: null, // enables multiline
                 decoration: InputDecoration(
-                  hintText: "Search place...",
-                ),
+                    hintText: "Search place...",
+                    suffixIcon: IconButton(
+                        icon: Icon(Icons.my_location),
+                        onPressed: () {
+                          _useCurrentLocation();
+                        })),
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
               Visibility(
-                visible: !_isLoading && _searchController.text.isNotEmpty,
+                visible: _showPredictions(),
                 child: Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -134,46 +141,25 @@ class _LocationAutoCompleteScreenState
                           setState(() {
                             _searchController.text =
                                 listOfLocations[index]["description"];
+                            listOfLocations.clear();
                           });
                         },
-                        child: ListTile(
-                          // TODO: beautify
-                          title: Text(listOfLocations[index]["description"],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                  )),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            listOfLocations[index]["description"],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                          ),
                         ),
                       );
                     },
                   ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  alignment: FractionalOffset.bottomCenter,
-                  margin: EdgeInsets.only(top: Common.space),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        _useCurrentLocation();
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.my_location,
-                            color: Colors.brown,
-                          ),
-                          SizedBox(width: Common.space / 2),
-                          Text(
-                            "Use current location",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      )),
                 ),
               ),
             ],
@@ -199,5 +185,23 @@ class _LocationAutoCompleteScreenState
         _searchController.text = 'Error: $err';
       });
     }
+  }
+
+  bool _showPredictions() {
+    log('_isLoading: $_isLoading',
+        name: 'LocationAutoComplete._showPredictions');
+
+    if (_isLoading) {
+      return false;
+    }
+
+    log('length: ${_searchController.text.trim().length}',
+        name: 'LocationAutoComplete._showPredictions');
+
+    if (_searchController.text.trim().length < _minSearchTextLength) {
+      return false;
+    }
+
+    return listOfLocations.isNotEmpty;
   }
 }

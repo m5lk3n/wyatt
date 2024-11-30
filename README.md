@@ -146,6 +146,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - Seeding?
 - Add/Edit Location
+  - Default Notification Distance widget (see also settings)
 
 ## Open
 

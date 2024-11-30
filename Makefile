@@ -23,6 +23,8 @@ install:
 	flutter pub add location
 	flutter pub add geocoding
 	flutter pub add google_map_dynamic_key
+	flutter pub add flutter_datetime_picker_plus
+	flutter pub add intl
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean

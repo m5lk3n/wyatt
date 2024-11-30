@@ -116,6 +116,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
+- [ ] Field validation
 - [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
 - [ ] Recover from crash

@@ -3,6 +3,7 @@ import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/address_loader.dart';
+import 'package:wyatt/widgets/datetime_picker.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -37,13 +38,18 @@ class _LocationScreenState extends State<LocationScreen> {
             ),
             child: AddressLoader(
               locationData: LocationData.fromMap({
-                'latitude': 52.0892639,
+                'latitude': 52.0892639, // TODO/FIXME
                 'longitude': 4.3840610,
               }),
             ),
           ),
           Padding(
-            padding: Common.padding,
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              Common.space,
+              Common.space,
+              0,
+            ),
             child: TextField(
               enableSuggestions: false,
               autocorrect: false,
@@ -59,6 +65,26 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Common.space,
+                Common.space,
+                Common.space,
+                0,
+              ),
+              child: DateTimePicker(
+                  label: 'Start Notification',
+                  hintText: 'Select start date & time')),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Common.space,
+                Common.space,
+                Common.space,
+                0,
+              ),
+              child: DateTimePicker(
+                  label: 'End Notification',
+                  hintText: 'Select end date & time')),
           Divider(
             indent: Common.space,
             endIndent: Common.space,

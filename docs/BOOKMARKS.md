@@ -11,9 +11,14 @@
 - https://codewithandrea.com/articles/flutter-state-management-riverpod/
 - [Onboarding with routes and riverpod](https://flutterexplained.com/p/flutter-onboarding-with-riverpod)
 
-## Input Fields
+## Input Widgets
 
 - https://stackoverflow.com/questions/49577781/how-to-create-number-input-field-in-flutter
+- Pick Date & Time
+  - https://stackoverflow.com/questions/71480069/how-we-can-use-time-and-date-picker-together-in-flutter
+  - https://pub.dev/packages/flutter_datetime_picker_plus
+  - https://github.com/dylanwuzh/flutter-cupertino-date-picker
+  - https://stackoverflow.com/questions/52727535/what-is-the-correct-way-to-add-date-picker-in-flutter-app
 
 ## Widgets
 

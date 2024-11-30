@@ -75,7 +75,7 @@ class _AddressLoaderState extends State<AddressLoader> {
       maxLines: null, // enables multiline
       controller: _addressController,
       decoration: InputDecoration(
-        label: const Text("Address"),
+        label: const Text("Location *"),
         suffixIcon: IconButton(
             icon: Icon(Icons.location_pin),
             onPressed: () {

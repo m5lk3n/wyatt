@@ -50,6 +50,8 @@ dependencies:
   location: ^7.0.1
   geocoding: ^3.0.0
   google_map_dynamic_key: ^1.0.1
+  flutter_datetime_picker_plus: ^2.2.0
+  intl: ^0.20.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1

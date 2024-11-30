@@ -38,7 +38,7 @@ class _LocationScreenState extends State<LocationScreen> {
             ),
             child: AddressLoader(
               locationData: LocationData.fromMap({
-                'latitude': 52.0892639, // TODO/FIXME
+                'latitude': 52.0892639, // TODO/FIXME -> add also to model
                 'longitude': 4.3840610,
               }),
             ),
@@ -56,13 +56,28 @@ class _LocationScreenState extends State<LocationScreen> {
               // causes keyboard to slide up: autofocus: true,
               controller: _aliasController,
               decoration: InputDecoration(
-                label: const Text("Location Alias"),
+                label: const Text(
+                    "Location Alias"), // TODO/FIXME -> add also to model
                 hintText: "Enter a location alias here",
               ),
               maxLength: 40,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              Common.space,
+              Common.space,
+              0,
+            ),
+            child: DateTimePicker(
+              label: 'Start Notification',
+              hintText: 'Select start date & time',
+              dateTime: DateTime.now().subtract(
+                  Duration(hours: 1)), // TODO/FIXME -> add also to model
             ),
           ),
           Padding(
@@ -73,17 +88,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 0,
               ),
               child: DateTimePicker(
-                  label: 'Start Notification',
-                  hintText: 'Select start date & time')),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Common.space,
-                Common.space,
-                Common.space,
-                0,
-              ),
-              child: DateTimePicker(
-                  label: 'End Notification',
+                  label: 'End Notification', // TODO/FIXME -> add also to model
                   hintText: 'Select end date & time')),
           Divider(
             indent: Common.space,
@@ -100,7 +105,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     backgroundColor:
                         Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  onPressed: null, // TODO: implement
+                  onPressed: null, // TODO: validate/implement
                   autofocus: true,
                   child: Text('Save'),
                 ),

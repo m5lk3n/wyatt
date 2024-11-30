@@ -33,10 +33,6 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
     if (widget.dateTime != null) {
       _currentDateTime = widget.dateTime;
-      _dateTimeController.text = formatDateTime(
-        Localizations.localeOf(context),
-        _currentDateTime!,
-      );
     }
   }
 
@@ -50,6 +46,13 @@ class _DateTimePickerState extends State<DateTimePicker> {
   @override
   Widget build(BuildContext context) {
     log('dateTime: ${_currentDateTime ?? "unknown"}', name: 'DateTimePicker');
+
+    if (_currentDateTime != null) {
+      _dateTimeController.text = formatDateTime(
+        Localizations.localeOf(context),
+        _currentDateTime!,
+      );
+    }
 
     return TextField(
       onTap: () {

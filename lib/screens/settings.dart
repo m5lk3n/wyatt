@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt/app_routes.dart';
@@ -8,6 +7,7 @@ import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
 import 'package:wyatt/widgets/appbar.dart';
+import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/link_button.dart';
 import 'package:restart_app/restart_app.dart';
 
@@ -116,6 +116,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget distanceField = createDistanceField(
+      context,
+      _distanceController,
+      _isProcessing,
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
       appBar: WyattAppBar(context, widget.title),
@@ -263,33 +269,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ? SizedBox.shrink()
               : Padding(
                   padding: const EdgeInsets.all(Common.space),
-                  child: FractionallySizedBox(
-                    widthFactor: 0.5,
-                    alignment: Alignment.centerLeft,
-                    child: TextField(
-                      keyboardType: TextInputType.numberWithOptions(
-                        signed: false,
-                        decimal: false,
-                      ),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter
-                            .digitsOnly // no decimal point, no sign
-                      ],
-                      enabled: !_isProcessing,
-                      // causes keyboard to slide up: autofocus: true,
-                      controller: _distanceController,
-                      textAlign: TextAlign.right,
-                      decoration: InputDecoration(
-                          // prefixIcon: Icon(Icons.straighten),
-                          labelText: 'Default Notification Distance',
-                          suffixText: 'm'),
-                      maxLength: 4,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                    ),
-                  ),
-                ),
+                  child: distanceField),
           Divider(
             indent: Common.space,
             endIndent: Common.space,

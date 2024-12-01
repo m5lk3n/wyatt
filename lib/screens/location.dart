@@ -3,6 +3,7 @@ import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/address_loader.dart';
+import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/datetime_picker.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -15,6 +16,14 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   final _msgController = TextEditingController();
   final _aliasController = TextEditingController();
+  final _distanceController = TextEditingController();
+  bool _isProcessing = false; // TODO: use this
+
+  @override
+  void initState() {
+    super.initState();
+    _distanceController.text = '100'; // TODO/FIXME -> add also to model
+  }
 
   @override
   void dispose() {
@@ -26,6 +35,12 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget distanceField = createDistanceField(
+      context,
+      _distanceController,
+      _isProcessing,
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
       appBar: WyattAppBar(context, Screen.editLocation),
@@ -40,7 +55,7 @@ class _LocationScreenState extends State<LocationScreen> {
             ),
             child: TextField(
               enableSuggestions: true,
-              maxLines: 2,
+              // maxLines: 2,
               autocorrect: true,
               // causes keyboard to slide up: autofocus: true,
               controller: _msgController,
@@ -50,7 +65,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     "Notification Message *"), // TODO/FIXME -> add also to model
                 hintText: "Enter a notification message",
               ),
-              maxLength: 40,
+              maxLength: 30,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
@@ -63,26 +78,11 @@ class _LocationScreenState extends State<LocationScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(
               Common.space,
-              Common.space,
-              Common.space,
               0,
-            ),
-            child: AddressLoader(
-              locationData: LocationData.fromMap({
-                'latitude': 52.0892639, // TODO/FIXME -> add also to model
-                'longitude': 4.3840610,
-              }),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Common.space,
-              Common.space,
               Common.space,
               0,
             ),
             child: TextField(
-              maxLines: 2,
               enableSuggestions: false,
               autocorrect: false,
               // causes keyboard to slide up: autofocus: true,
@@ -93,10 +93,24 @@ class _LocationScreenState extends State<LocationScreen> {
                     "Location Alias"), // TODO/FIXME -> add also to model
                 hintText: "Enter a location alias here",
               ),
-              maxLength: 40,
+              maxLength: 30,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              0,
+              Common.space,
+              0,
+            ),
+            child: AddressLoader(
+              locationData: LocationData.fromMap({
+                'latitude': 52.0892639, // TODO/FIXME -> add also to model
+                'longitude': 4.3840610,
+              }),
             ),
           ),
           Divider(
@@ -106,7 +120,7 @@ class _LocationScreenState extends State<LocationScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(
               Common.space,
-              Common.space,
+              0,
               Common.space,
               0,
             ),
@@ -127,6 +141,18 @@ class _LocationScreenState extends State<LocationScreen> {
               child: DateTimePicker(
                   label: 'End Notification', // TODO/FIXME -> add also to model
                   hintText: 'Select end date & time')),
+          Divider(
+            indent: Common.space,
+            endIndent: Common.space,
+          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Common.space,
+                0,
+                Common.space,
+                0,
+              ),
+              child: distanceField),
           Divider(
             indent: Common.space,
             endIndent: Common.space,

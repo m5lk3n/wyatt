@@ -10,4 +10,6 @@
 
 - [Dialogs](https://m3.material.io/components/dialogs/specs)
 
+- [Text fields](https://m3.material.io/components/text-fields/)
+
 - [Appainter](https://appainter.dev/)

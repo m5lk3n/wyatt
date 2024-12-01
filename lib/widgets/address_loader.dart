@@ -76,8 +76,8 @@ class _AddressLoaderState extends State<AddressLoader> {
       controller: _addressController,
       decoration: InputDecoration(
         label: const Text("Location *"),
-        suffixIcon: IconButton(
-            icon: Icon(Icons.location_pin),
+        prefixIcon: IconButton(
+            icon: Icon(Icons.edit_location_alt),
             onPressed: () {
               pickLocation(context);
             }),

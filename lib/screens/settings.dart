@@ -263,27 +263,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ? SizedBox.shrink()
               : Padding(
                   padding: const EdgeInsets.all(Common.space),
-                  child: TextField(
-                    keyboardType: TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: false,
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    alignment: Alignment.centerLeft,
+                    child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(
+                        signed: false,
+                        decimal: false,
+                      ),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter
+                            .digitsOnly // no decimal point, no sign
+                      ],
+                      enabled: !_isProcessing,
+                      // causes keyboard to slide up: autofocus: true,
+                      controller: _distanceController,
+                      textAlign: TextAlign.right,
+                      decoration: InputDecoration(
+                          // prefixIcon: Icon(Icons.straighten),
+                          labelText: 'Default Notification Distance',
+                          suffixText: 'm'),
+                      maxLength: 4,
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                     ),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter
-                          .digitsOnly // no decimal point, no sign
-                    ],
-                    enabled: !_isProcessing,
-                    // causes keyboard to slide up: autofocus: true,
-                    controller: _distanceController,
-                    decoration: InputDecoration(
-                      labelText: 'Default Notification Distance (m)',
-                      hintText: 'Enter distance in meters',
-                      //suffixIcon: Icon(Icons.directions),
-                    ),
-                    maxLength: 4,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
                   ),
                 ),
           Divider(

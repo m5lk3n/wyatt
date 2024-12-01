@@ -63,10 +63,18 @@ class _DateTimePickerState extends State<DateTimePicker> {
       decoration: InputDecoration(
         label: Text(widget.label),
         hintText: widget.hintText,
-        suffixIcon: IconButton(
+        prefixIcon: IconButton(
             icon: Icon(Icons.date_range),
             onPressed: () {
               pickDateTime(context);
+            }),
+        suffixIcon: IconButton(
+            icon: Icon(Icons.clear),
+            onPressed: () {
+              setState(() {
+                _currentDateTime = null;
+                _dateTimeController.clear();
+              });
             }),
       ),
       style: Theme.of(context).textTheme.titleMedium!.copyWith(

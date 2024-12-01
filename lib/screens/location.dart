@@ -13,10 +13,12 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  final _msgController = TextEditingController();
   final _aliasController = TextEditingController();
 
   @override
   void dispose() {
+    _msgController.dispose();
     _aliasController.dispose();
 
     super.dispose();
@@ -29,6 +31,35 @@ class _LocationScreenState extends State<LocationScreen> {
       appBar: WyattAppBar(context, Screen.editLocation),
       body: ListView(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              Common.space,
+              Common.space,
+              0,
+            ),
+            child: TextField(
+              enableSuggestions: true,
+              maxLines: 2,
+              autocorrect: true,
+              // causes keyboard to slide up: autofocus: true,
+              controller: _msgController,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.message),
+                label: const Text(
+                    "Notification Message *"), // TODO/FIXME -> add also to model
+                hintText: "Enter a notification message",
+              ),
+              maxLength: 40,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+          ),
+          Divider(
+            indent: Common.space,
+            endIndent: Common.space,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(
               Common.space,
@@ -51,11 +82,13 @@ class _LocationScreenState extends State<LocationScreen> {
               0,
             ),
             child: TextField(
+              maxLines: 2,
               enableSuggestions: false,
               autocorrect: false,
               // causes keyboard to slide up: autofocus: true,
               controller: _aliasController,
               decoration: InputDecoration(
+                prefixIcon: SizedBox(width: 24),
                 label: const Text(
                     "Location Alias"), // TODO/FIXME -> add also to model
                 hintText: "Enter a location alias here",
@@ -65,6 +98,10 @@ class _LocationScreenState extends State<LocationScreen> {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
+          ),
+          Divider(
+            indent: Common.space,
+            endIndent: Common.space,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(

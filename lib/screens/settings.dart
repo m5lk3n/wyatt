@@ -261,21 +261,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           _isSettingUp
               ? SizedBox.shrink()
-              : Divider(
-                  indent: Common.space,
-                  endIndent: Common.space,
-                ),
-          _isSettingUp
-              ? SizedBox.shrink()
               : Padding(
-                  padding: const EdgeInsets.all(Common.space),
+                  padding: const EdgeInsets.fromLTRB(
+                    Common.space,
+                    0,
+                    Common.space,
+                    0,
+                  ),
                   child: distanceField),
-          Divider(
-            indent: Common.space,
-            endIndent: Common.space,
-          ),
           Padding(
-            padding: const EdgeInsets.all(Common.space),
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              Common.space,
+              Common.space,
+              0,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -301,7 +301,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _isSettingUp
               ? SizedBox.shrink()
               : Padding(
-                  padding: const EdgeInsets.all(Common.space),
+                  padding: const EdgeInsets.fromLTRB(
+                    Common.space,
+                    0,
+                    Common.space,
+                    0,
+                  ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.secondary,

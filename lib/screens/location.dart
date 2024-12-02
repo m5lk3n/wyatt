@@ -43,7 +43,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
-      appBar: WyattAppBar(context, Screen.editLocation),
+      appBar: WyattAppBar(context, Screen.editReminder),
       body: ListView(
         children: [
           Padding(
@@ -70,10 +70,6 @@ class _LocationScreenState extends State<LocationScreen> {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
-          ),
-          Divider(
-            indent: Common.space,
-            endIndent: Common.space,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(
@@ -113,14 +109,10 @@ class _LocationScreenState extends State<LocationScreen> {
               }),
             ),
           ),
-          Divider(
-            indent: Common.space,
-            endIndent: Common.space,
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(
               Common.space,
-              0,
+              Common.space,
               Common.space,
               0,
             ),
@@ -141,22 +133,14 @@ class _LocationScreenState extends State<LocationScreen> {
               child: DateTimePicker(
                   label: 'End Notification', // TODO/FIXME -> add also to model
                   hintText: 'Select end date & time')),
-          Divider(
-            indent: Common.space,
-            endIndent: Common.space,
-          ),
           Padding(
               padding: const EdgeInsets.fromLTRB(
                 Common.space,
-                0,
+                Common.space,
                 Common.space,
                 0,
               ),
               child: distanceField),
-          Divider(
-            indent: Common.space,
-            endIndent: Common.space,
-          ),
           Padding(
             padding: const EdgeInsets.all(Common.space),
             child: Row(

@@ -5,12 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/providers/key_provider.dart';
+import 'package:wyatt/screens/reminder.dart';
+import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
 
 // ignore: must_be_immutable
 class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String title;
   bool isOnSettingsScreen = false;
+  bool isOnRemindersScreen = false;
   bool isSettingUp = false;
 
   WyattAppBar(
@@ -20,6 +23,7 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
     super.key,
   }) {
     isOnSettingsScreen = context.widget is SettingsScreen;
+    isOnRemindersScreen = context.widget is RemindersScreen;
     if (isOnSettingsScreen) {
       final screen = context.widget as SettingsScreen;
       isSettingUp = screen.inSetupMode;
@@ -48,7 +52,17 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       title: Text(title),
       actions: isKeyValid || isSettingUp
-          ? null
+          ? isOnRemindersScreen
+              ? <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ReminderScreen()));
+                    },
+                  ),
+                ]
+              : null
           : <Widget>[
               // TODO: lightbulb icon to seed
               IconButton(

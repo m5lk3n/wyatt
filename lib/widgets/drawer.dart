@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
+import 'package:wyatt/screens/welcome.dart';
 import 'package:wyatt/widgets/common.dart';
 
 class WyattDrawer extends StatelessWidget {
@@ -40,7 +41,11 @@ class WyattDrawer extends StatelessWidget {
                   ),
                   title: const Text(Screen.home),
                   onTap: () {
-                    // TODO
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => WelcomeScreen()),
+                    );
                   },
                 ),
                 ListTile(

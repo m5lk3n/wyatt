@@ -46,34 +46,34 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Getting started (Set up Wyatt) (default if there's no key)
   - [x] Squared background color
 
-- [ ] Home (default it there are no locations)
+- [ ] Home (default it there are no reminders)
   - [x] Intro text
     - [ ] Animate text (?) (see `flutter_animate`)
     - [x] Getting Started button at the bottom
   - [ ] Add help button right upper corner (?)
   - [x] Left drawer with
       - [Home](https://api.flutter.dev/flutter/material/Icons/home-constant.html)
-      - [Locations](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html) ([alternative icon](https://api.flutter.dev/flutter/material/Icons/pin_drop-constant.html))
+      - [Reminders](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html) ([alternative icon](https://api.flutter.dev/flutter/material/Icons/pin_drop-constant.html))
       - [Settings](https://api.flutter.dev/flutter/material/Icons/settings-constant.html)
       - [About](https://api.flutter.dev/flutter/material/Icons/info-constant.html)
 
-- [ ] Locations (default if there are locations)
-  - [ ] Load locations into an overview grid ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
+- [ ] Reminders
+  - [ ] Load reminders into an overview list (not a grid) ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
     - [ ] Pre-seed (?)
-  - [ ] Sort locations overview by (due) date or by city name
-  - [ ] Search locations (?)
-  - [ ] Filter locations (?)
+  - [ ] Sort reminders overview by (due) date or by city name
+  - [ ] Search reminders (?)
+  - [ ] Filter reminders (?)
 
-  - [ ] Manage locations (through dots menu)
-    - [ ] [Add a location](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
-      - [ ] Evaluate and use a location picker:
+  - [ ] Manage reminders (through dots menu)
+    - [ ] [Add a reminder](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
+      - [x] Evaluate and use a location picker:
             - [map_location_picker](https://pub.dev/packages/map_location_picker)
             - [Custom Map For Location Picker](https://community.flutterflow.io/c/community-custom-widgets/post/custom-map-for-location-picker-kPu8C7qdo1eSy0h)
             - [how to pick an address from map in flutter](https://stackoverflow.com/questions/69443353/how-to-pick-an-address-from-map-in-flutter)
-    - [ ] [Edit a location](https://api.flutter.dev/flutter/material/Icons/edit-constant.html)
-    - [ ] [Delete a location](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
-    - [ ] [Turn off a location](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a location](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
-    - [ ] [Turn on a location](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a location](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
+    - [ ] [Edit a reminder](https://api.flutter.dev/flutter/material/Icons/edit-constant.html)
+    - [ ] [Delete a reminder](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
+    - [ ] [Snooze/Turn off a reminder](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a reminder](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
+    - [ ] [Activate/Turn on a reminder](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a reminder](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
 
 - [x] Settings
   - [x] Save key
@@ -154,14 +154,14 @@ A location- and time-based To-do app for iOS and Android.
 - What if navigation back from Settings happens during saving?
 - Suspend app, wake up?
 - Recover from "panic"/exception (loss of connectivity in a tunnel?)
-- Merge nearby locations?
+- Merge nearby reminders?
 - Support landscape mode?
 - License?
 
 ## Backlog
 
-- [ ] Sort locations overview by continent name
-- [ ] [Share a location](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
+- [ ] Sort reminders overview by continent name
+- [ ] [Share a reminder](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] OpenStreetMap version
   - https://github.com/Michael-M-aher/location_picker_flutter_map/
   - https://switch2osm.org/the-basics/

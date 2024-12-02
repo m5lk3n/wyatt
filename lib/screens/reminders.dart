@@ -32,14 +32,8 @@ class RemindersScreen extends StatelessWidget {
     );
 
     if (seedReminders.isNotEmpty) {
-      content = GridView.builder(
+      content = ListView.builder(
         itemCount: seedReminders.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // 2 columns horizontally
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: Common.space, // 20 pixels between columns
-          mainAxisSpacing: Common.space, // 20 pixels between rows
-        ),
         itemBuilder: (context, index) {
           return ReminderGridItem(reminder: seedReminders[index]);
         },

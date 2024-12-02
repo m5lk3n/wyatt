@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wyatt/screens/location.dart';
 import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/screens/splash.dart';
@@ -11,7 +10,6 @@ class AppRoutes {
   static const splash = '/splash';
   static const reminders = '/reminders';
   static const settings = '/settings';
-  static const location = '/location';
 
   GoRouter createRouter(WidgetRef ref) {
     return GoRouter(
@@ -32,10 +30,6 @@ class AppRoutes {
         GoRoute(
           path: settings,
           builder: (context, state) => SettingsScreen(),
-        ),
-        GoRoute(
-          path: location,
-          builder: (context, state) => LocationScreen(),
         ),
       ],
     );

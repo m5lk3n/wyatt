@@ -6,18 +6,18 @@ import 'package:wyatt/widgets/address_loader.dart';
 import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/datetime_picker.dart';
 
-class LocationScreen extends StatefulWidget {
-  const LocationScreen({super.key});
+class ReminderScreen extends StatefulWidget {
+  const ReminderScreen({super.key});
 
   @override
-  State<LocationScreen> createState() => _LocationScreenState();
+  State<ReminderScreen> createState() => _ReminderScreenState();
 }
 
-class _LocationScreenState extends State<LocationScreen> {
+class _ReminderScreenState extends State<ReminderScreen> {
   final _msgController = TextEditingController();
   final _aliasController = TextEditingController();
   final _distanceController = TextEditingController();
-  bool _isProcessing = false; // TODO: use this
+  final bool _isProcessing = false; // TODO: use this
 
   @override
   void initState() {

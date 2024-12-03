@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/data/seed.dart';
+import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/reminder.dart';
 
-class RemindersScreen extends StatelessWidget {
+class RemindersScreen extends StatefulWidget {
   const RemindersScreen({super.key});
+
+  @override
+  State<RemindersScreen> createState() => _RemindersScreenState();
+}
+
+class _RemindersScreenState extends State<RemindersScreen> {
+  final List<Reminder> _items = seedReminders;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +23,14 @@ class RemindersScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Nothing to do',
+            'Nothing here yet',
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
           const SizedBox(height: Common.space / 2),
           Text(
-            'Add some reminders to get started',
+            'Add a reminder to get started',
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
@@ -31,11 +39,22 @@ class RemindersScreen extends StatelessWidget {
       ),
     );
 
-    if (seedReminders.isNotEmpty) {
+    if (_items.isNotEmpty) {
       content = ListView.builder(
-        itemCount: seedReminders.length,
+        itemCount: _items.length,
         itemBuilder: (context, index) {
-          return ReminderListItem(reminder: seedReminders[index]);
+          return Dismissible(
+            background: Container(
+              color: Common.seedColor,
+            ),
+            key: ValueKey<Reminder>(_items[index]),
+            onDismissed: (DismissDirection direction) {
+              setState(() {
+                _items.removeAt(index);
+              });
+            },
+            child: ReminderListItem(reminder: _items[index]),
+          );
         },
       );
     }

@@ -29,7 +29,6 @@ class ReminderListItem extends StatelessWidget {
         },
         splashColor: Theme.of(context).primaryColor,
         child: ListTile(
-            // TODO: make disposable
             isThreeLine: false,
             tileColor: Theme.of(context).colorScheme.onSecondary,
             title: Text(
@@ -43,7 +42,9 @@ class ReminderListItem extends StatelessWidget {
                   .copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
             leading: Icon(
-              reminder.enabled ? Icons.volume_up : Icons.volume_off,
+              reminder.enabled
+                  ? Icons.volume_up
+                  : Icons.volume_off, // TODO: IconButton to toggle?
             ),
             trailing: ThreeDotsMenu()),
       ),

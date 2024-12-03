@@ -1,34 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/address_loader.dart';
 import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/datetime_picker.dart';
 
 class ReminderScreen extends StatefulWidget {
-  const ReminderScreen({super.key});
+  const ReminderScreen({
+    super.key,
+    this.reminder,
+  });
 
   @override
   State<ReminderScreen> createState() => _ReminderScreenState();
+
+  final Reminder? reminder;
 }
 
 class _ReminderScreenState extends State<ReminderScreen> {
   final _msgController = TextEditingController();
   final _aliasController = TextEditingController();
   final _distanceController = TextEditingController();
+  LocationData? _locationData;
+  DateTime? _startDateTime;
+  DateTime? _endDateTime;
   final bool _isProcessing = false; // TODO: use this
 
   @override
   void initState() {
     super.initState();
-    _distanceController.text = '100'; // TODO/FIXME -> add also to model
+
+    _msgController.text =
+        widget.reminder != null ? widget.reminder!.notificationMessage : '';
+
+    _aliasController.text = widget.reminder?.locationAlias ?? '';
+
+    _locationData = widget.reminder?.locationData;
+
+    _startDateTime = widget.reminder?.notificationStartDateTime;
+    _endDateTime = widget.reminder?.notificationEndDateTime;
+
+    _distanceController.text = widget.reminder != null
+        ? widget.reminder!.notificationDistance.toString()
+        : Default.notificationDistance.toString();
   }
 
   @override
   void dispose() {
     _msgController.dispose();
     _aliasController.dispose();
+    _distanceController.dispose();
 
     super.dispose();
   }
@@ -37,6 +60,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
   Widget build(BuildContext context) {
     Widget distanceField = createDistanceField(
       context,
+      'Notification Distance',
       _distanceController,
       _isProcessing,
     );
@@ -61,8 +85,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
               controller: _msgController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.message),
-                label: const Text(
-                    "Notification Message *"), // TODO/FIXME -> add also to model
+                label: const Text("Notification Message *"),
                 hintText: "Enter a notification message",
               ),
               maxLength: 30,
@@ -85,8 +108,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
               controller: _aliasController,
               decoration: InputDecoration(
                 prefixIcon: SizedBox(width: 24),
-                label: const Text(
-                    "Location Alias"), // TODO/FIXME -> add also to model
+                label: const Text("Location Alias"),
                 hintText: "Enter a location alias here",
               ),
               maxLength: 30,
@@ -103,10 +125,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
               0,
             ),
             child: AddressLoader(
-              locationData: LocationData.fromMap({
-                'latitude': 52.0892639, // TODO/FIXME -> add also to model
-                'longitude': 4.3840610,
-              }),
+              locationData: _locationData,
             ),
           ),
           Padding(
@@ -119,20 +138,22 @@ class _ReminderScreenState extends State<ReminderScreen> {
             child: DateTimePicker(
               label: 'Start Notification',
               hintText: 'Select start date & time',
-              dateTime: DateTime.now().subtract(
-                  Duration(hours: 1)), // TODO/FIXME -> add also to model
+              dateTime: _startDateTime,
             ),
           ),
           Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Common.space,
-                Common.space,
-                Common.space,
-                0,
-              ),
-              child: DateTimePicker(
-                  label: 'End Notification', // TODO/FIXME -> add also to model
-                  hintText: 'Select end date & time')),
+            padding: const EdgeInsets.fromLTRB(
+              Common.space,
+              Common.space,
+              Common.space,
+              0,
+            ),
+            child: DateTimePicker(
+              label: 'End Notification',
+              hintText: 'Select end date & time',
+              dateTime: _endDateTime,
+            ),
+          ),
           Padding(
               padding: const EdgeInsets.fromLTRB(
                 Common.space,

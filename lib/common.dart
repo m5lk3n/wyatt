@@ -9,15 +9,15 @@ abstract class Common {
   static String keyKey = "$packageName.key";
   static const String keyUrl = String.fromEnvironment(
     'KEY_URL', // see launch configuration
-    defaultValue: 'https://wyatt.lttl.dev/key', // TODO
+    defaultValue: Default.urlKey,
   );
   static const String keyWhatUrl = String.fromEnvironment(
     'KEY_WHAT_URL', // see launch configuration
-    defaultValue: 'https://wyatt.lttl.dev/what', // TODO
+    defaultValue: Default.urlWhat,
   );
   static const String keyWhyUrl = String.fromEnvironment(
     'KEY_WHY_URL', // see launch configuration
-    defaultValue: 'https://wyatt.lttl.dev/why', // TODO
+    defaultValue: Default.urlWhy,
   );
 
   static const bigSpace = 50.0;
@@ -27,6 +27,7 @@ abstract class Common {
 
   static const magicalWaitTimeInSeconds = 2;
 
+  // Platform.isIOS doesn't allow overriding in tests
   static bool isIOS(context) =>
       Theme.of(context).platform == TargetPlatform.iOS;
 }
@@ -39,4 +40,11 @@ abstract class Screen {
   static const String about = 'About';
   static const String editReminder = 'Edit Reminder';
   static const String pickLocation = 'Pick a Location';
+}
+
+abstract class Default {
+  static const int notificationDistance = 500;
+  static const String urlKey = 'https://wyatt.lttl.dev/key';
+  static const String urlWhy = 'https://wyatt.lttl.dev/why';
+  static const String urlWhat = 'https://wyatt.lttl.dev/what';
 }

@@ -150,6 +150,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Open
 
+- Are all StatefulWidgets needed?
 - Theme.of vs. Theme.of.copyWith?
 - What if navigation back from Settings happens during saving?
 - Suspend app, wake up?

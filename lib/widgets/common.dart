@@ -76,6 +76,7 @@ Widget createBackground(context) {
 
 Widget createDistanceField(
   BuildContext context,
+  String label,
   TextEditingController distanceController,
   bool isProcessing,
 ) {
@@ -96,7 +97,7 @@ Widget createDistanceField(
       textAlign: TextAlign.right,
       decoration: InputDecoration(
           // prefixIcon: Icon(Icons.straighten),
-          labelText: 'Default Notification Distance',
+          labelText: label,
           suffixText: 'm'), // TODO: support yards?
       maxLength: 4,
       style: Theme.of(context).textTheme.titleMedium!.copyWith(

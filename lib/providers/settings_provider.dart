@@ -5,7 +5,7 @@ import 'package:wyatt/services/secure_storage.dart';
 import 'package:wyatt/services/storage.dart';
 
 const cfgDefaultNotificationDistance = 'cfgDefaultNotificationDistance';
-const defaultDefaultNotificationDistance = 500;
+const defaultDefaultNotificationDistance = Default.notificationDistance;
 
 final settingsNotifierProvider =
     StateNotifierProvider<SettingsNotifier, Settings>(

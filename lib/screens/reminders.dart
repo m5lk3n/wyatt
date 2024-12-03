@@ -35,14 +35,22 @@ class RemindersScreen extends StatelessWidget {
       content = ListView.builder(
         itemCount: seedReminders.length,
         itemBuilder: (context, index) {
-          return ReminderGridItem(reminder: seedReminders[index]);
+          return ReminderListItem(reminder: seedReminders[index]);
         },
       );
     }
 
     return Scaffold(
       appBar: WyattAppBar(context, Screen.reminders),
-      body: content,
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          0,
+          Common.space / 2,
+          0,
+          0,
+        ),
+        child: content,
+      ),
       drawer: WyattDrawer(),
     );
   }

@@ -118,6 +118,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     Widget distanceField = createDistanceField(
       context,
+      'Default Notification Distance',
       _distanceController,
       _isProcessing,
     );

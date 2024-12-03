@@ -20,12 +20,7 @@ class ReminderListItem extends StatelessWidget {
       child:
           InkWell /* provides a visual feedback when the user taps the item*/ (
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    ReminderScreen(reminder: reminder)),
-          );
+          editReminder(context);
         },
         splashColor: Theme.of(context).primaryColor,
         child: ListTile(
@@ -46,15 +41,28 @@ class ReminderListItem extends StatelessWidget {
                   ? Icons.volume_up
                   : Icons.volume_off, // TODO: IconButton to toggle?
             ),
-            trailing: ThreeDotsMenu()),
+            trailing: ThreeDotsMenu(
+              editReminder: editReminder,
+            )),
       ),
+    );
+  }
+
+  void editReminder(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (BuildContext context) =>
+              ReminderScreen(reminder: reminder)),
     );
   }
 }
 
 // https://flutter.github.io/samples/web/material_3_demo/
 class ThreeDotsMenu extends StatelessWidget {
-  const ThreeDotsMenu({super.key});
+  final dynamic editReminder;
+
+  const ThreeDotsMenu({super.key, required this.editReminder});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +84,9 @@ class ThreeDotsMenu extends StatelessWidget {
       menuChildren: [
         MenuItemButton(
           child: const Text('Edit'),
-          onPressed: () {}, // TODO: implement
+          onPressed: () {
+            editReminder(context);
+          },
         ),
         MenuItemButton(
           child: const Text('Delete'),

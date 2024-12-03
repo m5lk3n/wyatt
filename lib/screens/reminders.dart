@@ -50,7 +50,18 @@ class _RemindersScreenState extends State<RemindersScreen> {
             key: ValueKey<Reminder>(_items[index]),
             onDismissed: (DismissDirection direction) {
               setState(() {
-                _items.removeAt(index);
+                Reminder deletedItem = _items.removeAt(index);
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Reminder deleted"),
+                    action: SnackBarAction(
+                        label: "UNDO",
+                        onPressed: () => setState(
+                              () => _items.insert(index, deletedItem),
+                            )),
+                  ),
+                );
               });
             },
             child: ReminderListItem(reminder: _items[index]),

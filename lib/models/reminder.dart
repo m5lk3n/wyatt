@@ -37,5 +37,5 @@ class Reminder {
   int notificationDistance;
   DateTime? notificationStartDateTime;
   DateTime? notificationEndDateTime;
-  final bool enabled;
+  bool enabled;
 }

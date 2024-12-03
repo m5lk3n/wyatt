@@ -3,11 +3,17 @@ import 'package:wyatt/common.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/screens/reminder.dart';
 
-class ReminderListItem extends StatelessWidget {
-  const ReminderListItem({super.key, required this.reminder});
+// ignore: must_be_immutable
+class ReminderListItem extends StatefulWidget {
+  ReminderListItem({super.key, required this.reminder});
 
-  final Reminder reminder;
+  Reminder reminder;
 
+  @override
+  State<ReminderListItem> createState() => _ReminderListItemState();
+}
+
+class _ReminderListItemState extends State<ReminderListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,22 +33,26 @@ class ReminderListItem extends StatelessWidget {
             isThreeLine: false,
             tileColor: Theme.of(context).colorScheme.onSecondary,
             title: Text(
-              "${reminder.notificationMessage} at ${reminder.locationAlias ?? {
-                    reminder.locationData.latitude,
-                    reminder.locationData.longitude
+              "${widget.reminder.notificationMessage} at ${widget.reminder.locationAlias ?? {
+                    widget.reminder.locationData.latitude,
+                    widget.reminder.locationData.longitude
                   }}",
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
                   .copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
-            leading: Icon(
-              reminder.enabled
-                  ? Icons.volume_up
-                  : Icons.volume_off, // TODO: IconButton to toggle?
+            leading: IconButton(
+              onPressed: () {
+                toggleSnoozeReminder();
+              },
+              icon: Icon(
+                widget.reminder.enabled ? Icons.volume_up : Icons.volume_off,
+              ),
             ),
             trailing: ThreeDotsMenu(
               editReminder: editReminder,
+              toggleSnoozeReminder: toggleSnoozeReminder,
             )),
       ),
     );
@@ -53,16 +63,27 @@ class ReminderListItem extends StatelessWidget {
       context,
       MaterialPageRoute(
           builder: (BuildContext context) =>
-              ReminderScreen(reminder: reminder)),
+              ReminderScreen(reminder: widget.reminder)),
     );
+  }
+
+  void toggleSnoozeReminder() {
+    setState(() {
+      widget.reminder.enabled = !widget.reminder.enabled;
+    });
   }
 }
 
 // https://flutter.github.io/samples/web/material_3_demo/
 class ThreeDotsMenu extends StatelessWidget {
   final dynamic editReminder;
+  final dynamic toggleSnoozeReminder;
 
-  const ThreeDotsMenu({super.key, required this.editReminder});
+  const ThreeDotsMenu({
+    super.key,
+    required this.editReminder,
+    required this.toggleSnoozeReminder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +114,10 @@ class ThreeDotsMenu extends StatelessWidget {
           onPressed: () {}, // TODO: implement
         ),
         MenuItemButton(
-          child: const Text('Toggle Snooze'),
-          onPressed: () {}, // TODO: implement
+          child: const Text('Snooze/Unsnooze'),
+          onPressed: () {
+            toggleSnoozeReminder();
+          },
         ),
       ],
     );

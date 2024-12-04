@@ -29,7 +29,7 @@ class _RemindersScreenState extends State<RemindersScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Nothing here yet',
+              "Ain't nothin' here yet",
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
@@ -62,7 +62,7 @@ class _RemindersScreenState extends State<RemindersScreen> {
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
-                      'Are you ok with a sample reminder?'),
+                      'Are you ok with a sample reminder list?'),
                   actions: [
                     TextButton(
                         onPressed: () {

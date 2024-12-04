@@ -76,33 +76,44 @@ Widget createBackground(context) {
 
 Widget createDistanceField(
   BuildContext context,
-  String label,
   TextEditingController distanceController,
   bool isProcessing,
 ) {
-  return FractionallySizedBox(
-    widthFactor: 0.5,
-    alignment: Alignment.centerLeft,
-    child: TextField(
-      keyboardType: TextInputType.numberWithOptions(
-        signed: false,
-        decimal: false,
+  return Flexible(
+    // https://stackoverflow.com/questions/57242651/using-fractionallysizedbox-in-a-row
+    child: FractionallySizedBox(
+      widthFactor: 1,
+      alignment: Alignment.centerLeft,
+      child: TextFormField(
+        keyboardType: TextInputType.numberWithOptions(
+          signed: false,
+          decimal: false,
+        ),
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly // no decimal point, no sign
+        ],
+        enabled: !isProcessing,
+        // causes keyboard to slide up: autofocus: true,
+        controller: distanceController,
+        textAlign: TextAlign.right,
+        decoration: InputDecoration(
+            // prefixIcon: Icon(Icons.straighten),
+            labelText: 'Notification Distance *',
+            hintText: 'Enter a distance',
+            suffixText: 'm', // TODO: support yards?
+            helperText: 'Minimum 100 m'),
+        maxLength: 4,
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+        validator: (value) {
+          return (value == null ||
+                  int.tryParse(value) == null ||
+                  int.tryParse(value)! < 100)
+              ? 'Please provide a distance of at least 100 m'
+              : null; // success
+        },
       ),
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly // no decimal point, no sign
-      ],
-      enabled: !isProcessing,
-      // causes keyboard to slide up: autofocus: true,
-      controller: distanceController,
-      textAlign: TextAlign.right,
-      decoration: InputDecoration(
-          // prefixIcon: Icon(Icons.straighten),
-          labelText: label,
-          suffixText: 'm'), // TODO: support yards?
-      maxLength: 4,
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
     ),
   );
 }

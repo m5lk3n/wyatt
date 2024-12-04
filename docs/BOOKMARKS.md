@@ -11,7 +11,7 @@
 - https://codewithandrea.com/articles/flutter-state-management-riverpod/
 - [Onboarding with routes and riverpod](https://flutterexplained.com/p/flutter-onboarding-with-riverpod)
 
-## Input Widgets
+## (Input) Widgets
 
 - https://stackoverflow.com/questions/49577781/how-to-create-number-input-field-in-flutter
 - Pick Date & Time
@@ -19,10 +19,13 @@
   - https://pub.dev/packages/flutter_datetime_picker_plus
   - https://github.com/dylanwuzh/flutter-cupertino-date-picker
   - https://stackoverflow.com/questions/52727535/what-is-the-correct-way-to-add-date-picker-in-flutter-app
-
-## Widgets
-
 - https://stackoverflow.com/questions/53455358/how-to-present-an-empty-view-in-flutter
+- https://stackoverflow.com/questions/57242651/using-fractionallysizedbox-in-a-row
+- https://medium.com/flutter-community/an-in-depth-dive-into-implementing-swipe-to-dismiss-in-flutter-41b9007f1e0
+
+## Scrolling
+
+- https://medium.com/@enoch.mbuga/preventing-keyboard-overlap-and-bottom-overflow-in-flutter-4aced5b981ae
 
 ## Requirements
 

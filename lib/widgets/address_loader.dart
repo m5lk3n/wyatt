@@ -41,6 +41,14 @@ class _AddressLoaderState extends State<AddressLoader> {
     super.dispose();
   }
 
+  @override
+  void setState(fn) {
+    // attempt to avoid "setState() called after dispose()" exception
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   Future<void> _updateAddress({LocationData? locationData}) async {
     setState(() {
       _error = null;

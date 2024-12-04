@@ -118,7 +118,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     Widget distanceField = createDistanceField(
       context,
-      'Default Notification Distance',
       _distanceController,
       _isProcessing,
     );
@@ -126,211 +125,245 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid bottom overflow
       appBar: WyattAppBar(context, widget.title),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Common.space,
-              Common.space,
-              Common.space,
-              0,
-            ),
-            child: Text.rich(
-              // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
-              TextSpan(children: [
-                TextSpan(
-                  text: _isSettingUp
-                      ? 'A key is needed. Please obtain one from '
-                      : 'If needed, please obtain a key from ',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                ),
-                WidgetSpan(
-                  alignment: PlaceholderAlignment.baseline,
-                  baseline: TextBaseline.alphabetic,
-                  child: LinkButton(
-                    urlLabel: 'this page',
-                    url: Common.keyUrl,
+      body: Form(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Common.space,
+                Common.space,
+                Common.space,
+                0,
+              ),
+              child: Text.rich(
+                // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                TextSpan(children: [
+                  TextSpan(
+                    text: _isSettingUp
+                        ? 'A key is needed. Please obtain one from '
+                        : 'If needed, please obtain a key from ',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
-                ),
-                TextSpan(
-                  text: '.',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                ),
-              ]),
-            ),
-          ),
-          _isSettingUp
-              ? Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    Common.space,
-                    Common.space,
-                    Common.space,
-                    0,
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.baseline,
+                    baseline: TextBaseline.alphabetic,
+                    child: LinkButton(
+                      urlLabel: 'this page',
+                      url: Common.keyUrl,
+                    ),
                   ),
-                  child: Text.rich(
-                    // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
-                    TextSpan(
+                  TextSpan(
+                    text: '.',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                  ),
+                ]),
+              ),
+            ),
+            _isSettingUp
+                ? Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Common.space,
+                      Common.space,
+                      Common.space,
+                      0,
+                    ),
+                    child: Text.rich(
+                      // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                      TextSpan(
+                        children: [
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: LinkButton(
+                              urlLabel: 'What',
+                              url: Common.keyWhatUrl,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' is this and ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                          ),
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: LinkButton(
+                              urlLabel: 'why',
+                              url: Common.keyWhyUrl,
+                            ),
+                          ),
+                          TextSpan(
+                            text:
+                                ' is this needed?\nYou can change the key later in ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                          ),
+                          TextSpan(
+                            text: 'Settings',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .inversePrimary,
+                                    ),
+                          ),
+                          TextSpan(
+                            text: '.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox.shrink(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Common.space,
+                0,
+                Common.space,
+                0,
+              ),
+              child: TextField(
+                obscureText: _isObscured,
+                enableSuggestions: false,
+                autocorrect: false,
+                enabled: !_isProcessing,
+                // causes keyboard to slide up: autofocus: true,
+                controller: _keyController,
+                decoration: InputDecoration(
+                    label: const Text("Key *"),
+                    hintText: "Enter your key here",
+                    suffixIcon: IconButton(
+                        icon: Icon(_isObscured
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isObscured = !_isObscured;
+                          });
+                        })),
+                maxLength: 40,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+              ),
+            ),
+            _isSettingUp
+                ? SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Common.space,
+                      0,
+                      Common.space,
+                      0,
+                    ),
+                    child: Column(
                       children: [
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.baseline,
-                          baseline: TextBaseline.alphabetic,
-                          child: LinkButton(
-                            urlLabel: 'What',
-                            url: Common.keyWhatUrl,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' is this and ',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.baseline,
-                          baseline: TextBaseline.alphabetic,
-                          child: LinkButton(
-                            urlLabel: 'why',
-                            url: Common.keyWhyUrl,
-                          ),
-                        ),
-                        TextSpan(
-                          text:
-                              ' is this needed?\nYou can change the key later in ',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
-                        TextSpan(
-                          text: 'Settings',
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Defaults:',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
+                            ),
+                          ],
                         ),
-                        TextSpan(
-                          text: '.',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [distanceField]),
                       ],
                     ),
                   ),
-                )
-              : SizedBox.shrink(),
-          Padding(
-            padding: Common.padding,
-            child: TextField(
-              obscureText: _isObscured,
-              enableSuggestions: false,
-              autocorrect: false,
-              enabled: !_isProcessing,
-              // causes keyboard to slide up: autofocus: true,
-              controller: _keyController,
-              decoration: InputDecoration(
-                  label: const Text("Key *"),
-                  hintText: "Enter your key here",
-                  suffixIcon: IconButton(
-                      icon: Icon(_isObscured
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          _isObscured = !_isObscured;
-                        });
-                      })),
-              maxLength: 40,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-            ),
-          ),
-          _isSettingUp
-              ? SizedBox.shrink()
-              : Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    Common.space,
-                    0,
-                    Common.space,
-                    0,
-                  ),
-                  child: distanceField),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Common.space,
-              Common.space,
-              Common.space,
-              0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.secondary,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.inversePrimary,
-                  ),
-                  onPressed: _isProcessing ? null : () => _save(context),
-                  autofocus: true,
-                  child: Text('Save'),
-                ),
-              ],
-            ),
-          ),
-          _isSettingUp
-              ? SizedBox.shrink()
-              : Divider(
-                  indent: Common.space,
-                  endIndent: Common.space,
-                ),
-          _isSettingUp
-              ? SizedBox.shrink()
-              : Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    Common.space,
-                    0,
-                    Common.space,
-                    0,
-                  ),
-                  child: ElevatedButton(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Common.space,
+                Common.space,
+                Common.space,
+                0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.secondary,
                       backgroundColor:
                           Theme.of(context).colorScheme.inversePrimary,
                     ),
-                    onPressed:
-                        _isProcessing ? null : () => _confirmReset(context),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text('Reset to factory settings'),
+                    onPressed: _isProcessing ? null : () => _save(),
+                    autofocus: true,
+                    child: Text('Save'),
+                  ),
+                ],
+              ),
+            ),
+            _isSettingUp
+                ? SizedBox.shrink()
+                : Divider(
+                    indent: Common.space,
+                    endIndent: Common.space,
+                  ),
+            _isSettingUp
+                ? SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Common.space,
+                      0,
+                      Common.space,
+                      0,
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor:
+                            Theme.of(context).colorScheme.secondary,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                      onPressed:
+                          _isProcessing ? null : () => _confirmReset(context),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('Reset to factory settings'),
+                      ),
                     ),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Future<bool> _saveSettings(BuildContext context) async {
+  Future<bool> _saveSettings() async {
     FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
 
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
+    // done in _saveKey: scaffold.clearSnackBars();
 
     setState(() {
       _isProcessing = true;
@@ -353,8 +386,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return result;
   }
 
-  void _save(BuildContext context) async {
-    if (await _saveSettings(context)) {
+  void _save() async {
+    if (await _saveSettings()) {
       // ignore: use_build_context_synchronously
       context.go(AppRoutes.reminders);
     }
@@ -387,12 +420,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             'Please tap here to open the app again.',
                       );
                     },
-                    child: const Text('Yes')),
+                    child: const Text('Reset')),
                 TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('No'))
+                    child: const Text('Cancel'))
               ],
             ),
           );

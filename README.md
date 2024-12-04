@@ -59,7 +59,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - [ ] Reminders
   - [ ] Load reminders into an overview list (not a grid) ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
-    - [ ] Pre-seed (?)
+    - [x] Seed option
   - [ ] Sort reminders overview by (due) date or by city name
   - [ ] Search reminders (?)
   - [ ] Filter reminders (?)
@@ -116,10 +116,20 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
+- [ ] Time between the same notification
 - [ ] Field validation
 - [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
 - [ ] Recover from crash
+- [ ] Add to each StatefulWidget (?) ((reasoning)[https://stackoverflow.com/questions/49340116/setstate-called-after-dispose]):
+
+      @override
+      void setState(fn) {
+        if(mounted) {
+          super.setState(fn);
+        }
+      }
+
 - [ ] Clarify minimal API key scope and document
 - [ ] Clarify permissions
   - [ ] https://developer.android.com/develop/sensors-and-location/location/retrieve-current#permissions
@@ -144,12 +154,12 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- Seeding?
 - Add/Edit Location
-  - Default Notification Distance widget (see also settings)
 
 ## Open
 
+- How to reset non-FormFields?
+- AlertDialog title too big?
 - Are all StatefulWidgets needed?
 - Theme.of vs. Theme.of.copyWith?
 - What if navigation back from Settings happens during saving?
@@ -159,10 +169,12 @@ A location- and time-based To-do app for iOS and Android.
 - Support landscape mode?
 - License?
 
-## Backlog
+## Backlog / Outlook
 
 - [ ] Sort reminders overview by continent name
 - [ ] [Share a reminder](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
+- [ ] Support spoken reminders
+- [ ] Enhance location with a picture taken
 - [ ] OpenStreetMap version
   - https://github.com/Michael-M-aher/location_picker_flutter_map/
   - https://switch2osm.org/the-basics/

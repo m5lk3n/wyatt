@@ -38,4 +38,23 @@ class Reminder {
   DateTime? notificationStartDateTime;
   DateTime? notificationEndDateTime;
   bool enabled;
+
+  bool isExpired() {
+    return notificationEndDateTime != null &&
+        notificationEndDateTime!.isBefore(DateTime.now());
+  }
+
+  bool validateDateTime() {
+    return notificationStartDateTime != null &&
+        notificationEndDateTime != null &&
+        notificationStartDateTime!.isBefore(notificationEndDateTime!);
+  }
+
+/* TODO: implement this
+  bool isInRange(LocationData currentLocation) {
+    return locationData.distanceBetween(
+            currentLocation.latitude!, currentLocation.longitude!) <=
+        notificationDistance;
+  }
+*/
 }

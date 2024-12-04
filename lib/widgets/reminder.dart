@@ -28,12 +28,14 @@ class _ReminderListItemState extends State<ReminderListItem> {
       child:
           InkWell /* provides a visual feedback when the user taps the item*/ (
         onTap: () {
-          editReminder(context);
+          editReminder();
         },
         splashColor: Theme.of(context).primaryColor,
         child: ListTile(
           isThreeLine: false,
-          tileColor: Theme.of(context).colorScheme.onSecondary,
+          tileColor: widget.reminder.isExpired()
+              ? Theme.of(context).colorScheme.onInverseSurface
+              : Theme.of(context).colorScheme.onSecondary,
           title: Text(
             "${widget.reminder.notificationMessage} at ${widget.reminder.locationAlias ?? {
                   widget.reminder.locationData.latitude,
@@ -46,10 +48,16 @@ class _ReminderListItemState extends State<ReminderListItem> {
           ),
           trailing: IconButton(
             onPressed: () {
-              toggleSnoozeReminder();
+              widget.reminder.isExpired()
+                  ? editReminder()
+                  : toggleSnoozeReminder();
             },
             icon: Icon(
-              widget.reminder.enabled ? Icons.volume_up : Icons.volume_off,
+              widget.reminder.isExpired()
+                  ? Icons.notifications_paused
+                  : widget.reminder.enabled
+                      ? Icons.notifications_active
+                      : Icons.notifications_off,
             ),
           ),
         ),
@@ -57,7 +65,7 @@ class _ReminderListItemState extends State<ReminderListItem> {
     );
   }
 
-  void editReminder(BuildContext context) {
+  void editReminder() {
     Navigator.push(
       context,
       MaterialPageRoute(

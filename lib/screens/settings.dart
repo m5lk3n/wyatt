@@ -32,6 +32,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   late final bool _isSettingUp;
   bool _isProcessing = false;
   bool _isObscured = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -123,167 +124,111 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: false, // avoid bottom overflow
+      resizeToAvoidBottomInset:
+          true, // goes along with SingleChildScrollView below to allow keyboard to slide up and not cover input fields (https://stackoverflow.com/questions/49207145/flutter-keyboard-over-textformfield)
       appBar: WyattAppBar(context, widget.title),
-      body: Form(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Common.space,
-                Common.space,
-                Common.space,
-                0,
-              ),
-              child: Text.rich(
-                // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
-                TextSpan(children: [
-                  TextSpan(
-                    text: _isSettingUp
-                        ? 'A key is needed. Please obtain one from '
-                        : 'If needed, please obtain a key from ',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                  ),
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.baseline,
-                    baseline: TextBaseline.alphabetic,
-                    child: LinkButton(
-                      urlLabel: 'this page',
-                      url: Common.keyUrl,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Common.space,
+                  Common.space,
+                  Common.space,
+                  0,
+                ),
+                child: Text.rich(
+                  // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                  TextSpan(children: [
+                    TextSpan(
+                      text: _isSettingUp
+                          ? 'A key is needed. Please obtain one from '
+                          : 'If needed, please obtain a key from ',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                     ),
-                  ),
-                  TextSpan(
-                    text: '.',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                  ),
-                ]),
-              ),
-            ),
-            _isSettingUp
-                ? Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Common.space,
-                      Common.space,
-                      Common.space,
-                      0,
-                    ),
-                    child: Text.rich(
-                      // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
-                      TextSpan(
-                        children: [
-                          WidgetSpan(
-                            alignment: PlaceholderAlignment.baseline,
-                            baseline: TextBaseline.alphabetic,
-                            child: LinkButton(
-                              urlLabel: 'What',
-                              url: Common.keyWhatUrl,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' is this and ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
-                                ),
-                          ),
-                          WidgetSpan(
-                            alignment: PlaceholderAlignment.baseline,
-                            baseline: TextBaseline.alphabetic,
-                            child: LinkButton(
-                              urlLabel: 'why',
-                              url: Common.keyWhyUrl,
-                            ),
-                          ),
-                          TextSpan(
-                            text:
-                                ' is this needed?\nYou can change the key later in ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
-                                ),
-                          ),
-                          TextSpan(
-                            text: 'Settings',
-                            style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .inversePrimary,
-                                    ),
-                          ),
-                          TextSpan(
-                            text: '.',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
-                                ),
-                          ),
-                        ],
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.baseline,
+                      baseline: TextBaseline.alphabetic,
+                      child: LinkButton(
+                        urlLabel: 'this page',
+                        url: Common.keyUrl,
                       ),
                     ),
-                  )
-                : SizedBox.shrink(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Common.space,
-                0,
-                Common.space,
-                0,
-              ),
-              child: TextField(
-                obscureText: _isObscured,
-                enableSuggestions: false,
-                autocorrect: false,
-                enabled: !_isProcessing,
-                // causes keyboard to slide up: autofocus: true,
-                controller: _keyController,
-                decoration: InputDecoration(
-                    label: const Text("Key *"),
-                    hintText: "Enter your key here",
-                    suffixIcon: IconButton(
-                        icon: Icon(_isObscured
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isObscured = !_isObscured;
-                          });
-                        })),
-                maxLength: 40,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
+                    TextSpan(
+                      text: '.',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                     ),
+                  ]),
+                ),
               ),
-            ),
-            _isSettingUp
-                ? SizedBox.shrink()
-                : Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Common.space,
-                      0,
-                      Common.space,
-                      0,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+              _isSettingUp
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        0,
+                        Common.space,
+                        Common.space,
+                        Common.space,
+                      ),
+                      child: Text.rich(
+                        // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                        TextSpan(
                           children: [
-                            Text(
-                              'Defaults:',
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              child: LinkButton(
+                                urlLabel: 'What',
+                                url: Common.keyWhatUrl,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' is this and ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                            ),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              child: LinkButton(
+                                urlLabel: 'why',
+                                url: Common.keyWhyUrl,
+                              ),
+                            ),
+                            TextSpan(
+                              text:
+                                  ' is this needed?\nYou can change the key later in ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                            ),
+                            TextSpan(
+                              text: 'Settings',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                  ),
+                            ),
+                            TextSpan(
+                              text: '.',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
@@ -294,66 +239,130 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             ),
                           ],
                         ),
-                        Row(
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Common.space,
+                  0,
+                  Common.space,
+                  0,
+                ),
+                child: TextField(
+                  obscureText: _isObscured,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  enabled: !_isProcessing,
+                  // causes keyboard to slide up: autofocus: true,
+                  controller: _keyController,
+                  decoration: InputDecoration(
+                      label: const Text("Key *"),
+                      hintText: "Enter your key here",
+                      suffixIcon: IconButton(
+                          icon: Icon(_isObscured
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscured = !_isObscured;
+                            });
+                          })),
+                  maxLength: 40,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                ),
+              ),
+              _isSettingUp
+                  ? SizedBox.shrink()
+                  : Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        Common.space,
+                        0,
+                        Common.space,
+                        0,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [distanceField]),
-                      ],
+                            children: [
+                              Text(
+                                'Defaults:',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [distanceField]),
+                        ],
+                      ),
                     ),
-                  ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Common.space,
-                Common.space,
-                Common.space,
-                0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Theme.of(context).colorScheme.secondary,
-                      backgroundColor:
-                          Theme.of(context).colorScheme.inversePrimary,
-                    ),
-                    onPressed: _isProcessing ? null : () => _save(),
-                    autofocus: true,
-                    child: Text('Save'),
-                  ),
-                ],
-              ),
-            ),
-            _isSettingUp
-                ? SizedBox.shrink()
-                : Divider(
-                    indent: Common.space,
-                    endIndent: Common.space,
-                  ),
-            _isSettingUp
-                ? SizedBox.shrink()
-                : Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Common.space,
-                      0,
-                      Common.space,
-                      0,
-                    ),
-                    child: ElevatedButton(
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Common.space,
+                  Common.space,
+                  Common.space,
+                  0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor:
                             Theme.of(context).colorScheme.secondary,
                         backgroundColor:
                             Theme.of(context).colorScheme.inversePrimary,
                       ),
-                      onPressed:
-                          _isProcessing ? null : () => _confirmReset(context),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text('Reset to factory settings'),
+                      onPressed: _isProcessing ? null : () => _save(),
+                      autofocus: true,
+                      child: Text('Save'),
+                    ),
+                  ],
+                ),
+              ),
+              _isSettingUp
+                  ? SizedBox.shrink()
+                  : Divider(
+                      indent: Common.space,
+                      endIndent: Common.space,
+                    ),
+              _isSettingUp
+                  ? SizedBox.shrink()
+                  : Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        Common.space,
+                        0,
+                        Common.space,
+                        0,
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                        onPressed:
+                            _isProcessing ? null : () => _confirmReset(context),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text('Reset to factory settings'),
+                        ),
                       ),
                     ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );

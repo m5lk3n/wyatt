@@ -155,6 +155,10 @@ A location- and time-based To-do app for iOS and Android.
 ## Doing
 
 - Add/Edit Location
+  - https://stackoverflow.com/questions/67194040/flutter-how-to-use-riverpod-with-sharedpreference-and-liststring-variable-in
+  - https://stackoverflow.com/questions/68380827/how-best-to-use-riverpod-to-manage-items-in-a-list
+  - https://medium.com/@purboyndra/flutter-tutorial-add-to-favorite-and-remove-from-favorite-with-riverpod-1cd419bc0b2a
+  - https://stackoverflow.com/questions/65378735/difference-between-list-add-and-manually-adding-item-to-a-riverpod-statenotifier/65380308#65380308
 
 ## Open
 

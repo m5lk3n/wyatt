@@ -155,16 +155,22 @@ A location- and time-based To-do app for iOS and Android.
 ## Doing
 
 - Add/Edit Location
+  - Add persistence
+  - controller as callbacks?
   - https://stackoverflow.com/questions/67194040/flutter-how-to-use-riverpod-with-sharedpreference-and-liststring-variable-in
   - https://stackoverflow.com/questions/68380827/how-best-to-use-riverpod-to-manage-items-in-a-list
   - https://medium.com/@purboyndra/flutter-tutorial-add-to-favorite-and-remove-from-favorite-with-riverpod-1cd419bc0b2a
   - https://stackoverflow.com/questions/65378735/difference-between-list-add-and-manually-adding-item-to-a-riverpod-statenotifier/65380308#65380308
+- Validate DateTimes
+  - https://medium.com/@thekavak/flutter-valuenotifier-with-examples-66b3933d7036
 
 ## Open
 
 - How to reset non-FormFields?
 - AlertDialog title too big?
 - Are all StatefulWidgets needed?
+  - "Stateful widgets are mutable and they update their data every time a `setState((){data;})` is called."
+  - "Stateless widgets on the other hand are immutable, i.e they contain data that shouldn't change during runtime."
 - Theme.of vs. Theme.of.copyWith?
 - What if navigation back from Settings happens during saving?
 - Suspend app, wake up?

@@ -6,15 +6,19 @@ import 'package:location/location.dart';
 import 'package:wyatt/widgets/location_helper.dart';
 import 'package:wyatt/widgets/location_picker.dart';
 
+typedef LocationDataCallback = void Function(LocationData locationData);
+
 // https://github.com/Lyokone/flutterlocation/blob/master/packages/location/example/lib/get_location.dart
 class AddressLoader extends StatefulWidget {
   const AddressLoader({
     super.key,
     this.locationData,
+    required this.onLocationDataChange,
   });
 
   final LocationData?
-      locationData; // input location data // TODO/FIXME: restore on LocationPicker back
+      locationData; // initial location data // TODO/FIXME: restore on LocationPicker back
+  final LocationDataCallback onLocationDataChange;
 
   @override
   State<AddressLoader> createState() => _AddressLoaderState();
@@ -61,6 +65,7 @@ class _AddressLoaderState extends State<AddressLoader> {
       setState(() {
         _currentLocationData = locationResult;
         _addressController.text = locationAddress;
+        widget.onLocationDataChange(locationResult);
       });
     } on PlatformException catch (err) {
       setState(() {
@@ -112,7 +117,7 @@ class _AddressLoaderState extends State<AddressLoader> {
     if (location == null) {
       return;
     }
-    _currentLocationData = location;
+    //_currentLocationData = location;
     _updateAddress(locationData: location);
   }
 }

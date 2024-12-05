@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/models/reminder.dart';
+import 'package:wyatt/providers/reminders_provider.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/address_loader.dart';
 import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/datetime_picker.dart';
 
-class ReminderScreen extends StatefulWidget {
+class ReminderScreen extends ConsumerStatefulWidget {
   const ReminderScreen({
     super.key,
     this.reminder,
   });
 
   @override
-  State<ReminderScreen> createState() => _ReminderScreenState();
+  ConsumerState<ReminderScreen> createState() => _ReminderScreenState();
 
   final Reminder? reminder;
 }
 
-class _ReminderScreenState extends State<ReminderScreen> {
+class _ReminderScreenState extends ConsumerState<ReminderScreen> {
   final _msgController = TextEditingController();
   final _aliasController = TextEditingController();
   final _distanceController = TextEditingController();
@@ -111,8 +113,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   0,
                 ),
                 child: TextField(
-                  enableSuggestions: false,
-                  autocorrect: false,
+                  enableSuggestions: true,
+                  autocorrect: true,
                   // causes keyboard to slide up: autofocus: true,
                   controller: _aliasController,
                   decoration: InputDecoration(
@@ -135,6 +137,9 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 ),
                 child: AddressLoader(
                   locationData: _locationData,
+                  onLocationDataChange: (LocationData locationData) {
+                    _locationData = locationData;
+                  },
                 ),
               ),
               Padding(
@@ -148,6 +153,9 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   label: 'Start Notification',
                   hintText: 'Select start date & time',
                   dateTime: _startDateTime,
+                  onDateTimeChange: (DateTime? dateTime) {
+                    _startDateTime = dateTime;
+                  },
                 ),
               ),
               Padding(
@@ -161,6 +169,9 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   label: 'End Notification',
                   hintText: 'Select end date & time',
                   dateTime: _endDateTime,
+                  onDateTimeChange: (DateTime? dateTime) {
+                    _endDateTime = dateTime;
+                  },
                 ),
               ),
               Padding(
@@ -186,7 +197,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
                         backgroundColor:
                             Theme.of(context).colorScheme.inversePrimary,
                       ),
-                      onPressed: _isProcessing ? null : () => _save(),
+                      onPressed: _isProcessing
+                          ? null
+                          : () {
+                              if (_save()) {
+                                Navigator.pop(context);
+                              }
+                            },
                       autofocus: true,
                       child: Text('Save'),
                     ),
@@ -214,24 +231,69 @@ class _ReminderScreenState extends State<ReminderScreen> {
     );
   }
 
-  void _save() {
+  bool _save() {
     FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
 
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
+    scaffold.clearSnackBars();
+
+    if (_locationData == null) {
+      scaffold.showSnackBar(SnackBar(
+          content: Text('Wait for the location to load and try again')));
+      return false;
+    }
 
     setState(() {
       _isProcessing = true;
     });
 
-    scaffold.clearSnackBars();
     if (_formKey.currentState!.validate()) {
-      // TODO: save reminder
-      String savedMsg = "Reminder saved";
-      scaffold.showSnackBar(SnackBar(content: Text(savedMsg)));
+      final reminder = _createReminder();
+      if (_validateDateTime(reminder)) {
+        String action = 'updated';
+        if (widget.reminder == null) {
+          action = 'added';
+          ref.read(remindersNotifierProvider.notifier).add(reminder);
+        } else {
+          reminder.id = widget.reminder!.id;
+          ref.read(remindersNotifierProvider.notifier).update(reminder);
+        }
+        scaffold.showSnackBar(SnackBar(content: Text('Reminder $action')));
+        return true;
+      }
     }
 
     setState(() {
       _isProcessing = false;
     });
+
+    return false;
+  }
+
+  bool _validateDateTime(Reminder reminder) {
+    if (reminder.validateDateTime()) {
+      return true;
+    }
+
+    final ThemeData themeData = Theme.of(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: themeData.colorScheme.error,
+        content: Text('Start Notification must be before End Notification'),
+      ),
+    );
+
+    return false;
+  }
+
+  Reminder _createReminder() {
+    return Reminder(
+      notificationMessage: _msgController.text.trim(),
+      locationAlias: _aliasController.text.trim(),
+      locationData: _locationData!,
+      notificationStartDateTime: _startDateTime,
+      notificationEndDateTime: _endDateTime,
+      notificationDistance: int.parse(_distanceController.text),
+    );
   }
 }

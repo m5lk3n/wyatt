@@ -1,29 +1,31 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/data/seed.dart';
 import 'package:wyatt/models/reminder.dart';
+import 'package:wyatt/providers/reminders_provider.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/reminder.dart';
 
-class RemindersScreen extends StatefulWidget {
-  const RemindersScreen({super.key});
+// ignore: must_be_immutable
+class RemindersScreen extends ConsumerWidget {
+  // required for undo:
+  Reminder? _deletedItem;
+  int? _deletedIndex;
+
+  RemindersScreen({super.key});
 
   @override
-  State<RemindersScreen> createState() => _RemindersScreenState();
-}
-
-class _RemindersScreenState extends State<RemindersScreen> {
-  List<Reminder> _items = List.from(seedReminders); // TODO: load
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Widget content;
     Widget? floatingActionButton;
 
-    if (_items.isEmpty) {
+    final reminders = ref.watch(remindersNotifierProvider);
+
+    if (reminders.isEmpty) {
       content = Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -36,8 +38,15 @@ class _RemindersScreenState extends State<RemindersScreen> {
             ),
             const SizedBox(height: Common.space / 2),
             Text(
-              'Add a reminder to get started',
+              'Hit + above to get started',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+            const SizedBox(height: Common.space / 2),
+            Text(
+              '(or tap the light bulb below for inspiration)',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
@@ -65,14 +74,15 @@ class _RemindersScreenState extends State<RemindersScreen> {
                       'Are you ok with a sample reminder list?'),
                   actions: [
                     TextButton(
-                        onPressed: () {
-                          setState(() {
-                            log('Seeding ${seedReminders.length} reminders');
-                            _items = List.from(seedReminders);
-                          });
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Seed')),
+                      onPressed: () {
+                        log('Seeding ${seedReminders.length} reminders');
+                        ref
+                            .read(remindersNotifierProvider.notifier)
+                            .addAll(seedReminders);
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Seed'),
+                    ),
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
                       child: const Text('Cancel'),
@@ -89,7 +99,7 @@ class _RemindersScreenState extends State<RemindersScreen> {
       content = ListView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: _items.length,
+        itemCount: reminders.length,
         itemBuilder: (context, index) {
           return Dismissible(
             background: Container(
@@ -108,7 +118,7 @@ class _RemindersScreenState extends State<RemindersScreen> {
                 Icons.delete,
               ),
             ),
-            key: ValueKey<Reminder>(_items[index]),
+            key: ValueKey<Reminder>(reminders[index]),
             confirmDismiss: (DismissDirection direction) async {
               return await showDialog(
                 context: context,
@@ -143,10 +153,25 @@ class _RemindersScreenState extends State<RemindersScreen> {
               );
             },
             onDismissed: (DismissDirection direction) {
-              deleteReminder(context, index);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              _deletedItem = reminders.removeAt(index);
+              _deletedIndex = index;
+              ref
+                  .read(remindersNotifierProvider.notifier)
+                  .remove(_deletedItem!);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text('Reminder deleted'),
+                    action: SnackBarAction(
+                      label: 'UNDO',
+                      onPressed: () => ref
+                          .read(remindersNotifierProvider.notifier)
+                          .insertAt(_deletedIndex!, _deletedItem!),
+                    )),
+              );
             },
             child: ReminderListItem(
-              reminder: _items[index],
+              reminder: reminders[index],
             ),
           );
         },
@@ -167,22 +192,5 @@ class _RemindersScreenState extends State<RemindersScreen> {
       drawer: WyattDrawer(),
       floatingActionButton: floatingActionButton,
     );
-  }
-
-  void deleteReminder(BuildContext context, int index) {
-    setState(() {
-      Reminder deletedItem = _items.removeAt(index);
-      ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Reminder deleted'),
-          action: SnackBarAction(
-              label: 'UNDO',
-              onPressed: () => setState(
-                    () => _items.insert(index, deletedItem),
-                  )),
-        ),
-      );
-    });
   }
 }

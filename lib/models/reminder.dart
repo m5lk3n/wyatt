@@ -26,11 +26,11 @@ class Reminder {
     this.locationAlias,
     this.notificationStartDateTime,
     this.notificationEndDateTime,
+    this.notificationDistance = Default.notificationDistance,
     this.enabled = true,
-  })  : id = uuid.v4(),
-        notificationDistance = Default.notificationDistance;
+  }) : id = uuid.v4();
 
-  final String id;
+  String id;
   final LocationData locationData;
   final String notificationMessage;
   String? locationAlias;
@@ -45,9 +45,23 @@ class Reminder {
   }
 
   bool validateDateTime() {
+    if (notificationStartDateTime == null && notificationEndDateTime == null) {
+      return true;
+    }
+
     return notificationStartDateTime != null &&
         notificationEndDateTime != null &&
         notificationStartDateTime!.isBefore(notificationEndDateTime!);
+  }
+
+  @override
+  String toString() {
+    String location = (locationAlias != null && locationAlias!.isNotEmpty)
+        ? locationAlias!
+        : {locationData.latitude.toString(), locationData.longitude.toString()}
+            .join(', ');
+
+    return ("$notificationMessage at $location");
   }
 
 /* TODO: implement this

@@ -5,6 +5,8 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
 import 'package:wyatt/widgets/datetime_helper.dart';
 
+typedef DateTimeCallback = void Function(DateTime? dateTime);
+
 // https://pub.dev/packages/flutter_datetime_picker_plus/example
 class DateTimePicker extends StatefulWidget {
   const DateTimePicker({
@@ -12,12 +14,14 @@ class DateTimePicker extends StatefulWidget {
     required this.label,
     required this.hintText,
     this.dateTime,
+    required this.onDateTimeChange,
   });
 
   final String label;
   final String hintText;
   final DateTime?
-      dateTime; // input date time // TODO/FIXME: restore on LocationPicker back
+      dateTime; // initial date time // TODO/FIXME: restore on LocationPicker back
+  final DateTimeCallback onDateTimeChange;
 
   @override
   State<DateTimePicker> createState() => _DateTimePickerState();
@@ -56,7 +60,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
     return TextField(
       onTap: () {
-        pickDateTime(context);
+        pickDateTime();
       },
       readOnly: true,
       controller: _dateTimeController,
@@ -66,7 +70,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
         prefixIcon: IconButton(
             icon: Icon(Icons.date_range),
             onPressed: () {
-              pickDateTime(context);
+              pickDateTime();
             }),
         suffixIcon: IconButton(
             icon: Icon(Icons.clear),
@@ -74,6 +78,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
               setState(() {
                 _currentDateTime = null;
                 _dateTimeController.clear();
+                widget.onDateTimeChange(null);
               });
             }),
       ),
@@ -84,7 +89,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
   }
 
   // sets _currentDateTime as a side effect
-  void pickDateTime(BuildContext context) {
+  void pickDateTime() {
     final Locale userLocale = Localizations.localeOf(context);
     final dt = _currentDateTime ?? DateTime.now();
 
@@ -125,6 +130,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
         _currentDateTime = date;
         _dateTimeController.text =
             formatDateTime(userLocale, _currentDateTime!);
+        widget.onDateTimeChange(_currentDateTime!);
       },
       currentTime: dt,
       locale: fromLanguageCode(userLocale),

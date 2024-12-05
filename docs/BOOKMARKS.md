@@ -33,6 +33,7 @@
 
 ## Backlog / Research
 
+- https://medium.com/swlh/the-simplest-way-to-pass-and-fetch-data-between-stateful-and-stateless-widgets-pages-full-2021-c5dbce8db1db
 - https://mobikul.com/flutteradd-google-maps-api-key-dynamically/
 - https://pub.dev/packages/google_map_dynamic_key/
 - https://github.com/flutter/flutter/issues/41244

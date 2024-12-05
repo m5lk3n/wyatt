@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/models/reminder.dart';
+import 'package:wyatt/providers/reminders_provider.dart';
 import 'package:wyatt/screens/reminder.dart';
 
-class ReminderListItem extends StatefulWidget {
+class ReminderListItem extends ConsumerStatefulWidget {
   const ReminderListItem({
     super.key,
     required this.reminder,
@@ -12,10 +14,10 @@ class ReminderListItem extends StatefulWidget {
   final Reminder reminder;
 
   @override
-  State<ReminderListItem> createState() => _ReminderListItemState();
+  ConsumerState<ReminderListItem> createState() => _ReminderListItemState();
 }
 
-class _ReminderListItemState extends State<ReminderListItem> {
+class _ReminderListItemState extends ConsumerState<ReminderListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +30,7 @@ class _ReminderListItemState extends State<ReminderListItem> {
       child:
           InkWell /* provides a visual feedback when the user taps the item*/ (
         onTap: () {
-          editReminder();
+          _editReminder();
         },
         splashColor: Theme.of(context).primaryColor,
         child: ListTile(
@@ -37,10 +39,7 @@ class _ReminderListItemState extends State<ReminderListItem> {
               ? Theme.of(context).colorScheme.onInverseSurface
               : Theme.of(context).colorScheme.onSecondary,
           title: Text(
-            "${widget.reminder.notificationMessage} at ${widget.reminder.locationAlias ?? {
-                  widget.reminder.locationData.latitude,
-                  widget.reminder.locationData.longitude
-                }}",
+            '${widget.reminder}',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -49,8 +48,8 @@ class _ReminderListItemState extends State<ReminderListItem> {
           trailing: IconButton(
             onPressed: () {
               widget.reminder.isExpired()
-                  ? editReminder()
-                  : toggleSnoozeReminder();
+                  ? _editReminder()
+                  : _toggleSnoozeReminder();
             },
             icon: Icon(
               widget.reminder.isExpired()
@@ -65,7 +64,7 @@ class _ReminderListItemState extends State<ReminderListItem> {
     );
   }
 
-  void editReminder() {
+  void _editReminder() {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -74,9 +73,8 @@ class _ReminderListItemState extends State<ReminderListItem> {
     );
   }
 
-  void toggleSnoozeReminder() {
-    setState(() {
-      widget.reminder.enabled = !widget.reminder.enabled;
-    });
+  void _toggleSnoozeReminder() {
+    widget.reminder.enabled = !widget.reminder.enabled;
+    ref.read(remindersNotifierProvider.notifier).update(widget.reminder);
   }
 }

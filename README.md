@@ -64,16 +64,16 @@ A location- and time-based To-do app for iOS and Android.
   - [ ] Search reminders (?)
   - [ ] Filter reminders (?)
 
-  - [ ] Manage reminders (through dots menu)
-    - [ ] [Add a reminder](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
+  - [x] Manage reminders ~~(through dots menu)~~
+    - [x] [Add a reminder](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
       - [x] Evaluate and use a location picker:
             - [map_location_picker](https://pub.dev/packages/map_location_picker)
             - [Custom Map For Location Picker](https://community.flutterflow.io/c/community-custom-widgets/post/custom-map-for-location-picker-kPu8C7qdo1eSy0h)
             - [how to pick an address from map in flutter](https://stackoverflow.com/questions/69443353/how-to-pick-an-address-from-map-in-flutter)
-    - [ ] [Edit a reminder](https://api.flutter.dev/flutter/material/Icons/edit-constant.html)
-    - [ ] [Delete a reminder](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
-    - [ ] [Snooze/Turn off a reminder](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a reminder](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
-    - [ ] [Activate/Turn on a reminder](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a reminder](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
+    - [x] [Edit a reminder](https://api.flutter.dev/flutter/material/Icons/edit-constant.html)
+    - [x] [Delete a reminder](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
+    - [x] [Snooze/Turn off a reminder](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a reminder](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
+    - [x] [Activate/Turn on a reminder](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a reminder](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
 
 - [x] Settings
   - [x] Save key
@@ -154,15 +154,11 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- Add/Edit Location
-  - Add persistence
-  - controller as callbacks?
-  - https://stackoverflow.com/questions/67194040/flutter-how-to-use-riverpod-with-sharedpreference-and-liststring-variable-in
-  - https://stackoverflow.com/questions/68380827/how-best-to-use-riverpod-to-manage-items-in-a-list
-  - https://medium.com/@purboyndra/flutter-tutorial-add-to-favorite-and-remove-from-favorite-with-riverpod-1cd419bc0b2a
-  - https://stackoverflow.com/questions/65378735/difference-between-list-add-and-manually-adding-item-to-a-riverpod-statenotifier/65380308#65380308
-- Validate DateTimes
-  - https://medium.com/@thekavak/flutter-valuenotifier-with-examples-66b3933d7036
+- GoogleMapKey setting issue
+  - https://developers.google.com/maps/documentation/android-sdk/start
+- Location picker marker
+- Initial reminders list order
+- Intermediate testing/improving
 
 ## Open
 

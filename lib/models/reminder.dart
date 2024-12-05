@@ -21,6 +21,7 @@ class Reminder {
     - Action (Check/Done, Snooze, Cancel)
 */
   Reminder({
+    this.id,
     required this.locationData,
     required this.notificationMessage,
     this.locationAlias,
@@ -28,9 +29,11 @@ class Reminder {
     this.notificationEndDateTime,
     this.notificationDistance = Default.notificationDistance,
     this.enabled = true,
-  }) : id = uuid.v4();
+  }) {
+    id ??= uuid.v4();
+  }
 
-  String id;
+  String? id;
   final LocationData locationData;
   final String notificationMessage;
   String? locationAlias;
@@ -45,7 +48,7 @@ class Reminder {
   }
 
   bool validateDateTime() {
-    if (notificationStartDateTime == null && notificationEndDateTime == null) {
+    if (notificationEndDateTime == null) {
       return true;
     }
 
@@ -62,6 +65,39 @@ class Reminder {
             .join(', ');
 
     return ("$notificationMessage at $location");
+  }
+
+  factory Reminder.fromJson(Map<String, dynamic> json) {
+    return Reminder(
+      id: json['id'],
+      locationData: LocationData.fromMap(json['locationData']),
+      notificationMessage: json['notificationMessage'],
+      locationAlias: json['locationAlias'],
+      notificationDistance: json['notificationDistance'],
+      notificationStartDateTime: json['notificationStartDateTime'] != null
+          ? DateTime.parse(json['notificationStartDateTime'])
+          : null,
+      notificationEndDateTime: json['notificationEndDateTime'] != null
+          ? DateTime.parse(json['notificationEndDateTime'])
+          : null,
+      enabled: json['enabled'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'locationData': {
+        'latitude': locationData.latitude,
+        'longitude': locationData.longitude,
+      },
+      'notificationMessage': notificationMessage,
+      'locationAlias': locationAlias,
+      'notificationDistance': notificationDistance,
+      'notificationStartDateTime': notificationStartDateTime?.toIso8601String(),
+      'notificationEndDateTime': notificationEndDateTime?.toIso8601String(),
+      'enabled': enabled,
+    };
   }
 
 /* TODO: implement this

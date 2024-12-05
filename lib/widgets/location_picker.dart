@@ -28,6 +28,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   late String _key;
 
   void _onMapCreated(GoogleMapController controller) {
+    log("onMapCreated", name: "LocationPicker");
     _controller = controller;
   }
 

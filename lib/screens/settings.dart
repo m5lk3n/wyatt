@@ -80,14 +80,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     settings.setKey(keyValue);
 
     if (await KeyValidator.validateKey(keyValue)) {
-      scaffold.showSnackBar(SnackBar(content: Text('The saved key is valid.')));
+      scaffold.showSnackBar(SnackBar(content: Text('The key is valid.')));
       ref.read(isKeyValidStateProvider.notifier).state = true;
       return true;
     } else {
       ref.read(isKeyValidStateProvider.notifier).state = false;
       scaffold.showSnackBar(SnackBar(
           backgroundColor: themeData.colorScheme.error,
-          content: Text('The saved key is invalid, the app won\'t work!')));
+          content: Text('The key is invalid, the app won\'t work!')));
     }
 
     return false;

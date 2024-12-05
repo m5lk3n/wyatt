@@ -10,6 +10,10 @@
 
 - https://codewithandrea.com/articles/flutter-state-management-riverpod/
 - [Onboarding with routes and riverpod](https://flutterexplained.com/p/flutter-onboarding-with-riverpod)
+- https://stackoverflow.com/questions/67194040/flutter-how-to-use-riverpod-with-sharedpreference-and-liststring-variable-in
+- https://stackoverflow.com/questions/68380827/how-best-to-use-riverpod-to-manage-items-in-a-list
+- https://medium.com/@purboyndra/flutter-tutorial-add-to-favorite-and-remove-from-favorite-with-riverpod-1cd419bc0b2a
+- https://stackoverflow.com/questions/65378735/difference-between-list-add-and-manually-adding-item-to-a-riverpod-statenotifier/65380308#65380308
 
 ## (Input) Widgets
 
@@ -32,6 +36,12 @@
 - [ ] https://github.com/mohesu/map_location_picker
 
 ## Backlog / Research
+
+- https://medium.com/@ahumza152/storing-a-list-object-of-objects-in-flutter-using-shared-preferences-713ca091afc5
+- https://www.bezkoder.com/dart-flutter-parse-json-string-array-to-object-list/
+- https://www.bezkoder.com/dart-flutter-convert-object-to-json-string/
+
+- https://medium.com/@thekavak/flutter-valuenotifier-with-examples-66b3933d7036
 
 - https://medium.com/swlh/the-simplest-way-to-pass-and-fetch-data-between-stateful-and-stateless-widgets-pages-full-2021-c5dbce8db1db
 - https://mobikul.com/flutteradd-google-maps-api-key-dynamically/

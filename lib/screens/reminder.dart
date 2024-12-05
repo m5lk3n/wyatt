@@ -239,7 +239,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
 
     if (_locationData == null) {
       scaffold.showSnackBar(SnackBar(
-          content: Text('Wait for the location to load and try again')));
+          content: Text('Wait for the location to load, then try again.')));
       return false;
     }
 
@@ -259,6 +259,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
           ref.read(remindersNotifierProvider.notifier).update(reminder);
         }
         scaffold.showSnackBar(SnackBar(content: Text('Reminder $action')));
+
         return true;
       }
     }

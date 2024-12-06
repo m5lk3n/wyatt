@@ -25,6 +25,7 @@ install:
 	flutter pub add google_map_dynamic_key
 	flutter pub add flutter_datetime_picker_plus
 	flutter pub add intl
+	flutter pub add haversine_distance
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean

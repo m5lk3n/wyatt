@@ -15,13 +15,20 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
 
   RemindersNotifier(super.state) {
     _storage.readRemindersKeys().then((ids) {
+      List<Reminder> reminders = [];
+
       for (var id in ids) {
         _storage.readString(key: id).then((value) {
           if (value != null) {
             Reminder reminder = Reminder.fromJson(jsonDecode(value));
-            state = [...state, reminder];
+            reminders = [
+              ...reminders,
+              reminder
+            ]; // updating state here would maybe fire notifications, don't know
           }
         });
+
+        state = reminders;
       }
     });
   }

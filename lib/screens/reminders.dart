@@ -96,6 +96,7 @@ class RemindersScreen extends ConsumerWidget {
         child: const Icon(Icons.lightbulb),
       );
     } else {
+      _sortByMessage(reminders);
       content = ListView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -192,5 +193,11 @@ class RemindersScreen extends ConsumerWidget {
       drawer: WyattDrawer(),
       floatingActionButton: floatingActionButton,
     );
+  }
+
+  void _sortByMessage(List<Reminder> reminders) {
+    reminders.sort((r1, r2) => r1.notificationMessage
+        .toLowerCase()
+        .compareTo(r2.notificationMessage.toLowerCase()));
   }
 }

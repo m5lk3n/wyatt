@@ -95,7 +95,7 @@ class SplashScreen extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircularProgressIndicator(),
+                    CircularProgressIndicator.adaptive(),
                     Text('Saddling up...',
                         style: Theme.of(context)
                             .textTheme

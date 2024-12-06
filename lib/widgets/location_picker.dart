@@ -15,8 +15,7 @@ class LocationPicker extends ConsumerStatefulWidget {
     required this.locationData,
   });
 
-  final LocationData
-      locationData; // input location data // TODO/WIP: use this to set the initial location
+  final LocationData locationData; // initial location data
 
   @override
   ConsumerState<LocationPicker> createState() => _LocationPickerState();
@@ -26,6 +25,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   final _googleMapDynamicKeyPlugin = GoogleMapDynamicKey();
   late GoogleMapController _controller; // TODO: use takeSnapshot()
   late String _key;
+  bool _isLoading = false;
 
   void _onMapCreated(GoogleMapController controller) {
     log("onMapCreated", name: "LocationPicker");
@@ -60,14 +60,25 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   Future<void> initGoogleMapKey() async {
     final settings = ref.read(settingsNotifierProvider.notifier);
 
+    /* don't omit setState() and _isLoading here, otherwise the GoogleMap widget
+       will not be updated with the key, and tries to read the (dummy) key from 
+       the manifest instead (results in a blank Google Maps screen and an error
+      message in the console): */
+    setState(() {
+      _isLoading = true;
+    });
+
     _key = await settings.getKey();
     log('key = $_key',
         name:
             'LocationPicker'); // if key is empty, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
-    // TODO: complain if key is invalid
+    // TODO: complain if key is invalid (set global error via notifier and route to setup page)
 
     await _googleMapDynamicKeyPlugin.setGoogleApiKey(_key).then((value) {
       log("GoogleMap key set dynamically", name: "LocationPicker");
+      setState(() {
+        _isLoading = false;
+      });
     });
   }
 
@@ -79,28 +90,28 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
 
     return Scaffold(
       appBar: WyattAppBar(context, Screen.pickLocation),
-      body: GoogleMap(
-        mapToolbarEnabled: false,
-        myLocationEnabled: true,
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          //target: LatLng(userLocation.latitude!, userLocation.longitude!),
-          target: latLngLocation,
-          zoom: 12,
-        ),
-        markers: {
-          Marker(
-            position: latLngLocation,
-            markerId: MarkerId(
-                'TODO'), // TODO/FIXME: use a unique ID? or a random one? or the reminder text?
-            infoWindow: InfoWindow(
-              title: "Reminder location",
-              snippet: "Buy coffee", // TODO/FIXME: use the reminder text
-            ), // InfoWindo
-          )
-        },
-        onTap: _pickLocation,
-      ),
+      body: _isLoading
+          ? Center(child: const CircularProgressIndicator.adaptive())
+          : GoogleMap(
+              mapToolbarEnabled: false,
+              myLocationEnabled: true,
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: latLngLocation,
+                zoom: 12,
+              ),
+              markers: {
+                Marker(
+                  position: latLngLocation,
+                  markerId: MarkerId(''), // there's only one, not ID needed
+                  infoWindow: InfoWindow(
+                    title: 'Reminder location',
+                    snippet: 'Pick this as your reminder location',
+                  ), // InfoWindo
+                )
+              },
+              onTap: _pickLocation,
+            ),
     );
   }
 }

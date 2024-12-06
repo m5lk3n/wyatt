@@ -58,11 +58,11 @@ A location- and time-based To-do app for iOS and Android.
       - [About](https://api.flutter.dev/flutter/material/Icons/info-constant.html)
 
 - [ ] Reminders
-  - [ ] Load reminders into an overview list (not a grid) ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
+  - [x] Load reminders into an overview list (not a grid) ([exemplified fetch](https://docs.flutter.dev/cookbook/networking/fetch-data))
     - [x] Seed option
-  - [ ] Sort reminders overview by (due) date or by city name
-  - [ ] Search reminders (?)
-  - [ ] Filter reminders (?)
+  - (?) Sort reminders overview by (due) date or by city name
+  - [ ] Search reminders
+  - (?) Filter reminders
 
   - [x] Manage reminders ~~(through dots menu)~~
     - [x] [Add a reminder](https://api.flutter.dev/flutter/material/Icons/add-constant.html)
@@ -84,7 +84,10 @@ A location- and time-based To-do app for iOS and Android.
 
 - [x] Indicate invalid key in appbar
 
-- [ ] Download my data (?)
+- [x] Incorporate [loctose](https://github.com/m5lk3n/loctose/)
+- [ ] Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)
+
+- (?) Download my data
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
 
@@ -93,8 +96,9 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - [ ] Implement notification
-
-      https://pub.dev/packages/location:
+  - (?) https://pub.dev/packages/awesome_notifications
+  - (?) https://pub.dev/packages/flutter_local_notifications
+  - [ ] https://pub.dev/packages/location:
 
       *You can also get continuous callbacks when your position is changing:*
 
@@ -154,16 +158,14 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- GoogleMapKey setting issue
-  - https://developers.google.com/maps/documentation/android-sdk/start
-- Location picker marker
-- Initial reminders list order
 - Intermediate testing/improving
+- Locato
 
 ## Open
 
 - How to reset non-FormFields?
 - AlertDialog title too big?
+- Use riverpod with families or providerscope?
 - Are all StatefulWidgets needed?
   - "Stateful widgets are mutable and they update their data every time a `setState((){data;})` is called."
   - "Stateless widgets on the other hand are immutable, i.e they contain data that shouldn't change during runtime."

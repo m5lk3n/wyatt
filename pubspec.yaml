@@ -52,9 +52,10 @@ dependencies:
   google_map_dynamic_key: ^1.0.1
   flutter_datetime_picker_plus: ^2.2.0
   intl: ^0.20.1
+  haversine_distance: ^1.2.1
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
   flutter_test:
     sdk: flutter
 

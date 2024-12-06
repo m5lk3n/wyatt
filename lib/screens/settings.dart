@@ -1,6 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/providers/key_provider.dart';
@@ -63,18 +61,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   Future<bool> _saveKey() async {
-    final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
-    final ThemeData themeData = Theme.of(context);
-    scaffold.clearSnackBars();
-
-    final keyValue = _keyController.text.trim();
-    if (keyValue.isEmpty) {
-      scaffold.showSnackBar(SnackBar(
-        backgroundColor: themeData.colorScheme.onErrorContainer,
-        content: Text('Please enter a key'),
-      ));
+    if (!_formKey.currentState!.validate()) {
       return false;
     }
+
+    final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
+    final ThemeData themeData = Theme.of(context);
+
+    final keyValue = _keyController.text
+        .trim(); // we know here it's not empty as it was validated before
 
     final settings = ref.read(settingsNotifierProvider.notifier);
     settings.setKey(keyValue);
@@ -122,6 +117,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       _distanceController,
       _isProcessing,
     );
+    Widget notificationsIntervalField = SizedBox.shrink(); // TODO: implement
 
     return Scaffold(
       resizeToAvoidBottomInset:
@@ -249,7 +245,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   Common.space,
                   0,
                 ),
-                child: TextField(
+                child: TextFormField(
                   obscureText: _isObscured,
                   enableSuggestions: false,
                   autocorrect: false,
@@ -272,6 +268,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
+                  validator: (value) {
+                    return (value == null || value.trim().isEmpty)
+                        ? 'Please enter a key'
+                        : null; // success
+                  },
                 ),
               ),
               _isSettingUp
@@ -304,6 +305,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [distanceField]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [notificationsIntervalField]),
                         ],
                       ),
                     ),
@@ -368,11 +372,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Future<bool> _saveSettings() async {
+  Future<bool> _save() async {
     FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
 
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
-    // done in _saveKey: scaffold.clearSnackBars();
+    scaffold.clearSnackBars();
 
     setState(() {
       _isProcessing = true;
@@ -380,26 +384,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     bool result =
         await _saveKey(); // we need to wait for this to finish, otherwise the ref in `ref.read(isKeyValidStateProvider.notifier).state = ...` will be called after the widget is disposed on an invalidated ref, causing an error
-    String savedMsg = 'Key saved.';
-    if (!_isSettingUp) {
-      _saveDefaultNotificationDistance();
-      savedMsg = 'Settings saved.';
+    if (result) {
+      String savedMsg = 'Key saved.';
+      if (!_isSettingUp) {
+        _saveDefaultNotificationDistance();
+        savedMsg = 'Settings saved.';
+      }
+      scaffold.showSnackBar(SnackBar(content: Text(savedMsg)));
     }
-
-    scaffold.showSnackBar(SnackBar(content: Text(savedMsg)));
 
     setState(() {
       _isProcessing = false;
     });
 
     return result;
-  }
-
-  void _save() async {
-    if (await _saveSettings()) {
-      // ignore: use_build_context_synchronously
-      context.go(AppRoutes.reminders);
-    }
   }
 
   void _confirmReset(BuildContext context) {

@@ -112,7 +112,8 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
                   Common.space,
                   0,
                 ),
-                child: TextField(
+                child: TextFormField(
+                  // although this has no validation, it is still handy to use a form field here to enable reset
                   enableSuggestions: true,
                   autocorrect: true,
                   // causes keyboard to slide up: autofocus: true,

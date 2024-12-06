@@ -37,6 +37,8 @@
 
 ## Backlog / Research
 
+- https://stackoverflow.com/questions/30559602/google-map-still-blank-on-real-android-device-on-release-apk/56307654#56307654
+
 - https://medium.com/@ahumza152/storing-a-list-object-of-objects-in-flutter-using-shared-preferences-713ca091afc5
 - https://www.bezkoder.com/dart-flutter-parse-json-string-array-to-object-list/
 - https://www.bezkoder.com/dart-flutter-convert-object-to-json-string/

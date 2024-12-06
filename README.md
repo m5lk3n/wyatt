@@ -163,6 +163,10 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Open
 
+- ```
+  OnBackInvokedCallback is not enabled for the application.
+  Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+  ```
 - How to reset non-FormFields?
 - AlertDialog title too big?
 - Use riverpod with families or providerscope?

@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/providers/key_provider.dart';
@@ -357,8 +359,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           backgroundColor:
                               Theme.of(context).colorScheme.inversePrimary,
                         ),
-                        onPressed:
-                            _isProcessing ? null : () => _confirmReset(context),
+                        onPressed: _isProcessing ? null : () => _confirmReset(),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text('Reset to factory settings'),
@@ -377,6 +378,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
     scaffold.clearSnackBars();
+    BuildContext ctx = context;
 
     setState(() {
       _isProcessing = true;
@@ -391,6 +393,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         savedMsg = 'Settings saved.';
       }
       scaffold.showSnackBar(SnackBar(content: Text(savedMsg)));
+
+      if (context.mounted) {
+        ctx.go(AppRoutes.reminders);
+      }
     }
 
     setState(() {
@@ -400,7 +406,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return result;
   }
 
-  void _confirmReset(BuildContext context) {
+  void _confirmReset() {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {

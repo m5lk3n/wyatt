@@ -4,6 +4,7 @@ import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/reminders_provider.dart';
+import 'package:wyatt/screens/screens_helper.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/address_loader.dart';
 import 'package:wyatt/widgets/common.dart';
@@ -45,9 +46,12 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
     _startDateTime = widget.reminder?.notificationStartDateTime;
     _endDateTime = widget.reminder?.notificationEndDateTime;
 
-    _distanceController.text = widget.reminder != null
-        ? widget.reminder!.notificationDistance.toString()
-        : Default.notificationDistance.toString();
+    if (widget.reminder != null) {
+      _distanceController.text =
+          widget.reminder!.notificationDistance.toString();
+    } else {
+      readDefaultNotificationDistance(ref, _distanceController);
+    }
   }
 
   @override
@@ -259,7 +263,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
           reminder.id = widget.reminder!.id;
           ref.read(remindersNotifierProvider.notifier).update(reminder);
         }
-        scaffold.showSnackBar(SnackBar(content: Text('Reminder $action')));
+        scaffold.showSnackBar(SnackBar(content: Text('Reminder $action.')));
 
         return true;
       }

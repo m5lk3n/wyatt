@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
+import 'package:wyatt/screens/screens_helper.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/common.dart';
 import 'package:wyatt/widgets/link_button.dart';
@@ -42,7 +43,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     _readKey();
     if (!_isSettingUp) {
-      _readDefaultNotificationDistance();
+      readDefaultNotificationDistance(ref, _distanceController);
     }
   }
 
@@ -90,14 +91,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return false;
   }
 
-  Future<void> _readDefaultNotificationDistance() async {
-    final settings = ref.read(settingsNotifierProvider.notifier);
-
-    int distance = await settings.getDefaultNotificationDistance();
-
-    _distanceController.text = distance.toString();
-  }
-
   Future<void> _saveDefaultNotificationDistance() async {
     if (_distanceController.text.trim().isEmpty) {
       return;
@@ -108,7 +101,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         .setDefaultNotificationDistance(int.parse(_distanceController.text));
 
     setState(() {
-      _readDefaultNotificationDistance(); // show parsed value, e.g. 0500 -> 500
+      readDefaultNotificationDistance(
+          ref, _distanceController); // show parsed value, e.g. 0500 -> 500
     });
   }
 
@@ -330,7 +324,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         backgroundColor:
                             Theme.of(context).colorScheme.inversePrimary,
                       ),
-                      onPressed: _isProcessing ? null : () => _save(),
+                      onPressed: _isProcessing
+                          ? null
+                          : () async {
+                              if (await _save()) {
+                                if (context.mounted) {
+                                  context.go(AppRoutes.reminders);
+                                }
+                              }
+                            },
                       autofocus: true,
                       child: Text('Save'),
                     ),
@@ -378,7 +380,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     final ScaffoldMessengerState scaffold = ScaffoldMessenger.of(context);
     scaffold.clearSnackBars();
-    BuildContext ctx = context;
 
     setState(() {
       _isProcessing = true;
@@ -393,10 +394,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         savedMsg = 'Settings saved.';
       }
       scaffold.showSnackBar(SnackBar(content: Text(savedMsg)));
-
-      if (context.mounted) {
-        ctx.go(AppRoutes.reminders);
-      }
     }
 
     setState(() {

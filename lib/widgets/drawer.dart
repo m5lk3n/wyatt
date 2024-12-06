@@ -44,7 +44,8 @@ class WyattDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => WelcomeScreen()),
+                          builder: (BuildContext context) =>
+                              WelcomeScreen()), // TODO: implement home screen, maybe a mini overview dashboard with stats
                     );
                   },
                 ),

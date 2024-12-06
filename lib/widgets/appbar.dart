@@ -64,7 +64,6 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 ]
               : null
           : <Widget>[
-              // TODO: lightbulb icon to seed
               IconButton(
                 icon: Icon(
                   Icons.error,

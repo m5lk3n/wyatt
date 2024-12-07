@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wyatt/common.dart';
 
 class PersistentLocalStorage {
   Future<void> writeString({required String key, required String value}) async {
@@ -34,11 +35,11 @@ class PersistentLocalStorage {
 
   Future<Iterable<String>> readSettingsKeys() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getKeys().where((key) => key.startsWith('cfg'));
+    return prefs.getKeys().where((key) => key.startsWith(SettingsKeys.prefix));
   }
 
   Future<Iterable<String>> readRemindersKeys() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getKeys().where((key) => !key.startsWith('cfg'));
+    return prefs.getKeys().where((key) => !key.startsWith(SettingsKeys.prefix));
   }
 }

@@ -4,9 +4,6 @@ import 'package:wyatt/models/settings.dart';
 import 'package:wyatt/services/secure_storage.dart';
 import 'package:wyatt/services/storage.dart';
 
-const cfgDefaultNotificationDistance = 'cfgDefaultNotificationDistance';
-const defaultDefaultNotificationDistance = Default.notificationDistance;
-
 final settingsNotifierProvider =
     StateNotifierProvider<SettingsNotifier, Settings>(
         (ref) => SettingsNotifier());
@@ -17,8 +14,10 @@ class SettingsNotifier extends StateNotifier<Settings> {
 
   SettingsNotifier() : super(Settings());
 
+  // --- secure storage ---
+
   Future<String> getKey() async {
-    final keyValue = await _secureStorage.read(key: Common.keyKey);
+    final keyValue = await _secureStorage.read(key: SecureSettingsKeys.key);
     state.key = keyValue?.trim() ?? '';
 
     return state.key;
@@ -26,29 +25,32 @@ class SettingsNotifier extends StateNotifier<Settings> {
 
   Future<void> setKey(String keyValue) async {
     await _secureStorage.write(
-      key: Common.keyKey,
+      key: SecureSettingsKeys.key,
       value: keyValue.trim(),
     );
   }
 
+  // --- storage ---
+
   Future<int> getDefaultNotificationDistance() async {
     state.defaultNotificationDistance =
-        await _storage.readInt(key: 'cfgDefaultNotificationDistance') ??
-            defaultDefaultNotificationDistance;
+        await _storage.readInt(key: SettingsKeys.distance) ??
+            Default.notificationDistance;
 
     return state.defaultNotificationDistance;
   }
 
   Future<void> setDefaultNotificationDistance(int distance) async {
-    await _storage.writeInt(
-        key: 'cfgDefaultNotificationDistance', value: distance);
+    await _storage.writeInt(key: SettingsKeys.distance, value: distance);
     state.defaultNotificationDistance = distance;
   }
+
+  // --- storage & secure storage ---
 
   Future<void> clearSettings() async {
     await _secureStorage.deleteAll();
     await _storage.deleteAll();
     state.key = '';
-    state.defaultNotificationDistance = defaultDefaultNotificationDistance;
+    state.defaultNotificationDistance = Default.notificationDistance;
   }
 }

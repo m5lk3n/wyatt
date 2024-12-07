@@ -16,7 +16,7 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
   @override
   Startup build() {
     _loadStartupStatus();
-    return Startup(); // TODO: should this be a member?
+    return Startup();
   }
 
   Future<void> _loadStartupStatus() async {
@@ -27,16 +27,21 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
     Startup startup = Startup(); // TODO: should this be a member?
     state = startup;
 
-    final keyValue = await _secureStorage.read(key: Common.keyKey);
-    log('key = $keyValue', name: 'StartupNotifier');
-
-    if (keyValue == null || keyValue.isEmpty) {
-      state = startup.copyWith(isLoading: false, hasNoKey: true);
+    final key = await _secureStorage.read(key: SecureSettingsKeys.key);
+    log('key = $key', name: 'StartupNotifier');
+    if (key == null || key.isEmpty) {
+      state = startup.copyWith(
+        isLoading: false,
+        hasNoKey: true,
+      );
       return;
     }
 
-    KeyValidator.validateKey(keyValue).then((isValid) {
-      state = startup.copyWith(isLoading: false, hasInvalidKey: !isValid);
+    KeyValidator.validateKey(key).then((isValid) {
+      state = startup.copyWith(
+        isLoading: false,
+        hasInvalidKey: !isValid,
+      );
     });
 
     log('state = $state', name: 'StartupNotifier');

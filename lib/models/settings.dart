@@ -1,4 +1,4 @@
 class Settings {
-  late String key; // TODO
+  late String key;
   late int defaultNotificationDistance;
 }

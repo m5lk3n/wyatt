@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
@@ -11,41 +12,15 @@ import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/startup_provider.dart';
 
 class SplashScreen extends ConsumerWidget {
-  const SplashScreen({super.key});
-
-  /* TODO: add checks
-
-  check internet connectivity
-
-  check https://pub.dev/packages/location
-
-  bool _serviceEnabled;
-  PermissionStatus _permissionGranted;
-  LocationData _locationData;
-
-  _serviceEnabled = await location.serviceEnabled();
-  if (!_serviceEnabled) {
-    _serviceEnabled = await location.requestService();
-    if (!_serviceEnabled) {
-      return;
-    }
+  SplashScreen({super.key}) {
+    requestPermissions();
   }
 
-  _permissionGranted = await location.hasPermission();
-  if (_permissionGranted == PermissionStatus.denied) {
-    _permissionGranted = await location.requestPermission();
-    if (_permissionGranted != PermissionStatus.granted) {
-      return;
-    }
+  Future<void> requestPermissions() async {
+    await Permission.location.request();
+    await Permission.locationAlways.request();
+    await Permission.notification.request();
   }
-
-  import 'package:permission_handler/permission_handler.dart';
-
-  void setPermissions() async{
-   Map<PermissionGroup, PermissionStatus> permissions = 
-   await PermissionHandler().requestPermissions([PermissionGroup.location]);
-  }
-  */
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

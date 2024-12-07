@@ -90,15 +90,16 @@ A location- and time-based To-do app for iOS and Android.
 - (?) Download my data
 
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
+  - https://pub.dev/packages/permission_handler
 
 - [ ] Check Internet connectivity
 
-- [ ] Implement Haversine (`flutter pub add haversine_distance`)
+- (?) Implement Haversine (`flutter pub add haversine_distance`)
 
-- [ ] Implement notification
+- (?) Implement notification
   - (?) https://pub.dev/packages/awesome_notifications
   - (?) https://pub.dev/packages/flutter_local_notifications
-  - [ ] https://pub.dev/packages/location:
+  - (?) https://pub.dev/packages/location:
 
       *You can also get continuous callbacks when your position is changing:*
 
@@ -140,7 +141,9 @@ A location- and time-based To-do app for iOS and Android.
   - [ ] See "Permissions" under https://github.com/Michael-M-aher/location_picker_flutter_map/tree/main?tab=readme-ov-file#setup
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
 - [ ] Document permissions
+  - [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
   - e.g., [location](https://pub.dev/packages/location) package: "Remember that the user has to accept the location permission to always allow to use the background location."
+- Clarify minimum requirements (Android (API) version, etc.), see e.g., Note under https://docs.flutter.dev/deployment/android#enable-multidex-support
 - [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
   - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
@@ -157,14 +160,31 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Clean up assets
 
 ## Doing
-
+ 
 - Add service
+  - https://pub.dev/packages/geofence_foreground_service
+    - [ ] https://pub.dev/packages/geofence_foreground_service#-ios-setup
+  - https://github.com/Basel-525k/geofence_foreground_service
+  - https://stackoverflow.com/questions/35014702/how-to-implement-un-dwell-in-android-geofences:
+    *In Google Geofences, Enter event triggers every time you enter a geofence, Exit event triggers every time you cross the boundry of the Geofence. Also Dwell event triggers when you stay inside a geofence for a specified interval of time.
+
+    In your case, if you keep jumping In and Out of a geofence in less than one minute, Dwell will never happen.
+
+    If you enter a geofence, Enter event triggers, and then you stay inside for one minute or more, Dwell will happen, and after the Dwell happens, if you notice any Exit event, you can use that Exit event as a real Exit.*
+
+  - https://medium.com/flutter/executing-dart-in-the-background-with-flutter-plugins-and-geofencing-2b3e40a1a124:
+    `dwell` doesn't work on iOS?
+
+  Backlog service:
   - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps
   - https://pub.dev/packages/flutter_background_service
     (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
   - https://medium.com/@hasibulhasan3590/elevate-your-flutter-app-with-background-services-using-flutter-background-service-131f4ba7ec8a
-  - https://medium.com/flutter/executing-dart-in-the-background-with-flutter-plugins-and-geofencing-2b3e40a1a124
-- Incorporate locato
+  
+- Responsiveness geofence?
+- Time between notifications?
+
+- Incorporate locato?
 
 ## Open
 

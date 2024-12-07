@@ -6,7 +6,7 @@ abstract class Common {
   static late String packageName;
 
   static String devUrl = 'https://lttl.dev';
-  static String keyKey = "$packageName.key";
+
   static const String keyUrl = String.fromEnvironment(
     'KEY_URL', // see launch configuration
     defaultValue: Default.urlKey,
@@ -47,4 +47,14 @@ abstract class Default {
   static const String urlKey = 'https://wyatt.lttl.dev/key';
   static const String urlWhy = 'https://wyatt.lttl.dev/why';
   static const String urlWhat = 'https://wyatt.lttl.dev/what';
+}
+
+abstract class SecureSettingsKeys {
+  static String prefix = Common.packageName;
+  static String key = "$prefix.key";
+}
+
+abstract class SettingsKeys {
+  static const String prefix = 'cfg';
+  static const String distance = '${prefix}DefaultNotificationDistance';
 }

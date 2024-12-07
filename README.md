@@ -158,15 +158,16 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- Intermediate testing/improving
-- Locato
+- Add service
+  - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps
+  - https://pub.dev/packages/flutter_background_service
+    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
+  - https://medium.com/@hasibulhasan3590/elevate-your-flutter-app-with-background-services-using-flutter-background-service-131f4ba7ec8a
+  - https://medium.com/flutter/executing-dart-in-the-background-with-flutter-plugins-and-geofencing-2b3e40a1a124
+- Incorporate locato
 
 ## Open
 
-- ```
-  OnBackInvokedCallback is not enabled for the application.
-  Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
-  ```
 - How to reset non-FormFields?
 - AlertDialog title too big?
 - Use riverpod with families or providerscope?

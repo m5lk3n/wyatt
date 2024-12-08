@@ -46,6 +46,7 @@ abstract class Screen {
   static const String setup = 'Saddle Up';
   static const String settings = 'Settings';
   static const String about = 'About';
+  static const String addReminder = 'Add Reminder';
   static const String editReminder = 'Edit Reminder';
   static const String pickLocation = 'Pick a Location';
 }

@@ -31,6 +31,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - [x] `flutter create --platforms android,ios --org dev.lttl wyatt`
 - [x] `rm wyatt.iml`
+- [x] `rm android/wyatt_android.iml`
 - [x] `rm -rf .idea`
 - [x] clean up `.gitignore`
 
@@ -82,19 +83,18 @@ A location- and time-based To-do app for iOS and Android.
   - [x] Default notification distance (500m)
   - [x] Reset to factory settings
 
-- [x] Indicate invalid key in appbar
+- [x] Check and indicate invalid key in appbar
+- [x] Check and indicate missing permissions in appbar
+- [ ] Check and indicate broken (Internet) connectivity in add/edit reminder
 
 - [x] Incorporate [loctose](https://github.com/m5lk3n/loctose/)
 - [ ] Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)
-
-- (?) Download my data
-
 - [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
   - https://pub.dev/packages/permission_handler
 
-- [ ] Check Internet connectivity
+- (?) Download my data
 
-- (?) Implement Haversine (`flutter pub add haversine_distance`)
+- (?) ~~Implement Haversine (`flutter pub add haversine_distance`)~~
 
 - (?) Implement notification
   - (?) https://pub.dev/packages/awesome_notifications
@@ -141,6 +141,7 @@ A location- and time-based To-do app for iOS and Android.
   - [ ] See "Permissions" under https://github.com/Michael-M-aher/location_picker_flutter_map/tree/main?tab=readme-ov-file#setup
   - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
 - [ ] Document permissions
+  - updating permissions while the app is open requires an app action to refresh appbar to get rid of the error message reg. missing permissions
   - [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
   - e.g., [location](https://pub.dev/packages/location) package: "Remember that the user has to accept the location permission to always allow to use the background location."
 - Clarify minimum requirements (Android (API) version, etc.), see e.g., Note under https://docs.flutter.dev/deployment/android#enable-multidex-support

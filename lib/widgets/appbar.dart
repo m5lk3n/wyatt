@@ -134,7 +134,6 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                     ),
                   ],
                 );
-                ;
               });
         },
       )

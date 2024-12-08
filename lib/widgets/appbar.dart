@@ -11,6 +11,7 @@ import 'package:wyatt/screens/reminder.dart';
 import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/helper.dart';
+import 'package:wyatt/widgets/connectivity_helper.dart';
 
 class WyattAppBar extends ConsumerStatefulWidget
     implements PreferredSizeWidget {
@@ -30,6 +31,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
   bool isOnSettingsScreen = false;
   bool isOnRemindersScreen = false;
   bool isSettingUp = false;
+  bool isOnline = false;
 
   @override
   void initState() {
@@ -43,13 +45,19 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
     }
   }
 
+  _checkConnection(bool isOnline) {
+    isOnline = isOnline;
+  }
+
   @override
   PreferredSizeWidget build(BuildContext context) {
     final bool isKeyValid = ref.watch(isKeyValidStateProvider);
     final bool arePermissionsGranted =
         ref.watch(arePermissionsGrantedStateProvider);
+    ConnectivityHelper().checkConnection(_checkConnection);
 
     log('arePermissionsGranted = $arePermissionsGranted', name: 'WyattAppBar');
+    log('isOnline = $isOnline', name: 'WyattAppBar');
     log("context.widget = ${widget.context.widget}", name: "WyattAppBar");
 
     return AppBar(
@@ -63,7 +71,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
       ),
       backgroundColor: Colors.transparent,
       title: Text(widget.title),
-      actions: (arePermissionsGranted && isKeyValid) || isSettingUp
+      actions: (isOnline && arePermissionsGranted && isKeyValid) || isSettingUp
           ? isOnRemindersScreen
               ? <Widget>[
                   IconButton(
@@ -75,12 +83,62 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                   ),
                 ]
               : null
-          : !isKeyValid
-              ? _createKeyErrorAction(context)
-              : !arePermissionsGranted
-                  ? _createPermissionErrorAction(context)
-                  : null,
+          : !isOnline
+              ? _createConnectivityErrorAction(context)
+              : !isKeyValid
+                  ? _createKeyErrorAction(context)
+                  : !arePermissionsGranted
+                      ? _createPermissionErrorAction(context)
+                      : null,
     );
+  }
+
+  List<Widget> _createConnectivityErrorAction(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(
+          Icons.error,
+          color: Theme.of(context).colorScheme.error,
+        ),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Theme.of(context).colorScheme.onError,
+                  title: Text("Error",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.error)),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "The app won't work properly without an Internet connection.",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                      SizedBox(height: Common.space / 2),
+                      Text(
+                        "Please connect to the Internet, try again (later).",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+                ;
+              });
+        },
+      )
+    ];
   }
 
   List<Widget> _createPermissionErrorAction(BuildContext context) {
@@ -128,7 +186,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                                       Theme.of(context).colorScheme.primary,
                                   color: Theme.of(context).colorScheme.primary),
                         ),
-                        onTap: () => browseToUrl(Url.permissions)),
+                        onTap: () => browseTo(Url.permissions)),
                   ],
                 ),
                 actions: <Widget>[

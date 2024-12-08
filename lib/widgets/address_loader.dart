@@ -70,7 +70,9 @@ class _AddressLoaderState extends State<AddressLoader> {
     } on PlatformException catch (err) {
       setState(() {
         _error = err.code;
-        _addressController.text = 'Error: $_error';
+        _addressController.text =
+            'Error loading location. You may be offline. Please try again later.';
+        log('error loading location: $_error', name: 'AddressLoader');
       });
     }
   }

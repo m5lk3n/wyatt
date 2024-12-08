@@ -27,7 +27,7 @@ class LinkButton extends StatelessWidget {
               decoration: TextDecoration.underline,
               decorationColor: Theme.of(context).colorScheme.primary)),
       onPressed: () {
-        browseToUrl(url);
+        browseTo(url);
       },
       child: Text(urlLabel),
     );

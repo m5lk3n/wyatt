@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> browseToUrl(String url) async {
+Future<void> browseTo(String url) async {
   final Uri uri = Uri.parse(url);
 
   if (!await launchUrl(uri)) {
-    throw Exception('Could not launch $uri'); // TODO: intended/handle this?
+    log('Could not launch $uri', name: 'browseTo');
   }
 }

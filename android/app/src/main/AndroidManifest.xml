@@ -57,6 +57,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--required by e.g. internet_connection_checker_plus -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--required by geofence_foreground_service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />

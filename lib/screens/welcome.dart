@@ -117,7 +117,7 @@ class WelcomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: Common.bigSpace),
                         child: GestureDetector(
                           onTap: () {
-                            browseToUrl(Url.dev);
+                            browseTo(Url.dev);
                           },
                           child: Image.asset('assets/images/logo.png',
                               height: Common.bigSpace),

@@ -6,20 +6,32 @@ import 'package:wyatt/common.dart';
 import 'package:wyatt/data/seed.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/reminders_provider.dart';
+import 'package:wyatt/screens/screens_helper.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/reminder.dart';
 
-// ignore: must_be_immutable
-class RemindersScreen extends ConsumerWidget {
-  // required for undo:
-  Reminder? _deletedItem;
-  int? _deletedIndex;
-
-  RemindersScreen({super.key});
+class RemindersScreen extends ConsumerStatefulWidget {
+  const RemindersScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<RemindersScreen> createState() => _RemindersScreenState();
+}
+
+class _RemindersScreenState extends ConsumerState<RemindersScreen> {
+  // required for undo:
+  Reminder? deletedItem;
+  int? deletedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+
+    PermissionsHelper(ref).checkPermissions();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     Widget content;
     Widget? floatingActionButton;
 
@@ -155,11 +167,9 @@ class RemindersScreen extends ConsumerWidget {
             },
             onDismissed: (DismissDirection direction) {
               ScaffoldMessenger.of(context).clearSnackBars();
-              _deletedItem = reminders.removeAt(index);
-              _deletedIndex = index;
-              ref
-                  .read(remindersNotifierProvider.notifier)
-                  .remove(_deletedItem!);
+              deletedItem = reminders.removeAt(index);
+              deletedIndex = index;
+              ref.read(remindersNotifierProvider.notifier).remove(deletedItem!);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                     content: Text('Reminder deleted'),
@@ -167,7 +177,7 @@ class RemindersScreen extends ConsumerWidget {
                       label: 'UNDO',
                       onPressed: () => ref
                           .read(remindersNotifierProvider.notifier)
-                          .insertAt(_deletedIndex!, _deletedItem!),
+                          .insertAt(deletedIndex!, deletedItem!),
                     )),
               );
             },

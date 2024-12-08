@@ -33,6 +33,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   late final bool _isSettingUp;
   bool _isProcessing = false;
   bool _isObscured = true;
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -41,6 +42,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     _isSettingUp = widget.inSetupMode;
 
+    PermissionsHelper(ref).checkPermissions();
     _readKey();
     if (!_isSettingUp) {
       readDefaultNotificationDistance(ref, _distanceController);
@@ -147,7 +149,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       baseline: TextBaseline.alphabetic,
                       child: LinkButton(
                         urlLabel: 'this page',
-                        url: Common.keyUrl,
+                        url: Url.key,
                       ),
                     ),
                     TextSpan(
@@ -176,7 +178,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               baseline: TextBaseline.alphabetic,
                               child: LinkButton(
                                 urlLabel: 'What',
-                                url: Common.keyWhatUrl,
+                                url: Url.keyWhat,
                               ),
                             ),
                             TextSpan(
@@ -194,7 +196,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               baseline: TextBaseline.alphabetic,
                               child: LinkButton(
                                 urlLabel: 'why',
-                                url: Common.keyWhyUrl,
+                                url: Url.keyWhy,
                               ),
                             ),
                             TextSpan(

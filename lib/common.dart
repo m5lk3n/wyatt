@@ -5,21 +5,6 @@ abstract class Common {
   static late String appVersion;
   static late String packageName;
 
-  static String devUrl = 'https://lttl.dev';
-
-  static const String keyUrl = String.fromEnvironment(
-    'KEY_URL', // see launch configuration
-    defaultValue: Default.urlKey,
-  );
-  static const String keyWhatUrl = String.fromEnvironment(
-    'KEY_WHAT_URL', // see launch configuration
-    defaultValue: Default.urlWhat,
-  );
-  static const String keyWhyUrl = String.fromEnvironment(
-    'KEY_WHY_URL', // see launch configuration
-    defaultValue: Default.urlWhy,
-  );
-
   static const bigSpace = 50.0;
   static const space = 20.0;
   static const padding = EdgeInsets.all(space);
@@ -30,6 +15,29 @@ abstract class Common {
   // Platform.isIOS doesn't allow overriding in tests
   static bool isIOS(context) =>
       Theme.of(context).platform == TargetPlatform.iOS;
+  static bool isAndroid(context) =>
+      Theme.of(context).platform == TargetPlatform.android;
+}
+
+abstract class Url {
+  static String dev = 'https://lttl.dev';
+
+  static const String key = String.fromEnvironment(
+    'KEY_URL', // see launch configuration
+    defaultValue: Default.urlKey,
+  );
+  static const String keyWhat = String.fromEnvironment(
+    'KEY_WHAT_URL', // see launch configuration
+    defaultValue: Default.urlWhat,
+  );
+  static const String keyWhy = String.fromEnvironment(
+    'KEY_WHY_URL', // see launch configuration
+    defaultValue: Default.urlWhy,
+  );
+  static const String permissions = String.fromEnvironment(
+    'PERMISSIONS_URL', // see launch configuration
+    defaultValue: Default.urlPermissions,
+  );
 }
 
 abstract class Screen {
@@ -47,6 +55,7 @@ abstract class Default {
   static const String urlKey = 'https://wyatt.lttl.dev/key';
   static const String urlWhy = 'https://wyatt.lttl.dev/why';
   static const String urlWhat = 'https://wyatt.lttl.dev/what';
+  static const String urlPermissions = 'https://wyatt.lttl.dev/permissions';
 }
 
 abstract class SecureSettingsKeys {

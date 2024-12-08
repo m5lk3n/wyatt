@@ -81,7 +81,7 @@ android-debug: needs-clean-build
 .PHONY: ios-debug
 ios-debug: needs-clean-build
 	cd ios && pod install
-	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key --dart-define=KEY_WHAT_URL=https://wyatt.lttl.dev/what --dart-define=KEY_WHY_URL=https://wyatt.lttl.dev/why
+	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key --dart-define=KEY_WHAT_URL=https://wyatt.lttl.dev/what --dart-define=KEY_WHY_URL=https://wyatt.lttl.dev/why --dart-define=KEY_PERMISSIONS_URL=https://wyatt.lttl.dev/permissions
 
 # ios-debug: regenerate dependencies for iOS and build the application in debug mode
 #.PHONY: ios-release

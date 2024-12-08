@@ -4,23 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/startup_provider.dart';
+import 'package:wyatt/helper.dart';
 
 class SplashScreen extends ConsumerWidget {
-  SplashScreen({super.key}) {
-    requestPermissions();
-  }
-
-  Future<void> requestPermissions() async {
-    await Permission.location.request();
-    await Permission.locationAlways.request();
-    await Permission.notification.request();
-  }
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -87,7 +78,7 @@ class SplashScreen extends ConsumerWidget {
                   padding: const EdgeInsets.only(bottom: Common.bigSpace),
                   child: GestureDetector(
                     onTap: () {
-                      launchUrl(Uri.parse(Common.devUrl));
+                      browseToUrl(Url.dev);
                     },
                     child: Image.asset('assets/images/logo.png',
                         height: Common.bigSpace),

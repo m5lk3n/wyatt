@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt/app_routes.dart';
+import 'package:wyatt/common.dart';
 import 'package:wyatt/providers/key_provider.dart';
+import 'package:wyatt/providers/permissions_provider.dart';
 import 'package:wyatt/screens/reminder.dart';
 import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
+import 'package:wyatt/helper.dart';
 
 // ignore: must_be_immutable
 class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
+  // TODO: make it a ConsumerStatefulWidget to get rid of the ignore
   final String title;
   bool isOnSettingsScreen = false;
   bool isOnRemindersScreen = false;
@@ -33,11 +37,10 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   PreferredSizeWidget build(BuildContext context, WidgetRef ref) {
     final bool isKeyValid = ref.watch(isKeyValidStateProvider);
+    final bool arePermissionsGranted =
+        ref.watch(arePermissionsGrantedStateProvider);
 
-    final txtSuffix = isOnSettingsScreen
-        ? "\n\nPlease obtain a new key."
-        : "\n\nYou can change the key in Settings.";
-
+    log('arePermissionsGranted = $arePermissionsGranted', name: 'WyattAppBar');
     log("context.widget = ${context.widget}", name: "WyattAppBar");
 
     return AppBar(
@@ -51,7 +54,7 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.transparent,
       title: Text(title),
-      actions: isKeyValid || isSettingUp
+      actions: (arePermissionsGranted && isKeyValid) || isSettingUp
           ? isOnRemindersScreen
               ? <Widget>[
                   IconButton(
@@ -63,57 +66,140 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   ),
                 ]
               : null
-          : <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.error,
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: Theme.of(context).colorScheme.onError,
-                        title: Text("Error",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.error)),
-                        content: Text(
-                            "The key is invalid, the app won't work!$txtSuffix",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface)),
-                        actions: <Widget>[
-                          isOnSettingsScreen
-                              ? SizedBox.shrink()
-                              : TextButton(
-                                  child: Text("Go to Settings"),
-                                  onPressed: () {
-                                    context.go(AppRoutes.settings);
-                                  },
-                                ),
-                          TextButton(
-                            child: Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              )
-            ],
+          : !isKeyValid
+              ? _createKeyErrorAction(context)
+              : !arePermissionsGranted
+                  ? _createPermissionErrorAction(context)
+                  : null,
     );
+  }
+
+  List<Widget> _createPermissionErrorAction(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(
+          Icons.error,
+          color: Theme.of(context).colorScheme.error,
+        ),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: Theme.of(context).colorScheme.onError,
+                title: Text("Error",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Theme.of(context).colorScheme.error)),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "The app won't work without certain permissions.",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
+                    SizedBox(height: Common.space / 2),
+                    Text(
+                      "Please grant the permissions in ${_getOSName(context)} Settings.",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
+                    SizedBox(height: Common.space / 2),
+                    InkWell(
+                        child: Text(
+                          'Learn how, and which permissions are needed as well as why.',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        onTap: () => browseToUrl(Url.permissions)),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      )
+    ];
+  }
+
+  List<Widget> _createKeyErrorAction(BuildContext context) {
+    final txtSuffix = isOnSettingsScreen
+        ? "\n\nPlease obtain a new key."
+        : "\n\nYou can change the key in Settings.";
+
+    return <Widget>[
+      IconButton(
+        icon: Icon(
+          Icons.error,
+          color: Theme.of(context).colorScheme.error,
+        ),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: Theme.of(context).colorScheme.onError,
+                title: Text("Error",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Theme.of(context).colorScheme.error)),
+                content: Text(
+                    "The key is invalid, the app won't work!$txtSuffix",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface)),
+                actions: <Widget>[
+                  isOnSettingsScreen
+                      ? SizedBox.shrink()
+                      : TextButton(
+                          child: Text("Go to Settings"),
+                          onPressed: () {
+                            context.go(AppRoutes.settings);
+                          },
+                        ),
+                  TextButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      )
+    ];
+  }
+
+  String _getOSName(BuildContext context) {
+    /* switch (Platform.operatingSystem) { ... } is slicker but comparison is based upon
+       string values which might change in the future (see remarks in dart.io's platform.dart)
+       sp, let's use the more verbose (and "auto-testable") way
+    */
+    if (Common.isAndroid(context)) {
+      return 'Android';
+    } else if (Common.isIOS(context)) {
+      return 'iOS';
+    } else {
+      return 'OS';
+    }
   }
 
   @override

@@ -120,7 +120,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return Scaffold(
       resizeToAvoidBottomInset:
           true, // goes along with SingleChildScrollView below to allow keyboard to slide up and not cover input fields (https://stackoverflow.com/questions/49207145/flutter-keyboard-over-textformfield)
-      appBar: WyattAppBar(context, widget.title),
+      appBar: WyattAppBar(context: context, title: widget.title),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,

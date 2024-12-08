@@ -190,7 +190,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     }
 
     return Scaffold(
-      appBar: WyattAppBar(context, Screen.reminders),
+      appBar: WyattAppBar(context: context, title: Screen.reminders),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
           0,

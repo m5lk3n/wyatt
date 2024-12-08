@@ -35,44 +35,47 @@ class PermissionsHelper {
     */
     log('checking permissions', name: 'PermissionsHelper');
 
+    bool locationGranted = false;
+    bool locationAlwaysGranted = false;
+    bool notificationGranted = false;
+
     await Permission.location.onGrantedCallback(() {
-      _setPermissionsGranted('location granted');
+      locationGranted = true;
+      log('location granted', name: 'PermissionsHelper');
     }).onDeniedCallback(() {
-      _setPermissionsDenied('location denied');
+      log('location denied', name: 'PermissionsHelper');
     }).onPermanentlyDeniedCallback(() {
-      _setPermissionsDenied('location permanently denied');
+      log('location permanently denied', name: 'PermissionsHelper');
     }).onProvisionalCallback(() {
-      _setPermissionsDenied('location provisional');
+      log('location provisional', name: 'PermissionsHelper');
     }).request();
 
     await Permission.locationAlways.onGrantedCallback(() {
-      _setPermissionsGranted('locationAlways granted');
+      log('locationAlways granted', name: 'PermissionsHelper');
+      locationAlwaysGranted = true;
     }).onDeniedCallback(() {
-      _setPermissionsDenied('locationAlways denied');
+      log('locationAlways denied', name: 'PermissionsHelper');
     }).onPermanentlyDeniedCallback(() {
-      _setPermissionsDenied('locationAlways permanently denied');
+      log('locationAlways permanently denied', name: 'PermissionsHelper');
     }).onProvisionalCallback(() {
-      _setPermissionsDenied('locationAlways provisional');
+      log('locationAlways provisional', name: 'PermissionsHelper');
     }).request();
 
     await Permission.notification.onGrantedCallback(() {
-      _setPermissionsGranted('notification granted');
+      log('notification granted', name: 'PermissionsHelper');
+      notificationGranted = true;
     }).onDeniedCallback(() {
-      _setPermissionsDenied('notification denied');
+      log('notification denied', name: 'PermissionsHelper');
     }).onPermanentlyDeniedCallback(() {
-      _setPermissionsDenied('notification permanently denied');
+      log('notification permanently denied', name: 'PermissionsHelper');
     }).onProvisionalCallback(() {
-      _setPermissionsDenied('notification provisional');
+      log('notification provisional', name: 'PermissionsHelper');
     }).request();
-  }
 
-  void _setPermissionsGranted(String debugMessage) {
-    log(debugMessage, name: 'PermissionsHelper');
-    ref.read(arePermissionsGrantedStateProvider.notifier).state = true;
-  }
-
-  void _setPermissionsDenied(String debugMessage) {
-    log(debugMessage, name: 'PermissionsHelper');
-    ref.read(arePermissionsGrantedStateProvider.notifier).state = false;
+    bool overallGranted =
+        locationGranted && locationAlwaysGranted && notificationGranted;
+    ref.read(arePermissionsGrantedStateProvider.notifier).state =
+        overallGranted;
+    log('overallGranted = $overallGranted', name: 'PermissionsHelper');
   }
 }

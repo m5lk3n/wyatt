@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/helper.dart';
 import 'package:wyatt/screens/settings.dart';

@@ -12,36 +12,45 @@ import 'package:wyatt/screens/reminders.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/helper.dart';
 
-// ignore: must_be_immutable
-class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  // TODO: make it a ConsumerStatefulWidget to get rid of the ignore
+class WyattAppBar extends ConsumerStatefulWidget
+    implements PreferredSizeWidget {
+  final BuildContext context;
   final String title;
+
+  const WyattAppBar({super.key, required this.context, required this.title});
+
+  @override
+  ConsumerState<WyattAppBar> createState() => _WyattAppBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+class _WyattAppBarState extends ConsumerState<WyattAppBar> {
   bool isOnSettingsScreen = false;
   bool isOnRemindersScreen = false;
   bool isSettingUp = false;
 
-  WyattAppBar(
-    BuildContext context,
-    this.title, {
-    // TODO: make named parameters
-    super.key,
-  }) {
-    isOnSettingsScreen = context.widget is SettingsScreen;
-    isOnRemindersScreen = context.widget is RemindersScreen;
+  @override
+  void initState() {
+    super.initState();
+
+    isOnSettingsScreen = widget.context.widget is SettingsScreen;
+    isOnRemindersScreen = widget.context.widget is RemindersScreen;
     if (isOnSettingsScreen) {
-      final screen = context.widget as SettingsScreen;
+      final screen = widget.context.widget as SettingsScreen;
       isSettingUp = screen.inSetupMode;
     }
   }
 
   @override
-  PreferredSizeWidget build(BuildContext context, WidgetRef ref) {
+  PreferredSizeWidget build(BuildContext context) {
     final bool isKeyValid = ref.watch(isKeyValidStateProvider);
     final bool arePermissionsGranted =
         ref.watch(arePermissionsGrantedStateProvider);
 
     log('arePermissionsGranted = $arePermissionsGranted', name: 'WyattAppBar');
-    log("context.widget = ${context.widget}", name: "WyattAppBar");
+    log("context.widget = ${widget.context.widget}", name: "WyattAppBar");
 
     return AppBar(
       flexibleSpace: Container(
@@ -53,7 +62,7 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
       ),
       backgroundColor: Colors.transparent,
-      title: Text(title),
+      title: Text(widget.title),
       actions: (arePermissionsGranted && isKeyValid) || isSettingUp
           ? isOnRemindersScreen
               ? <Widget>[
@@ -201,7 +210,4 @@ class WyattAppBar extends ConsumerWidget implements PreferredSizeWidget {
       return 'OS';
     }
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

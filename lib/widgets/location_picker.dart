@@ -89,7 +89,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
         LatLng(widget.locationData.latitude!, widget.locationData.longitude!);
 
     return Scaffold(
-      appBar: WyattAppBar(context, Screen.pickLocation),
+      appBar: WyattAppBar(context: context, title: Screen.pickLocation),
       body: _isLoading
           ? Center(child: const CircularProgressIndicator.adaptive())
           : GoogleMap(

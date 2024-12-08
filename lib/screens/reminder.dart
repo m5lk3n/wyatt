@@ -74,7 +74,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
     return Scaffold(
       resizeToAvoidBottomInset:
           true, // goes along with SingleChildScrollView below to allow keyboard to slide up and not cover input fields (https://stackoverflow.com/questions/49207145/flutter-keyboard-over-textformfield)
-      appBar: WyattAppBar(context, Screen.editReminder),
+      appBar: WyattAppBar(context: context, title: Screen.editReminder),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,

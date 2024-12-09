@@ -165,7 +165,10 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Clean up assets
 
 ## Doing
- 
+
+- https://stackoverflow.com/questions/48768106/how-to-avoid-the-geofences-limit-of-5-per-app
+- https://developers.google.com/android/reference/com/google/android/gms/location/GeofenceStatusCodes#GEOFENCE_TOO_MANY_PENDING_INTENTS
+
 - Add service
   - https://pub.dev/packages/geofence_foreground_service
     - [ ] https://pub.dev/packages/geofence_foreground_service#-ios-setup

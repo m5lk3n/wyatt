@@ -9,6 +9,7 @@ import 'package:wyatt/common.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/startup_provider.dart';
 import 'package:wyatt/helper.dart';
+import 'package:wyatt/widgets/common.dart';
 
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});
@@ -16,22 +17,22 @@ class SplashScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final startup = ref.watch(startupNotifierProvider);
-    log('startup = $startup', name: 'SplashScreen');
+    log('startup = $startup', name: '$runtimeType');
 
     // schedule a callback to run after the frame has been rendered to avoid "setState() ... called during build" error
     // https://stackoverflow.com/questions/47592301/setstate-or-markneedsbuild-called-during-build
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (!startup.isLoading) {
         if (startup.hasNoKey) {
-          log('no key -> welcome', name: 'SplashScreen');
+          log('no key -> welcome', name: '$runtimeType');
           ref.read(isKeyValidStateProvider.notifier).state = false;
           context.go(AppRoutes.welcome);
         } else if (startup.hasInvalidKey) {
-          log('invalid key -> settings', name: 'SplashScreen');
+          log('invalid key -> settings', name: '$runtimeType');
           ref.read(isKeyValidStateProvider.notifier).state = false;
           context.go(AppRoutes.settings);
         } else {
-          log('else -> reminders', name: 'SplashScreen');
+          log('else -> reminders', name: '$runtimeType');
           ref.read(isKeyValidStateProvider.notifier).state = true;
           context.go(AppRoutes.reminders);
         }
@@ -48,9 +49,7 @@ class SplashScreen extends ConsumerWidget {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 2 * Common.bigSpace),
-                  child: ClipOval(
-                    child: Image.asset('assets/icon/icon.png', height: 100),
-                  ),
+                  child: AppIcon(),
                 ),
               ),
               Text(Common.appName,
@@ -80,8 +79,7 @@ class SplashScreen extends ConsumerWidget {
                     onTap: () {
                       browseTo(Url.dev);
                     },
-                    child: Image.asset('assets/images/logo.png',
-                        height: Common.bigSpace),
+                    child: Logo(),
                   ),
                 ),
               ),

@@ -37,6 +37,8 @@
 
 ## Backlog / Research
 
+- https://stackoverflow.com/questions/49648022/check-whether-there-is-an-internet-connection-available-on-flutter-app
+
 - https://stackoverflow.com/questions/73782320/onbackinvokedcallback-is-not-enabled-for-the-application-in-set-androidenableo
 
 - https://stackoverflow.com/questions/30559602/google-map-still-blank-on-real-android-device-on-release-apk/56307654#56307654

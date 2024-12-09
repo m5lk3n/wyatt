@@ -85,12 +85,12 @@ A location- and time-based To-do app for iOS and Android.
 
 - [x] Check and indicate invalid key in appbar
 - [x] Check and indicate missing permissions in appbar
+  - [x] https://pub.dev/packages/permission_handler
 - [x] Handle broken (Internet) connectivity
 
 - [x] Incorporate [loctose](https://github.com/m5lk3n/loctose/)
-- [ ] Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)
-- [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
-  - https://pub.dev/packages/permission_handler
+- [ ] ~~Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)~~
+- [ ] ~~[_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)~~
 
 - (?) Download my data
 
@@ -121,8 +121,11 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
+- [ ] Update screenshots
+- [ ] Take over [Spec.](https://github.com/m5lk3n/locato?tab=readme-ov-file#spec)
+- [ ] Search a location
 - [ ] Time between the same notification
-- [ ] Field validation
+- [x] Field validation
 - [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
 - [ ] Recover from crash (e.g., by revoking permissions)

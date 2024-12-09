@@ -9,6 +9,7 @@ abstract class Common {
   static const space = 20.0;
   static const padding = EdgeInsets.all(space);
   static const seedColor = Colors.brown;
+  static const iconicBackgroundColor = Colors.white; // wow, white, yay
 
   static const magicalWaitTimeInSeconds = 2;
 

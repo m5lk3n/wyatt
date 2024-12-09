@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
+import 'package:wyatt/core.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
@@ -42,7 +43,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     _isSettingUp = widget.inSetupMode;
 
-    PermissionsHelper(ref).checkPermissions();
+    CoreSystem(ref).checkPermissions();
     _readKey();
     if (!_isSettingUp) {
       readDefaultNotificationDistance(ref, _distanceController);

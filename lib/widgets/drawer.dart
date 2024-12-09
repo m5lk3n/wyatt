@@ -18,9 +18,7 @@ class WyattDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.inversePrimary,
             ),
             child: Row(children: [
-              ClipOval(
-                child: Image.asset("assets/icon/icon-small.png"),
-              ),
+              AppIconSmall(),
               SizedBox(width: Common.space / 2),
               Text(
                 Common.appName,

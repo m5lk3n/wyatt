@@ -72,7 +72,7 @@ class _AddressLoaderState extends State<AddressLoader> {
         _error = err.code;
         _addressController.text =
             'Error loading location. You may be offline. Please try again later.';
-        log('error loading location: $_error', name: 'AddressLoader');
+        log('error loading location: $_error', name: '$runtimeType');
       });
     }
   }
@@ -80,7 +80,7 @@ class _AddressLoaderState extends State<AddressLoader> {
   @override
   Widget build(BuildContext context) {
     log('location: ${_error ?? '${_currentLocationData ?? "unknown"}'}',
-        name: 'AddressLoader');
+        name: '$runtimeType');
 
     return TextField(
       onTap: () {
@@ -105,7 +105,7 @@ class _AddressLoaderState extends State<AddressLoader> {
 
   Future<void> pickLocation(BuildContext context) async {
     if (_currentLocationData == null) {
-      log('no location data', name: 'AddressLoader');
+      log('no location data', name: '$runtimeType');
       return;
     }
 
@@ -115,7 +115,7 @@ class _AddressLoaderState extends State<AddressLoader> {
           builder: (context) =>
               LocationPicker(locationData: _currentLocationData!)),
     );
-    log('location picked: $location', name: 'AddressLoader');
+    log('location picked: $location', name: '$runtimeType');
     if (location == null) {
       return;
     }

@@ -31,3 +31,9 @@ Open `ios` folder in Xcode.
 Plug in test iPhone.
 
 In Xcode, open `Runner.xcodeproj`, pick the connected iPhone as runner, and hit the play button to build the project.
+
+## ... (re-)generate icons
+
+Run `make icons`* from this repo's root folder.
+
+*) "regenerate application launcher icons (from assets/icon/icon.png)"

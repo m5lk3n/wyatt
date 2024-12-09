@@ -19,9 +19,7 @@ class WelcomeScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 2 * Common.bigSpace),
-                  child: ClipOval(
-                    child: Image.asset('assets/icon/icon.png', height: 100),
-                  ),
+                  child: AppIcon(),
                 ),
               ),
               Text(Common.appName,
@@ -119,8 +117,7 @@ class WelcomeScreen extends StatelessWidget {
                           onTap: () {
                             browseTo(Url.dev);
                           },
-                          child: Image.asset('assets/images/logo.png',
-                              height: Common.bigSpace),
+                          child: Logo(),
                         ),
                       ),
                     ),

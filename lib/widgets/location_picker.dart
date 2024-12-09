@@ -28,7 +28,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   bool _isLoading = false;
 
   void _onMapCreated(GoogleMapController controller) {
-    log("onMapCreated", name: "LocationPicker");
+    log('onMapCreated', name: '$runtimeType');
     _controller = controller;
   }
 
@@ -45,7 +45,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
       "latitude": position.latitude,
       "longitude": position.longitude,
     });
-    log("picked location: $pickedLocation", name: "LocationPicker");
+    log('picked location: $pickedLocation', name: '$runtimeType');
     Navigator.of(context).pop(pickedLocation);
   }
 
@@ -75,7 +75,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
     // TODO: complain if key is invalid (set global error via notifier and route to setup page)
 
     await _googleMapDynamicKeyPlugin.setGoogleApiKey(_key).then((value) {
-      log("GoogleMap key set dynamically", name: "LocationPicker");
+      log('GoogleMap key set dynamically', name: '$runtimeType');
       setState(() {
         _isLoading = false;
       });
@@ -84,7 +84,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
 
   @override
   Widget build(BuildContext context) {
-    log("build", name: "LocationPicker");
+    log('build', name: '$runtimeType');
     final latLngLocation =
         LatLng(widget.locationData.latitude!, widget.locationData.longitude!);
 

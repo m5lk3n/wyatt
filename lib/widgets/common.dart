@@ -14,15 +14,10 @@ String _getLegalese() {
 Widget createAboutDialog(BuildContext context) => AboutDialog(
       applicationName: Common.appName,
       applicationVersion: "v${Common.appVersion}",
-      applicationIcon: ClipOval(
-        child: Image.asset("assets/icon/icon-small.png"),
-      ),
+      applicationIcon: AppIconSmall(),
       applicationLegalese: _getLegalese(),
       children: [
-        Image.asset(
-          "assets/images/logo.png",
-          width: 175,
-        ),
+        Logo(),
         Text(
           '\nWhen You Are There, Then...',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -116,4 +111,58 @@ Widget createDistanceField(
       ),
     ),
   );
+}
+
+class AppIcon extends StatelessWidget {
+  final double size = 100;
+
+  const AppIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Stack(children: [
+        Container(
+          color: Common.iconicBackgroundColor,
+          height: size,
+          width: size,
+        ),
+        Container(
+          alignment: Alignment.center,
+          height: size,
+          width: size,
+          child: Image.asset('assets/icon/icon.png', height: (2 / 3) * size),
+        ),
+      ]),
+    );
+  }
+}
+
+class AppIconSmall extends StatelessWidget {
+  final double size = 64;
+
+  const AppIconSmall({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Stack(children: [
+        Container(
+          color: Common.iconicBackgroundColor,
+          height: size,
+          width: size,
+        ),
+        Image.asset('assets/icon/icon-small.png'),
+      ]),
+    );
+  }
+}
+
+class Logo extends StatelessWidget {
+  const Logo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset('assets/images/logo.png', height: Common.bigSpace);
+  }
 }

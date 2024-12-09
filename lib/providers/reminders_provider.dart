@@ -63,7 +63,7 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
       ),
     ];
     _storeReminder(reminder);
-    log('updated reminder: $reminder', name: 'RemindersNotifier');
+    log('updated reminder: $reminder', name: '$runtimeType');
   }
 
   void clearAll() {

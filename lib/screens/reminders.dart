@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/core.dart';
 import 'package:wyatt/data/seed.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/reminders_provider.dart';
-import 'package:wyatt/screens/screens_helper.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/drawer.dart';
 import 'package:wyatt/widgets/reminder.dart';
@@ -27,7 +27,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
   void initState() {
     super.initState();
 
-    PermissionsHelper(ref).checkPermissions();
+    CoreSystem(ref).checkPermissions();
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:geofence_foreground_service/exports.dart';
+import 'package:geofence_foreground_service/models/zone.dart';
 import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wyatt/common.dart';
@@ -100,11 +102,17 @@ class Reminder {
     };
   }
 
-/* TODO: implement this
-  bool isInRange(LocationData currentLocation) {
-    return locationData.distanceBetween(
-            currentLocation.latitude!, currentLocation.longitude!) <=
-        notificationDistance;
+  Zone asZone() {
+    return Zone(
+      id: id!,
+      coordinates: [
+        LatLng.degree(
+          locationData.latitude!,
+          locationData.longitude!,
+        )
+      ],
+      radius: notificationDistance.toDouble(),
+      notificationResponsivenessMs: Default.notificationResponsivenessMs,
+    );
   }
-*/
 }

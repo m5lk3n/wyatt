@@ -22,12 +22,14 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
   // required for undo:
   Reminder? deletedItem;
   int? deletedIndex;
+  CoreSystem? core;
 
   @override
   void initState() {
     super.initState();
 
-    CoreSystem(ref).checkPermissions();
+    core = CoreSystem(ref);
+    core!.checkPermissions();
   }
 
   @override
@@ -36,6 +38,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     Widget? floatingActionButton;
 
     final reminders = ref.watch(remindersNotifierProvider);
+    _registerReminders(reminders);
 
     if (reminders.isEmpty) {
       content = Center(
@@ -153,7 +156,10 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                           'Are you sure to delete this reminder?'),
                       actions: [
                         TextButton(
-                            onPressed: () => Navigator.of(context).pop(true),
+                            onPressed: () {
+                              core!.cancelReminder(reminders[index]);
+                              Navigator.of(context).pop(true);
+                            },
                             child: const Text('Delete')),
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(false),
@@ -209,5 +215,11 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     reminders.sort((r1, r2) => r1.notificationMessage
         .toLowerCase()
         .compareTo(r2.notificationMessage.toLowerCase()));
+  }
+
+  void _registerReminders(List<Reminder> reminders) {
+    for (final reminder in reminders) {
+      core!.registerReminder(reminder);
+    }
   }
 }

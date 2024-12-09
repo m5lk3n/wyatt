@@ -121,6 +121,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
+- [ ] Reminder with tabs for `standard` add/edit and `advanced` (like approaching, leaving)
 - [ ] Update screenshots
 - [ ] Take over [Spec.](https://github.com/m5lk3n/locato?tab=readme-ov-file#spec)
 - [ ] Search a location
@@ -178,6 +179,8 @@ A location- and time-based To-do app for iOS and Android.
 
   - https://medium.com/flutter/executing-dart-in-the-background-with-flutter-plugins-and-geofencing-2b3e40a1a124:
     `dwell` doesn't work on iOS?
+
+  - https://pub.dev/packages/native_geofence
 
   Backlog service:
   - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps

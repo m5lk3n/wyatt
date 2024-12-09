@@ -7,6 +7,7 @@ import 'package:geofence_foreground_service/geofence_foreground_service.dart';
 import 'package:geofence_foreground_service/models/notification_icon_data.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/permissions_provider.dart';
 
 bool isCoreServiceStarted = false;
@@ -14,8 +15,8 @@ bool isCoreServiceStarted = false;
 @pragma('vm:entry-point')
 void callbackDispatcher() async {
   GeofenceForegroundService().handleTrigger(
-    backgroundTriggerHandler: (zoneID, triggerType) {
-      log('zoneID: $zoneID', name: 'callbackDispatcher');
+    backgroundTriggerHandler: (zoneId, triggerType) {
+      log('trigger ID: $zoneId', name: 'callbackDispatcher');
 
       if (triggerType == GeofenceEventType.enter) {
         log('triggerType: enter', name: 'callbackDispatcher');
@@ -128,5 +129,53 @@ class CoreSystem {
     );
 
     log('service start status: $isCoreServiceStarted', name: '$runtimeType');
+  }
+
+  // TODO: handle result
+  void registerReminder(Reminder reminder) async {
+    if (!isCoreServiceStarted) {
+      log('service not started, skipping registration for reminder ${reminder.id}',
+          name: '$runtimeType');
+      return;
+    }
+
+    if (!reminder.enabled) {
+      log('reminder ${reminder.id} is disabled, skipping registration',
+          name: '$runtimeType');
+      return;
+    }
+
+    await GeofenceForegroundService()
+        .addGeofenceZone(
+      zone: reminder.asZone(),
+    )
+        .then((result) {
+      log('result registering reminder ${reminder.id}: $result',
+          name: '$runtimeType');
+    }).onError((error, stackTrace) {
+      log('error registering reminder ${reminder.id}: $error',
+          name: '$runtimeType');
+    });
+  }
+
+  // TODO: handle result
+  void cancelReminder(Reminder reminder) async {
+    if (!isCoreServiceStarted) {
+      log('service not started, skipping cancelation of reminder ${reminder.id}',
+          name: '$runtimeType');
+      return;
+    }
+
+    await GeofenceForegroundService()
+        .removeGeofenceZone(
+      zoneId: reminder.id!,
+    )
+        .then((result) {
+      log('result canceling reminder ${reminder.id}: $result',
+          name: '$runtimeType');
+    }).onError((error, stackTrace) {
+      log('error canceling reminder ${reminder.id}: $error',
+          name: '$runtimeType');
+    });
   }
 }

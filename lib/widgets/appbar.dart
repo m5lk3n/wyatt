@@ -111,7 +111,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                 ]
               : null
           : !isOnline
-              ? _createConnectivityErrorAction(context)
+              ? _createConnectivityWarningAction(context)
               : !isKeyValid
                   ? _createKeyErrorAction(context)
                   : !arePermissionsGranted
@@ -120,12 +120,12 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
     );
   }
 
-  List<Widget> _createConnectivityErrorAction(BuildContext context) {
+  List<Widget> _createConnectivityWarningAction(BuildContext context) {
     return <Widget>[
       IconButton(
         icon: Icon(
-          Icons.error,
-          color: Theme.of(context).colorScheme.error,
+          Icons.wifi_off,
+          color: Theme.of(context).colorScheme.tertiary,
         ),
         onPressed: () {
           showDialog(

@@ -281,7 +281,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
   }
 
   bool _validateDateTime(Reminder reminder) {
-    if (reminder.validateDateTime()) {
+    if (reminder.isDateTimeValid()) {
       return true;
     }
 

@@ -54,8 +54,6 @@ abstract class Screen {
 
 abstract class Default {
   static const int notificationDistance = 500;
-  static const int notificationResponsivenessMs =
-      60 * 1000; // 1min // TODO: make configurable
   static const String urlKey = 'https://wyatt.lttl.dev/key';
   static const String urlWhy = 'https://wyatt.lttl.dev/why';
   static const String urlWhat = 'https://wyatt.lttl.dev/what';

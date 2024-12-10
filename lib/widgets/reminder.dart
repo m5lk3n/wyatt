@@ -45,6 +45,17 @@ class _ReminderListItemState extends ConsumerState<ReminderListItem> {
                 .titleMedium!
                 .copyWith(color: Theme.of(context).colorScheme.onSurface),
           ),
+          leading: widget.reminder.isNotified()
+              ? Icon(
+                  Icons.done_all,
+                  color: Theme.of(context).colorScheme.onSurface, // TODO
+                )
+              : widget.reminder.isInError()
+                  ? Icon(
+                      Icons.bolt,
+                      color: Theme.of(context).colorScheme.onError, // TODO
+                    )
+                  : null,
           trailing: IconButton(
             onPressed: () {
               widget.reminder.isExpired()

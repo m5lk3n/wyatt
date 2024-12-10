@@ -94,7 +94,7 @@ A location- and time-based To-do app for iOS and Android.
 
 - (?) Download my data
 
-- (?) ~~Implement Haversine (`flutter pub add haversine_distance`)~~
+- [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - (?) Implement notification
   - (?) https://pub.dev/packages/awesome_notifications
@@ -166,20 +166,15 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
+- Auto-cancel expired reminders
+- notification is a one-off!
+- reminder.hasNotified?
+
 - https://stackoverflow.com/questions/48768106/how-to-avoid-the-geofences-limit-of-5-per-app
-- https://developers.google.com/android/reference/com/google/android/gms/location/GeofenceStatusCodes#GEOFENCE_TOO_MANY_PENDING_INTENTS
+
+- stopGeofencingService on app close?
 
 - Add service
-  - https://pub.dev/packages/geofence_foreground_service
-    - [ ] https://pub.dev/packages/geofence_foreground_service#-ios-setup
-  - https://github.com/Basel-525k/geofence_foreground_service
-  - https://stackoverflow.com/questions/35014702/how-to-implement-un-dwell-in-android-geofences:
-    *In Google Geofences, Enter event triggers every time you enter a geofence, Exit event triggers every time you cross the boundry of the Geofence. Also Dwell event triggers when you stay inside a geofence for a specified interval of time.
-
-    In your case, if you keep jumping In and Out of a geofence in less than one minute, Dwell will never happen.
-
-    If you enter a geofence, Enter event triggers, and then you stay inside for one minute or more, Dwell will happen, and after the Dwell happens, if you notice any Exit event, you can use that Exit event as a real Exit.*
-
   - https://medium.com/flutter/executing-dart-in-the-background-with-flutter-plugins-and-geofencing-2b3e40a1a124:
     `dwell` doesn't work on iOS?
 
@@ -190,8 +185,9 @@ A location- and time-based To-do app for iOS and Android.
   - https://pub.dev/packages/flutter_background_service
     (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
   - https://medium.com/@hasibulhasan3590/elevate-your-flutter-app-with-background-services-using-flutter-background-service-131f4ba7ec8a
-  
-- Responsiveness geofence?
+
+  - https://github.com/fluttercommunity/flutter_workmanager/issues/151#issuecomment-612637579
+
 - Time between notifications?
 
 - Incorporate locato?
@@ -211,6 +207,16 @@ A location- and time-based To-do app for iOS and Android.
 - Merge nearby reminders?
 - Support landscape mode?
 - License?
+
+## Lessons learned:
+
+- GoogleMap with static key baked in, even obfuscated just a matter of reverse engineering
+  - Dynamic plugin
+    - requires dummy key entry `com.google.android.geo.API_KEY` in `AndroidManifest.xml`
+    - requires `setState()` to trigger key refresh on time
+- Document why https://developer.android.com/develop/sensors-and-location/location/geofencing and `geofence_foreground_service` are not usable:
+  - Limit reminders to 100 due to technical restriction (https://developer.android.com/develop/sensors-and-location/location/geofencing), document.
+  - https://developers.google.com/android/reference/com/google/android/gms/location/GeofenceStatusCodes.html#GEOFENCE_TOO_MANY_PENDING_INTENTS -> `geofence_foreground_service`: with one zone (=request ID), last one wins = geofence gets overwritten, with many zones: GEOFENCE_TOO_MANY_PENDING_INTENTS if more than 5 zones
 
 ## Backlog / Outlook
 

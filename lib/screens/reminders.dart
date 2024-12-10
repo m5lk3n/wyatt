@@ -38,7 +38,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     Widget? floatingActionButton;
 
     final reminders = ref.watch(remindersNotifierProvider);
-    _registerReminders(reminders);
+    // TODO: _registerReminders(reminders);
 
     if (reminders.isEmpty) {
       content = Center(
@@ -157,7 +157,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                       actions: [
                         TextButton(
                             onPressed: () {
-                              core!.cancelReminder(reminders[index]);
+                              // TODO: core!.cancelReminder(reminders[index]);
                               Navigator.of(context).pop(true);
                             },
                             child: const Text('Delete')),
@@ -217,9 +217,11 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
         .compareTo(r2.notificationMessage.toLowerCase()));
   }
 
+  /* TODO:
   void _registerReminders(List<Reminder> reminders) {
     for (final reminder in reminders) {
       core!.registerReminder(reminder);
     }
   }
+  */
 }

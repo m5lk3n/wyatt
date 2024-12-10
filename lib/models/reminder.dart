@@ -1,5 +1,3 @@
-import 'package:geofence_foreground_service/exports.dart';
-import 'package:geofence_foreground_service/models/zone.dart';
 import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wyatt/common.dart';
@@ -30,7 +28,9 @@ class Reminder {
     this.notificationStartDateTime,
     this.notificationEndDateTime,
     this.notificationDistance = Default.notificationDistance,
-    this.enabled = true,
+    this.enabled = true, // snoozed or not
+    this.notified = false,
+    this.inError = false,
   }) {
     id ??= uuid.v4();
   }
@@ -43,13 +43,66 @@ class Reminder {
   DateTime? notificationStartDateTime;
   DateTime? notificationEndDateTime;
   bool enabled;
+  bool notified;
+  bool inError;
+
+  void setDone() {
+    setDisabled();
+    setNotified();
+  }
+
+  void reset() {
+    setEnabled();
+    notified = false;
+    inError = false;
+  }
+
+  void setInError() {
+    inError = true;
+    setDisabled();
+  }
+
+  bool isInError() {
+    return inError;
+  }
+
+  // for consistency
+  void setEnabled() {
+    enabled = true;
+  }
+
+  // for consistency
+  void setDisabled() {
+    enabled = false;
+  }
+
+  // for consistency
+  void setNotified() {
+    notified = true;
+    inError = false;
+  }
+
+  // for consistency
+  bool isNotified() {
+    return notified;
+  }
+
+  // for consistency
+  bool isEnabled() {
+    return enabled;
+  }
+
+  // for convenience
+  bool isDisabled() {
+    return !enabled;
+  }
 
   bool isExpired() {
     return notificationEndDateTime != null &&
         notificationEndDateTime!.isBefore(DateTime.now());
   }
 
-  bool validateDateTime() {
+  bool isDateTimeValid() {
     if (notificationEndDateTime == null) {
       return true;
     }
@@ -66,7 +119,7 @@ class Reminder {
         : {locationData.latitude.toString(), locationData.longitude.toString()}
             .join(', ');
 
-    return ("$notificationMessage at $location");
+    return ('$notificationMessage at $location');
   }
 
   factory Reminder.fromJson(Map<String, dynamic> json) {
@@ -83,6 +136,8 @@ class Reminder {
           ? DateTime.parse(json['notificationEndDateTime'])
           : null,
       enabled: json['enabled'],
+      notified: json['notified'],
+      inError: json['inError'],
     );
   }
 
@@ -99,20 +154,15 @@ class Reminder {
       'notificationStartDateTime': notificationStartDateTime?.toIso8601String(),
       'notificationEndDateTime': notificationEndDateTime?.toIso8601String(),
       'enabled': enabled,
+      'notified': notified,
+      'inError': inError,
     };
   }
 
-  Zone asZone() {
-    return Zone(
-      id: id!,
-      coordinates: [
-        LatLng.degree(
-          locationData.latitude!,
-          locationData.longitude!,
-        )
-      ],
-      radius: notificationDistance.toDouble(),
-      notificationResponsivenessMs: Default.notificationResponsivenessMs,
-    );
+/*
+  bool isInRange(LocationData currentLocation) {
+    return _distanceBetween(locationData, currentLocation) <=
+        notificationDistance;
   }
+*/
 }

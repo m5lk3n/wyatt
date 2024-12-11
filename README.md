@@ -89,12 +89,11 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Handle broken (Internet) connectivity
 
 - [x] Incorporate [loctose](https://github.com/m5lk3n/loctose/)
-- [ ] ~~Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)~~
-- [ ] ~~[_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)~~
+- [ ] Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)
+- [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
+- [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - (?) Download my data
-
-- [ ] Implement Haversine (`flutter pub add haversine_distance`)
 
 - (?) Implement notification
   - (?) https://pub.dev/packages/awesome_notifications
@@ -166,21 +165,12 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
+- Incorporate locato
+
 - Auto-cancel expired reminders
 - notification is a one-off!
-- reminder.hasNotified?
-
-- https://stackoverflow.com/questions/48768106/how-to-avoid-the-geofences-limit-of-5-per-app
-
-- stopGeofencingService on app close?
 
 - Add service
-  - https://medium.com/flutter/executing-dart-in-the-background-with-flutter-plugins-and-geofencing-2b3e40a1a124:
-    `dwell` doesn't work on iOS?
-
-  - https://pub.dev/packages/native_geofence
-
-  Backlog service:
   - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps
   - https://pub.dev/packages/flutter_background_service
     (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
@@ -189,8 +179,6 @@ A location- and time-based To-do app for iOS and Android.
   - https://github.com/fluttercommunity/flutter_workmanager/issues/151#issuecomment-612637579
 
 - Time between notifications?
-
-- Incorporate locato?
 
 ## Open
 

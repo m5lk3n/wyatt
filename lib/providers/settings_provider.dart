@@ -10,7 +10,7 @@ final settingsNotifierProvider =
 
 class SettingsNotifier extends StateNotifier<Settings> {
   final _secureStorage = SecurePersistentLocalStorage();
-  final _storage = PersistentLocalStorage();
+  final _storage = PersistentLocalStorage(StorageType.settings);
 
   SettingsNotifier() : super(Settings());
 
@@ -40,16 +40,16 @@ class SettingsNotifier extends StateNotifier<Settings> {
     return state.defaultNotificationDistance;
   }
 
-  Future<void> setDefaultNotificationDistance(int distance) async {
-    await _storage.writeInt(key: SettingsKeys.distance, value: distance);
+  void setDefaultNotificationDistance(int distance) {
+    _storage.writeInt(key: SettingsKeys.distance, value: distance);
     state.defaultNotificationDistance = distance;
   }
 
   // --- storage & secure storage ---
 
-  Future<void> clearSettings() async {
+  Future<void> clearAll() async {
     await _secureStorage.deleteAll();
-    await _storage.deleteAll();
+    _storage.deleteAll();
     state.key = '';
     state.defaultNotificationDistance = Default.notificationDistance;
   }

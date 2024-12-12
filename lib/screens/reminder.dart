@@ -86,9 +86,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
-                  Common.space,
-                  Common.space,
+                  Style.space,
+                  Style.space,
+                  Style.space,
                   0,
                 ),
                 child: TextFormField(
@@ -115,9 +115,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
+                  Style.space,
                   0,
-                  Common.space,
+                  Style.space,
                   0,
                 ),
                 child: TextFormField(
@@ -139,9 +139,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
+                  Style.space,
                   0,
-                  Common.space,
+                  Style.space,
                   0,
                 ),
                 child: AddressLoader(
@@ -153,9 +153,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
-                  Common.space,
-                  Common.space,
+                  Style.space,
+                  Style.space,
+                  Style.space,
                   0,
                 ),
                 child: DateTimePicker(
@@ -169,9 +169,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
-                  Common.space,
-                  Common.space,
+                  Style.space,
+                  Style.space,
+                  Style.space,
                   0,
                 ),
                 child: DateTimePicker(
@@ -185,9 +185,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
-                  Common.space,
-                  Common.space,
+                  Style.space,
+                  Style.space,
+                  Style.space,
                   0,
                 ),
                 child: Row(
@@ -195,7 +195,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
                     children: [distanceField]),
               ),
               Padding(
-                padding: const EdgeInsets.all(Common.space),
+                padding: const EdgeInsets.all(Style.space),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -216,7 +216,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
                       autofocus: true,
                       child: Text('Save'),
                     ),
-                    SizedBox(width: Common.space / 2),
+                    SizedBox(width: Style.space / 2),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor:

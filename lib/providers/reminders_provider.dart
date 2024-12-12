@@ -1,58 +1,45 @@
-import 'dart:convert';
 import 'dart:core';
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/models/reminder.dart';
-import 'package:wyatt/services/storage.dart';
+import 'package:wyatt/services/reminders_storage.dart';
 
 final remindersNotifierProvider =
     StateNotifierProvider<RemindersNotifier, List<Reminder>>(
         (ref) => RemindersNotifier([]));
 
 class RemindersNotifier extends StateNotifier<List<Reminder>> {
-  final _storage = PersistentLocalStorage();
+  final _storage = RemindersStorage();
 
   RemindersNotifier(super.state) {
-    _storage.readRemindersKeys().then((ids) {
-      List<Reminder> reminders = [];
-
-      for (var id in ids) {
-        _storage.readString(key: id).then((value) {
-          if (value != null) {
-            Reminder reminder = Reminder.fromJson(jsonDecode(value));
-            reminders = [
-              ...reminders,
-              reminder
-            ]; // updating state here would maybe fire notifications, don't know
-          }
-        });
-
-        state = reminders;
-      }
-    });
+    log('had ${state.length} reminders', name: '$runtimeType');
+    state = _storage.getReminders();
+    log('now ${state.length} reminders', name: '$runtimeType');
   }
 
   void add(Reminder reminder) {
     state = [...state, reminder];
-    _storeReminder(reminder);
+    _storage.add(reminder);
   }
 
   void addAll(List<Reminder> reminders) {
+    log('adding ${reminders.length} reminders to ${state.length} from the state',
+        name: '$runtimeType');
     state = [...state, ...reminders];
-    for (var reminder in reminders) {
-      _storeReminder(reminder);
-    }
+    _storage.addAll(reminders);
   }
 
   void insertAt(int index, Reminder reminder) {
     state = [...state]..insert(index, reminder);
-    _storeReminder(reminder);
+    _storage.add(reminder);
   }
 
   void remove(Reminder reminder) {
     state = state.where((r) => r != reminder).toList();
-    _deleteReminder(reminder.id!);
+    _storage.remove(reminder);
+    log('removed reminder: $reminder, ${state.length} is left',
+        name: '$runtimeType');
   }
 
   void update(Reminder reminder) {
@@ -62,25 +49,11 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
         (r) => r.id == reminder.id ? reminder : r,
       ),
     ];
-    _storeReminder(reminder);
-    log('updated reminder: $reminder', name: '$runtimeType');
+    _storage.update(reminder);
   }
 
   void clearAll() {
     state = [];
-    _storage.readRemindersKeys().then((ids) {
-      for (var id in ids) {
-        _deleteReminder(id);
-      }
-    });
-  }
-
-  // overrides an existing reminder with the same id
-  void _storeReminder(Reminder reminder) {
-    _storage.writeString(key: reminder.id!, value: jsonEncode(reminder));
-  }
-
-  void _deleteReminder(String reminderId) {
-    _storage.delete(key: reminderId);
+    _storage.clearAll();
   }
 }

@@ -22,10 +22,10 @@ class _ReminderListItemState extends ConsumerState<ReminderListItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
-        Common.space,
-        Common.space / 2,
-        Common.space,
-        Common.space / 2,
+        Style.space,
+        Style.space / 2,
+        Style.space,
+        Style.space / 2,
       ),
       child:
           InkWell /* provides a visual feedback when the user taps the item*/ (

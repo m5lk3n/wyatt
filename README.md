@@ -182,8 +182,9 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Open
 
+- Check if async is always needed
+- How to use `._();` construct / how to implement singletons?
 - How to reset non-FormFields?
-- AlertDialog title too big?
 - Use riverpod with families or providerscope?
 - Are all StatefulWidgets needed?
   - "Stateful widgets are mutable and they update their data every time a `setState((){data;})` is called."
@@ -198,6 +199,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Lessons learned:
 
+- If possible, use actual devices to test, simply because the dev turnaround is so much quicker.
 - GoogleMap with static key baked in, even obfuscated just a matter of reverse engineering
   - Dynamic plugin
     - requires dummy key entry `com.google.android.geo.API_KEY` in `AndroidManifest.xml`

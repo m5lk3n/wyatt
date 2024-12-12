@@ -19,7 +19,7 @@ class WyattDrawer extends StatelessWidget {
             ),
             child: Row(children: [
               AppIconSmall(),
-              SizedBox(width: Common.space / 2),
+              SizedBox(width: Style.space / 2),
               Text(
                 Common.appName,
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
@@ -88,16 +88,7 @@ class WyattDrawer extends StatelessWidget {
               title: const Text(Screen.about),
               onTap: () {
                 Navigator.pop(context);
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Theme(
-                      data: Theme.of(context)
-                          .copyWith(dialogBackgroundColor: Common.seedColor),
-                      child: createAboutDialog(context),
-                    );
-                  },
-                );
+                showWyattAboutDialog(context);
               },
             ),
           ),

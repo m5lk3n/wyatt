@@ -15,7 +15,7 @@ install:
 	flutter pub add flutter_secure_storage
 	flutter pub add http
 	flutter pub add uuid
-	flutter pub add shared_preferences
+	flutter pub add get_storage
 	flutter pub add flutter_riverpod
 	flutter pub add go_router
 	flutter pub add restart_app

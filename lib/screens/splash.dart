@@ -42,13 +42,13 @@ class SplashScreen extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          color: Common.seedColor,
+          color: Style.seedColor,
           child: Column(
             children: [
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 2 * Common.bigSpace),
+                  padding: const EdgeInsets.only(top: 2 * Style.bigSpace),
                   child: AppIcon(),
                 ),
               ),
@@ -74,7 +74,7 @@ class SplashScreen extends ConsumerWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: Common.bigSpace),
+                  padding: const EdgeInsets.only(bottom: Style.bigSpace),
                   child: GestureDetector(
                     onTap: () {
                       browseTo(Url.dev);

@@ -1,45 +1,50 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wyatt/common.dart';
+import 'package:get_storage/get_storage.dart';
+
+enum StorageType { reminders, settings }
+
+Future<void> initPersistentLocalStorage() async {
+  for (var type in StorageType.values) {
+    await GetStorage.init(type.toString());
+  }
+}
 
 class PersistentLocalStorage {
-  Future<void> writeString({required String key, required String value}) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, value);
+  GetStorage? box;
+
+  PersistentLocalStorage(StorageType type) {
+    box = GetStorage(type.toString());
   }
 
-  Future<String?> readString({required String key}) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
+  void writeString({required String key, required String value}) {
+    box!.write(key, value);
+    // use ReadWriteValue(key, value)?
   }
 
-  Future<void> writeInt({required String key, required int value}) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setInt(key, value);
+  String? readString({required String key}) {
+    return box!.read(key);
   }
 
-  Future<int?> readInt({required String key}) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    return prefs.getInt(key);
+  void writeInt({required String key, required int value}) {
+    box!.write(key, value);
   }
 
-  Future<void> delete({required String key}) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove(key);
+  int? readInt({required String key}) {
+    return box!.read(key);
   }
 
-  Future<void> deleteAll() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+  void delete({required String key}) {
+    box!.remove(key);
   }
 
-  Future<Iterable<String>> readSettingsKeys() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getKeys().where((key) => key.startsWith(SettingsKeys.prefix));
+  void deleteAll() {
+    box!.erase();
   }
 
-  Future<Iterable<String>> readRemindersKeys() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getKeys().where((key) => !key.startsWith(SettingsKeys.prefix));
+  Iterable<String> readKeys() {
+    return box!.getKeys();
+  }
+
+  Iterable<dynamic> readValues() {
+    return box!.getValues();
   }
 }

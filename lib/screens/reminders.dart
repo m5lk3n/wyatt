@@ -38,7 +38,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     Widget? floatingActionButton;
 
     final reminders = ref.watch(remindersNotifierProvider);
-    // TODO: _registerReminders(reminders);
+    log('got ${reminders.length} reminders', name: '$runtimeType');
 
     if (reminders.isEmpty) {
       content = Center(
@@ -51,14 +51,14 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
-            const SizedBox(height: Common.space / 2),
+            const SizedBox(height: Style.space / 2),
             Text(
               'Hit + above to get started',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
-            const SizedBox(height: Common.space / 2),
+            const SizedBox(height: Style.space / 2),
             Text(
               '(or tap the light bulb below for inspiration)',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -77,10 +77,11 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
             builder: (BuildContext context) {
               return Theme(
                 data: Theme.of(context)
-                    .copyWith(dialogBackgroundColor: Common.seedColor),
+                    .copyWith(dialogBackgroundColor: Style.seedColor),
                 child: AlertDialog(
                   title: Text(
                     'Inspire me',
+                    style: Style.getDialogTitleStyle(context),
                   ),
                   content: Text(
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -90,7 +91,8 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                   actions: [
                     TextButton(
                       onPressed: () {
-                        log('Seeding ${seedReminders.length} reminders');
+                        log('seeding ${seedReminders.length} reminders',
+                            name: '$runtimeType');
                         ref
                             .read(remindersNotifierProvider.notifier)
                             .addAll(seedReminders);
@@ -119,16 +121,16 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
         itemBuilder: (context, index) {
           return Dismissible(
             background: Container(
-              color: Common.seedColor,
-              padding: EdgeInsets.symmetric(horizontal: Common.space),
+              color: Style.seedColor,
+              padding: EdgeInsets.symmetric(horizontal: Style.space),
               alignment: AlignmentDirectional.centerStart,
               child: Icon(
                 Icons.delete,
               ),
             ),
             secondaryBackground: Container(
-              color: Common.seedColor,
-              padding: EdgeInsets.symmetric(horizontal: Common.space),
+              color: Style.seedColor,
+              padding: EdgeInsets.symmetric(horizontal: Style.space),
               alignment: AlignmentDirectional.centerEnd,
               child: Icon(
                 Icons.delete,
@@ -141,10 +143,11 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                 builder: (BuildContext context) {
                   return Theme(
                     data: Theme.of(context)
-                        .copyWith(dialogBackgroundColor: Common.seedColor),
+                        .copyWith(dialogBackgroundColor: Style.seedColor),
                     child: AlertDialog(
                       title: Text(
-                        'Please Confirm',
+                        'Confirmation needed',
+                        style: Style.getDialogTitleStyle(context),
                       ),
                       content: Text(
                           style: Theme.of(context)
@@ -200,7 +203,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
           0,
-          Common.space / 2,
+          Style.space / 2,
           0,
           0,
         ),

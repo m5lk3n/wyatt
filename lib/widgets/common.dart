@@ -3,32 +3,43 @@ import 'package:flutter/services.dart';
 import 'package:wyatt/common.dart';
 
 String _getLegalese() {
-  const int startYear = 2024;
   final int currentYear = DateTime.now().year;
 
-  final prefix = (startYear == currentYear) ? '' : '$startYear-';
+  final prefix =
+      (Common.appStartYear == currentYear) ? '' : '$Common.appStartYear-';
 
   return /* TODO '© '? unicode? */ '$prefix$currentYear by';
 }
 
-Widget createAboutDialog(BuildContext context) => AboutDialog(
-      applicationName: Common.appName,
-      applicationVersion: "v${Common.appVersion}",
-      applicationIcon: AppIconSmall(),
-      applicationLegalese: _getLegalese(),
-      children: [
-        Logo(),
-        Text(
-          '\nWhen You Are There, Then...',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontStyle: FontStyle.italic),
-        ),
-      ],
-    );
+void showWyattAboutDialog(BuildContext context) {
+  final aboutDialog = AboutDialog(
+    applicationName: Common.appName,
+    applicationVersion: "v${Common.appVersion}",
+    applicationIcon: AppIconSmall(),
+    applicationLegalese: _getLegalese(),
+    children: [
+      Logo(),
+      Text(
+        '\nWhen You Are There, Then...',
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontStyle: FontStyle.italic),
+      ),
+    ],
+  );
+
+  showDialog(
+      context: context,
+      builder: (ctx) {
+        return Theme(
+          data: Style.aboutTheme,
+          child: aboutDialog,
+        );
+      });
+}
 
 Widget createBackground(context) {
-  const Color color1 = Common.seedColor;
+  const Color color1 = Style.seedColor;
   final Color color2 = Theme.of(context)
       .colorScheme
       .surface; // Theme.of(context).colorScheme.outlineVariant;
@@ -123,7 +134,7 @@ class AppIcon extends StatelessWidget {
     return ClipOval(
       child: Stack(children: [
         Container(
-          color: Common.iconicBackgroundColor,
+          color: Style.iconicBackgroundColor,
           height: size,
           width: size,
         ),
@@ -148,7 +159,7 @@ class AppIconSmall extends StatelessWidget {
     return ClipOval(
       child: Stack(children: [
         Container(
-          color: Common.iconicBackgroundColor,
+          color: Style.iconicBackgroundColor,
           height: size,
           width: size,
         ),
@@ -163,6 +174,6 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('assets/images/logo.png', height: Common.bigSpace);
+    return Image.asset('assets/images/logo.png', height: Style.bigSpace);
   }
 }

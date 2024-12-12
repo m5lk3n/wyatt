@@ -134,8 +134,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                 return AlertDialog(
                   backgroundColor: Theme.of(context).colorScheme.onError,
                   title: Text("Error",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.error)),
+                      style: Style.getErrorDialogTitleStyle(context)),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -144,7 +143,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface),
                       ),
-                      SizedBox(height: Common.space / 2),
+                      SizedBox(height: Style.space / 2),
                       Text(
                         "Please connect to the Internet, try again (later).",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -181,10 +180,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
               return AlertDialog(
                 backgroundColor: Theme.of(context).colorScheme.onError,
                 title: Text("Error",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Theme.of(context).colorScheme.error)),
+                    style: Style.getErrorDialogTitleStyle(context)),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -193,13 +189,13 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onSurface),
                     ),
-                    SizedBox(height: Common.space / 2),
+                    SizedBox(height: Style.space / 2),
                     Text(
                       "Please grant the permissions in ${_getOSName(context)} Settings.",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onSurface),
                     ),
-                    SizedBox(height: Common.space / 2),
+                    SizedBox(height: Style.space / 2),
                     InkWell(
                         child: Text(
                           'Learn how, and which permissions are needed as well as why.',
@@ -249,10 +245,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
               return AlertDialog(
                 backgroundColor: Theme.of(context).colorScheme.onError,
                 title: Text("Error",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Theme.of(context).colorScheme.error)),
+                    style: Style.getErrorDialogTitleStyle(context)),
                 content: Text(
                     "The key is invalid, the app won't work!$txtSuffix",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(

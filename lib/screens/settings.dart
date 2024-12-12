@@ -5,6 +5,7 @@ import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/core.dart';
 import 'package:wyatt/providers/key_provider.dart';
+import 'package:wyatt/providers/reminders_provider.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/providers/settings_provider.dart';
 import 'package:wyatt/screens/screens_helper.dart';
@@ -129,9 +130,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
-                  Common.space,
-                  Common.space,
+                  Style.space,
+                  Style.space,
+                  Style.space,
                   0,
                 ),
                 child: Text.rich(
@@ -166,9 +167,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ? Padding(
                       padding: const EdgeInsets.fromLTRB(
                         0,
-                        Common.space,
-                        Common.space,
-                        Common.space,
+                        Style.space,
+                        Style.space,
+                        Style.space,
                       ),
                       child: Text.rich(
                         // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
@@ -239,9 +240,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   : SizedBox.shrink(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
+                  Style.space,
                   0,
-                  Common.space,
+                  Style.space,
                   0,
                 ),
                 child: TextFormField(
@@ -278,9 +279,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ? SizedBox.shrink()
                   : Padding(
                       padding: const EdgeInsets.fromLTRB(
-                        Common.space,
+                        Style.space,
                         0,
-                        Common.space,
+                        Style.space,
                         0,
                       ),
                       child: Column(
@@ -312,9 +313,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  Common.space,
-                  Common.space,
-                  Common.space,
+                  Style.space,
+                  Style.space,
+                  Style.space,
                   0,
                 ),
                 child: Row(
@@ -345,16 +346,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _isSettingUp
                   ? SizedBox.shrink()
                   : Divider(
-                      indent: Common.space,
-                      endIndent: Common.space,
+                      indent: Style.space,
+                      endIndent: Style.space,
                     ),
               _isSettingUp
                   ? SizedBox.shrink()
                   : Padding(
                       padding: const EdgeInsets.fromLTRB(
-                        Common.space,
+                        Style.space,
                         0,
-                        Common.space,
+                        Style.space,
                         0,
                       ),
                       child: ElevatedButton(
@@ -412,10 +413,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         builder: (BuildContext ctx) {
           return Theme(
             data: Theme.of(context)
-                .copyWith(dialogBackgroundColor: Common.seedColor),
+                .copyWith(dialogBackgroundColor: Style.seedColor),
             child: AlertDialog(
               title: Text(
-                'Please Confirm',
+                'Confirmation needed',
+                style: Style.getDialogTitleStyle(context),
               ),
               content: Text(
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -451,7 +453,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     });
 
     final settings = ref.read(settingsNotifierProvider.notifier);
-    settings.clearSettings();
+    settings.clearAll();
+
+    final reminders = ref.read(remindersNotifierProvider.notifier);
+    reminders.clearAll();
 
     _keyController.clear();
     _distanceController.clear();

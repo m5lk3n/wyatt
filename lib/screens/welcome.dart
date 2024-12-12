@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 2 * Common.bigSpace),
+                  padding: const EdgeInsets.only(top: 2 * Style.bigSpace),
                   child: AppIcon(),
                 ),
               ),
@@ -39,9 +39,9 @@ class WelcomeScreen extends StatelessWidget {
                             .copyWith(
                               color: Theme.of(context).colorScheme.onSurface,
                             )),
-                    SizedBox(height: Common.space),
+                    SizedBox(height: Style.space),
                     Padding(
-                      padding: const EdgeInsets.all(Common.space),
+                      padding: const EdgeInsets.all(Style.space),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -60,14 +60,14 @@ class WelcomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: Common.space),
+                    SizedBox(height: Style.space),
                     Text('When You Are There, Then...',
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontStyle: FontStyle.italic)),
-                    SizedBox(height: Common.space),
+                    SizedBox(height: Style.space),
                     Padding(
-                      padding: const EdgeInsets.all(Common.space),
+                      padding: const EdgeInsets.all(Style.space),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -112,7 +112,7 @@ class WelcomeScreen extends StatelessWidget {
                   : Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: Common.bigSpace),
+                        padding: const EdgeInsets.only(bottom: Style.bigSpace),
                         child: GestureDetector(
                           onTap: () {
                             browseTo(Url.dev);

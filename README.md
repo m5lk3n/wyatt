@@ -165,7 +165,8 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- Incorporate locato
+- Incorporate locato (from geo_fencing_demo)
+  - https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
 
 - Auto-cancel expired reminders
 - notification is a one-off!

@@ -37,6 +37,8 @@
 
 ## Backlog / Research
 
+- https://sikandarsadaqat.medium.com/flutter-benchmarking-adding-multiple-objects-to-a-list-8ab527890898
+
 - https://stackoverflow.com/questions/49648022/check-whether-there-is-an-internet-connection-available-on-flutter-app
 
 - https://stackoverflow.com/questions/73782320/onbackinvokedcallback-is-not-enabled-for-the-application-in-set-androidenableo

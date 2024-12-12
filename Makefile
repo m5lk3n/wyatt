@@ -28,6 +28,7 @@ install:
 	flutter pub add permission_handler
 	flutter pub add internet_connection_checker_plus
 	flutter pub add haversine_distance
+##	flutter pub add workmanager
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean
@@ -43,6 +44,7 @@ update:
 ## upgrade: major upgrade dependencies
 .PHONY: upgrade
 upgrade:
+	flutter clean
 	flutter pub upgrade --major-versions
 
 # generate: generate code
@@ -55,10 +57,10 @@ upgrade:
 test:
 	flutter test
 
-## run: start the application
+## run: execute the application (in release mode but with debug URLs)
 .PHONY: run
 run:
-	flutter run
+	flutter run --release --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
 
 ## icons: regenerate application launcher icons (from assets/icon/icon.png)
 .PHONY: icons
@@ -67,34 +69,27 @@ icons:
 # https://github.com/fluttercommunity/flutter_launcher_icons/issues/578#issuecomment-2366797554:
 	rm -rf android/app/src/main/res/mipmap-anydpi-v26
 
-## generate_lttl_dev: generate lttl.dev/wyatt
-.PHONY: generate_lttl_dev
-generate_lttl_dev:
+## generate-lttl_dev: generate lttl.dev/wyatt
+.PHONY: generate-lttl_dev
+generate-lttl_dev:
 	lttl.dev/generate.sh
 
-## android-debug: build the apk in debug mode
-.PHONY: android-debug
-android-debug:
+## build-android-debug: build the apk in debug mode
+.PHONY: build-android-debug
+build-android-debug:
 	flutter clean
-	flutter build apk --debug
+	flutter build apk --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
 
-## ios-debug: regenerate dependencies for iOS and build the application in debug mode
-.PHONY: ios-debug
-ios-debug:
+## build-ios-debug: regenerate dependencies for iOS and build the application in debug mode
+.PHONY: build-ios-debug
+build-ios-debug:
 	flutter clean
 	cd ios && pod install
-	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key --dart-define=KEY_WHAT_URL=https://wyatt.lttl.dev/what --dart-define=KEY_WHY_URL=https://wyatt.lttl.dev/why --dart-define=KEY_PERMISSIONS_URL=https://wyatt.lttl.dev/permissions
+	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
 
-# ios-debug: regenerate dependencies for iOS and build the application in debug mode
-#.PHONY: ios-release
-#ios-debug:
-#	flutter clean
-#	cd ios && pod install
-#	flutter build ios --debug
-
-# TODO: ios-release: regenerate dependencies for iOS and build the application in release mode
-#.PHONY: ios-release
-#ios-release:
+# TODO: build-ios-release: regenerate dependencies for iOS and build the application in release mode
+#.PHONY: build-ios-release
+#build-ios-release:
 #	flutter clean
 #	cd ios && pod install
 #	flutter build ios --release --obfuscate?

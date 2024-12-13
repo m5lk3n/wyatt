@@ -32,6 +32,8 @@ install:
 	flutter pub add workmanager
 	flutter pub add shared_preferences
 	flutter pub add flutter_local_notifications
+	flutter pub add geolocator
+	flutter pub add timezone
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean

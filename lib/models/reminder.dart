@@ -1,6 +1,7 @@
 import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wyatt/common.dart';
+import 'package:haversine_distance/haversine_distance.dart' as hav;
 
 const uuid = Uuid();
 
@@ -14,11 +15,10 @@ class Reminder {
   - Start Time (optional. if set, always starts at 00:00:00)
   - End Time (optional. if set, always starts at 23:59:59)
   - --
-  - Later:
+  - Outlook:
     - Image
     - Type (Approaching, Leaving, Staying)
     - Recurring (interval)
-    - Action (Check/Done, Snooze, Cancel)
 */
   Reminder({
     this.id,
@@ -163,10 +163,28 @@ class Reminder {
     };
   }
 
-/*
-  bool isInRange(LocationData currentLocation) {
-    return _distanceBetween(locationData, currentLocation) <=
+  bool isInRange({required double latitude, required double longitude}) {
+    return _calcDistanceBetweenInM(
+            locationData,
+            LocationData.fromMap({
+              'latitude': latitude,
+              'longitude': longitude,
+            })) <=
         notificationDistance;
   }
-*/
+
+  int _calcDistanceBetweenInM(
+      LocationData currentLocationData, LocationData targetLocationData) {
+    final haversineDistance = hav.HaversineDistance();
+    final targetLocation = hav.Location(
+        targetLocationData.latitude!, targetLocationData.longitude!);
+    final currentLocation = hav.Location(
+        currentLocationData.latitude!, currentLocationData.longitude!);
+
+    final distance = haversineDistance
+        .haversine(targetLocation, currentLocation, hav.Unit.METER)
+        .floor();
+
+    return distance;
+  }
 }

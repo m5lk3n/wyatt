@@ -39,6 +39,10 @@
 
 - https://pub.dev/packages/awesome_notifications
 
+- https://pub.dev/packages/sqflite
+- https://stackoverflow.com/questions/59775485/flutter-using-plugins-inside-flutter-workmanager-plugin-callbackdispatcher-funct
+- https://github.com/tekartik/sqflite/blob/master/sqflite/doc/troubleshooting.md
+
 - Drift (share storage across isolates)
   - https://pub.dev/packages/drift/example
   - https://drift.simonbinder.eu/isolates/#simple-sharing

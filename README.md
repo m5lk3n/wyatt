@@ -89,15 +89,15 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Handle broken (Internet) connectivity
 
 - [x] Incorporate [loctose](https://github.com/m5lk3n/loctose/)
-- [ ] Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)
-- [ ] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
-- [ ] Implement Haversine (`flutter pub add haversine_distance`)
+- [x] Incorporate [locato](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart)
+- [x] [_handleLocationPermission](https://github.com/m5lk3n/locato/blob/main/lib/location_page.dart#L44)
+- [x] Implement Haversine (`flutter pub add haversine_distance`)
 
 - (?) Download my data
 
-- (?) Implement notification
-  - (?) https://pub.dev/packages/awesome_notifications
-  - (?) https://pub.dev/packages/flutter_local_notifications
+- [x] Implement notification
+  - ~~(?) https://pub.dev/packages/awesome_notifications~~
+  - [x] https://pub.dev/packages/flutter_local_notifications
   - (?) https://pub.dev/packages/location:
 
       *You can also get continuous callbacks when your position is changing:*
@@ -165,9 +165,8 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- https://pub.dev/packages/sqflite
-- https://stackoverflow.com/questions/59775485/flutter-using-plugins-inside-flutter-workmanager-plugin-callbackdispatcher-funct
-- https://github.com/tekartik/sqflite/blob/master/sqflite/doc/troubleshooting.md
+- https://amandevblogs.hashnode.dev/flutter-local-notifications-with-workmanager
+- https://pub.dev/packages/location above
 
 - https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
 - https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications
@@ -190,6 +189,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Open
 
+- Consolidate Geolocator and LocationData?
 - Cancel workmanager?
 - Check if async is always needed
 - How to use `._();` construct / how to implement singletons?

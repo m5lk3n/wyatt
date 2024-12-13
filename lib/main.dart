@@ -1,7 +1,8 @@
 import 'dart:developer';
+import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
@@ -10,25 +11,31 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:wyatt/core.dart';
 import 'package:wyatt/services/storage.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 @pragma('vm:entry-point')
 void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) {
-    /*
+  Workmanager().executeTask((task, inputData) async {
+    log('enter: $task', name: 'callbackDispatcher');
+
     if (task.trim() != 'Wyatt') {
       return Future.value(false);
     }
-*/
-    showNotification('This is a reminder!');
 
-    DateTime now = DateTime.now();
-    if (kDebugMode) {
-      print('callbackDispatcher enter: $task, $inputData, $now');
-    }
-    handleIsolateExchangeData();
-    if (kDebugMode) {
-      print('callbackDispatcher exit: $task, $inputData, $now');
-    }
+    showNotification('This is at work!');
+
+    DartPluginRegistrant.ensureInitialized(); // required for geolocation
+    await Geolocator.getCurrentPosition(locationSettings: LocationSettings())
+        .then((Position currentLocation) async {
+      log('retrieved current location ${currentLocation.latitude}, ${currentLocation.longitude}',
+          name: 'Geolocator');
+
+      initNotifications();
+      handleBackgroundReminders(
+          currentLocation.latitude, currentLocation.longitude);
+    });
+
+    log('exit: $task', name: 'callbackDispatcher');
 
     return Future.value(true);
   });
@@ -53,13 +60,18 @@ Future<void> initApp() async {
 }
 
 void initWorkmanager() {
-  Workmanager().initialize(callbackDispatcher, isInDebugMode: kDebugMode);
+  Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode:
+        false, // we use flutter_local_notifications in callbackDispatcher
+  );
   Workmanager().registerPeriodicTask(
     Common.packageName,
     Common.appName,
     initialDelay: Duration(seconds: 5),
     frequency: Duration(minutes: 15), // min. 15min as per OS
   );
+  tz.initializeTimeZones();
 
   log('workmanager initialized', name: 'WyattApp');
 }

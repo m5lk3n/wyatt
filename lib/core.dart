@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -11,42 +10,45 @@ import 'package:wyatt/providers/permissions_provider.dart';
 
 const String isolateExchangeDataKey = 'dev.lttl.wyatt.isolateExchangeData';
 
-void updateIsolateExchangeData(List<Reminder> reminders) async {
-  SharedPreferencesAsync().setString(
-      isolateExchangeDataKey, '${reminders.length} active reminders');
-  if (kDebugMode) {
-    print('setIsolateExchangeData: ${reminders.length} active reminders');
-  }
+void updateBackgroundReminders(List<Reminder> reminders) async {
+  log('${reminders.length} active reminders in shared preferences',
+      name: 'updateBackgroundReminders');
 
   List<String> remindersAsStringList =
       reminders.map((r) => jsonEncode(r.toJson())).toList();
-
   SharedPreferencesAsync()
       .setStringList(isolateExchangeDataKey, remindersAsStringList);
 }
 
-void handleIsolateExchangeData() async {
-  List<String>? remindersAsStringList =
-      await SharedPreferencesAsync().getStringList(isolateExchangeDataKey);
+void handleBackgroundReminders(
+    double currentLatitude, double currentLongitude) async {
+  try {
+    List<String>? remindersAsStringList =
+        await SharedPreferencesAsync().getStringList(isolateExchangeDataKey);
 
-  if (remindersAsStringList == null) {
-    if (kDebugMode) {
-      print('readIsolateExchangeData: no reminders, skipping');
+    if (remindersAsStringList == null) {
+      log('no reminders, skipping', name: 'handleIsolateExchangeData');
+      return;
     }
-    return;
+
+    List<Reminder> reminders = remindersAsStringList
+        .map((jsonString) => Reminder.fromJson(jsonDecode(jsonString)))
+        .toList();
+
+    log('${reminders.length} reminders', name: 'handleIsolateExchangeData');
+    log('$reminders', name: 'handleIsolateExchangeData');
+
+    for (Reminder reminder in reminders) {
+      if (reminder.isInRange(
+          latitude: currentLatitude, longitude: currentLongitude)) {
+        log('reminder in range: $reminder', name: 'handleIsolateExchangeData');
+        showNotification(reminder.notificationMessage);
+        await Future.delayed(Duration(seconds: 1));
+      }
+    }
+  } catch (e) {
+    log('ERROR: $e', name: 'handleIsolateExchangeData');
   }
-
-  List<Reminder> reminders = remindersAsStringList
-      .map((jsonString) => Reminder.fromJson(jsonDecode(jsonString)))
-      .toList();
-
-  if (kDebugMode) {
-    print('readIsolateExchangeData: ${reminders.length} reminders');
-  }
-
-  print('readIsolateExchangeData: $reminders');
-
-  // TODO: implement
 }
 
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;

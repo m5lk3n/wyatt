@@ -39,7 +39,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
 
     final reminders = ref.watch(remindersNotifierProvider);
     log('got ${reminders.length} reminders', name: '$runtimeType');
-    updateIsolateExchangeData(reminders.where((r) => r.isActive()).toList());
+    updateBackgroundReminders(reminders.where((r) => r.isActive()).toList());
 
     if (reminders.isEmpty) {
       content = Center(

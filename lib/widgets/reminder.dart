@@ -37,7 +37,9 @@ class _ReminderListItemState extends ConsumerState<ReminderListItem> {
           isThreeLine: false,
           tileColor: widget.reminder.isExpired()
               ? Theme.of(context).colorScheme.onInverseSurface
-              : Theme.of(context).colorScheme.onSecondary,
+              : widget.reminder.isEnabled()
+                  ? Theme.of(context).colorScheme.onSecondary
+                  : Theme.of(context).colorScheme.secondaryContainer,
           title: Text(
             '${widget.reminder}',
             style: Theme.of(context)

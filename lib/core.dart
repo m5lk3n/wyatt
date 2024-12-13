@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
@@ -16,14 +17,34 @@ void updateIsolateExchangeData(List<Reminder> reminders) async {
   if (kDebugMode) {
     print('setIsolateExchangeData: ${reminders.length} active reminders');
   }
+
+  List<String> remindersAsStringList =
+      reminders.map((r) => jsonEncode(r.toJson())).toList();
+
+  SharedPreferencesAsync()
+      .setStringList(isolateExchangeDataKey, remindersAsStringList);
 }
 
 void handleIsolateExchangeData() async {
-  var reminders =
-      await SharedPreferencesAsync().getString(isolateExchangeDataKey);
-  if (kDebugMode) {
-    print('readIsolateExchangeData: $reminders');
+  List<String>? remindersAsStringList =
+      await SharedPreferencesAsync().getStringList(isolateExchangeDataKey);
+
+  if (remindersAsStringList == null) {
+    if (kDebugMode) {
+      print('readIsolateExchangeData: no reminders, skipping');
+    }
+    return;
   }
+
+  List<Reminder> reminders = remindersAsStringList
+      .map((jsonString) => Reminder.fromJson(jsonDecode(jsonString)))
+      .toList();
+
+  if (kDebugMode) {
+    print('readIsolateExchangeData: ${reminders.length} reminders');
+  }
+
+  print('readIsolateExchangeData: $reminders');
 
   // TODO: implement
 }

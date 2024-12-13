@@ -34,7 +34,7 @@ class SettingsNotifier extends StateNotifier<Settings> {
 
   Future<int> getDefaultNotificationDistance() async {
     state.defaultNotificationDistance =
-        await _storage.readInt(key: SettingsKeys.distance) ??
+        _storage.readInt(key: SettingsKeys.distance) ??
             Default.notificationDistance;
 
     return state.defaultNotificationDistance;

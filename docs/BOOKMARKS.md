@@ -37,6 +37,8 @@
 
 ## Backlog / Research
 
+- https://pub.dev/packages/awesome_notifications
+
 - Drift (share storage across isolates)
   - https://pub.dev/packages/drift/example
   - https://drift.simonbinder.eu/isolates/#simple-sharing

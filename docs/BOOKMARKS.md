@@ -37,6 +37,12 @@
 
 ## Backlog / Research
 
+- Drift (share storage across isolates)
+  - https://pub.dev/packages/drift/example
+  - https://drift.simonbinder.eu/isolates/#simple-sharing
+
+- https://iamkaival.medium.com/flutter-isolates-working-with-firebase-storage-with-isolates-3645d4445e6b
+
 - https://sikandarsadaqat.medium.com/flutter-benchmarking-adding-multiple-objects-to-a-list-8ab527890898
 
 - https://stackoverflow.com/questions/49648022/check-whether-there-is-an-internet-connection-available-on-flutter-app

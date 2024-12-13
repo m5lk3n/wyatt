@@ -165,7 +165,14 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- Incorporate locato (from geo_fencing_demo)
+- https://pub.dev/packages/sqflite
+- https://stackoverflow.com/questions/59775485/flutter-using-plugins-inside-flutter-workmanager-plugin-callbackdispatcher-funct
+- https://github.com/tekartik/sqflite/blob/master/sqflite/doc/troubleshooting.md
+
+- https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
+- https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications
+
+- Incorporate locato ([from geo_fencing_demo](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart))
   - https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
 
 - Auto-cancel expired reminders
@@ -183,6 +190,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Open
 
+- Cancel workmanager?
 - Check if async is always needed
 - How to use `._();` construct / how to implement singletons?
 - How to reset non-FormFields?

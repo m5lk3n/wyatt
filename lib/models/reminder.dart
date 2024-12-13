@@ -97,6 +97,10 @@ class Reminder {
     return !enabled;
   }
 
+  bool isActive() {
+    return isEnabled() && !isInError() && !isExpired() && !isNotified();
+  }
+
   bool isExpired() {
     return notificationEndDateTime != null &&
         notificationEndDateTime!.isBefore(DateTime.now());

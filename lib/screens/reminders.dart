@@ -39,6 +39,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
 
     final reminders = ref.watch(remindersNotifierProvider);
     log('got ${reminders.length} reminders', name: '$runtimeType');
+    updateIsolateExchangeData(reminders.where((r) => r.isActive()).toList());
 
     if (reminders.isEmpty) {
       content = Center(
@@ -160,7 +161,6 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                       actions: [
                         TextButton(
                             onPressed: () {
-                              // TODO: core!.cancelReminder(reminders[index]);
                               Navigator.of(context).pop(true);
                             },
                             child: const Text('Delete')),
@@ -219,12 +219,4 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
         .toLowerCase()
         .compareTo(r2.notificationMessage.toLowerCase()));
   }
-
-  /* TODO:
-  void _registerReminders(List<Reminder> reminders) {
-    for (final reminder in reminders) {
-      core!.registerReminder(reminder);
-    }
-  }
-  */
 }

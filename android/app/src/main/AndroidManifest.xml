@@ -31,7 +31,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value= "WillBeReplacedAtRuntime"/>
         <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+             and by flutter_workmanager -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
@@ -52,6 +53,16 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--required by e.g. internet_connection_checker_plus -->
+    <!-- required by e.g. internet_connection_checker_plus -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- AT WORK -->
+    <!-- uses-permission android:name="android.permission.USE_EXACT_ALARM" /-->
+    <!-- https://pub.dev/packages/flutter_local_notifications#androidmanifestxml-setup -->
+    <uses-permission android:name="android.permission.VIBRATE" /> 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" /-->
+    <!-- uses-permission android:name="android.permission.WAKE_LOCK" / ? -->
+    <!-- https://developer.android.com/develop/ui/views/notifications/notification-permission -->
+    <!-- "to send a notification while the app is not running": -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 </manifest>

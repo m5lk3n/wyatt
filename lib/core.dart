@@ -1,8 +1,74 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/permissions_provider.dart';
+
+const String isolateExchangeDataKey = 'dev.lttl.wyatt.isolateExchangeData';
+
+void updateIsolateExchangeData(List<Reminder> reminders) async {
+  SharedPreferencesAsync().setString(
+      isolateExchangeDataKey, '${reminders.length} active reminders');
+  if (kDebugMode) {
+    print('setIsolateExchangeData: ${reminders.length} active reminders');
+  }
+}
+
+void handleIsolateExchangeData() async {
+  var reminders =
+      await SharedPreferencesAsync().getString(isolateExchangeDataKey);
+  if (kDebugMode) {
+    print('readIsolateExchangeData: $reminders');
+  }
+
+  // TODO: implement
+}
+
+FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+
+void initNotifications() {
+  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  var initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+  /* var initializationSettingsIOS = IOSInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false);*/
+  var initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid, /*iOS: initializationSettingsIOS */
+  );
+  flutterLocalNotificationsPlugin!.initialize(initializationSettings);
+
+  log('notifications initialized', name: 'WyattApp');
+}
+
+void showNotification(String text) async {
+  if (flutterLocalNotificationsPlugin == null) {
+    initNotifications();
+  }
+
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    'dev.lttl.wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'packageName' has not been initialized.
+    'Wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'appName' has not been initialized.
+    importance: Importance.high,
+    priority: Priority.high,
+  );
+  // TODO: var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(
+    android:
+        androidPlatformChannelSpecifics, /*iOS: iOSPlatformChannelSpecifics*/
+  );
+  await flutterLocalNotificationsPlugin!.show(
+    0,
+    'Howdy!',
+    text,
+    platformChannelSpecifics,
+  );
+}
 
 class CoreSystem {
   final WidgetRef _ref;
@@ -48,7 +114,7 @@ class CoreSystem {
     }).onProvisionalCallback(() {
       log('locationAlways provisional', name: '$runtimeType');
     }).request();
-/*
+
     await Permission.notification.onGrantedCallback(() {
       log('notification granted', name: '$runtimeType');
       notificationGranted = true;
@@ -59,9 +125,6 @@ class CoreSystem {
     }).onProvisionalCallback(() {
       log('notification provisional', name: '$runtimeType');
     }).request();
-*/
-    notificationGranted =
-        true; // TODO: remove this line, replace with above block
 
     bool overallGranted =
         locationGranted && locationAlwaysGranted && notificationGranted;
@@ -70,7 +133,7 @@ class CoreSystem {
     log('overallGranted = $overallGranted', name: '$runtimeType');
 
     if (!overallGranted) {
-      log("permissions not granted, service can't be started",
+      log("permissions not granted, core functionality will not work",
           name: '$runtimeType');
     }
 

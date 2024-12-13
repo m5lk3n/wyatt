@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get_storage/get_storage.dart';
 
 enum StorageType { reminders, settings }
@@ -6,6 +8,8 @@ Future<void> initPersistentLocalStorage() async {
   for (var type in StorageType.values) {
     await GetStorage.init(type.toString());
   }
+
+  log('persistent storage initialized', name: 'WyattApp');
 }
 
 class PersistentLocalStorage {

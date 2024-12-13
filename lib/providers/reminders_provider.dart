@@ -10,34 +10,34 @@ final remindersNotifierProvider =
         (ref) => RemindersNotifier([]));
 
 class RemindersNotifier extends StateNotifier<List<Reminder>> {
-  final _storage = RemindersStorage();
+  final _persistentStorage = RemindersStorage();
 
   RemindersNotifier(super.state) {
     log('had ${state.length} reminders', name: '$runtimeType');
-    state = _storage.getReminders();
+    state = _persistentStorage.getReminders();
     log('now ${state.length} reminders', name: '$runtimeType');
   }
 
   void add(Reminder reminder) {
     state = [...state, reminder];
-    _storage.add(reminder);
+    _persistentStorage.add(reminder);
   }
 
   void addAll(List<Reminder> reminders) {
     log('adding ${reminders.length} reminders to ${state.length} from the state',
         name: '$runtimeType');
     state = [...state, ...reminders];
-    _storage.addAll(reminders);
+    _persistentStorage.addAll(reminders);
   }
 
   void insertAt(int index, Reminder reminder) {
     state = [...state]..insert(index, reminder);
-    _storage.add(reminder);
+    _persistentStorage.add(reminder);
   }
 
   void remove(Reminder reminder) {
     state = state.where((r) => r != reminder).toList();
-    _storage.remove(reminder);
+    _persistentStorage.remove(reminder);
     log('removed reminder: $reminder, ${state.length} is left',
         name: '$runtimeType');
   }
@@ -49,11 +49,11 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
         (r) => r.id == reminder.id ? reminder : r,
       ),
     ];
-    _storage.update(reminder);
+    _persistentStorage.update(reminder);
   }
 
   void clearAll() {
     state = [];
-    _storage.clearAll();
+    _persistentStorage.clearAll();
   }
 }

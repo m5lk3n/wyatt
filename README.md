@@ -98,21 +98,6 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Implement notification
   - ~~(?) https://pub.dev/packages/awesome_notifications~~
   - [x] https://pub.dev/packages/flutter_local_notifications
-  - (?) https://pub.dev/packages/location:
-
-      *You can also get continuous callbacks when your position is changing:*
-
-      ```
-      location.onLocationChanged.listen((LocationData currentLocation) {
-        // Use current location
-      });
-      ```
-
-      *To receive location when application is in background you have to enable it:*
-
-      ```
-      location.enableBackgroundMode(enable: true)
-      ```
 
 ## Wireframe
 
@@ -146,7 +131,6 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Document permissions
   - updating permissions while the app is open requires an app action to refresh appbar to get rid of the error message reg. missing permissions
   - [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
-  - e.g., [location](https://pub.dev/packages/location) package: "Remember that the user has to accept the location permission to always allow to use the background location."
 - Clarify minimum requirements (Android (API) version, etc.), see e.g., Note under https://docs.flutter.dev/deployment/android#enable-multidex-support
 - [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
@@ -164,9 +148,6 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Clean up assets
 
 ## Doing
-
-- https://amandevblogs.hashnode.dev/flutter-local-notifications-with-workmanager
-- https://pub.dev/packages/location above
 
 - https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
 - https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications

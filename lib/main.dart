@@ -10,9 +10,12 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:wyatt/core.dart';
+import 'package:wyatt/models/reminder.dart';
+import 'package:wyatt/notifications.dart';
 import 'package:wyatt/services/storage.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+/*
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
@@ -40,6 +43,49 @@ void callbackDispatcher() {
     return Future.value(true);
   });
 }
+*/
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  Workmanager().executeTask((taskName, inputData) async {
+    try {
+      /* 
+      Location location = Location();
+      location.enableBackgroundMode(enable: true);
+      LocationData currentLocation = await location.getLocation(); // throws a java.lang.NullPointerException, hence we use Geolocator
+      */
+      DartPluginRegistrant.ensureInitialized(); // required for geolocation
+      Position currentLocation = await Geolocator.getCurrentPosition(
+          locationSettings: LocationSettings());
+      log('retrieved current location ${currentLocation.latitude}, ${currentLocation.longitude}',
+          name: 'Geolocator');
+
+      List<Reminder> remindersInRange = await getBackgroundRemindersInRange(
+          currentLocation.latitude, currentLocation.longitude);
+
+      String message = '';
+      for (Reminder reminder in remindersInRange) {
+        message += message.isEmpty ? '$reminder' : ', $reminder';
+      }
+
+      return await callNotification(message);
+    } catch (e) {
+      log('ERROR: $e', name: 'callbackDispatcher');
+
+      return Future.value(false);
+    }
+  });
+}
+
+Future<bool> callNotification(String notificationMessage) async {
+  await NotificationService().showLocalNotification(
+      id: 0,
+      title: "Howdy!",
+      body: "Wyatt reminds you: $notificationMessage",
+      payload: "");
+
+  return Future.value(true);
+}
 
 // https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
 extension StringExtensions on String {
@@ -54,17 +100,18 @@ Future<void> initApp() async {
   Common.appVersion = packageInfo.version;
   Common.packageName = packageInfo.packageName;
 
-  initNotifications();
+  //initNotifications();
   initPersistentLocalStorage();
   initWorkmanager();
 }
 
-void initWorkmanager() {
+void initWorkmanager() async {
   Workmanager().initialize(
     callbackDispatcher,
     isInDebugMode:
         false, // we use flutter_local_notifications in callbackDispatcher
   );
+  await NotificationService().initializePlatformNotifications();
   Workmanager().registerPeriodicTask(
     Common.packageName,
     Common.appName,

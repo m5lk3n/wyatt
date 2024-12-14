@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wyatt/models/reminder.dart';
@@ -20,37 +20,39 @@ void updateBackgroundReminders(List<Reminder> reminders) async {
       .setStringList(isolateExchangeDataKey, remindersAsStringList);
 }
 
-void handleBackgroundReminders(
+Future<List<Reminder>> getBackgroundRemindersInRange(
     double currentLatitude, double currentLongitude) async {
+  List<Reminder> remindersInRange = [];
   try {
     List<String>? remindersAsStringList =
         await SharedPreferencesAsync().getStringList(isolateExchangeDataKey);
 
-    if (remindersAsStringList == null) {
-      log('no reminders, skipping', name: 'handleIsolateExchangeData');
-      return;
+    if (remindersAsStringList == null || remindersAsStringList.isEmpty) {
+      log('no reminders, skipping', name: 'getRemindersInRange');
+      return [];
     }
 
     List<Reminder> reminders = remindersAsStringList
         .map((jsonString) => Reminder.fromJson(jsonDecode(jsonString)))
         .toList();
 
-    log('${reminders.length} reminders', name: 'handleIsolateExchangeData');
-    log('$reminders', name: 'handleIsolateExchangeData');
+    log('${reminders.length} reminders', name: 'getRemindersInRange');
+    log('$reminders', name: 'getRemindersInRange');
 
-    for (Reminder reminder in reminders) {
-      if (reminder.isInRange(
-          latitude: currentLatitude, longitude: currentLongitude)) {
-        log('reminder in range: $reminder', name: 'handleIsolateExchangeData');
-        showNotification(reminder.notificationMessage);
-        await Future.delayed(Duration(seconds: 1));
-      }
-    }
+    remindersInRange = reminders.where((reminder) {
+      return reminder.isInRange(LocationData.fromMap(
+          {'latitude': currentLatitude, 'longitude': currentLongitude}));
+    }).toList();
+    log('${remindersInRange.length} reminders in range',
+        name: 'getRemindersInRange');
   } catch (e) {
-    log('ERROR: $e', name: 'handleIsolateExchangeData');
+    log('ERROR: $e', name: 'getRemindersInRange');
+    remindersInRange = [];
   }
+  return remindersInRange;
 }
 
+/*
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
 
 void initNotifications() {
@@ -92,7 +94,7 @@ void showNotification(String text) async {
     platformChannelSpecifics,
   );
 }
-
+*/
 class CoreSystem {
   final WidgetRef _ref;
 

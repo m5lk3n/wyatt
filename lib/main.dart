@@ -78,6 +78,10 @@ void callbackDispatcher() {
 }
 
 Future<bool> callNotification(String notificationMessage) async {
+  if (notificationMessage.trim().isEmpty) {
+    return Future.value(false);
+  }
+
   await NotificationService().showLocalNotification(
       id: 0,
       title: "Howdy!",

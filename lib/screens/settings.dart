@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/core.dart';
+import 'package:wyatt/helper.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/reminders_provider.dart';
 import 'package:wyatt/providers/settings_helper.dart';
@@ -11,7 +13,6 @@ import 'package:wyatt/providers/settings_provider.dart';
 import 'package:wyatt/screens/screens_helper.dart';
 import 'package:wyatt/widgets/appbar.dart';
 import 'package:wyatt/widgets/common.dart';
-import 'package:wyatt/widgets/link_button.dart';
 import 'package:restart_app/restart_app.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -37,6 +38,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _isObscured = true;
 
   final _formKey = GlobalKey<FormState>();
+  late TapGestureRecognizer _tapGestureRecognizer;
 
   @override
   void initState() {
@@ -49,12 +51,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     if (!_isSettingUp) {
       readDefaultNotificationDistance(ref, _distanceController);
     }
+
+    _tapGestureRecognizer = TapGestureRecognizer();
   }
 
   @override
   void dispose() {
     _keyController.dispose();
     _distanceController.dispose();
+
+    _tapGestureRecognizer.dispose();
 
     super.dispose();
   }
@@ -137,6 +143,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
                 child: Text.rich(
                   // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                  // don't use TextButton here either as its textStyle yields a different result on Android 14 and 15
                   TextSpan(children: [
                     TextSpan(
                       text: _isSettingUp
@@ -146,13 +153,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                     ),
-                    WidgetSpan(
-                      alignment: PlaceholderAlignment.baseline,
-                      baseline: TextBaseline.alphabetic,
-                      child: LinkButton(
-                        urlLabel: 'this page',
-                        url: Url.key,
-                      ),
+                    TextSpan(
+                      recognizer: _tapGestureRecognizer
+                        ..onTap = () {
+                          browseTo(Url.key);
+                        },
+                      text: 'this page',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: Theme.of(context).colorScheme.primary,
+                          decorationColor:
+                              Theme.of(context).colorScheme.primary),
                     ),
                     TextSpan(
                       text: '.',
@@ -165,26 +176,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               _isSettingUp
                   ? Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        0,
-                        Style.space,
-                        Style.space,
-                        Style.space,
-                      ),
+                      padding: const EdgeInsets.all(Style.space),
                       child: Text.rich(
                         // don't use RichText here as it's overriding the default font: https://stackoverflow.com/questions/74459505/richtext-overriding-default-font-family
+                        // don't use TextButton here either as its textStyle yields a different result on Android 14 and 15
                         TextSpan(
                           children: [
-                            WidgetSpan(
-                              alignment: PlaceholderAlignment.baseline,
-                              baseline: TextBaseline.alphabetic,
-                              child: LinkButton(
-                                urlLabel: 'What',
-                                url: Url.keyWhat,
-                              ),
+                            TextSpan(
+                              recognizer: _tapGestureRecognizer
+                                ..onTap = () {
+                                  browseTo(Url.keyWhat);
+                                },
+                              text: 'What',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      decoration: TextDecoration.underline,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      decorationColor: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                             ),
                             TextSpan(
-                              text: ' is this and ',
+                              text: ' is that and ',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
@@ -193,13 +209,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                         Theme.of(context).colorScheme.onSurface,
                                   ),
                             ),
-                            WidgetSpan(
-                              alignment: PlaceholderAlignment.baseline,
-                              baseline: TextBaseline.alphabetic,
-                              child: LinkButton(
-                                urlLabel: 'why',
-                                url: Url.keyWhy,
-                              ),
+                            TextSpan(
+                              recognizer: _tapGestureRecognizer
+                                ..onTap = () {
+                                  browseTo(Url.keyWhy);
+                                },
+                              text: 'why',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      decoration: TextDecoration.underline,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      decorationColor: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                             ),
                             TextSpan(
                               text:

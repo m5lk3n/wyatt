@@ -10,12 +10,12 @@ import 'package:wyatt/providers/permissions_provider.dart';
 
 const String isolateExchangeDataKey = 'dev.lttl.wyatt.isolateExchangeData';
 
-void updateBackgroundReminders(List<Reminder> reminders) async {
-  log('${reminders.length} active reminders in shared preferences',
+void updateBackgroundReminders(List<Reminder> activeReminders) async {
+  log('${activeReminders.length} active reminders in shared preferences',
       name: 'updateBackgroundReminders');
 
   List<String> remindersAsStringList =
-      reminders.map((r) => jsonEncode(r.toJson())).toList();
+      activeReminders.map((r) => jsonEncode(r.toJson())).toList();
   SharedPreferencesAsync()
       .setStringList(isolateExchangeDataKey, remindersAsStringList);
 }

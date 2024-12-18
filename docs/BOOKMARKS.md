@@ -93,3 +93,5 @@
 - [How to store coordinates on the local device](https://docs.flutter.dev/cookbook/persistence/key-value)
 
 - [How to implement Dark mode and Light Mode in flutter?](https://stackoverflow.com/questions/60232070/how-to-implement-dark-mode-and-light-mode-in-flutter)
+
+- https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget (see comments about `textStyle` differences between Android 14 and 15)

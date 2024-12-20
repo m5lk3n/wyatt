@@ -149,6 +149,9 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
+- https://stackoverflow.com/questions/78048254/is-it-possible-to-turn-a-flutter-listview-into-a-reorderablelistview
+- https://media.licdn.com/dms/image/v2/D4E22AQHIT8AOnPoxgA/feedshare-shrink_800/B4EZPWR_EkHsAg-/0/1734466864882?e=1737590400&v=beta&t=pCszA3RTVRhqxQyoqyU3W1ulPbVOxRkfyP8iFtIVbiw
+
 - https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
 - https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications
 

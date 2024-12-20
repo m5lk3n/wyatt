@@ -38,7 +38,7 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
   void remove(Reminder reminder) {
     state = state.where((r) => r != reminder).toList();
     _persistentStorage.remove(reminder);
-    log('removed reminder: $reminder, ${state.length} is left',
+    log('removed reminder: $reminder, ${state.length} is/are left',
         name: '$runtimeType');
   }
 

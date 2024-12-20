@@ -114,8 +114,17 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
         child: const Icon(Icons.lightbulb),
       );
     } else {
-      _sortByMessage(reminders);
-      content = ListView.builder(
+      // ReorderableListView: _sortByMessage(reminders);
+      content = ReorderableListView.builder(
+        onReorder: (int oldIndex, int newIndex) {
+          if (oldIndex < newIndex) {
+            newIndex -= 1;
+          }
+          final item = reminders.removeAt(oldIndex);
+          ref.read(remindersNotifierProvider.notifier).remove(item);
+          reminders.insert(newIndex, item);
+          ref.read(remindersNotifierProvider.notifier).insertAt(newIndex, item);
+        },
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: reminders.length,
@@ -214,9 +223,11 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     );
   }
 
+/*
   void _sortByMessage(List<Reminder> reminders) {
     reminders.sort((r1, r2) => r1.notificationMessage
         .toLowerCase()
         .compareTo(r2.notificationMessage.toLowerCase()));
   }
+*/
 }

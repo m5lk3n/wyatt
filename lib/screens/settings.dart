@@ -95,7 +95,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ref.read(isKeyValidStateProvider.notifier).state = false;
       scaffold.showSnackBar(SnackBar(
           backgroundColor: themeData.colorScheme.error,
-          content: Text('The key is invalid, the app won\'t work!')));
+          content: Text(
+              'The key is invalid or the device is offline, the app won\'t work!')));
     }
 
     return false;

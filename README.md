@@ -113,7 +113,8 @@ A location- and time-based To-do app for iOS and Android.
 - [x] Field validation
 - [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
-- [ ] Recover from crash (e.g., by revoking permissions)
+- [ ] Recover from crash (e.g., by user revoking permissions during usage)
+  - [ ] [Catcher 2](https://pub.dev/packages/catcher_2)
 - [ ] Add to each StatefulWidget (?) ((reasoning)[https://stackoverflow.com/questions/49340116/setstate-called-after-dispose]):
 
       @override

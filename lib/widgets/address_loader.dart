@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/widgets/location_helper.dart';
 import 'package:wyatt/widgets/location_picker.dart';
 
@@ -72,14 +71,15 @@ class _AddressLoaderState extends State<AddressLoader> {
         _error = err.code;
         _addressController.text =
             'Error loading location. You may be offline. Please try again later.';
-        log('error loading location: $_error', name: '$runtimeType');
+        log.error('error loading location',
+            error: _error, name: '$runtimeType');
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    log('location: ${_error ?? '${_currentLocationData ?? "unknown"}'}',
+    log.debug('location: ${_error ?? '${_currentLocationData ?? "unknown"}'}',
         name: '$runtimeType');
 
     return TextField(
@@ -105,7 +105,7 @@ class _AddressLoaderState extends State<AddressLoader> {
 
   Future<void> pickLocation(BuildContext context) async {
     if (_currentLocationData == null) {
-      log('no location data', name: '$runtimeType');
+      log.debug('no location data', name: '$runtimeType');
       return;
     }
 
@@ -115,7 +115,7 @@ class _AddressLoaderState extends State<AddressLoader> {
           builder: (context) =>
               LocationPicker(locationData: _currentLocationData!)),
     );
-    log('location picked: $location', name: '$runtimeType');
+    log.debug('location picked: $location', name: '$runtimeType');
     if (location == null) {
       return;
     }

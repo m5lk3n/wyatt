@@ -1,18 +1,18 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/permissions_provider.dart';
 
 const String isolateExchangeDataKey = 'dev.lttl.wyatt.isolateExchangeData';
 
-void updateBackgroundReminders(List<Reminder> activeReminders) async {
-  log('${activeReminders.length} active reminders in shared preferences',
-      name: 'updateBackgroundReminders');
+void setBackgroundReminders(List<Reminder> activeReminders) async {
+  log.debug(
+      'setting ${activeReminders.length} active reminders in shared preferences');
 
   List<String> remindersAsStringList =
       activeReminders.map((r) => jsonEncode(r.toJson())).toList();
@@ -28,7 +28,7 @@ Future<List<Reminder>> getBackgroundRemindersInRange(
         await SharedPreferencesAsync().getStringList(isolateExchangeDataKey);
 
     if (remindersAsStringList == null || remindersAsStringList.isEmpty) {
-      log('no reminders, skipping', name: 'getRemindersInRange');
+      log.debug('no reminders in shared preferences, skipping range check');
       return [];
     }
 
@@ -36,17 +36,16 @@ Future<List<Reminder>> getBackgroundRemindersInRange(
         .map((jsonString) => Reminder.fromJson(jsonDecode(jsonString)))
         .toList();
 
-    log('${reminders.length} reminders', name: 'getRemindersInRange');
-    log('$reminders', name: 'getRemindersInRange');
+    log.debug(
+        '${reminders.length} reminders in shared preferences: $reminders');
 
     remindersInRange = reminders.where((reminder) {
       return reminder.isInRange(LocationData.fromMap(
           {'latitude': currentLatitude, 'longitude': currentLongitude}));
     }).toList();
-    log('${remindersInRange.length} reminders in range',
-        name: 'getRemindersInRange');
+    log.debug('${remindersInRange.length} reminders in range');
   } catch (e) {
-    log('ERROR: $e', name: 'getRemindersInRange');
+    log.error('error getting reminders in range', error: e);
     remindersInRange = [];
   }
   return remindersInRange;
@@ -68,7 +67,7 @@ void initNotifications() {
   );
   flutterLocalNotificationsPlugin!.initialize(initializationSettings);
 
-  log('notifications initialized', name: 'WyattApp');
+  log.debug('notifications initialized', name: 'WyattApp');
 }
 
 void showNotification(String text) async {
@@ -112,7 +111,7 @@ class CoreSystem {
        - onPermanentlyDeniedCallback: no new permission dialog will be shown, redirect user to App settings page for permissions
        - onProvisionalCallback: iOS only, "provisionally authorized to post noninterruptive user notifications" (https://github.com/Baseflow/flutter-permission-handler/blob/main/permission_handler/lib/permission_handler.dart#L154C29-L154C96)
     */
-    log('checking permissions', name: '$runtimeType');
+    log.debug('checking permissions', name: '$runtimeType');
 
     bool locationGranted = false;
     bool locationAlwaysGranted = false;
@@ -120,45 +119,45 @@ class CoreSystem {
 
     await Permission.location.onGrantedCallback(() {
       locationGranted = true;
-      log('location granted', name: '$runtimeType');
+      log.debug('location granted', name: '$runtimeType');
     }).onDeniedCallback(() {
-      log('location denied', name: '$runtimeType');
+      log.debug('location denied', name: '$runtimeType');
     }).onPermanentlyDeniedCallback(() {
-      log('location permanently denied', name: '$runtimeType');
+      log.debug('location permanently denied', name: '$runtimeType');
     }).onProvisionalCallback(() {
-      log('location provisional', name: '$runtimeType');
+      log.debug('location provisional', name: '$runtimeType');
     }).request();
 
     await Permission.locationAlways.onGrantedCallback(() {
-      log('locationAlways granted', name: '$runtimeType');
+      log.debug('locationAlways granted', name: '$runtimeType');
       locationAlwaysGranted = true;
     }).onDeniedCallback(() {
-      log('locationAlways denied', name: '$runtimeType');
+      log.debug('locationAlways denied', name: '$runtimeType');
     }).onPermanentlyDeniedCallback(() {
-      log('locationAlways permanently denied', name: '$runtimeType');
+      log.debug('locationAlways permanently denied', name: '$runtimeType');
     }).onProvisionalCallback(() {
-      log('locationAlways provisional', name: '$runtimeType');
+      log.debug('locationAlways provisional', name: '$runtimeType');
     }).request();
 
     await Permission.notification.onGrantedCallback(() {
-      log('notification granted', name: '$runtimeType');
+      log.debug('notification granted', name: '$runtimeType');
       notificationGranted = true;
     }).onDeniedCallback(() {
-      log('notification denied', name: '$runtimeType');
+      log.debug('notification denied', name: '$runtimeType');
     }).onPermanentlyDeniedCallback(() {
-      log('notification permanently denied', name: '$runtimeType');
+      log.debug('notification permanently denied', name: '$runtimeType');
     }).onProvisionalCallback(() {
-      log('notification provisional', name: '$runtimeType');
+      log.debug('notification provisional', name: '$runtimeType');
     }).request();
 
     bool overallGranted =
         locationGranted && locationAlwaysGranted && notificationGranted;
     _ref.read(arePermissionsGrantedStateProvider.notifier).state =
         overallGranted;
-    log('overallGranted = $overallGranted', name: '$runtimeType');
+    log.debug('overallGranted = $overallGranted', name: '$runtimeType');
 
     if (!overallGranted) {
-      log("permissions not granted, core functionality will not work",
+      log.prod('permissions not granted, core functionality will not work',
           name: '$runtimeType');
     }
 

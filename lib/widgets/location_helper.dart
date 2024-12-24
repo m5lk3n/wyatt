@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
+import 'package:wyatt/log.dart';
 
 Future<String> determineAddress(LocationData locationData) async {
   List<Placemark> placemarks = await placemarkFromCoordinates(
@@ -10,7 +9,7 @@ Future<String> determineAddress(LocationData locationData) async {
   );
 
   if (placemarks.isEmpty) {
-    log('no placemarks', name: 'determineAddress');
+    log.debug('no placemarks at address');
     return 'Unknown';
   }
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:core';
-import 'dart:developer';
 
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/services/storage.dart';
 
@@ -18,7 +18,7 @@ class RemindersStorage {
       }
     }
 
-    log('retrieved ${reminders.length} reminders from persistent storage',
+    log.debug('retrieved ${reminders.length} reminders from persistent storage',
         name: '$runtimeType');
 
     return reminders;
@@ -26,34 +26,34 @@ class RemindersStorage {
 
   void add(Reminder reminder) {
     _storeReminder(reminder);
-    log('added reminder: $reminder', name: '$runtimeType');
+    log.debug('added reminder: $reminder', name: '$runtimeType');
   }
 
   void addAll(List<Reminder> reminders) {
     for (var reminder in reminders) {
       _storeReminder(reminder);
     }
-    log('added all ${reminders.length} reminders', name: '$runtimeType');
+    log.debug('added all ${reminders.length} reminders', name: '$runtimeType');
   }
 
   void insertAt(int index, Reminder reminder) {
     _storeReminder(reminder);
-    log('inserted reminder: $reminder', name: '$runtimeType');
+    log.debug('inserted reminder: $reminder', name: '$runtimeType');
   }
 
   void remove(Reminder reminder) {
     _deleteReminder(reminder.id!);
-    log('deleted reminder: $reminder', name: '$runtimeType');
+    log.debug('deleted reminder: $reminder', name: '$runtimeType');
   }
 
   void update(Reminder reminder) {
     _storeReminder(reminder);
-    log('updated reminder: $reminder', name: '$runtimeType');
+    log.debug('updated reminder: $reminder', name: '$runtimeType');
   }
 
   void clearAll() {
     _storage.deleteAll();
-    log('updated all reminders', name: '$runtimeType');
+    log.debug('updated all reminders', name: '$runtimeType');
   }
 
   // overrides an existing reminder with the same id

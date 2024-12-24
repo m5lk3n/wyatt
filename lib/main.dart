@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:wyatt/core.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/notifications.dart';
 import 'package:wyatt/services/storage.dart';
@@ -57,8 +57,8 @@ void callbackDispatcher() {
       DartPluginRegistrant.ensureInitialized(); // required for geolocation
       Position currentLocation = await Geolocator.getCurrentPosition(
           locationSettings: LocationSettings());
-      log('retrieved current location ${currentLocation.latitude}, ${currentLocation.longitude}',
-          name: 'Geolocator');
+      log.debug(
+          'retrieved current geolocation ${currentLocation.latitude}, ${currentLocation.longitude}');
 
       List<Reminder> remindersInRange = await getBackgroundRemindersInRange(
           currentLocation.latitude, currentLocation.longitude);
@@ -70,7 +70,10 @@ void callbackDispatcher() {
 
       return await callNotification(message);
     } catch (e) {
-      log('ERROR: $e', name: 'callbackDispatcher');
+      log.error(
+        'error executing workmanager task',
+        error: e,
+      );
 
       return Future.value(false);
     }
@@ -104,6 +107,7 @@ Future<void> initApp() async {
   Common.appVersion = packageInfo.version;
   Common.packageName = packageInfo.packageName;
 
+  initLogging();
   //initNotifications();
   initPersistentLocalStorage();
   initWorkmanager();
@@ -124,7 +128,7 @@ void initWorkmanager() async {
   );
   tz.initializeTimeZones();
 
-  log('workmanager initialized', name: 'WyattApp');
+  log.debug('workmanager initialized');
 }
 
 Future<void> main() async {

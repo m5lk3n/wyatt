@@ -9,4 +9,4 @@ if [ ! -f ${ADB} ]; then
     exit 1
 fi
 
-${ADB} shell logcat --pid=$(${ADB} shell pidof dev.lttl.wyatt) | tee wyatt.log
+${ADB} shell logcat --pid=$(${ADB} shell pidof dev.lttl.wyatt) | tee wyatt-logcat.log

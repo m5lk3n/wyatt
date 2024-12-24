@@ -34,6 +34,8 @@ install:
 	flutter pub add flutter_local_notifications
 	flutter pub add geolocator
 	flutter pub add timezone
+	flutter pub add logging
+	flutter pub add path_provider
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean

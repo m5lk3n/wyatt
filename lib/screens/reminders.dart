@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/core.dart';
 import 'package:wyatt/data/seed.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/providers/reminders_provider.dart';
 import 'package:wyatt/widgets/appbar.dart';
@@ -38,8 +37,8 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
     Widget? floatingActionButton;
 
     final reminders = ref.watch(remindersNotifierProvider);
-    log('got ${reminders.length} reminders', name: '$runtimeType');
-    updateBackgroundReminders(reminders.where((r) => r.isActive()).toList());
+    log.debug('got ${reminders.length} reminders', name: '$runtimeType');
+    setBackgroundReminders(reminders.where((r) => r.isActive()).toList());
 
     if (reminders.isEmpty) {
       content = Center(
@@ -92,7 +91,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                   actions: [
                     TextButton(
                       onPressed: () {
-                        log('seeding ${seedReminders.length} reminders',
+                        log.debug('seeding ${seedReminders.length} reminders',
                             name: '$runtimeType');
                         ref
                             .read(remindersNotifierProvider.notifier)

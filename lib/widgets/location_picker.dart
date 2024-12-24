@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_map_dynamic_key/google_map_dynamic_key.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/providers/settings_provider.dart';
 import 'package:wyatt/widgets/appbar.dart';
 
@@ -28,7 +27,6 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
   bool _isLoading = false;
 
   void _onMapCreated(GoogleMapController controller) {
-    log('onMapCreated', name: '$runtimeType');
     _controller = controller;
   }
 
@@ -45,7 +43,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
       "latitude": position.latitude,
       "longitude": position.longitude,
     });
-    log('picked location: $pickedLocation', name: '$runtimeType');
+    log.debug('picked location: $pickedLocation', name: '$runtimeType');
     Navigator.of(context).pop(pickedLocation);
   }
 
@@ -69,13 +67,13 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
     });
 
     _key = await settings.getKey();
-    log('key = $_key',
+    log.debug('key from settings: $_key',
         name:
-            'LocationPicker'); // if key is empty, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
+            '$runtimeType'); // if key is empty, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
     // TODO: complain if key is invalid (set global error via notifier and route to setup page)
 
     await _googleMapDynamicKeyPlugin.setGoogleApiKey(_key).then((value) {
-      log('GoogleMap key set dynamically', name: '$runtimeType');
+      log.debug('GoogleMap key set dynamically', name: '$runtimeType');
       setState(() {
         _isLoading = false;
       });
@@ -84,7 +82,6 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
 
   @override
   Widget build(BuildContext context) {
-    log('build', name: '$runtimeType');
     final latLngLocation =
         LatLng(widget.locationData.latitude!, widget.locationData.longitude!);
 

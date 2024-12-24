@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/startup.dart';
 import 'package:wyatt/providers/settings_helper.dart';
 import 'package:wyatt/services/secure_storage.dart';
@@ -28,7 +27,7 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
     state = startup;
 
     final key = await _secureStorage.read(key: SecureSettingsKeys.key);
-    log('key = $key', name: '$runtimeType');
+    log.debug('key = $key', name: '$runtimeType');
     if (key == null || key.isEmpty) {
       state = startup.copyWith(
         isLoading: false,
@@ -44,6 +43,6 @@ class StartupNotifier extends AutoDisposeNotifier<Startup> {
       );
     });
 
-    log('state = $state', name: '$runtimeType');
+    log.debug('state = $state', name: '$runtimeType');
   }
 }

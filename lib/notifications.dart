@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
-import 'dart:developer' as dev;
+import 'dart:developer'
+    as dev; // don't use 'package:wyatt/log.dart' here, as it's not available in the background isolate where this code runs
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';

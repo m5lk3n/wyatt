@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:wyatt/app_routes.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/permissions_provider.dart';
 import 'package:wyatt/screens/reminder.dart';
@@ -51,7 +51,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
         InternetConnection().onStatusChange.listen((InternetStatus status) {
       switch (status) {
         case InternetStatus.connected:
-          log('Internet connected', name: '$runtimeType');
+          log.debug('Internet connected', name: '$runtimeType');
           if (mounted) {
             setState(() {
               isOnline = true;
@@ -59,7 +59,7 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
           }
           break;
         case InternetStatus.disconnected:
-          log('Internet disconnected', name: '$runtimeType');
+          log.debug('Internet disconnected', name: '$runtimeType');
           if (mounted) {
             setState(() {
               isOnline = false;
@@ -83,9 +83,11 @@ class _WyattAppBarState extends ConsumerState<WyattAppBar> {
     final bool arePermissionsGranted =
         ref.watch(arePermissionsGrantedStateProvider);
 
-    log('arePermissionsGranted = $arePermissionsGranted', name: '$runtimeType');
-    log('isOnline = $isOnline', name: '$runtimeType');
-    log("context.widget = ${widget.context.widget}", name: '$runtimeType');
+    log.debug('arePermissionsGranted = $arePermissionsGranted',
+        name: '$runtimeType');
+    log.debug('isOnline = $isOnline', name: '$runtimeType');
+    log.debug("context.widget = ${widget.context.widget}",
+        name: '$runtimeType');
 
     return AppBar(
       flexibleSpace: Container(

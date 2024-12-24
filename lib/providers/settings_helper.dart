@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/network.dart';
 
 class KeyValidator {
   static Future<bool> validateKey(String key) async {
-    log('validating key', name: 'KeyValidator');
+    log.debug('validating key');
 
     try {
       final response = await http.get(Uri.parse(
@@ -16,16 +16,16 @@ class KeyValidator {
         GeocodeAddress geocodeAddress = GeocodeAddress.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
         if (geocodeAddress.status == 'OK') {
-          log('key validation successful', name: 'KeyValidator');
+          log.debug('key validation successful');
 
           return true;
         }
       } else {
-        log('key validation failed with status code: ${response.statusCode}',
-            name: 'KeyValidator');
+        log.debug(
+            'key validation failed with status code: ${response.statusCode}');
       }
     } catch (e) {
-      log('key validation failed with: $e', name: 'KeyValidator');
+      log.error('key validation failed', error: e);
     }
 
     return false;

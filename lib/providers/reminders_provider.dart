@@ -1,7 +1,7 @@
 import 'dart:core';
-import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wyatt/log.dart';
 import 'package:wyatt/models/reminder.dart';
 import 'package:wyatt/services/reminders_storage.dart';
 
@@ -13,9 +13,9 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
   final _persistentStorage = RemindersStorage();
 
   RemindersNotifier(super.state) {
-    log('had ${state.length} reminders', name: '$runtimeType');
+    log.debug('had ${state.length} reminders', name: '$runtimeType');
     state = _persistentStorage.getReminders();
-    log('now ${state.length} reminders', name: '$runtimeType');
+    log.debug('now ${state.length} reminders', name: '$runtimeType');
   }
 
   void add(Reminder reminder) {
@@ -24,7 +24,8 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
   }
 
   void addAll(List<Reminder> reminders) {
-    log('adding ${reminders.length} reminders to ${state.length} from the state',
+    log.debug(
+        'adding ${reminders.length} reminders to ${state.length} from the state',
         name: '$runtimeType');
     state = [...state, ...reminders];
     _persistentStorage.addAll(reminders);
@@ -38,7 +39,7 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
   void remove(Reminder reminder) {
     state = state.where((r) => r != reminder).toList();
     _persistentStorage.remove(reminder);
-    log('removed reminder: $reminder, ${state.length} is/are left',
+    log.debug('removed reminder: $reminder, ${state.length} is/are left',
         name: '$runtimeType');
   }
 

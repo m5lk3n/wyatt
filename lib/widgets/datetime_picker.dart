@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
+import 'package:wyatt/log.dart';
 import 'package:wyatt/widgets/datetime_helper.dart';
 
 typedef DateTimeCallback = void Function(DateTime? dateTime);
@@ -49,7 +48,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    log('dateTime: ${_currentDateTime ?? "unknown"}', name: '$runtimeType');
+    log.debug('dateTime: ${_currentDateTime ?? "unknown"}',
+        name: '$runtimeType');
 
     if (_currentDateTime != null) {
       _dateTimeController.text = formatDateTime(
@@ -126,7 +126,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
         59,
       ),
       onConfirm: (date) {
-        log('confirmed: $date', name: '$runtimeType');
+        log.debug('confirmed: $date', name: '$runtimeType');
         _currentDateTime = date;
         _dateTimeController.text =
             formatDateTime(userLocale, _currentDateTime!);

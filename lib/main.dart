@@ -15,41 +15,12 @@ import 'package:wyatt/notifications.dart';
 import 'package:wyatt/services/storage.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
-/*
-@pragma('vm:entry-point')
-void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) async {
-    log('enter: $task', name: 'callbackDispatcher');
-
-    if (task.trim() != 'Wyatt') {
-      return Future.value(false);
-    }
-
-    showNotification('This is at work!');
-
-    DartPluginRegistrant.ensureInitialized(); // required for geolocation
-    await Geolocator.getCurrentPosition(locationSettings: LocationSettings())
-        .then((Position currentLocation) async {
-      log('retrieved current location ${currentLocation.latitude}, ${currentLocation.longitude}',
-          name: 'Geolocator');
-
-      initNotifications();
-      handleBackgroundReminders(
-          currentLocation.latitude, currentLocation.longitude);
-    });
-
-    log('exit: $task', name: 'callbackDispatcher');
-
-    return Future.value(true);
-  });
-}
-*/
-
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((taskName, inputData) async {
+    log.debug('executing workmanager task: $taskName');
     try {
-      /* 
+      /* doesn't work:
       Location location = Location();
       location.enableBackgroundMode(enable: true);
       LocationData currentLocation = await location.getLocation(); // throws a java.lang.NullPointerException, hence we use Geolocator
@@ -68,30 +39,24 @@ void callbackDispatcher() {
         message += message.isEmpty ? '$reminder' : ', $reminder';
       }
 
-      return await callNotification(message);
+      if (message.trim().isEmpty) {
+        log.debug('message is empty, skipping notification');
+      } else {
+        await NotificationService().showLocalNotification(
+            id: 0,
+            title: "Howdy!",
+            body: "Wyatt reminds you: $message",
+            payload: "");
+      }
     } catch (e) {
       log.error(
         'error executing workmanager task',
         error: e,
       );
-
-      return Future.value(false);
     }
+
+    return Future.value(true);
   });
-}
-
-Future<bool> callNotification(String notificationMessage) async {
-  if (notificationMessage.trim().isEmpty) {
-    return Future.value(false);
-  }
-
-  await NotificationService().showLocalNotification(
-      id: 0,
-      title: "Howdy!",
-      body: "Wyatt reminds you: $notificationMessage",
-      payload: "");
-
-  return Future.value(true);
 }
 
 // https://www.geeksforgeeks.org/how-to-capitalize-the-first-letter-of-a-string-in-flutter/
@@ -107,10 +72,9 @@ Future<void> initApp() async {
   Common.appVersion = packageInfo.version;
   Common.packageName = packageInfo.packageName;
 
-  initLogging();
-  //initNotifications();
-  initPersistentLocalStorage();
   initWorkmanager();
+  initLogging();
+  initPersistentLocalStorage();
 }
 
 void initWorkmanager() async {

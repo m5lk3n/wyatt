@@ -75,6 +75,7 @@ A location- and time-based To-do app for iOS and Android.
     - [x] [Delete a reminder](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
     - [x] [Snooze/Turn off a reminder](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a reminder](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
     - [x] [Activate/Turn on a reminder](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a reminder](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
+    - [ ] Reminder with tabs for `standard` add/edit and `advanced`
 
 - [x] Settings
   - [x] Save key
@@ -105,7 +106,6 @@ A location- and time-based To-do app for iOS and Android.
 
 ## To do
 
-- [ ] Reminder with tabs for `standard` add/edit and `advanced` (like approaching, leaving)
 - [ ] Update screenshots
 - [ ] Take over [Spec.](https://github.com/m5lk3n/locato?tab=readme-ov-file#spec)
 - [ ] Search a location
@@ -132,10 +132,13 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Document permissions
   - updating permissions while the app is open requires an app action to refresh appbar to get rid of the error message reg. missing permissions
   - [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
+- [ ] Document logging
+  - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
 - Clarify minimum requirements (Android (API) version, etc.), see e.g., Note under https://docs.flutter.dev/deployment/android#enable-multidex-support
 - [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
   - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
+- Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
 - [ ] Add `intl` (e.g. https://emiliodinen.medium.com/flutter-guide-to-use-internalization-and-localization-c8feedb46ac1)
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
 - [ ] Add tests
@@ -150,27 +153,11 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- https://stackoverflow.com/questions/78048254/is-it-possible-to-turn-a-flutter-listview-into-a-reorderablelistview
-- https://media.licdn.com/dms/image/v2/D4E22AQHIT8AOnPoxgA/feedshare-shrink_800/B4EZPWR_EkHsAg-/0/1734466864882?e=1737590400&v=beta&t=pCszA3RTVRhqxQyoqyU3W1ulPbVOxRkfyP8iFtIVbiw
+- Tabs add/edit reminder
 
-- https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
-- https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications
+## Known issues
 
-- Incorporate locato ([from geo_fencing_demo](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart))
-  - https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
-
-- Auto-cancel expired reminders
-- notification is a one-off!
-
-- Add service
-  - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps
-  - https://pub.dev/packages/flutter_background_service
-    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
-  - https://medium.com/@hasibulhasan3590/elevate-your-flutter-app-with-background-services-using-flutter-background-service-131f4ba7ec8a
-
-  - https://github.com/fluttercommunity/flutter_workmanager/issues/151#issuecomment-612637579
-
-- Time between notifications?
+- Reordering of reminders is not yet persistent.
 
 ## Open
 
@@ -193,6 +180,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Lessons learned:
 
+- Workmanager notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough
 - If possible, use actual devices to test, simply because the dev turnaround is so much quicker.
 - GoogleMap with static key baked in, even obfuscated just a matter of reverse engineering
   - Dynamic plugin
@@ -209,7 +197,7 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] [Share a reminder](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] Support spoken reminders
 - [ ] Enhance location with a picture taken
-- [ ] OpenStreetMap version
+- [ ] OpenStreetMap (OSM) version
   - https://github.com/Michael-M-aher/location_picker_flutter_map/
   - https://switch2osm.org/the-basics/
   - https://pub.dev/packages/flutter_osm_plugin
@@ -236,6 +224,6 @@ A location- and time-based To-do app for iOS and Android.
 
 ### Future Acknowledgements
 
-- Map theme and tile by
+- OSM: Map theme and tile by
 
   [![](https://maptiler.com/styles/style/logo/maptiler-logo-adaptive.svg?123#maptilerLogo)](https://maptiler.com/)

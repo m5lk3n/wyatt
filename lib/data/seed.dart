@@ -24,7 +24,7 @@ final seedReminders = [
       'longitude': -157.79311359303142,
     }),
     locationAlias: 'Pali Lookout',
-    notificationMessage: 'Take a photo',
+    notificationMessage: 'Take a picture',
     enabled: false,
   ),
   Reminder(
@@ -38,5 +38,14 @@ final seedReminders = [
     notificationStartDateTime:
         DateTime.now().subtract(const Duration(days: 10)),
     notificationEndDateTime: DateTime.now().subtract(const Duration(days: 7)),
+  ),
+  Reminder(
+    locationData: LocationData.fromMap({
+      'latitude': 46.977165535434615,
+      'longitude': 11.109485325338017,
+    }),
+    locationAlias: 'Stubai Glacier',
+    notificationMessage: 'Climb to the Top of Tyrol',
+    enabled: true,
   ),
 ];

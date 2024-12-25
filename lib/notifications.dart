@@ -66,7 +66,7 @@ class NotificationService {
         AndroidNotificationDetails(
       'dev.lttl.wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'packageName' has not been initialized.
       'Wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'appName' has not been initialized.
-      groupKey: 'com.example.flutter_push_notifications',
+      groupKey: 'dev.lttl.wyatt', // groups alerts in the notification tray
       channelDescription: 'Wyatt reminders',
       importance: Importance.max,
       priority: Priority.max,

@@ -35,7 +35,36 @@
 
 - [ ] https://github.com/mohesu/map_location_picker
 
+## Logging
+
+- https://stackoverflow.com/questions/59992538/flutter-how-to-log-to-a-file-on-mobile-instead-of-console
+- https://pub.dev/packages/logger
+- https://pub.dev/packages/flutter_logs
+
+## Reorderable ListView
+
+- https://stackoverflow.com/questions/78048254/is-it-possible-to-turn-a-flutter-listview-into-a-reorderablelistview
+- https://media.licdn.com/dms/image/v2/D4E22AQHIT8AOnPoxgA/feedshare-shrink_800/B4EZPWR_EkHsAg-/0/1734466864882?e=1737590400&v=beta&t=pCszA3RTVRhqxQyoqyU3W1ulPbVOxRkfyP8iFtIVbiw
+
+## Notifications
+
+- https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
+- https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications
+
 ## Backlog / Research
+
+- Incorporate locato ([from geo_fencing_demo](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart))
+  - https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
+
+- Background service
+  - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps
+  - https://pub.dev/packages/flutter_background_service
+    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
+  - https://medium.com/@hasibulhasan3590/elevate-your-flutter-app-with-background-services-using-flutter-background-service-131f4ba7ec8a
+
+- https://stackoverflow.com/questions/67090324/flutter-workmanager-background-fetch-example-with-statefull-widget
+
+- https://github.com/fluttercommunity/flutter_workmanager/issues/151#issuecomment-612637579
 
 - https://pub.dev/packages/awesome_notifications
 

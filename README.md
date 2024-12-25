@@ -76,7 +76,7 @@ A location- and time-based To-do app for iOS and Android.
     - [x] [Delete a reminder](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
     - [x] [Snooze/Turn off a reminder](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a reminder](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
     - [x] [Activate/Turn on a reminder](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a reminder](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
-    - [ ] Add/Edit Reminder with `standard` (message and location) and expandable `advanced` (start/end, distance)
+    - [x] Add/Edit Reminder with `standard` (message and location) and expandable `advanced` (start/end, distance)
 
 - [x] Settings
   - [x] Save key
@@ -151,10 +151,6 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Generate `lttl.dev/wyatt/index.html`
 - [ ] Godoc
 - [ ] Clean up assets
-
-## Doing
-
-- Expandable add/edit reminder
 
 ## Known issues
 

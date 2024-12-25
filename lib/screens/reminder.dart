@@ -31,6 +31,7 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
   DateTime? _endDateTime;
   bool _isProcessing = false;
   final _formKey = GlobalKey<FormState>();
+  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -151,48 +152,64 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Style.space,
-                  Style.space,
-                  Style.space,
-                  0,
-                ),
-                child: DateTimePicker(
-                  label: 'Start Notification',
-                  hintText: 'Select start date & time',
-                  dateTime: _startDateTime,
-                  onDateTimeChange: (DateTime? dateTime) {
-                    _startDateTime = dateTime;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Style.space,
-                  Style.space,
-                  Style.space,
-                  0,
-                ),
-                child: DateTimePicker(
-                  label: 'End Notification',
-                  hintText: 'Select end date & time',
-                  dateTime: _endDateTime,
-                  onDateTimeChange: (DateTime? dateTime) {
-                    _endDateTime = dateTime;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Style.space,
-                  Style.space,
-                  Style.space,
-                  0,
-                ),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [distanceField]),
+              ExpansionTile(
+                title: Text(_isExpanded ? 'Less Options' : 'More Options'),
+                controlAffinity: ListTileControlAffinity.leading,
+                dense: true,
+                shape:
+                    Border(), // remove the default border lines (https://stackoverflow.com/questions/62667990/how-to-remove-the-divider-lines-of-an-expansiontile-when-expanded-in-flutter)
+                tilePadding:
+                    EdgeInsets.fromLTRB(Style.space, 0, Style.space, 0),
+                onExpansionChanged: (bool expanded) {
+                  setState(() {
+                    _isExpanded = expanded;
+                  });
+                },
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Style.space,
+                      Style.space,
+                      Style.space,
+                      0,
+                    ),
+                    child: DateTimePicker(
+                      label: 'Start Notification',
+                      hintText: 'Select start date & time',
+                      dateTime: _startDateTime,
+                      onDateTimeChange: (DateTime? dateTime) {
+                        _startDateTime = dateTime;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Style.space,
+                      Style.space,
+                      Style.space,
+                      0,
+                    ),
+                    child: DateTimePicker(
+                      label: 'End Notification',
+                      hintText: 'Select end date & time',
+                      dateTime: _endDateTime,
+                      onDateTimeChange: (DateTime? dateTime) {
+                        _endDateTime = dateTime;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Style.space,
+                      Style.space,
+                      Style.space,
+                      0,
+                    ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [distanceField]),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(Style.space),

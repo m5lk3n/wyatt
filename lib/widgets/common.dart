@@ -9,7 +9,7 @@ String _getLegalese() {
   final prefix =
       (Common.appStartYear == currentYear) ? '' : '$Common.appStartYear-';
 
-  return /* TODO '© '? unicode? */ '$prefix$currentYear by';
+  return /* TODO: add (c)? '\u00a9 ' */ '$prefix$currentYear by';
 }
 
 void showWyattAboutDialog(BuildContext context) {

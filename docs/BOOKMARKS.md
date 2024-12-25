@@ -53,6 +53,8 @@
 
 ## Backlog / Research
 
+- https://www.woolha.com/tutorials/dart-replace-multiple-whitespaces-with-a-single-space
+
 - Incorporate locato ([from geo_fencing_demo](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart))
   - https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
 
@@ -64,6 +66,7 @@
 
 - https://stackoverflow.com/questions/67090324/flutter-workmanager-background-fetch-example-with-statefull-widget
 
+- https://github.com/fluttercommunity/flutter_workmanager
 - https://github.com/fluttercommunity/flutter_workmanager/issues/151#issuecomment-612637579
 
 - https://pub.dev/packages/awesome_notifications

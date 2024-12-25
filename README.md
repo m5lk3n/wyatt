@@ -19,9 +19,10 @@ A location- and time-based To-do app for iOS and Android.
 ├── .vscode     # me: app launch configs
 ├── android     # Flutter
 ├── assets      # me: app icons and images
-├── docs        # me
+├── docs        # me: documentation incl. images
 ├── ios         # Flutter
 ├── lib         # Flutter
+├── logcat      # me: for logcat-specific logging
 ├── lttl.dev    # me: app supporting web page 
 ├── screenshots # me: app screenshots 
 └── test        # Flutter
@@ -75,7 +76,7 @@ A location- and time-based To-do app for iOS and Android.
     - [x] [Delete a reminder](https://api.flutter.dev/flutter/material/Icons/delete-constant.html)
     - [x] [Snooze/Turn off a reminder](https://api.flutter.dev/flutter/material/Icons/volume_off-constant.html) or [Suspend a reminder](https://api.flutter.dev/flutter/material/Icons/location_off-constant.html)
     - [x] [Activate/Turn on a reminder](https://api.flutter.dev/flutter/material/Icons/volume_up-constant.html) or [Hibernate a reminder](https://api.flutter.dev/flutter/material/Icons/location_on-constant.html)
-    - [ ] Reminder with tabs for `standard` add/edit and `advanced`
+    - [ ] Add/Edit Reminder with `standard` (message and location) and expandable `advanced` (start/end, distance)
 
 - [x] Settings
   - [x] Save key
@@ -153,7 +154,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Doing
 
-- Tabs add/edit reminder
+- Expandable add/edit reminder
 
 ## Known issues
 
@@ -180,7 +181,7 @@ A location- and time-based To-do app for iOS and Android.
 
 ## Lessons learned:
 
-- Workmanager notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough
+- Workmanager notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough (see limited connectivity from cell phone provider in [screenshot](screenshots/no-reminders.png))
 - If possible, use actual devices to test, simply because the dev turnaround is so much quicker.
 - GoogleMap with static key baked in, even obfuscated just a matter of reverse engineering
   - Dynamic plugin

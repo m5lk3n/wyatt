@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
-import 'package:wyatt/helper.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/widgets/common.dart';
 
@@ -113,12 +112,7 @@ class WelcomeScreen extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: Style.bigSpace),
-                        child: GestureDetector(
-                          onTap: () {
-                            browseTo(Url.dev);
-                          },
-                          child: Logo(),
-                        ),
+                        child: Logo(),
                       ),
                     ),
             ],

@@ -7,7 +7,6 @@ import 'package:wyatt/common.dart';
 import 'package:wyatt/log.dart';
 import 'package:wyatt/providers/key_provider.dart';
 import 'package:wyatt/providers/startup_provider.dart';
-import 'package:wyatt/helper.dart';
 import 'package:wyatt/widgets/common.dart';
 
 class SplashScreen extends ConsumerWidget {
@@ -74,12 +73,7 @@ class SplashScreen extends ConsumerWidget {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: Style.bigSpace),
-                  child: GestureDetector(
-                    onTap: () {
-                      browseTo(Url.dev);
-                    },
-                    child: Logo(),
-                  ),
+                  child: Logo(),
                 ),
               ),
             ],

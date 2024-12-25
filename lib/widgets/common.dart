@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/helper.dart';
 
 String _getLegalese() {
   final int currentYear = DateTime.now().year;
@@ -105,7 +106,11 @@ Widget createDistanceField(
         decoration: InputDecoration(
             // prefixIcon: Icon(Icons.straighten),
             labelText: 'Notification Distance *',
-            hintText: 'Enter a distance',
+            hintText: 'Enter a distance in\u00A0',
+            /* this is a right-aligned hint text if no number is provided.
+               it's followed by the unit from suffixText.
+               \u00A0 is a non-breakable space to avoid Dart's default right-trimming.
+               result on screen is: Enter a distance in m*/
             suffixText: 'm', // TODO: support yards?
             helperText: 'Minimum 100 m'),
         maxLength: 4,
@@ -174,6 +179,10 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('assets/images/logo.png', height: Style.bigSpace);
+    return GestureDetector(
+        onTap: () {
+          browseTo(Url.dev);
+        },
+        child: Image.asset('assets/images/logo.png', height: Style.bigSpace));
   }
 }

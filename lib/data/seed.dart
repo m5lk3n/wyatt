@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:location/location.dart';
 import 'package:wyatt/models/reminder.dart';
 
@@ -25,20 +26,21 @@ final seedReminders = [
     }),
     locationAlias: 'Pali Lookout',
     notificationMessage: 'Take a picture',
-    enabled: false,
+    enabled: kReleaseMode,
   ),
-  Reminder(
-    locationData: LocationData.fromMap({
-      'latitude': 52.0892639,
-      'longitude': 4.3840610,
-    }),
-    locationAlias: 'Mall of The Netherlands',
-    notificationMessage: 'Buy coffee',
-    enabled: false,
-    notificationStartDateTime:
-        DateTime.now().subtract(const Duration(days: 10)),
-    notificationEndDateTime: DateTime.now().subtract(const Duration(days: 7)),
-  ),
+  if (kDebugMode)
+    Reminder(
+      locationData: LocationData.fromMap({
+        'latitude': 52.0892639,
+        'longitude': 4.3840610,
+      }),
+      locationAlias: 'Mall of The Netherlands',
+      notificationMessage: 'Buy coffee',
+      enabled: false,
+      notificationStartDateTime:
+          DateTime.now().subtract(const Duration(days: 10)),
+      notificationEndDateTime: DateTime.now().subtract(const Duration(days: 7)),
+    ),
   Reminder(
     locationData: LocationData.fromMap({
       'latitude': 46.977165535434615,
@@ -46,6 +48,7 @@ final seedReminders = [
     }),
     locationAlias: 'Stubai Glacier',
     notificationMessage: 'Climb to the Top of Tyrol',
+    notificationDistance: 9999,
     enabled: true,
   ),
 ];

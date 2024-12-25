@@ -107,7 +107,7 @@ class Reminder {
   }
 
   bool isDateTimeValid() {
-    if (notificationEndDateTime == null) {
+    if (notificationStartDateTime == null || notificationEndDateTime == null) {
       return true;
     }
 

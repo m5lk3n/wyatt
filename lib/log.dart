@@ -11,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 final log = Logger('WyattApp');
 
 extension LogExtensions on Logger {
-  void prod(String message, {String name = 'WyattApp'}) {
+  void release(String message, {String name = 'WyattApp'}) {
     log.fine('[PROD] $name: $message', error);
   }
 
@@ -25,26 +25,24 @@ extension LogExtensions on Logger {
 }
 
 Future<void> initLogging() async {
-  if (kDebugMode && Platform.isAndroid /* doesn't work on iOS */) {
-    // log everything to stdout and logfile
-    Logger.root.level = Level.ALL;
-    final file = await _localFile;
-    Logger.root.onRecord.listen((record) {
-      final String logMessage = '${record.time}: ${record.message}';
-      dev.log(logMessage); // use dev.log to integrate with Flutter DevTools
-      file.writeAsStringSync(
-        '$logMessage\n',
-        mode: FileMode.append,
-        flush: true, // TODO: check if this is necessary
-      );
-    });
-  } /* else {
-    Logger.root.level = Level.INFO; // is also the default
-    Logger.root.onRecord.listen((record) {
-      // TODO: write log to file, or use something like crashlytics, e.g.
-      // FirebaseCrashlytics.instance.log('${record.time}: ${record.message}');
-    });
-  }*/
+  final file = Platform.isAndroid
+      ? await _localFile
+      : null; // file logging doesn't work as intended below on iOS
+
+  // log to stdout (and to logfile on Android)
+  Logger.root.level =
+      kDebugMode ? Level.ALL : Level.FINER; // INFO is the default
+  Logger.root.onRecord.listen((record) {
+    final String logMessage = '${record.time}: ${record.message}';
+    dev.log(logMessage); // use dev.log to integrate with Flutter DevTools
+    file?.writeAsStringSync(
+      '$logMessage\n',
+      mode: kDebugMode
+          ? FileMode.append
+          : FileMode.write, // overwrite in production
+      flush: true, // TODO: check if flushing is necessary
+    );
+  });
 }
 
 Future<String> get _localPath async {
@@ -59,7 +57,7 @@ Future<String> get _localPath async {
 Future<File> get _localFile async {
   final path = await _localPath;
   final logFile =
-      '$path/wyatt-debug-log.txt'; // don't call it .log, as it's recognized as a bininary file on Android
+      '$path/wyatt-${kDebugMode ? 'debug' : 'release'}-log.txt'; // don't call it .log, as it's recognized as a bininary file on Android
 
   dev.log('logging to $logFile', name: 'initLogging');
 

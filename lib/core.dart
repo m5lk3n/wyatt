@@ -157,7 +157,7 @@ class CoreSystem {
     log.debug('overallGranted = $overallGranted', name: '$runtimeType');
 
     if (!overallGranted) {
-      log.prod('permissions not granted, core functionality will not work',
+      log.release('permissions not granted, core functionality will not work',
           name: '$runtimeType');
     }
 

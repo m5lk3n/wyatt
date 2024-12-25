@@ -111,7 +111,7 @@ A location- and time-based To-do app for iOS and Android.
 - [ ] Search a location
 - [ ] Time between the same notification
 - [x] Field validation
-- [ ] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
+- [x] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
 - [ ] Recover from crash (e.g., by user revoking permissions during usage)
   - [ ] [Catcher 2](https://pub.dev/packages/catcher_2)
@@ -205,6 +205,7 @@ A location- and time-based To-do app for iOS and Android.
 ## Backlog / Outlook
 
 - [ ] Sort reminders overview by continent name
+- [ ] Write log to crashlytics, e.g. `FirebaseCrashlytics.instance.log('${record.time}: ${record.message}');`
 - [ ] [Share a reminder](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
 - [ ] Support spoken reminders
 - [ ] Enhance location with a picture taken

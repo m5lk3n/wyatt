@@ -105,12 +105,18 @@ A location- and time-based reminder app for iOS and Android.
 
 [Mockup](docs/wireframe.pdf)
 
+## Doing
+
+- Add watermark with Wyatt to reminders screen
+- Fix app icon on Android 15
+
 ## To do
 
 - [ ] Update screenshots
 - [ ] Take over [Spec.](https://github.com/m5lk3n/locato?tab=readme-ov-file#spec)
 - [ ] Search a location
-- [ ] Time between the same notification
+- [ ] Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
+- [ ] End date notification widget init value should be set to start date (if any)
 - [x] Field validation
 - [x] Logging, levels, see also [here](https://medium.com/@sunisha.guptan/cracking-the-code-debugging-magic-in-flutter-release-mode-f2e089a61f78)
 - [ ] DRY
@@ -139,7 +145,6 @@ A location- and time-based reminder app for iOS and Android.
 - [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
   - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
-- Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
 - [ ] Add `intl` (e.g. https://emiliodinen.medium.com/flutter-guide-to-use-internalization-and-localization-c8feedb46ac1)
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
 - [ ] Add tests

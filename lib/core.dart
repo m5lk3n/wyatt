@@ -20,15 +20,16 @@ void setBackgroundReminders(List<Reminder> activeReminders) async {
       .setStringList(isolateExchangeDataKey, remindersAsStringList);
 }
 
-Future<List<Reminder>> getBackgroundRemindersInRange(
+Future<List<Reminder>> getBackgroundRemindersInRangeAndTime(
     double currentLatitude, double currentLongitude) async {
-  List<Reminder> remindersInRange = [];
+  List<Reminder> remindersInRangeAndTime = [];
   try {
     List<String>? remindersAsStringList =
         await SharedPreferencesAsync().getStringList(isolateExchangeDataKey);
 
     if (remindersAsStringList == null || remindersAsStringList.isEmpty) {
-      log.debug('no reminders in shared preferences, skipping range check');
+      log.debug(
+          'no reminders in shared preferences, skipping range and time check');
       return [];
     }
 
@@ -39,16 +40,20 @@ Future<List<Reminder>> getBackgroundRemindersInRange(
     log.debug(
         '${reminders.length} reminders in shared preferences: $reminders');
 
-    remindersInRange = reminders.where((reminder) {
-      return reminder.isInRange(LocationData.fromMap(
-          {'latitude': currentLatitude, 'longitude': currentLongitude}));
+    remindersInRangeAndTime = reminders.where((reminder) {
+      return reminder.hasBegun() &&
+          reminder.isNotExpired() &&
+          reminder.isInRange(LocationData.fromMap(
+              {'latitude': currentLatitude, 'longitude': currentLongitude}));
     }).toList();
-    log.debug('${remindersInRange.length} reminders in range');
+    log.debug(
+        '${remindersInRangeAndTime.length} reminders in range and in time');
   } catch (e) {
-    log.error('error getting reminders in range', error: e);
-    remindersInRange = [];
+    log.error('error getting reminders in range and time', error: e);
+    remindersInRangeAndTime = [];
   }
-  return remindersInRange;
+
+  return remindersInRangeAndTime;
 }
 
 /*

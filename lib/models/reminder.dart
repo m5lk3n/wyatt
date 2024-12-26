@@ -66,6 +66,11 @@ class Reminder {
     return inError;
   }
 
+  // for convenience
+  bool isNotInError() {
+    return !inError;
+  }
+
   // for consistency
   void setEnabled() {
     enabled = true;
@@ -88,6 +93,11 @@ class Reminder {
   }
 
   // for consistency
+  bool isNotNotified() {
+    return !notified;
+  }
+
+  // for consistency
   bool isEnabled() {
     return enabled;
   }
@@ -98,12 +108,22 @@ class Reminder {
   }
 
   bool isActive() {
-    return isEnabled() && !isInError() && !isExpired() && !isNotified();
+    return isEnabled() && isNotInError() && isNotExpired() && isNotNotified();
+  }
+
+  bool hasBegun() {
+    return notificationStartDateTime != null &&
+        notificationStartDateTime!.isBefore(DateTime.now());
   }
 
   bool isExpired() {
     return notificationEndDateTime != null &&
         notificationEndDateTime!.isBefore(DateTime.now());
+  }
+
+  // for convenience
+  bool isNotExpired() {
+    return !isExpired();
   }
 
   bool isDateTimeValid() {

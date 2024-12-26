@@ -32,8 +32,9 @@ void callbackDispatcher() {
       log.debug(
           'retrieved current geolocation ${currentLocation.latitude}, ${currentLocation.longitude}');
 
-      List<Reminder> remindersInRange = await getBackgroundRemindersInRange(
-          currentLocation.latitude, currentLocation.longitude);
+      List<Reminder> remindersInRange =
+          await getBackgroundRemindersInRangeAndTime(
+              currentLocation.latitude, currentLocation.longitude);
 
       String message = '';
       for (Reminder reminder in remindersInRange) {

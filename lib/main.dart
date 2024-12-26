@@ -18,6 +18,7 @@ import 'package:timezone/data/latest.dart' as tz;
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((taskName, inputData) async {
+    initLogging();
     log.debug('executing workmanager task: $taskName');
     try {
       /* doesn't work:

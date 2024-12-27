@@ -36,7 +36,7 @@ class _ReminderListItemState extends ConsumerState<ReminderListItem> {
         child: ListTile(
           isThreeLine: false,
           tileColor: widget.reminder.isExpired()
-              ? Theme.of(context).colorScheme.onInverseSurface
+              ? Theme.of(context).colorScheme.surface //onInverseSurface
               : widget.reminder.isEnabled()
                   ? Theme.of(context).colorScheme.onSecondary
                   : Theme.of(context).colorScheme.secondaryContainer,

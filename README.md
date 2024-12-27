@@ -107,8 +107,7 @@ A location- and time-based reminder app for iOS and Android.
 
 ## Doing
 
-- Add watermark with Wyatt to reminders screen
-- Fix app icon on Android 15
+- Fix different app icon on Android 15
 
 ## To do
 

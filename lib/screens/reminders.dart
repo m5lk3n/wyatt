@@ -51,7 +51,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
-            const SizedBox(height: Style.space / 2),
+            const SizedBox(height: Style.space),
             Text(
               'Hit + above to get started',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -206,19 +206,31 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
       );
     }
 
-    return Scaffold(
-      appBar: WyattAppBar(context: context, title: Screen.reminders),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          0,
-          Style.space / 2,
-          0,
-          0,
+    return Container(
+      // https://stackoverflow.com/questions/52572850/how-can-i-avoid-the-background-image-to-shrink-when-my-keyboard-is-active/70428060#70428060
+      decoration: BoxDecoration(
+        color: Theme.of(context)
+            .colorScheme
+            .onInverseSurface, //surfaceContainerHighest,
+        image: DecorationImage(
+          image: AssetImage('assets/icon/icon-medium.png'),
         ),
-        child: content,
       ),
-      drawer: WyattDrawer(),
-      floatingActionButton: floatingActionButton,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: WyattAppBar(context: context, title: Screen.reminders),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(
+            0,
+            Style.space / 2,
+            0,
+            0,
+          ),
+          child: content,
+        ),
+        drawer: WyattDrawer(),
+        floatingActionButton: floatingActionButton,
+      ),
     );
   }
 

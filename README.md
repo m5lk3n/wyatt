@@ -10,7 +10,9 @@ A location- and time-based reminder app for iOS and Android.
 
 ## Tips
 
-- If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100m from the center of the mall as this probably doesn't trigger a notification around the mall.
+- If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100 m from the center of the mall as this probably doesn't trigger a notification around the mall.
+
+- There should be a minimum of ~2h for a notification start and end date/time window, esp. when traveling (due to the (OS given) 15 mins interval between background activities).
 
 ## Structure
 

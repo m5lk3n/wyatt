@@ -148,7 +148,7 @@ A location- and time-based reminder app for iOS and Android.
   - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
 - [ ] Add `intl` (e.g. https://emiliodinen.medium.com/flutter-guide-to-use-internalization-and-localization-c8feedb46ac1)
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
-- [ ] Add tests
+- [ ] Outline [TEST.md](test/TEST.md)
 - [x] Add delete key (and any other local data)
 - [ ] TODOs in code
 - [ ] Rename members to start with an underscore

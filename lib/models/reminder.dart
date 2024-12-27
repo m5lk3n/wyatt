@@ -112,7 +112,7 @@ class Reminder {
   }
 
   bool hasBegun() {
-    return notificationStartDateTime != null &&
+    return notificationStartDateTime == null ||
         notificationStartDateTime!.isBefore(DateTime.now());
   }
 

@@ -161,6 +161,7 @@ A location- and time-based reminder app for iOS and Android.
 ## Known issues
 
 - Reordering of reminders is not yet persistent.
+- Android only: With the Nova Launcher, the app icon doesn't show the white (circular) background as intended (and as it does with the default launcher), but a dark-greyish one.
 
 ## Open
 

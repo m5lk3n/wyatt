@@ -18,16 +18,16 @@ A location- and time-based reminder app for iOS and Android.
 
 ```
 .
-├── .vscode     # me: app launch configs
-├── android     # Flutter
-├── assets      # me: app icons and images
-├── docs        # me: documentation incl. images
-├── ios         # Flutter
-├── lib         # Flutter
-├── logcat      # me: for logcat-specific logging
-├── lttl.dev    # me: app supporting web page 
-├── screenshots # me: app screenshots 
-└── test        # Flutter
+├── .vscode        # Wyatt: app launch configs
+├── android        # Flutter
+├── assets         # Wyatt: app icons and images
+├── device_screens # Wyatt: app screenshots and screenrecording
+├── docs           # Wyatt: documentation incl. images
+├── ios            # Flutter
+├── lib            # Flutter
+├── logcat         # Wyatt: for logcat-specific logging
+├── lttl.dev       # Wyatt: app supporting web page 
+└── test           # Flutter
 ```
 
 ## Steps

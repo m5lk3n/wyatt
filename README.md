@@ -6,7 +6,7 @@
 
 A location- and time-based reminder app for iOS and Android.
 
-:construction_worker:
+![](device_screens/screenrecording.gif)
 
 ## Tips
 

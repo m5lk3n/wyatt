@@ -51,6 +51,10 @@
 - https://medium.com/@ravipatel84184/integrating-local-notifications-in-flutter-using-flutter-local-notifications-package-3951c5fc21cd
 - https://pub.dev/packages/flutter_local_notifications#scheduled-android-notifications
 
+## Screen Capture
+
+- https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
+
 ## Backlog / Research
 
 - https://www.woolha.com/tutorials/dart-replace-multiple-whitespaces-with-a-single-space

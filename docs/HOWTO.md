@@ -15,7 +15,12 @@
 
 ## ... convert the wireframe from PDF to PNG
 
-Option 1: On Linux, run `pdftoppm -png wireframe.pdf wireframe` to create the PNG file(s).
+Option 1: On Linux, run the following to create the PNG file(s):
+
+```
+sudo apt install poppler-utils
+pdftoppm -png wireframe.pdf wireframe
+```
 
 Option 2: Browse to https://github.com/m5lk3n/wyatt/blob/main/docs/wireframe.pdf and right-click the preview image -> "Save Image As..."
 

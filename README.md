@@ -100,16 +100,12 @@ A location- and time-based reminder app for iOS and Android.
 - (?) Download my data
 
 - [x] Implement notification
-  - ~~(?) https://pub.dev/packages/awesome_notifications~~
+  - ~~(?)~~ ~~https://pub.dev/packages/awesome_notifications~~
   - [x] https://pub.dev/packages/flutter_local_notifications
 
 ## Wireframe
 
 [Mockup](docs/wireframe.pdf)
-
-## Doing
-
-- Fix different app icon on Android 15
 
 ## To do
 
@@ -155,7 +151,6 @@ A location- and time-based reminder app for iOS and Android.
 - [ ] Adhere to conventions, like *widget constructors only use named arguments. Also by convention, the first argument is key, and the last argument is child, children, or the equivalent.*
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 - [ ] Generate `lttl.dev/wyatt/index.html`
-- [ ] Godoc
 - [ ] Clean up assets
 
 ## Known issues
@@ -212,11 +207,12 @@ A location- and time-based reminder app for iOS and Android.
 
 ## Docs
 
-- [Styleguide](docs/STYLEGUIDE.md)
-- [How-to](docs/HOWTO.md)
+- [Appendix](docs/APPENDIX.md)
+- [Backlog](docs/BACKLOG.md)
 - [Bookmarks](docs/BOOKMARKS.md)
+- [How-to](docs/HOWTO.md)
 - [Ideas](docs/IDEAS.md) (partially outdated, archivable)
-- [Appendix](docs/APPENDIX.md) (not app-specific)
+- [Styleguide](docs/STYLEGUIDE.md)
 
 ## Acknowledgements
 
@@ -225,9 +221,3 @@ A location- and time-based reminder app for iOS and Android.
 - Google for Maps and the font(s)
 - [Moqups](https://app.moqups.com) for the wireframe
 - [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)
-
-### Future Acknowledgements
-
-- OSM: Map theme and tile by
-
-  [![](https://maptiler.com/styles/style/logo/maptiler-logo-adaptive.svg?123#maptilerLogo)](https://maptiler.com/)

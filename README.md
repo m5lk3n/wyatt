@@ -1,12 +1,12 @@
 # Wyatt
 
-![](assets/icon/icon-small.png)
-
-"*W*hen *Y*ou *A*re *T*here *T*hen ..."
+<div>
+  <img alt="Wyatt logo" style="vertical-align: middle;" src="assets/icon/icon-small.png"/> <i>W</i>hen <i>Y</i>ou <i>A</i>re <i>T</i>here <i>T</i>hen ...
+</div>
 
 A location- and time-based reminder app for Android and iOS.
 
-![](device_screens/screenrecording.gif)
+<img alt="Wyatt screenrecording" src="device_screens/screenrecording.gif" width="25%"/>
 
 ## Tips
 

@@ -35,9 +35,10 @@ if [[ "$1" == "convert" ]]; then
         echo
         usage
     fi
+
     # https://trac.ffmpeg.org/wiki/Encode/H.264
     echo "Converting screenrecording to animated gif..."
-    ffmpeg -i ${MP4_FILENAME} ${GIF_FILENAME} # -c:v libx264 -preset slow -crf 22
+    ffmpeg -i ${MP4_FILENAME} ${GIF_FILENAME} # -s 270x585 -c:v libx264 -preset slow -crf 22
     echo "Screenrecording converted to: ./${GIF_FILENAME}"
     exit 0
 fi

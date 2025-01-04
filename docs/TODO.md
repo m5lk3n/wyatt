@@ -107,6 +107,9 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
   - [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
 - [ ] Document logging
   - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
+- [ ] Document constraints
+  - https://pub.dev/packages/flutter_background_service
+    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
 - Clarify minimum requirements (Android (API) version, etc.), see e.g., Note under https://docs.flutter.dev/deployment/android#enable-multidex-support
 - [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
   - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well

@@ -51,15 +51,9 @@ update:
 ## upgrade: major upgrade dependencies
 .PHONY: upgrade
 upgrade:
-	flutter clean
 	flutter pub upgrade --major-versions
 
-# generate: generate code
-#.PHONY: generate
-#generate:
-#	dart run build_runner build --delete-conflicting-outputs
-
-## test: test the application
+## test: test the application (spoiler: not)
 .PHONY: test
 test:
 	flutter test
@@ -86,6 +80,12 @@ generate-lttl_dev:
 build-android-debug:
 	flutter clean
 	flutter build apk --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
+
+## all-android: start from scratch, install all dependencies, build the apk in release mode, and install on device
+.PHONY: all-android
+all-android: clean update upgrade
+	flutter build apk --release # --obfuscate --split-debug-info=build/app/outputs/flutter-apk/app-armeabi-v7a-release-obfuscation ?
+	flutter install
 
 ## build-ios-debug: regenerate dependencies for iOS and build the application in debug mode
 .PHONY: build-ios-debug

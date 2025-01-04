@@ -2,9 +2,9 @@
 
 ## Secure Storage
 
-- [x] https://pub.dev/packages/flutter_secure_storage/example
-- [x] https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage
-- [x] https://github.com/mogol/flutter_secure_storage/blob/develop/flutter_secure_storage/example/lib/main.dart
+- https://pub.dev/packages/flutter_secure_storage/example
+- https://github.com/mogol/flutter_secure_storage/tree/develop/flutter_secure_storage
+- https://github.com/mogol/flutter_secure_storage/blob/develop/flutter_secure_storage/example/lib/main.dart
 
 ## State Management / Routing
 
@@ -31,10 +31,6 @@
 
 - https://medium.com/@enoch.mbuga/preventing-keyboard-overlap-and-bottom-overflow-in-flutter-4aced5b981ae
 
-## Requirements
-
-- [ ] https://github.com/mohesu/map_location_picker
-
 ## Logging
 
 - https://stackoverflow.com/questions/59992538/flutter-how-to-log-to-a-file-on-mobile-instead-of-console
@@ -55,17 +51,14 @@
 
 - https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
 
-## Backlog / Research
+## Assorted / Research
 
 - https://www.woolha.com/tutorials/dart-replace-multiple-whitespaces-with-a-single-space
 
-- Incorporate locato ([from geo_fencing_demo](https://github.com/m5lk3n/geo_fencing_demo/blob/main/lib/locato.dart))
-  - https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
+- https://stackoverflow.com/questions/64111677/streamsubscription-not-resuming-when-the-app-comes-back-to-foreground
 
 - Background service
   - https://30dayscoding.com/blog/working-with-background-services-in-flutter-apps
-  - https://pub.dev/packages/flutter_background_service
-    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
   - https://medium.com/@hasibulhasan3590/elevate-your-flutter-app-with-background-services-using-flutter-background-service-131f4ba7ec8a
 
 - https://stackoverflow.com/questions/67090324/flutter-workmanager-background-fetch-example-with-statefull-widget

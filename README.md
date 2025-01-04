@@ -4,7 +4,7 @@
 
 "*W*hen *Y*ou *A*re *T*here *T*hen ..."
 
-A location- and time-based reminder app for iOS and Android.
+A location- and time-based reminder app for Android and iOS.
 
 ![](device_screens/screenrecording.gif)
 

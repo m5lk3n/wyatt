@@ -1,16 +1,15 @@
 # Ideas
 
-- time-based option
 - *approaching*: when you're reaching LOC, then do this (e.g., scheduled road closure, make sure to take detour into consideration)
 - *static*: when you stay [for DURATION] in this LOC, then do that
 - *leaving*: when you've left LOC for DURATION, then do this (e.g., "after 10 days, remember to reconnect with your friends and family when you're away from home")
 
-## Ideas for Naming
+## (Former) Naming
 
+- "loctose": The *loc*ation-based *to*-do app - *s*ingle *e*dition (or something like that :tada:)
+- "Locato": *loca*tion-based *to*-do
 - "Locatolog": community provided and maintained catalog of entries
-
 - "Locatory": gamified surprise feature: get random/hidden/secret entry from Locatolog
-
 - "Locator" = app user
 
 ## Use cases
@@ -27,7 +26,7 @@
 
 ## User input
 
-- Coordinates (in Decimal degrees (DD), e.g., 41.40338, 2.17403)
+- Coordinates (in decimal degrees (DD), e.g., 41.40338, 2.17403)
 - Radius
 - Check interval
 - Notification message

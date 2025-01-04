@@ -1,79 +1,20 @@
-# Backlog
+# Backlog / Outlook
 
-## Settings Screen
+- [ ] Sort reminders overview by continent name
+- [ ] Write log to crashlytics, e.g. `FirebaseCrashlytics.instance.log('${record.time}: ${record.message}');`
+- [ ] [Share a reminder](https://api.flutter.dev/flutter/material/Icons/share_location-constant.html)
+- [ ] Support spoken reminders
+- [ ] Enhance location with a picture taken
+- [ ] OpenStreetMap (OSM) version
+  - https://github.com/Michael-M-aher/location_picker_flutter_map/
+  - https://switch2osm.org/the-basics/
+  - https://pub.dev/packages/flutter_osm_plugin
+  - https://github.com/liodali/osm_flutter
+  - https://help.openstreetmap.org/questions/9367/can-i-use-openstreetmaps-openstreetmaps-api-for-commercial-apps-on-android
+  - https://stackoverflow.com/questions/51842695/openstreetmap-in-flutter
+  - https://leafletjs.com/
+  - [ ] Add to acknowledgements:
 
-```
-          Padding(
-            padding: const EdgeInsets.all(space),
-            child: DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                labelText: 'Language',
-                labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                suffixIcon: Tooltip(
-                  message: 'Another language is not yet available',
-                  child: Icon(Icons.info_outline),
-                ),
-              ),
-              value: 'English',
-              items: <String>['English', 'German'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          )),
-                );
-              }).toList(),
-              onChanged: null, // disabled, TODO: implement
-            ),
-          ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(space, space, space, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'System',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: RadioListTile<String>(
-                          title: Text('Metric'),
-                          value: 'Metric',
-                          groupValue: 'Metric',
-                          onChanged: (context) {
-                            /* TODO: implement */
-                          }),
-                    ),
-                    Expanded(
-                      child: RadioListTile<String>(
-                        title: Text('Imperial'),
-                        value: 'Imperial',
-                        groupValue: 'Metric',
-                        onChanged: (context) {/* TODO: implement */},
-                        secondary: Tooltip(
-                          message: 'This choice is not yet supported',
-                          child: Icon(Icons.info_outline),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            indent: space,
-            endIndent: space,
-          ),
-```
+    OSM: Map theme and tile by
+
+    [![](https://maptiler.com/styles/style/logo/maptiler-logo-adaptive.svg?123#maptilerLogo)](https://maptiler.com/)

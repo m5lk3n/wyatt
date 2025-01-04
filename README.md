@@ -18,7 +18,7 @@ Wyatt helps you to remember things like:
 
 Here's how Wyatt looks:
 
-<img alt="Wyatt screenrecording" src="device_screens/screenrecording.gif" width="33%"/>
+<img alt="Wyatt screenrecording" src="device_screens/screenrecording.gif" width="50%"/>
 
 ## Documentation
 
@@ -29,19 +29,22 @@ Here's how Wyatt looks:
 - [FAQ](docs/FAQ.md)
 - [How-to](docs/HOWTO.md)
 - [Ideas](docs/IDEAS.md) (partially outdated, archivable)
+- [Lessons learned](docs/LESSONS_LEARNED.md)
 - [Styleguide](docs/STYLEGUIDE.md)
 - [To-do](docs/TODO.md)
 
-## Tips / Known Limitations
+## Tips / Known Limitations / Known Issues
 
 - If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100 m from the center of the mall as this probably doesn't trigger a notification around the mall.
 - There should be a minimum of ~2h for a notification start and end date/time window, esp. when traveling. This is due to the (OS given) 15 minutes interval between background activities ([Background service](https://pub.dev/packages/flutter_background_service): *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*)
+- Notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough - **If you see limited connectivity from cell phone provider as in [this screenshot](device_screens/no-reminders.png), you will not get a reminder!**
+- On Android, under App info -> Unused app settings, make sure to disable "Manage app if unused" as shown on [this screenshot](device_screens/unused-app-settings.png). That's to avoid unintentional revocation of previously granted permissions or stopping of notifications.
 - Only portrait mode is supported for the time being.
+- Android only: With the Nova Launcher, the app icon doesn't show the white (circular) background as intended (and as it does with the default launcher), but a dark-greyish one.
 
-## Known Issues
+## Known Bugs
 
 - Reordering of reminders is not yet persistent.
-- Android only: With the Nova Launcher, the app icon doesn't show the white (circular) background as intended (and as it does with the default launcher), but a dark-greyish one.
 
 ## Repo Structure
 
@@ -64,7 +67,7 @@ Here's how Wyatt looks:
 [Here's why](docs/FAQ.md), at least at this point, Wyatt is not available from an app store. 
 
 Long story short, in a nutshell, you would need
-- a Google Maps API key,
+- to get a Google Maps API key,
 - to build the app yourself,
 - to upload the built app to your device.
 
@@ -80,23 +83,13 @@ To do that, I use either my 2023 Mac mini M2 (8 GB) or my 2020 MacBook Pro M1 (1
 
 ### On iOS
 
-TODO
+:construction_worker:
 
 ## Wireframe
 
 The mockup is [here](docs/wireframe.pdf).
 
-## Lessons Learned
-
-- Workmanager notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough (see limited connectivity from cell phone provider in [screenshot](screenshots/no-reminders.png))
-- If possible, use actual devices to test, simply because the dev turnaround is so much quicker.
-- GoogleMap with static key baked in, even obfuscated just a matter of reverse engineering
-  - Dynamic plugin
-    - requires dummy key entry `com.google.android.geo.API_KEY` in `AndroidManifest.xml`
-    - requires `setState()` to trigger key refresh on time
-- Document why https://developer.android.com/develop/sensors-and-location/location/geofencing and `geofence_foreground_service` are not usable:
-  - Limit reminders to 100 due to technical restriction (https://developer.android.com/develop/sensors-and-location/location/geofencing), document.
-  - https://developers.google.com/android/reference/com/google/android/gms/location/GeofenceStatusCodes.html#GEOFENCE_TOO_MANY_PENDING_INTENTS -> `geofence_foreground_service`: with one zone (=request ID), last one wins = geofence gets overwritten, with many zones: GEOFENCE_TOO_MANY_PENDING_INTENTS if more than 5 zones
+## [Lessons Learned](docs/LESSONS_LEARNED.md)
 
 ## Acknowledgements
 

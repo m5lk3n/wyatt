@@ -68,12 +68,15 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 - [ ] (?) Download my data
 
 - [x] Implement notification
-  - ~~(?)~~ ~~https://pub.dev/packages/awesome_notifications~~
+  - ~~[ ] (?)~~ ~~https://pub.dev/packages/awesome_notifications~~
   - [x] https://pub.dev/packages/flutter_local_notifications
 
 ## Doing
 
+- [x] Deploy to `wyatt.lttl.dev`
 - [ ] Generate `lttl.dev/wyatt/index.html`
+  - [ ] Adopt https://html5up.net/fractal
+  - [ ] (?) `git tag`s as changelog entries
 - [ ] Update screenshots
 - [ ] Clean up [README.md](README.md)
 - [ ] Outline [TEST.md](test/TEST.md)

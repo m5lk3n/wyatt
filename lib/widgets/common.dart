@@ -7,7 +7,7 @@ String _getLegalese() {
   final int currentYear = DateTime.now().year;
 
   final prefix =
-      (Common.appStartYear == currentYear) ? '' : '$Common.appStartYear-';
+      (Common.appStartYear == currentYear) ? '' : '${Common.appStartYear}-';
 
   return /* TODO: add (c)? '\u00a9 ' */ '$prefix$currentYear by';
 }

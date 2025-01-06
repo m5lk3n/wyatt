@@ -10,10 +10,10 @@
             "type": "dart",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev/key
-                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev/what
-                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why", // https://wyatt.lttl.dev/why
-                "--dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt#permissions" // https://wyatt.lttl.dev/permissions
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev#key
+                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev#what
+                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why", // https://wyatt.lttl.dev#why
+                "--dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt#permissions" // https://wyatt.lttl.dev#permissions
             ]
         },
         {
@@ -23,10 +23,10 @@
             "flutterMode": "profile",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev/key
-                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev/what
-                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why", // https://wyatt.lttl.dev/why
-                "--dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt#permissions" // https://wyatt.lttl.dev/permissions
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev#key
+                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev#what
+                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why", // https://wyatt.lttl.dev#why
+                "--dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt#permissions" // https://wyatt.lttl.dev#permissions
             ]
         },
         {
@@ -36,10 +36,10 @@
             "flutterMode": "release",
             "program": "lib/main.dart",
             "args": [
-                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev/key
-                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev/what
-                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why", // https://wyatt.lttl.dev/why
-                "--dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt#permissions" // https://wyatt.lttl.dev/permissions
+                "--dart-define=KEY_URL=http://192.168.1.115/note/wyatt#key", // https://wyatt.lttl.dev#key
+                "--dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt#what", // https://wyatt.lttl.dev#what
+                "--dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt#why", // https://wyatt.lttl.dev#why
+                "--dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt#permissions" // https://wyatt.lttl.dev#permissions
             ]
         }
     ]

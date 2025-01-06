@@ -104,10 +104,10 @@ abstract class Screen {
 
 abstract class Default {
   static const int notificationDistance = 500;
-  static const String urlKey = 'https://wyatt.lttl.dev/key';
-  static const String urlWhy = 'https://wyatt.lttl.dev/why';
-  static const String urlWhat = 'https://wyatt.lttl.dev/what';
-  static const String urlPermissions = 'https://wyatt.lttl.dev/permissions';
+  static const String urlKey = 'https://wyatt.lttl.dev#key';
+  static const String urlWhy = 'https://wyatt.lttl.dev#why';
+  static const String urlWhat = 'https://wyatt.lttl.dev#what';
+  static const String urlPermissions = 'https://wyatt.lttl.dev#permissions';
 }
 
 abstract class SecureSettingsKeys {

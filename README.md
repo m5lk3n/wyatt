@@ -98,3 +98,4 @@ The mockup is [here](docs/wireframe.pdf).
 - Google for Maps and the font(s)
 - [Moqups](https://app.moqups.com) for the wireframe
 - [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)
+- [HTML5 UP](https://html5up.net/) for [Strongly Typed](https://html5up.net/strongly-typed) on [wyatt.lttl.dev](https://wyatt.lttl.dev)

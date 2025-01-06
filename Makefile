@@ -70,10 +70,11 @@ icons:
 # https://github.com/fluttercommunity/flutter_launcher_icons/issues/578#issuecomment-2366797554:
 	rm -rf android/app/src/main/res/mipmap-anydpi-v26
 
-## generate-lttl_dev: generate lttl.dev/wyatt
-.PHONY: generate-lttl_dev
-generate-lttl_dev:
+## lttl_dev: generate lttl.dev/wyatt and deploy to wyatt.lttl.dev
+.PHONY: lttl_dev
+lttl_dev:
 	lttl.dev/generate.sh
+	lttl.dev/deploy.sh
 
 ## build-android-debug: build the apk in debug mode
 .PHONY: build-android-debug

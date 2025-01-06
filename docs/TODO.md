@@ -75,7 +75,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Deploy to `wyatt.lttl.dev`
 - [ ] Generate `lttl.dev/wyatt/index.html`
-  - [ ] Adopt https://html5up.net/fractal
+  - [x] Adopt https://html5up.net/strongly-typed
   - [ ] (?) `git tag`s as changelog entries
 - [ ] Update screenshots
 - [ ] Clean up [README.md](README.md)

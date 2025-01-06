@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
 		<title>Wyatt</title>
 		<meta charset="utf-8" />
@@ -11,17 +11,17 @@
 		<div id="page-wrapper">
 			<section id="header">
 				<div class="container">
-					<h1 id="logo"><a href="index.html">Wyatt</a></h1>
+					<h1 id="logo"><a href="index.html">Wyatt</a> - AT WORK!</h1>
 					<p>A location- and time-based reminder app for Android and iOS.</p>
 					<p><img src="images/icon.png" alt="Wyatt logo" /></p>
 					<nav id="nav">
 						<ul>
-							<li><a class="icon solid fa-home" href="index.html"><span>About</span></a></li>
-							<li><a class="icon solid fa-key" href="#"><span>Key</span></a></li>
-							<li><a class="icon solid fa-question" href="#"><span>What</span></a></li>
-							<li><a class="icon solid fa-question" href="#"><span>Why</span></a></li>
-							<li><a class="icon solid fa-exclamation" href="#"><span>Permissions</span></a></li>
-							<li><a class="icon solid fa-clone" href="#"><span>Changelog</span></a></li>
+							<li><a class="icon solid fa-home" href="index.html#about"><span>About</span></a></li>
+							<li><a class="icon solid fa-key" href="#key"><span>Key</span></a></li>
+							<li><a class="icon solid fa-question" href="#what"><span>What</span></a></li>
+							<li><a class="icon solid fa-question" href="#why"><span>Why</span></a></li>
+							<li><a class="icon solid fa-exclamation" href="#permissions"><span>Permissions</span></a></li>
+							<li><a class="icon solid fa-clone" href="#changelog"><span>Changelog</span></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -29,19 +29,50 @@
 			<section id="main">
 				<div class="container">
 					<div id="content">
-							<article class="box post">
-								<header>
-									<h2>Howdy!<br />Here's some additional intel about <strong>Wyatt</strong></h2>
-								</header>
-								<h3>Key</h3>
-								<p>...</p>
-								<h3>What</h3>
-								<p>...</p>
-								<h3>Why</h3>
-								<p>...</p>
-								<h3>Permissions</h3>
-								<p>...</p>
-							</article>
+						<article class="box post">
+							<header>
+								<h2 id="about">Howdy!</h2>
+								<h3>Here's a heapin' helping of extra information about <strong>Wyatt</strong>, straight from the dusty trails.<br/>Saddle up and dive on in!</h3>
+							</header>
+
+							<h3>Disclaimer</h3>
+							<p>Wyatt uses the Google Maps API, e.g., Geocoding to convert geographic coordinates into human-readable addresses. <b>Using Google APIs is NOT free of charge!</b> Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
+							<p>The application is provided as is and without warranty of any kind. The author is not responsible for any costs, damages or losses that may result from the use of the application or the Google APIs. By using the application, you agree to this disclaimer.</p>
+							<hr/>
+							<h3>Privacy Policy</h3>
+							<p>Wyatt itself does not collect any personal data. The application does not store any data on a server. The user's (API) key is stored securely on the client device along with the user's reminder data (that's the data entered by the user through the application's user interface). The application itself does not use cookies or any other tracking technologies.</p>
+							<p>Please note that, through the usage of Google Maps, <a href="https://www.google.com/policies/privacy/">Google Privacy Policy</a> and <a href="https://cloud.google.com/maps-platform/terms/maps-controller-terms">Google Controller-Controller Data Protection Terms</a> apply.</p>
+							<hr/>
+							<h3>Source Code</h3>
+							Wyatt is open-source software. The source code is available on <a href="https://github.com/m5lk3n/wyatt">GitHub</a>.
+							<hr/>
+							<h3>License</h3>
+							<p>?</p>
+							<hr/>
+
+							<h3 id="key">Key</h3>
+							<p><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Use API Keys with Geocoding API</a> explains how to obtain a key where the following, minimum restrictions apply:<br/>
+							<img src="images/restrictions.png" alt="API Key Restrictions"/>
+							<br/>
+							TODO: Clarify whether<br/>
+							- Geolocation API, Places API or Places API (new) is required as well.<br/>
+							- this screenshot needs an update.<br/></p>
+
+							<h3 id="what">What</h3>
+							<p>...</p>
+
+							<h3 id="why">Why</h3>
+							<p>...</p>
+
+							<h3 id="permissions">Permissions</h3>
+							<p>Here's the list of permissions and why they are required:
+								<ul>
+									<li>Internet (?): Required to make HTTPS calls to Google APIs.</li>
+									<li>Location: Required to know the user's current location to be able to notify.</li>
+									<li>Storage (?): Required to store the user's to-do list data on the client.</li>
+								</ul>
+							</p>
+						</article>
 					</div>
 				</div>
 			</section>
@@ -49,10 +80,17 @@
 			<section id="footer">
 				<div class="container">
 					<header>
-						<h2>Changelog</h2>
+						<h2 id="changelog">Changelog</h2>
 					</header>
 					<div class="row">
-						...
+						<section>
+							<p>Version __VERSION__</p>
+							<p>
+								<ul>
+									<li>Initial Android release</li>
+								</ul>
+							</p>
+						</section>
 						<!--div class="col-6 col-12-medium">
 							<section>
 								<form method="post" action="#">

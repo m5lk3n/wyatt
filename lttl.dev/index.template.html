@@ -38,7 +38,7 @@
 							</header>
 
 							<h3>Disclaimer</h3>
-							<p>Wyatt uses the Google Maps API, e.g., Geocoding to convert geographic coordinates into human-readable addresses. <b>Using Google APIs is NOT free of charge!</b> Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
+							<p>Wyatt in its initial version uses the Google Maps API, e.g., for Geocoding to convert geographic coordinates into human-readable addresses. <b>Using Google APIs is NOT free of charge!</b> Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
 							<p>The application is provided as is and without warranty of any kind. The author is not responsible for any costs, damages or losses that may result from the use of the application or the Google APIs. By using the application, you agree to this disclaimer.</p>
 							<hr/>
 							<h3>Privacy Policy</h3>
@@ -50,17 +50,14 @@
 								<li class="icon brands fa-github"><a href="https://github.com/m5lk3n/wyatt"> Wyatt is open-source software; its source code is on GitHub.</a></li>
 							</ul>
 							<hr/>
-							<h3>License</h3>
-							<p>?</p>
-							<hr/>
+							<!--h3>License</h3>
+							<p>TODO</p>
+							<hr/-->
 
 							<h3 id="key">Key</h3>
-							<p><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Use API Keys with Geocoding API</a> explains how to obtain a key where the following, minimum restrictions apply:<br/>
-							<img src="images/restrictions.png" alt="API Key Restrictions"/>
+							<p>Wyatt needs an API key to work. <a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Use API Keys with Geocoding API</a> explains how to obtain such a key. Please apply the following, minimum restrictions:<br/>
+							<img src="images/api-key-restrictions.png" alt="API Key Restrictions"/>
 							<br/>
-							TODO: Clarify whether<br/>
-							- Geolocation API, Places API or Places API (new) is required as well.<br/>
-							- this screenshot needs an update.<br/></p>
 
 							<h3 id="what">What</h3>
 							<p>...</p>
@@ -71,9 +68,11 @@
 							<h3 id="permissions">Permissions</h3>
 							<p>Here's the list of permissions and why they are required:
 								<ul>
-									<li>Internet (?): Required to make HTTPS calls to Google APIs.</li>
+									<li>Internet: Required to make HTTPS calls to Google APIs.</li>
 									<li>Location: Required to know the user's current location to be able to notify.</li>
+									<li>Notification: Required to be allowed to remind the user.</li>
 									<li>Storage (?): Required to store the user's to-do list data on the client.</li>
+									<li>...</li>
 								</ul>
 							</p>
 						</article>

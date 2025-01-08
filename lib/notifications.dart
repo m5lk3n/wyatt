@@ -3,10 +3,7 @@ import 'dart:ui';
 import 'dart:developer'
     as dev; // don't use 'package:wyatt/log.dart' here, as it's not available in the background isolate where this code runs
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-import 'package:wyatt/common.dart';
 
 // https://amandevblogs.hashnode.dev/flutter-local-notifications-with-workmanager
 class NotificationService {
@@ -71,9 +68,8 @@ class NotificationService {
       importance: Importance.max,
       priority: Priority.max,
       playSound: true,
-      color: kDebugMode
-          ? Color((Random().nextDouble() * 0xFFFFFF).toInt())
-          : Style.iconicBackgroundColor,
+      color: Color((Random().nextDouble() * 0xFFFFFF)
+          .toInt()), // let's make each notification a different color to make them easier to distinguish
     );
 
     final details = await _localNotifications.getNotificationAppLaunchDetails();

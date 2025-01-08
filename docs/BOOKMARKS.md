@@ -117,6 +117,7 @@
 - https://medium.com/@abdurrehman-520/unlock-the-power-of-geofencing-in-flutter-with-haversine-formula-21b8203b1a5
 - https://codelabs.developers.google.com/codelabs/google-maps-in-flutter
 
+- https://github.com/fernandoptrr/flutter-location-practice/tree/master
 - [Geolocator and Geocoding with Flutter](https://medium.com/@fernnandoptr/how-to-get-users-current-location-address-in-flutter-geolocator-geocoding-be563ad6f66a)
 - [How to calculate the distance between coordinates](https://pub.dev/packages/haversine_distance)
 - [How to store coordinates on the local device](https://docs.flutter.dev/cookbook/persistence/key-value)

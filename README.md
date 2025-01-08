@@ -4,7 +4,7 @@ A location- and time-based reminder app for Android and iOS.
 
 ![](assets/icon/icon-small.png)
 
-*W*hen *Y*ou *A*re *T*here *T*hen ...
+*W*hen *Y*ou *A*re *T*here, *T*hen ...
 
 ---
 
@@ -16,7 +16,7 @@ Wyatt helps you to remember things like:
 
 ---
 
-Here's how Wyatt looks:
+Here's how Wyatt looks like:
 
 <img alt="Wyatt screenrecording" src="device_screens/screenrecording.gif" width="50%"/>
 
@@ -33,12 +33,17 @@ Here's how Wyatt looks:
 - [Styleguide](docs/STYLEGUIDE.md)
 - [To-do](docs/TODO.md)
 
+Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.dev)
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0) or later. See the [LICENSE](./LICENSE) file for details.
+
 ## Tips / Known Limitations / Known Issues
 
 - If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100 m from the center of the mall as this probably doesn't trigger a notification around the mall.
 - There should be a minimum of ~2h for a notification start and end date/time window, esp. when traveling. This is due to the (OS given) 15 minutes interval between background activities ([Background service](https://pub.dev/packages/flutter_background_service): *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*)
-- Notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough - **If you see limited connectivity from cell phone provider as in [this screenshot](device_screens/no-reminders.png), you will not get a reminder!**
-- On Android, under App info -> Unused app settings, make sure to disable "Manage app if unused" as shown on [this screenshot](device_screens/unused-app-settings.png). That's to avoid unintentional revocation of previously granted permissions or stopping of notifications.
+- Reliable determination of a location only seems to work on physical devices that are online and connected to the cell phone network, i.e., with a cell phone plan which includes data; a hot-spotted Wifi connection is not enough (as tested in the field) - **If you see limited connectivity from cell phone provider as in [this screenshot](device_screens/no-reminders.png), you will not get notified even when you should be!**
 - Only portrait mode is supported for the time being.
 - Android only: With the Nova Launcher, the app icon doesn't show the white (circular) background as intended (and as it does with the default launcher), but a dark-greyish one.
 
@@ -93,9 +98,13 @@ The mockup is [here](docs/wireframe.pdf).
 
 ## Acknowledgements
 
-- Max Schwarzmüller for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
+- [Max Schwarzmüller](https://github.com/maxschwarzmueller) for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 - Copilot for the Wyatt logo and the AppBar background
-- Google for Maps and the font(s)
+- Google for Maps and font(s)
 - [Moqups](https://app.moqups.com) for the wireframe
 - [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)
-- [HTML5 UP](https://html5up.net/) for [Strongly Typed](https://html5up.net/strongly-typed) on [wyatt.lttl.dev](https://wyatt.lttl.dev)
+
+### [wyatt.lttl.dev](https://wyatt.lttl.dev)
+
+- [HTML5 UP](https://html5up.net/) for [Strongly Typed](https://html5up.net/strongly-typed)
+- [Font Awesome](https://fontawesome.com/) for icons and font

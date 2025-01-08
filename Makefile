@@ -61,7 +61,7 @@ test:
 ## run: execute the application (in release mode but with debug URLs)
 .PHONY: run
 run:
-	flutter run --release --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
+	flutter run --release --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=WHY_URL=http://192.168.1.115/note/wyatt --dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt
 
 ## icons: regenerate application launcher icons (from assets/icon/icon.png)
 .PHONY: icons
@@ -80,7 +80,7 @@ lttl_dev:
 .PHONY: build-android-debug
 build-android-debug:
 	flutter clean
-	flutter build apk --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
+	flutter build apk --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=WHY_URL=http://192.168.1.115/note/wyatt --dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt
 
 ## all-android: start from scratch, install all dependencies, build the apk in release mode, and install on device
 .PHONY: all-android
@@ -93,7 +93,7 @@ all-android: clean update upgrade
 build-ios-debug:
 	flutter clean
 	cd ios && pod install
-	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHAT_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_WHY_URL=http://192.168.1.115/note/wyatt --dart-define=KEY_PERMISSIONS_URL=http://192.168.1.115/note/wyatt
+	flutter build ios --debug --dart-define=KEY_URL=http://192.168.1.115/note/wyatt --dart-define=WHY_URL=http://192.168.1.115/note/wyatt --dart-define=PERMISSIONS_URL=http://192.168.1.115/note/wyatt
 
 # TODO: build-ios-release: regenerate dependencies for iOS and build the application in release mode
 #.PHONY: build-ios-release

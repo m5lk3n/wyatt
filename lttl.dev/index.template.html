@@ -20,7 +20,6 @@
 						<ul>
 							<li><a class="icon solid fa-home" href="index.html#about"><span>About</span></a></li>
 							<li><a class="icon solid fa-key" href="#key"><span>Key</span></a></li>
-							<li><a class="icon solid fa-question" href="#what"><span>What</span></a></li>
 							<li><a class="icon solid fa-question" href="#why"><span>Why</span></a></li>
 							<li><a class="icon solid fa-exclamation" href="#permissions"><span>Permissions</span></a></li>
 							<li><a class="icon solid fa-clone" href="#changelog"><span>Changelog</span></a></li>
@@ -34,52 +33,61 @@
 						<article class="box post">
 							<header>
 								<h2 id="about">Howdy!</h2>
-								<h3>Here's a heapin' helping of <strong>extra</strong> information about <i>Wyatt</i>, straight from the dusty trails.</h3>
+								<h3>Here's a heapin' helping of <strong>extra</strong> information about Wyatt, straight from the dusty trails.</h3>
 								<h3>Saddle up and dive on in!</h3>
 							</header>
 
-							<h3>Wyatt</h3>
-							<p>You should have reached this page through the Wyatt app. If not, please continue <a href="https://github.com/m5lk3n/wyatt">here</a>.</p>
+							<hr/>
+							<p></p>
+							<p style="text-align: center;"><i>You should have reached this page through the Wyatt app. If not, please continue <a href="https://github.com/m5lk3n/wyatt">here</a>.</i></p>
 							<hr/>
 
 							<h3 id="disclaimer">Disclaimer</h3>
-							<p>The application is provided as is and without warranty of any kind. The author is not responsible for any costs, damages or losses that may result from the use of the application or the Google APIs. By using the application, you agree to this disclaimer.</p>
+							<p>The application is not commercial, it's a pet project which, besides, is not available through an app store. (<a href="https://github.com/m5lk3n/wyatt/blob/main/docs/FAQ.md">Here</a> is why.) Wyatt is provided as is and without warranty of any kind. The author is not responsible for any costs, damages or losses that may result from the use of the application or the Google APIs. By using the application, you agree to this disclaimer.</p>
 							<hr/>
+
 							<h3 id="privacy">Privacy Policy</h3>
 							<p>Wyatt itself does not collect any personal data. The application does not store any data on a server. The user's (Google Maps API) key is stored securely on the client device along with the user's reminder data (that's the data entered by the user through the application's user interface). The application itself does not use cookies or any other tracking technologies.</p>
 							<p>Please note that, through the usage of Google Maps, <a href="https://www.google.com/policies/privacy/">Google Privacy Policy</a> and <a href="https://cloud.google.com/maps-platform/terms/maps-controller-terms">Google Controller-Controller Data Protection Terms</a> apply.</p>
 							<hr/>
+
 							<h3>Source Code</h3>
 							<ul class="icons">
 								<li class="icon brands fa-github"><a href="https://github.com/m5lk3n/wyatt"> Wyatt is open-source software; its source code is on GitHub.</a></li>
 							</ul>
 							<hr/>
-							<!--h3>License</h3>
-							<p>TODO</p>
-							<hr/-->
 
 							<h3 id="key">Key</h3>
-							<p>Wyatt in its initial version uses the Google Maps API, e.g., for Geocoding to convert geographic coordinates into human-readable addresses. <strong>At this point in time, using Google APIs is only free of charge up until a certain limit!</strong> So far, when using Wyatt with half a dozen reminders (and in a "normal way"), I've <i>not</i> been charged. Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
-							<p>Long story short, please roll your own. <strong><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Use API Keys with Geocoding API</a> explains how to create a key.</strong><br/>Additionally, please apply the following, minimum restrictions to the key:<br/>
-							<img src="images/api-key-restrictions.png" alt="API Key Restrictions"/>
-							</p>
-
-							<h3 id="what">What</h3>
-							<p>TODO</p>
+							<p>Wyatt in its initial version uses Google Maps which requires an API key. <strong>At this point in time, using the Google Maps API is only free of charge up until a certain limit!</strong> (So far, when using Wyatt with half a dozen reminders (and in a "normal way"), the author has <i>not</i> been charged.) Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
+							<p>Long story short, please bring your own key. <strong><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">This Google documentation</a> explains how to create a key.</strong> Additionally, please apply the following, minimum restrictions to the key:</p>
+							<p style="text-align: center;"><img style="border-radius: 25px;" src="images/api-key-restrictions.png" alt="API Key Restrictions"/></p>
 
 							<h3 id="why">Why</h3>
-							<p>TODO</p>
+							<p>Google Maps is probably today's de facto standard for its kind. Any app or service talking to Google Maps Platform must use an API key. Wyatt for example, leverages Google Maps'
+								<ul>
+									<li>Geocoding to convert geographic coordinates into human-readable addresses and vice versa</li>
+									<li>Geolocation to understand where the device currently is to remind the user</li>
+									<li>SDK for Android and iOS for development purposes</li>
+									<li>Places to search for locations</li>
+								</ul>
+							</p>
 
 							<h3 id="permissions">Permissions</h3>
 							<p>Here's the list of application permissions and for what they are required:
 								<ul>
-									<li>Internet: Required to make HTTPS calls to Google APIs.</li>
-									<li>Location: Required to know the user's current location to be able to notify.</li>
+									<li>Internet: Required to make HTTPS calls to Google Maps APIs.</li>
+									<li>Location: Required to know the user's current location to be able to notify (even when Wyatt is running in the background).</li>
 									<li>Notification: Required to be allowed to remind the user.</li>
-									<li>Storage (?): Required to store the user's to-do list data on the client.</li>
-									<li>TODO</li>
 								</ul>
 							</p>
+							<p>Upon first start or app reset, Wyatt will ask for these permissions. If you deny any of the permissions, the application will not work as expected. You can always change the permissions in the settings of your device.</p>
+							<p>Please note though, that
+								<ul>
+									<li>revoking those permissions in retrospect, while the app is running, throws Wyatt off the horse completely (read: crashes the app).</li>
+									<li>re-adding permissions while Wyatt is open requires an interaction (or a restart) to refresh its app bar and to get rid of the error message regarding missing permissions.</li>
+								</ul>
+							</p>
+							<p>Last, on Android under 'App info' &rarr; 'Unused app settings', to avoid unintentional revocation of previously granted permissions or stopping of notifications, make sure to disable 'Manage app if unused' as shown <a href="https://github.com/m5lk3n/wyatt/blob/main/device_screens/unused-app-settings.png">here</a>.</p>
 						</article>
 					</div>
 				</div>

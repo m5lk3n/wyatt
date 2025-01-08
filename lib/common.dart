@@ -77,12 +77,8 @@ abstract class Url {
     'KEY_URL', // see launch configuration
     defaultValue: Default.urlKey,
   );
-  static const String keyWhat = String.fromEnvironment(
-    'KEY_WHAT_URL', // see launch configuration
-    defaultValue: Default.urlWhat,
-  );
-  static const String keyWhy = String.fromEnvironment(
-    'KEY_WHY_URL', // see launch configuration
+  static const String why = String.fromEnvironment(
+    'WHY_URL', // see launch configuration
     defaultValue: Default.urlWhy,
   );
   static const String permissions = String.fromEnvironment(
@@ -106,7 +102,6 @@ abstract class Default {
   static const int notificationDistance = 500;
   static const String urlKey = 'https://wyatt.lttl.dev#key';
   static const String urlWhy = 'https://wyatt.lttl.dev#why';
-  static const String urlWhat = 'https://wyatt.lttl.dev#what';
   static const String urlPermissions = 'https://wyatt.lttl.dev#permissions';
 }
 

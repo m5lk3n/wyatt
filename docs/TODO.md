@@ -71,13 +71,28 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
   - ~~[ ] (?)~~ ~~https://pub.dev/packages/awesome_notifications~~
   - [x] https://pub.dev/packages/flutter_local_notifications
 
-## Doing
+- [x] Clarify minimal API key scope and document
+- [x] Clarify permissions
+  - See https://developer.android.com/develop/sensors-and-location/location/retrieve-current#permissions
+  - See "Permissions" under https://github.com/Michael-M-aher/location_picker_flutter_map/tree/main?tab=readme-ov-file#setup
+  - See [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
+- [x] Document permissions
+  - See also [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
+- [x] Document constraints
+  - https://pub.dev/packages/flutter_background_service
+    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
 
 - [x] Deploy to `wyatt.lttl.dev`
 - [x] Generate `lttl.dev/wyatt/index.html`
-  - [ ] Finish initial content
+  - [x] Finish initial content
   - [x] Adopt https://html5up.net/strongly-typed
-  - [x] `git tag`s as changelog entries
+  - [x] Use `git tag`s to generate changelog entries
+
+- [x] Research and add a license
+
+## Doing
+
+- [ ] Remove all EXIF info
 - [ ] Update screenshots
 - [ ] Clean up [README.md](README.md)
 - [ ] Outline [TEST.md](test/TEST.md)
@@ -101,26 +116,11 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
         }
       }
 
-- [ ] Clarify minimal API key scope and document
-- [ ] Clarify permissions
-  - [ ] https://developer.android.com/develop/sensors-and-location/location/retrieve-current#permissions
-  - [ ] See "Permissions" under https://github.com/Michael-M-aher/location_picker_flutter_map/tree/main?tab=readme-ov-file#setup
-  - [ ] [android.permission.INTERNET / com.apple.security.network.client](https://docs.flutter.dev/cookbook/networking/fetch-data)
-- [ ] Document permissions
-  - updating permissions while the app is open requires an app action to refresh appbar to get rid of the error message reg. missing permissions
-  - [geofence_foreground_service](https://pub.dev/packages/geofence_foreground_service) package: ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION on Android, Core Location on iOS
 - [ ] Document logging
   - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
-- [ ] Document constraints
-  - https://pub.dev/packages/flutter_background_service
-    (Background service: *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*/)
-- Clarify minimum requirements (Android (API) version, etc.), see e.g., Note under https://docs.flutter.dev/deployment/android#enable-multidex-support
-- [ ] [Source](https://github.com/fernandoptrr/flutter-location-practice/tree/master):
-  - [ ] Add `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>` to `AndroidManifest.xml` as well
-  - [ ] Clarify: `Geolocator.getCurrentPosition` is only executed on physical devices that are online (!?)
 - [ ] Add `intl` (e.g. https://emiliodinen.medium.com/flutter-guide-to-use-internalization-and-localization-c8feedb46ac1)
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
-- [ ] TODOs in code
+- [ ] TODOs
 - [ ] Rename members to start with an underscore
 - [ ] Adhere to conventions, like *widget constructors only use named arguments. Also by convention, the first argument is key, and the last argument is child, children, or the equivalent.*
 - [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
@@ -142,4 +142,3 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 - Recover from "panic"/exception (loss of connectivity in a tunnel?)
 - Merge nearby reminders?
 - Support landscape mode?
-- License?

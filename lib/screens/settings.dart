@@ -38,7 +38,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _isObscured = true;
 
   final _formKey = GlobalKey<FormState>();
-  late TapGestureRecognizer _tapGestureRecognizer;
+  late TapGestureRecognizer _tapGestureRecognizerKey;
+  late TapGestureRecognizer _tapGestureRecognizerWhy;
 
   @override
   void initState() {
@@ -52,7 +53,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       readDefaultNotificationDistance(ref, _distanceController);
     }
 
-    _tapGestureRecognizer = TapGestureRecognizer();
+    _tapGestureRecognizerKey = TapGestureRecognizer();
+    _tapGestureRecognizerWhy = TapGestureRecognizer();
   }
 
   @override
@@ -60,7 +62,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     _keyController.dispose();
     _distanceController.dispose();
 
-    _tapGestureRecognizer.dispose();
+    _tapGestureRecognizerKey.dispose();
+    _tapGestureRecognizerWhy.dispose();
 
     super.dispose();
   }
@@ -148,18 +151,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   TextSpan(children: [
                     TextSpan(
                       text: _isSettingUp
-                          ? 'A key is needed. Please obtain one from '
-                          : 'If needed, please obtain a key from ',
+                          ? 'A key is needed. Please obtain one as per '
+                          : 'If needed, please obtain a key as per ',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                     ),
                     TextSpan(
-                      recognizer: _tapGestureRecognizer
+                      recognizer: _tapGestureRecognizerKey
                         ..onTap = () {
                           browseTo(Url.key);
                         },
-                      text: 'this page',
+                      text: 'this',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           decoration: TextDecoration.underline,
                           color: Theme.of(context).colorScheme.primary,
@@ -167,7 +170,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               Theme.of(context).colorScheme.primary),
                     ),
                     TextSpan(
-                      text: '.',
+                      text: ' description.',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -184,38 +187,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         TextSpan(
                           children: [
                             TextSpan(
-                              recognizer: _tapGestureRecognizer
+                              recognizer: _tapGestureRecognizerWhy
                                 ..onTap = () {
-                                  browseTo(Url.keyWhat);
+                                  browseTo(Url.why);
                                 },
-                              text: 'What',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      decoration: TextDecoration.underline,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      decorationColor: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
-                            ),
-                            TextSpan(
-                              text: ' is that and ',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                  ),
-                            ),
-                            TextSpan(
-                              recognizer: _tapGestureRecognizer
-                                ..onTap = () {
-                                  browseTo(Url.keyWhy);
-                                },
-                              text: 'why',
+                              text: 'Here',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
@@ -229,7 +205,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             ),
                             TextSpan(
                               text:
-                                  ' is this needed?\nYou can change the key later in ',
+                                  ' is what that is and why it is needed.\nYou can change the key later in ',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!

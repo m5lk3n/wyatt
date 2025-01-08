@@ -34,16 +34,19 @@
 						<article class="box post">
 							<header>
 								<h2 id="about">Howdy!</h2>
-								<h3>Here's a heapin' helping of extra information about <strong>Wyatt</strong>, straight from the dusty trails.</h3>
+								<h3>Here's a heapin' helping of <strong>extra</strong> information about <i>Wyatt</i>, straight from the dusty trails.</h3>
 								<h3>Saddle up and dive on in!</h3>
 							</header>
 
-							<h3>Disclaimer</h3>
-							<p>Wyatt in its initial version uses the Google Maps API, e.g., for Geocoding to convert geographic coordinates into human-readable addresses. <b>Using Google APIs is NOT free of charge!</b> Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
+							<h3>Wyatt</h3>
+							<p>You should have reached this page through the Wyatt app. If not, please continue <a href="https://github.com/m5lk3n/wyatt">here</a>.</p>
+							<hr/>
+
+							<h3 id="disclaimer">Disclaimer</h3>
 							<p>The application is provided as is and without warranty of any kind. The author is not responsible for any costs, damages or losses that may result from the use of the application or the Google APIs. By using the application, you agree to this disclaimer.</p>
 							<hr/>
-							<h3>Privacy Policy</h3>
-							<p>Wyatt itself does not collect any personal data. The application does not store any data on a server. The user's (API) key is stored securely on the client device along with the user's reminder data (that's the data entered by the user through the application's user interface). The application itself does not use cookies or any other tracking technologies.</p>
+							<h3 id="privacy">Privacy Policy</h3>
+							<p>Wyatt itself does not collect any personal data. The application does not store any data on a server. The user's (Google Maps API) key is stored securely on the client device along with the user's reminder data (that's the data entered by the user through the application's user interface). The application itself does not use cookies or any other tracking technologies.</p>
 							<p>Please note that, through the usage of Google Maps, <a href="https://www.google.com/policies/privacy/">Google Privacy Policy</a> and <a href="https://cloud.google.com/maps-platform/terms/maps-controller-terms">Google Controller-Controller Data Protection Terms</a> apply.</p>
 							<hr/>
 							<h3>Source Code</h3>
@@ -56,9 +59,8 @@
 							<hr/-->
 
 							<h3 id="key">Key</h3>
-							<p>Wyatt needs an API key to work. You need to bring your own...<br/>
-							<a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Use API Keys with Geocoding API</a> explains how to create such a key.<br/>
-							Please apply the following, minimum restrictions:<br/>
+							<p>Wyatt in its initial version uses the Google Maps API, e.g., for Geocoding to convert geographic coordinates into human-readable addresses. <strong>At this point in time, using Google APIs is only free of charge up until a certain limit!</strong> So far, when using Wyatt with half a dozen reminders (and in a "normal way"), I've <i>not</i> been charged. Please read <a href="https://mapsplatform.google.com/pricing/">Platform Pricing & API Costs - Google Maps Platform</a> for details.</p>
+							<p>Long story short, please roll your own. <strong><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Use API Keys with Geocoding API</a> explains how to create a key.</strong><br/>Additionally, please apply the following, minimum restrictions to the key:<br/>
 							<img src="images/api-key-restrictions.png" alt="API Key Restrictions"/>
 							</p>
 

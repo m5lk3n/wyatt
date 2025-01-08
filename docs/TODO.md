@@ -90,17 +90,21 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Research and add a license
 
+- [x] Ensure there's no EXIF data in image files
+
+- [x] Clean up [README.md](README.md)
+
+- [x] Clean up assets
+
 ## Doing
 
-- [ ] Remove all EXIF info
 - [ ] Update screenshots
-- [ ] Clean up [README.md](README.md)
 - [ ] Outline [TEST.md](test/TEST.md)
-- [ ] Clean up assets
+- [ ] Document logging
+  - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
 
 ## To-do
 
-- [ ] Take over [Spec.](https://github.com/m5lk3n/locato?tab=readme-ov-file#spec)
 - [ ] Search a location
 - [ ] Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
 - [ ] End date notification widget init value should be set to start date (if any)
@@ -116,14 +120,12 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
         }
       }
 
-- [ ] Document logging
-  - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
 - [ ] Add `intl` (e.g. https://emiliodinen.medium.com/flutter-guide-to-use-internalization-and-localization-c8feedb46ac1)
   - [ ] Unify syntax ("Enter Distance in Meters" or "Enter distance in meters")
 - [ ] TODOs
 - [ ] Rename members to start with an underscore
 - [ ] Adhere to conventions, like *widget constructors only use named arguments. Also by convention, the first argument is key, and the last argument is child, children, or the equivalent.*
-- [ ] Automate builds (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
+- [ ] Automate builds further (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
 
 ## Open
 

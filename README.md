@@ -35,10 +35,6 @@ Here's how Wyatt looks like:
 
 Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.dev)
 
-## License
-
-This project is licensed under the GNU General Public License v3.0 (GPL-3.0) or later. See the [LICENSE](./LICENSE) file for details.
-
 ## Tips / Known Limitations / Known Issues
 
 - If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100 m from the center of the mall as this probably doesn't trigger a notification around the mall.
@@ -96,12 +92,16 @@ The mockup is [here](docs/wireframe.pdf).
 
 ## [Lessons Learned](docs/LESSONS_LEARNED.md)
 
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0) or later. See the [LICENSE](./LICENSE) file for details.
+
 ## Acknowledgements
 
 - [Max Schwarzmüller](https://github.com/maxschwarzmueller) for his incredible [Flutter & Dart - The Complete Guide [2024 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 - Copilot for the Wyatt logo and the AppBar background
 - Google for Maps and font(s)
-- [Moqups](https://app.moqups.com) for the wireframe
+- [Moqups](https://app.moqups.com) for the [wireframe](https://github.com/m5lk3n/wyatt?tab=readme-ov-file#wireframe)
 - [zeshuaro](https://github.com/zeshuaro) for [Appainter](https://appainter.dev/)
 
 ### [wyatt.lttl.dev](https://wyatt.lttl.dev)

@@ -50,3 +50,15 @@ Run `make icons`* from this repo's root folder.
 
 *) "regenerate application launcher icons (from assets/icon/icon.png)"
 </details>
+
+<details>
+<summary>... check that an image does not contain any EXIF data</summary>
+
+```
+$ exif --no-fixup assets/images/logo.png
+Corrupt data
+The data provided does not follow the specification.
+ExifLoader: The data supplied does not seem to contain EXIF data.
+```
+
+</details>

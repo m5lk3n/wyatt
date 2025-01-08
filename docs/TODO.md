@@ -96,9 +96,10 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Clean up assets
 
+- [x] Update screenshots
+
 ## Doing
 
-- [ ] Update screenshots
 - [ ] Outline [TEST.md](test/TEST.md)
 - [ ] Document logging
   - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device

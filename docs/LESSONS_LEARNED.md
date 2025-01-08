@@ -2,7 +2,7 @@
 
 :construction_worker:
 
-- Workmanager notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough (see limited connectivity from cell phone provider in [screenshot](screenshots/no-reminders.png)). Notifications are not reliable in general.
+- Workmanager notifications don't work without a cell phone plan which includes data; a hot-spotted Wifi connection is not enough (see limited connectivity from cell phone provider in [screenshot](../device_screens/screenshots/no-notifications.png)). Notifications are not reliable in general.
 - If possible, use actual devices to test, simply because the dev turnaround is so much quicker.
 - GoogleMap with static key baked in, even obfuscated, is just a matter of reverse engineering -> Solution:
   - Dynamic plugin

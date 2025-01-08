@@ -2,7 +2,7 @@
 
 export TS=$(date +%s)
 export ADB=~/Library/Android/sdk/platform-tools/adb
-export FILENAME=${TS}.png
+export FILENAME=screenshots/${TS}.png
 
 if [ ! -f ${ADB} ]; then
     echo "adb not found. Please install Android SDK and set the path to adb in this script."

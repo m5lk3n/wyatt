@@ -98,11 +98,14 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Update screenshots
 
+- [x] Outline [TEST.md](test/TEST.md)
+
 ## Doing
 
-- [ ] Outline [TEST.md](test/TEST.md)
 - [ ] Document logging
   - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
+- [ ] More field testing
+- [ ] Write up lessons learned and how-to(s) on Medium
 
 ## To-do
 

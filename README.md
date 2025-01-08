@@ -70,11 +70,11 @@ Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.de
 [Here's why](docs/FAQ.md), at least at this point, Wyatt is not available from an app store. 
 
 Long story short, in a nutshell, you would need
-- to get a Google Maps API key,
+- to [get a Google Maps API key](https://wyatt.lttl.dev#key),
 - to build the app yourself,
 - to upload the built app to your device.
 
-To do that, I use either my 2023 Mac mini M2 (8 GB) or my 2020 MacBook Pro M1 (16 GB), both on the latest Sequoia at the time of writing.
+To do that, I use either my 2023 Mac mini M2 (8 GB) or my 2020 MacBook Pro M1 (16 GB), both on the latest OS version at the time of writing.
 
 ### On Android
 

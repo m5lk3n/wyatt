@@ -119,7 +119,6 @@ class _AddressLoaderState extends State<AddressLoader> {
     if (location == null) {
       return;
     }
-    //_currentLocationData = location;
     _updateAddress(locationData: location);
   }
 }

@@ -30,20 +30,6 @@ class NotificationService {
   void onDidReceiveLocalNotification(NotificationResponse? response) {
     var data = response?.payload.toString();
 
-    // if (response!.id == 0) {
-    //   Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => SecondScreen(data: response.payload!),
-    //       ));
-    // } else {
-    //   Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => ThirdScreen(),
-    //       ));
-    // }
-
     dev.log('$data', name: 'onDidReceiveLocalNotification');
   }
 
@@ -53,10 +39,6 @@ class NotificationService {
 
     dev.log('$data', name: 'onDidReceiveBackgroundNotificationResponse');
   }
-
-  // void selectNotification(String? payload) {
-  //   if (payload != null && payload.isNotEmpty) {}
-  // }
 
   Future<NotificationDetails> _notificationDetails() async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
@@ -96,44 +78,4 @@ class NotificationService {
       payload: payload,
     );
   }
-/*
-  Future<void> showScheduledLocalNotification({
-    required int id,
-    required String title,
-    required String body,
-    required String payload,
-    required int seconds,
-  }) async {
-    final platformChannelSpecifics = await _notificationDetails();
-    await _localNotifications.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
-      platformChannelSpecifics,
-      payload: payload,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
-  }
-
-  Future<void> showPeriodicLocalNotification({
-    required int id,
-    required String title,
-    required String body,
-    required String payload,
-  }) async {
-    final platformChannelSpecifics = await _notificationDetails();
-    await _localNotifications.periodicallyShow(
-      id,
-      title,
-      body,
-      RepeatInterval.everyMinute,
-      platformChannelSpecifics,
-      payload: payload,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
-  }
-*/
 }

@@ -100,10 +100,10 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Outline [TEST.md](test/TEST.md)
 
+- [x] Document logging
+
 ## Doing
 
-- [ ] Document logging
-  - https://stackoverflow.com/questions/2882253/how-do-i-get-the-logfile-from-an-android-device
 - [ ] More field testing
 - [ ] Write up lessons learned and how-to(s) on Medium
 
@@ -129,7 +129,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 - [ ] TODOs
 - [ ] Rename members to start with an underscore
 - [ ] Adhere to conventions, like *widget constructors only use named arguments. Also by convention, the first argument is key, and the last argument is child, children, or the equivalent.*
-- [ ] Automate builds further (`flutter build apk --obfuscate "--dart-define=KEY_URL=https://developers.google.com/maps/documentation/geocoding/get-api-key ...`)
+- [ ] Automate builds further (`flutter build apk --obfuscate ...`)
 
 ## Open
 

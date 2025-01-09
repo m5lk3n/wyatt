@@ -71,19 +71,28 @@ abstract class Style {
 }
 
 abstract class Url {
-  static String dev = 'https://lttl.dev';
+  static const String dev = 'https://lttl.dev';
+  static const String wyatt = 'https://wyatt.lttl.dev';
 
   static const String key = String.fromEnvironment(
-    'KEY_URL', // see launch configuration
+    'URL_KEY', // see launch configuration, overwrite public URL with private dev server to copy & paste a key from
     defaultValue: Default.urlKey,
   );
   static const String why = String.fromEnvironment(
-    'WHY_URL', // see launch configuration
+    'URL_WHY',
     defaultValue: Default.urlWhy,
   );
   static const String permissions = String.fromEnvironment(
-    'PERMISSIONS_URL', // see launch configuration
+    'URL_PERMISSIONS',
     defaultValue: Default.urlPermissions,
+  );
+  static const String disclaimer = String.fromEnvironment(
+    'URL_DISCLAIMER',
+    defaultValue: Default.urlDisclaimer,
+  );
+  static const String privacy = String.fromEnvironment(
+    'URL_PRIVACY',
+    defaultValue: Default.urlPrivacy,
   );
 }
 
@@ -100,9 +109,11 @@ abstract class Screen {
 
 abstract class Default {
   static const int notificationDistance = 500;
-  static const String urlKey = 'https://wyatt.lttl.dev#key';
-  static const String urlWhy = 'https://wyatt.lttl.dev#why';
-  static const String urlPermissions = 'https://wyatt.lttl.dev#permissions';
+  static const String urlKey = '${Url.wyatt}#key';
+  static const String urlWhy = '${Url.wyatt}#why';
+  static const String urlPermissions = '${Url.wyatt}#permissions';
+  static const String urlDisclaimer = '${Url.wyatt}#disclaimer';
+  static const String urlPrivacy = '${Url.wyatt}#privacy';
 }
 
 abstract class SecureSettingsKeys {

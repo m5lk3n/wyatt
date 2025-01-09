@@ -1,5 +1,7 @@
 # Bookmarks
 
+Below is a list of resources that I've researched, used and/or learned and/or taken inspiration from.
+
 ## Secure Storage
 
 - https://pub.dev/packages/flutter_secure_storage/example

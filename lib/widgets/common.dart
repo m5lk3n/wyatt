@@ -26,6 +26,24 @@ void showWyattAboutDialog(BuildContext context) {
             color: Theme.of(context).colorScheme.onSurface,
             fontStyle: FontStyle.italic),
       ),
+      Row(
+        children: [
+          TextButton(
+              onPressed: () => browseTo(Url.disclaimer),
+              child: Text("Disclaimer",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: Theme.of(context).colorScheme.primary,
+                      decorationColor: Theme.of(context).colorScheme.primary))),
+          TextButton(
+              onPressed: () => browseTo(Url.privacy),
+              child: Text("Privacy Policy",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: Theme.of(context).colorScheme.primary,
+                      decorationColor: Theme.of(context).colorScheme.primary))),
+        ],
+      ),
     ],
   );
 

@@ -56,49 +56,6 @@ Future<List<Reminder>> getBackgroundRemindersInRangeAndTime(
   return remindersInRangeAndTime;
 }
 
-/*
-FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
-
-void initNotifications() {
-  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  var initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-  /* var initializationSettingsIOS = IOSInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false);*/
-  var initializationSettings = InitializationSettings(
-    android: initializationSettingsAndroid, /*iOS: initializationSettingsIOS */
-  );
-  flutterLocalNotificationsPlugin!.initialize(initializationSettings);
-
-  log.debug('notifications initialized', name: 'WyattApp');
-}
-
-void showNotification(String text) async {
-  if (flutterLocalNotificationsPlugin == null) {
-    initNotifications();
-  }
-
-  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-    'dev.lttl.wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'packageName' has not been initialized.
-    'Wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'appName' has not been initialized.
-    importance: Importance.high,
-    priority: Priority.high,
-  );
-  // TODO: var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  var platformChannelSpecifics = NotificationDetails(
-    android:
-        androidPlatformChannelSpecifics, /*iOS: iOSPlatformChannelSpecifics*/
-  );
-  await flutterLocalNotificationsPlugin!.show(
-    0,
-    'Howdy!',
-    text,
-    platformChannelSpecifics,
-  );
-}
-*/
 class CoreSystem {
   final WidgetRef _ref;
 

@@ -20,7 +20,7 @@ Here's how Wyatt looks like:
 
 <img alt="Wyatt screenrecording" src="device_screens/screenrecording.gif" width="50%"/>
 
-Screenshots can be found [here](device_screens/screenshots/SCREENSHOTS.md).
+Screenshots can be found [here](device_screens/screenshots/APP.md).
 
 ## Documentation
 
@@ -32,6 +32,7 @@ Screenshots can be found [here](device_screens/screenshots/SCREENSHOTS.md).
 - [How-to](docs/HOWTO.md)
 - [Ideas](docs/IDEAS.md) (partially outdated, archivable)
 - [Lessons learned](docs/LESSONS_LEARNED.md)
+- [Logging](docs/LOG.md)
 - [Styleguide](docs/STYLEGUIDE.md)
 - [To-do](docs/TODO.md)
 

@@ -18,4 +18,4 @@
 
 <img alt="Wyatt screenshot" src="app-8-settings.png" width="50%"/>
 
-<img alt="Wyatt screenshot" src="app-9-notifications.png" width="50%"/>
+<img alt="Wyatt screenshot" src="app-9-notification.png" width="50%"/>

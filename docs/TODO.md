@@ -104,6 +104,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 ## Doing
 
+- [ ] `make bump` - bump version in `pubspec.yaml` + `git tag` + `generate-lttl_dev`
 - [ ] More field testing
 - [ ] Write up lessons learned and how-to(s) on Medium
 

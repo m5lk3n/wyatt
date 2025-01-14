@@ -28,7 +28,7 @@ class _AddressLoaderState extends State<AddressLoader> {
       Location(); // location data retriever // TODO: shows several deprecated warnings when compiled. usage? update?
   final _addressController = TextEditingController();
   LocationData? _currentLocationData;
-  String? _error;
+  PlatformException? _error;
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _AddressLoaderState extends State<AddressLoader> {
       });
     } on PlatformException catch (err) {
       setState(() {
-        _error = err.code;
+        _error = err;
         _addressController.text =
             'Error loading location. You may be offline. Please try again later.';
         log.error('error loading location',

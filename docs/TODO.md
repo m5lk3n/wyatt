@@ -106,7 +106,6 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [ ] More field testing
 - [ ] Play optional Yeehaw sound up for notification (switched off by default)
-- [ ] `make bump` - bump version in `pubspec.yaml` + `git tag` + `make lttl_dev`
 - [ ] Write up lessons learned and how-to(s) on Medium
 
 ## To-do

@@ -10,6 +10,7 @@ install:
 	flutter clean
 	flutter pub add flutter_lints --dev
 	flutter pub add flutter_launcher_icons --dev
+	flutter pub add version_bmp --dev
 	flutter pub add package_info_plus
 	flutter pub add google_fonts
 	flutter pub add url_launcher
@@ -70,11 +71,25 @@ icons:
 # https://github.com/fluttercommunity/flutter_launcher_icons/issues/578#issuecomment-2366797554:
 	rm -rf android/app/src/main/res/mipmap-anydpi-v26
 
+## bump: bump the version in pubspec
+.PHONY: bump
+bump:
+	dart run version_bmp
+
+## tag: git tag the current pubspec version
+.PHONY: tag
+tag:
+	./tag.sh
+
 ## lttl_dev: generate lttl.dev/wyatt and deploy to wyatt.lttl.dev
 .PHONY: lttl_dev
 lttl_dev:
 	lttl.dev/generate.sh
 	lttl.dev/deploy.sh
+
+## bump-tag-lttl_dev: see bump + tag + lttl_dev
+.PHONY: bump-tag-lttl_dev
+bump-tag-lttl_dev: bump tag lttl_dev
 
 ## build-android-debug: build the apk in debug mode
 .PHONY: build-android-debug

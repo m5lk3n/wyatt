@@ -24,7 +24,6 @@ Screenshots can be found [here](device_screens/screenshots/APP.md).
 
 ## Documentation
 
-- [Appendix](docs/APPENDIX.md)
 - [Backlog](docs/BACKLOG.md)
 - [Bookmarks](docs/BOOKMARKS.md)
 - [Development](docs/DEV.md)

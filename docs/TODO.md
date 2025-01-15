@@ -102,10 +102,11 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Document logging
 
+- [x] Enable vibrate for notification
+
 ## Doing
 
 - [ ] More field testing
-- [ ] Play optional Yeehaw sound up for notification (switched off by default)
 - [ ] Write up lessons learned and how-to(s) on Medium
 
 ## To-do

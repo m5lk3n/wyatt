@@ -71,9 +71,7 @@ extension StringExtensions on String {
 Future<void> initApp() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   Common.appName = packageInfo.appName.capitalize();
-  String buildNumber = packageInfo.buildNumber;
-  Common.appVersion =
-      '${packageInfo.version}${buildNumber.isEmpty ? '' : '+$buildNumber'}';
+  Common.appVersion = packageInfo.version;
   Common.packageName = packageInfo.packageName;
 
   initWorkmanager();

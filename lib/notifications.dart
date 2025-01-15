@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'dart:developer'
     as dev; // don't use 'package:wyatt/log.dart' here, as it's not available in the background isolate where this code runs
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 // https://amandevblogs.hashnode.dev/flutter-local-notifications-with-workmanager
@@ -49,7 +50,14 @@ class NotificationService {
       channelDescription: 'Wyatt reminders',
       importance: Importance.max,
       priority: Priority.max,
-      playSound: true,
+      enableVibration: true,
+      vibrationPattern: Int64List.fromList([
+        0,
+        1000,
+        500,
+        1000
+      ]), // no initial delay, vibrate for 1s, wait for 0.5, vibrate for 1s
+      playSound: false,
       color: Color((Random().nextDouble() * 0xFFFFFF)
           .toInt()), // let's make each notification a different color to make them easier to distinguish
     );

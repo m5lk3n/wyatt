@@ -106,6 +106,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 ## Doing
 
+- [ ] Hint on Let's-get-started about permissions requests
 - [ ] Hint on successful reminder save about 15mins offset to (next) notification
 - [ ] More field testing
 - [ ] Write up lessons learned and how-to(s) on Medium

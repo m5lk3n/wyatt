@@ -61,7 +61,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
     /* don't omit setState() and _isLoading here, otherwise the GoogleMap widget
        will not be updated with the key, and tries to read the (dummy) key from 
        the manifest instead (results in a blank Google Maps screen and an error
-      message in the console): */
+       message in the console): */
     setState(() {
       _isLoading = true;
     });
@@ -69,7 +69,7 @@ class _LocationPickerState extends ConsumerState<LocationPicker> {
     _key = await settings.getKey();
     log.debug('key from settings: $_key',
         name:
-            '$runtimeType'); // if key is empty, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
+            '$runtimeType'); // without a key, the app will crash with FATAL EXCEPTION: androidmapsapi-ula-1
     // TODO: complain if key is invalid (set global error via notifier and route to setup page)
 
     await _googleMapDynamicKeyPlugin.setGoogleApiKey(_key).then((value) {

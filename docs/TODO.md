@@ -106,15 +106,16 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Write up lessons learned and how-to(s) on Medium
 
+- [x] Hint on Let's-get-started about permissions requests
+
+- [x] Hint on successful reminder save about 15mins offset to (next) notification
+
 ## Doing
 
-- [ ] Hint on Let's-get-started about permissions requests
-- [ ] Hint on successful reminder save about 15mins offset to (next) notification
-- [ ] More field testing
+- [ ] iOS flavor
 
 ## To-do
 
-- [ ] iOS flavor
 - [ ] Search a location
 - [ ] Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
 - [ ] End date notification widget init value should be set to start date (if any)

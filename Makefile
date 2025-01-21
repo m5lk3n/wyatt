@@ -37,6 +37,7 @@ install:
 	flutter pub add timezone
 	flutter pub add logging
 	flutter pub add path_provider
+	flutter pub add confirm_dialog
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean
@@ -97,7 +98,7 @@ build-android-debug:
 	flutter clean
 	flutter build apk --debug --dart-define=URL_KEY=http://192.168.1.115/note/wyatt
 
-## all-android: start from scratch, install all dependencies, build the apk in release mode, and install on device
+## all-android: (re-)start from scratch, install all dependencies, build the apk in release mode, and install on device
 .PHONY: all-android
 all-android: clean update upgrade
 	flutter build apk --release # --obfuscate --split-debug-info=build/app/outputs/flutter-apk/app-armeabi-v7a-release-obfuscation ?

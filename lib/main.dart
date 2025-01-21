@@ -89,8 +89,9 @@ void initWorkmanager() async {
   Workmanager().registerPeriodicTask(
     Common.packageName,
     Common.appName,
-    initialDelay: Duration(seconds: 5),
-    frequency: Duration(minutes: 15), // min. 15min as per OS
+    initialDelay: Duration(
+        seconds: 5), // more or less random to give some time to initialize
+    frequency: Duration(minutes: Default.notificationFrequencyInMins),
   );
   tz.initializeTimeZones();
 

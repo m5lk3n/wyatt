@@ -109,6 +109,7 @@ abstract class Screen {
 
 abstract class Default {
   static const int notificationDistance = 500;
+  static const int notificationFrequencyInMins = 15; // min. 15min as per OS
   static const String urlKey = '${Url.wyatt}#key';
   static const String urlWhy = '${Url.wyatt}#why';
   static const String urlPermissions = '${Url.wyatt}#permissions';

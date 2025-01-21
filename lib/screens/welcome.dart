@@ -1,3 +1,4 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
 import 'package:wyatt/screens/settings.dart';
@@ -77,16 +78,25 @@ class WelcomeScreen extends StatelessWidget {
                               backgroundColor:
                                   Theme.of(context).colorScheme.inversePrimary,
                             ),
-                            onPressed: () {
-                              Navigator.push(
+                            onPressed: () async {
+                              if (await confirm(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => SettingsScreen(
-                                    title: Screen.setup,
-                                    inSetupMode: true,
+                                title: const Text('Important'),
+                                content: const Text(
+                                    'Next, Wyatt needs permission to access your location and to send you notifications.'), // TODO: add link
+                                textOK: const Text('Continue'),
+                                textCancel: const Text('Cancel'),
+                              )) {
+                                Navigator.push(
+                                  context, // TODO/FIXME
+                                  MaterialPageRoute(
+                                    builder: (context) => SettingsScreen(
+                                      title: Screen.setup,
+                                      inSetupMode: true,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
                             },
                             autofocus: true,
                             child: Text('Let\'s get started',

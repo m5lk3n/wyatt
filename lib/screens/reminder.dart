@@ -284,7 +284,9 @@ class _ReminderScreenState extends ConsumerState<ReminderScreen> {
           reminder.id = widget.reminder!.id;
           ref.read(remindersNotifierProvider.notifier).update(reminder);
         }
-        scaffold.showSnackBar(SnackBar(content: Text('Reminder $action.')));
+        scaffold.showSnackBar(SnackBar(
+            content: Text(
+                'Reminder $action. Please allow ~${Default.notificationFrequencyInMins} minutes for a notification to appear.')));
 
         return true;
       }

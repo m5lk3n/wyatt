@@ -1,6 +1,7 @@
 import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:wyatt/common.dart';
+import 'package:wyatt/helper.dart';
 import 'package:wyatt/screens/settings.dart';
 import 'package:wyatt/widgets/common.dart';
 
@@ -82,13 +83,37 @@ class WelcomeScreen extends StatelessWidget {
                               if (await confirm(
                                 context,
                                 title: const Text('Important'),
-                                content: const Text(
-                                    'Next, Wyatt needs permission to access your location and to send you notifications.'), // TODO: add link
+                                content: Column(
+                                  children: [
+                                    const Text(
+                                        'Wyatt needs permission to access your location and to send you notifications.\n\nPlease grant these permissions if asked next.'),
+                                    SizedBox(height: Style.space),
+                                    InkWell(
+                                        child: Text(
+                                          'Learn about the how and why.',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  decorationColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .primary,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary),
+                                        ),
+                                        onTap: () => browseTo(Url.permissions)),
+                                  ],
+                                ),
                                 textOK: const Text('Continue'),
                                 textCancel: const Text('Cancel'),
                               )) {
                                 Navigator.push(
-                                  context, // TODO/FIXME
+                                  // ignore: use_build_context_synchronously
+                                  context,
                                   MaterialPageRoute(
                                     builder: (context) => SettingsScreen(
                                       title: Screen.setup,

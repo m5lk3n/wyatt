@@ -112,7 +112,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 ## Doing
 
-- [ ] iOS flavor
+- [ ] iOS flavor (v0.2.0)
 
 ## To-do
 

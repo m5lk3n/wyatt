@@ -108,6 +108,7 @@ all-android: clean update upgrade
 .PHONY: build-ios-debug
 build-ios-debug:
 	flutter clean
+	flutter pub get
 	cd ios && pod install
 	flutter build ios --debug --dart-define=URL_KEY=http://192.168.1.115/note/wyatt
 

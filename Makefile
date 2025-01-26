@@ -116,5 +116,6 @@ build-ios-debug:
 #.PHONY: build-ios-release
 #build-ios-release:
 #	flutter clean
+#	flutter pub get
 #	cd ios && pod install
 #	flutter build ios --release --obfuscate?

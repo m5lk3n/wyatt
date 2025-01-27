@@ -15,18 +15,19 @@ String _getLegalese() {
 void showWyattAboutDialog(BuildContext context) {
   final aboutDialog = AboutDialog(
     applicationName: Common.appName,
-    applicationVersion: "v${Common.appVersion}",
+    applicationVersion: "v${Common.appVersion} (Build #${Common.buildNumber})",
     applicationIcon: AppIconSmall(),
     applicationLegalese: _getLegalese(),
     children: [
       Logo(),
       Text(
+        textAlign: TextAlign.center,
         '\nWhen You Are There, Then...',
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSurface,
             fontStyle: FontStyle.italic),
       ),
-      Row(
+      Wrap(
         children: [
           TextButton(
               onPressed: () => browseTo(Url.disclaimer),

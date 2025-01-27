@@ -1,8 +1,16 @@
+DEFAULT_DEV_URL = "http://192.168.1.115/note/wyatt"
+DEV_URL ?= ${DEFAULT_DEV_URL} # can be overridden by ENV param 
+
 ## help: print this help message
 .PHONY: help
 help:
-	@echo 'Usage:'
+	@echo 'usage: make <target>'
+	@echo
+	@echo '  where <target> is one of the following:'
+	@echo
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /'
+	@echo
+	@echo "hint: use 'export DEV_URL=my.dev.url' to overwrite the default '${DEFAULT_DEV_URL}'"
 
 ## install: add all required dependencies
 .PHONY: install
@@ -60,10 +68,10 @@ upgrade:
 test:
 	flutter test
 
-## run: execute the application (in release mode but with debug URLs)
+## run: execute the application (in release mode but with dev URL)
 .PHONY: run
 run:
-	flutter run --release --dart-define=URL_KEY=http://192.168.1.115/note/wyatt
+	flutter run --release --dart-define=URL_KEY=${DEV_URL}
 
 ## icons: regenerate application launcher icons (from assets/icon/icon.png)
 .PHONY: icons
@@ -94,9 +102,8 @@ bump-tag-lttl_dev: bump tag lttl_dev
 
 ## build-android-debug: build the apk in debug mode
 .PHONY: build-android-debug
-build-android-debug:
-	flutter clean
-	flutter build apk --debug --dart-define=URL_KEY=http://192.168.1.115/note/wyatt
+build-android-debug: clean
+	flutter build apk --debug --dart-define=URL_KEY=${DEV_URL}
 
 ## all-android: (re-)start from scratch, install all dependencies, build the apk in release mode, and install on device
 .PHONY: all-android
@@ -106,16 +113,13 @@ all-android: clean update upgrade
 
 ## build-ios-debug: regenerate dependencies for iOS and build the application in debug mode
 .PHONY: build-ios-debug
-build-ios-debug:
-	flutter clean
-	flutter pub get
+build-ios-debug: clean
 	cd ios && pod install
-	flutter build ios --debug --dart-define=URL_KEY=http://192.168.1.115/note/wyatt
+	flutter build ios --debug --dart-define=URL_KEY=${DEV_URL}
 
-# TODO: build-ios-release: regenerate dependencies for iOS and build the application in release mode
-#.PHONY: build-ios-release
-#build-ios-release:
-#	flutter clean
-#	flutter pub get
+# TODO: all-ios: regenerate dependencies for iOS and build the application in release mode
+#.PHONY: all-ios
+#all-ios-release: clean update upgrade
 #	cd ios && pod install
 #	flutter build ios --release --obfuscate?
+#   flutter install

@@ -60,6 +60,7 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
             ),
             const SizedBox(height: Style.space / 2),
             Text(
+              textAlign: TextAlign.center,
               '(or tap the light bulb below for inspiration)',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,

@@ -110,10 +110,21 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Hint on successful reminder save about 15mins offset to (next) notification
 
+- [x] fix overflow in about dialog (iPhone 6s Plus)
+
 ## Doing
 
+- [ ] add delete key field
 - [ ] iOS flavor (v0.2.0)
+  - [ ] fix text center alignment on iOS
   - [ ] fix iOS config
+  - [ ] update documentation under wyatt.lttl.dev#permissions
+  - [ ] fix start-up
+    ```
+    [ERROR:flutter/runtime/dart_vm_initializer.cc(40)] Unhandled Exception: Invalid argument(s): iOS settings must be set when targeting iOS platform.
+    FlutterLocalNotificationsPlugin.initialize (package:flutter_local_notifications/src/flutter_local_notifications_plugin.dart:134:9)
+    NotificationService.initializePlatformNotifications (package:wyatt/notifications.dart:25:31)
+    ```
 
 ## To-do
 

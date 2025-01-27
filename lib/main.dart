@@ -73,6 +73,7 @@ Future<void> initApp() async {
   Common.appName = packageInfo.appName.capitalize();
   Common.appVersion = packageInfo.version;
   Common.packageName = packageInfo.packageName;
+  Common.buildNumber = packageInfo.buildNumber;
 
   initWorkmanager();
   initLogging();

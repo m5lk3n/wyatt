@@ -29,21 +29,6 @@ Option 2: Browse to https://github.com/m5lk3n/wyatt/blob/main/docs/wireframe.pdf
 </details>
 
 <details>
-<summary>... run on Xcode</summary>
-
-```
-cd ios
-pod install
-```
-
-Open `ios` folder in Xcode.
-
-Plug in test iPhone.
-
-In Xcode, open `Runner.xcodeproj`, pick the connected iPhone as runner, and hit the play button to build the project.
-</details>
-
-<details>
 <summary>... (re-)generate icons</summary>
 
 Run `make icons`* from this repo's root folder.
@@ -60,5 +45,28 @@ Corrupt data
 The data provided does not follow the specification.
 ExifLoader: The data supplied does not seem to contain EXIF data.
 ```
+
+</details>
+
+## iOS
+
+<details>
+<summary>... run on Xcode</summary>
+
+```
+cd ios
+pod install
+```
+
+Open `ios` folder in Xcode.
+
+Plug in test iPhone.
+
+In Xcode, open `Runner.xcodeproj`, pick the connected iPhone as runner, and hit the play button to build the project.
+</details>
+
+<details>
+<summary>... trust a developer</summary>
+"Tap Settings > General > VPN & Device Management. In the ~~Enterprise~~Developer App section, tap the name of the app developer. Tap Trust '[developer name]' to continue." (derived from [this](https://support.apple.com/en-us/118254) source)
 
 </details>

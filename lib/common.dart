@@ -5,6 +5,7 @@ abstract class Common {
   static late String appName;
   static late String appVersion;
   static late String packageName;
+  static late String buildNumber;
 
   static const int appStartYear = 2024;
 

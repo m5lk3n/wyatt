@@ -48,6 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
+                              textAlign: TextAlign.center,
                               'Welcome to Wyatt, a location- and time-based reminder app.',
                               style: Theme.of(context)
                                   .textTheme

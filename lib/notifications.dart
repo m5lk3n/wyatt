@@ -16,10 +16,13 @@ class NotificationService {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(); // TODO: check defaults ok? what about categories (https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/lib/main.dart#L91)?
+
     const InitializationSettings initializationSettings =
         InitializationSettings(
       android: initializationSettingsAndroid,
-      // TODO: iOS: initializationSettingsIOS
+      iOS: initializationSettingsIOS,
     );
 
     await _localNotifications.initialize(initializationSettings,
@@ -42,8 +45,18 @@ class NotificationService {
   }
 
   Future<NotificationDetails> _notificationDetails() async {
-    AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
+    final details = await _localNotifications.getNotificationAppLaunchDetails();
+    if (details != null && details.didNotificationLaunchApp) {}
+    NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: _createAndroidNotificationDetails(),
+      iOS: _createDarwinNotificationDetails(),
+    );
+
+    return platformChannelSpecifics;
+  }
+
+  AndroidNotificationDetails _createAndroidNotificationDetails() {
+    return AndroidNotificationDetails(
       'dev.lttl.wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'packageName' has not been initialized.
       'Wyatt', // avoids: Unhandled Exception: LateInitializationError: Field 'appName' has not been initialized.
       groupKey: 'dev.lttl.wyatt', // groups alerts in the notification tray
@@ -61,14 +74,12 @@ class NotificationService {
       color: Color((Random().nextDouble() * 0xFFFFFF)
           .toInt()), // let's make each notification a different color to make them easier to distinguish
     );
+  }
 
-    final details = await _localNotifications.getNotificationAppLaunchDetails();
-    if (details != null && details.didNotificationLaunchApp) {}
-    NotificationDetails platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
+  DarwinNotificationDetails _createDarwinNotificationDetails() {
+    return DarwinNotificationDetails(
+      categoryIdentifier: 'plainCategory', // TODO
     );
-
-    return platformChannelSpecifics;
   }
 
   Future<void> showLocalNotification({

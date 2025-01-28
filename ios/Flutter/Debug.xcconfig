@@ -1,2 +1,4 @@
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "Generated.xcconfig"
+// the following dummy include silences a CocoaPods warning:
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"

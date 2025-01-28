@@ -257,15 +257,33 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   decoration: InputDecoration(
                       label: const Text("Key *"),
                       hintText: "Enter your key here",
-                      suffixIcon: IconButton(
-                          icon: Icon(_isObscured
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _isObscured = !_isObscured;
-                            });
-                          })),
+                      suffixIcon: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            visualDensity: VisualDensity.compact,
+                            constraints: BoxConstraints(),
+                            icon: Icon(Icons.clear),
+                            onPressed: () {
+                              setState(() {
+                                _keyController.clear();
+                              });
+                            },
+                          ),
+                          IconButton(
+                              visualDensity: VisualDensity.compact,
+                              constraints: BoxConstraints(),
+                              icon: Icon(_isObscured
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: () {
+                                setState(() {
+                                  _isObscured = !_isObscured;
+                                });
+                              }),
+                        ],
+                      )),
                   maxLength: 40,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,

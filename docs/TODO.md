@@ -112,9 +112,10 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] fix overflow in about dialog (iPhone 6s Plus)
 
+- [x] add clear key field option
+
 ## Doing
 
-- [ ] add delete key field
 - [ ] iOS flavor (v0.2.0)
   - [ ] fix text center alignment on iOS
   - [ ] fix iOS config

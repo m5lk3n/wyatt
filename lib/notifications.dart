@@ -17,7 +17,7 @@ class NotificationService {
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const DarwinInitializationSettings initializationSettingsIOS =
-        DarwinInitializationSettings(); // TODO: check defaults ok? what about categories (https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/lib/main.dart#L91)?
+        DarwinInitializationSettings();
 
     const InitializationSettings initializationSettings =
         InitializationSettings(
@@ -78,7 +78,9 @@ class NotificationService {
 
   DarwinNotificationDetails _createDarwinNotificationDetails() {
     return DarwinNotificationDetails(
-      categoryIdentifier: 'plainCategory', // TODO
+      threadIdentifier: 'dev.lttl.wyatt', // group notifications together
+      categoryIdentifier:
+          'plainCategory', // see https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/lib/main.dart#L62
     );
   }
 

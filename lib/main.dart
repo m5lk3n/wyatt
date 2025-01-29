@@ -45,10 +45,10 @@ void callbackDispatcher() {
         log.debug('message is empty, skipping notification');
       } else {
         await NotificationService().showLocalNotification(
-            id: 0,
+            id: 0, // same ID updates/overwrites previous notification, intended
             title: "Howdy!",
             body: "Wyatt reminds you: $message",
-            payload: "");
+            payload: "Wyatt reminder: $message");
       }
     } catch (e) {
       log.error(
@@ -91,8 +91,11 @@ void initWorkmanager() async {
     Common.packageName,
     Common.appName,
     initialDelay: Duration(
-        seconds: 5), // more or less random to give some time to initialize
-    frequency: Duration(minutes: Default.notificationFrequencyInMins),
+        seconds:
+            5), // give it some time to initialize, matches iOS default ("earliestBeginInSeconds:5.0") - see also AppDelegate.swift WorkmanagerPlugin.registerPeriodicTask
+    frequency: Duration(
+        minutes: Default
+            .notificationFrequencyInMins), // see also/must match AppDelegate.swift WorkmanagerPlugin.registerPeriodicTask
   );
   tz.initializeTimeZones();
 

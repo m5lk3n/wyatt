@@ -1,5 +1,12 @@
 // !$*UTF8*$!
 {
+	/* https://github.com/fluttercommunity/flutter_workmanager/blob/main/IOS_SETUP.md#enable-bgtaskscheduler */
+	SystemCapabilities = {
+	com.apple.BackgroundModes = {
+		enabled = 1;
+		};
+	};
+
 	archiveVersion = 1;
 	classes = {
 	};

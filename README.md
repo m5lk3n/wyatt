@@ -41,6 +41,7 @@ Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.de
 
 - If you plan to be notified for a bigger place, like a mall, give it a good radius. Not a good example is a distance of 100 m from the center of the mall as this probably doesn't trigger a notification around the mall.
 - There should be a minimum of ~2h for a notification start and end date/time window, esp. when traveling. This is due to the (OS given) 15 minutes interval between background activities ([Background service](https://pub.dev/packages/flutter_background_service): *iOS... cannot be faster than 15 minutes and only alive about 15-30 seconds.*)
+- [This warning](https://github.com/fluttercommunity/flutter_workmanager/blob/main/IOS_SETUP.md#enable-bgtaskscheduler) outlines scheduling limitations (on iOS).
 - Reliable determination of a location only seems to work on physical devices that are online and connected to the cell phone network, i.e., with a cell phone plan which includes data; a hot-spotted Wifi connection is not enough (as tested in the field) - **If you see limited connectivity from cell phone provider as in [this screenshot](device_screens/screenshots/no-notifications.png), you will not get notified at all even when you should be!**
 - With a limited Wi-Fi connection, notification is delayed!
 - Only portrait mode is supported for the time being.

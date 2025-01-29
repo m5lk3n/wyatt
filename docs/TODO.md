@@ -120,15 +120,6 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
   - [ ] fix text center alignment on iOS
   - [ ] fix iOS config
   - [ ] update documentation under wyatt.lttl.dev#permissions
-  - [ ] fix start-up
-    ```
-    [ERROR:flutter/runtime/dart_vm_initializer.cc(40)] Unhandled Exception: PlatformException(unhandledMethod("registerPeriodicTask") error, Unhandled method registerPeriodicTask, null, null)
-    #0      StandardMethodCodec.decodeEnvelope (package:flutter/src/services/message_codecs.dart:646:7)
-    #1      MethodChannel._invokeMethod (package:flutter/src/services/platform_channel.dart:334:18)
-    <asynchronous suspension>
-    #2      Workmanager.registerPeriodicTask (package:workmanager/src/workmanager.dart:228:7)
-    <asynchronous suspension>
-    ```
 
 ## To-do
 

@@ -38,7 +38,7 @@ install:
 	flutter pub add permission_handler
 	flutter pub add internet_connection_checker_plus
 	flutter pub add haversine_distance
-	flutter pub add workmanager
+# TODO/FIXME (pending https://github.com/fluttercommunity/flutter_workmanager/issues/551): flutter pub add workmanager
 	flutter pub add shared_preferences
 	flutter pub add flutter_local_notifications
 	flutter pub add geolocator

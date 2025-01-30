@@ -24,8 +24,7 @@ class AddressLoader extends StatefulWidget {
 }
 
 class _AddressLoaderState extends State<AddressLoader> {
-  final Location location =
-      Location(); // location data retriever // TODO: shows several deprecated warnings when compiled. usage? update?
+  final Location location = Location(); // location data retriever
   final _addressController = TextEditingController();
   LocationData? _currentLocationData;
   PlatformException? _error;

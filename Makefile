@@ -34,7 +34,7 @@ install:
 	flutter pub add geocoding
 	flutter pub add google_map_dynamic_key
 	flutter pub add flutter_datetime_picker_plus
-	flutter pub add intl
+#	flutter pub add intl
 	flutter pub add permission_handler
 	flutter pub add internet_connection_checker_plus
 	flutter pub add haversine_distance
@@ -68,7 +68,12 @@ upgrade:
 test:
 	flutter test
 
-## run: execute the application (in release mode but with dev URL)
+## run-debug: execute the application in debug mode but with dev URL
+.PHONY: run-debug
+run-debug:
+	flutter run --debug --dart-define=URL_KEY=${DEV_URL}
+
+## run: execute the application in release mode but with dev URL
 .PHONY: run
 run:
 	flutter run --release --dart-define=URL_KEY=${DEV_URL}

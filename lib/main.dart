@@ -75,8 +75,8 @@ Future<void> initApp() async {
   Common.packageName = packageInfo.packageName;
   Common.buildNumber = packageInfo.buildNumber;
 
-  initWorkmanager();
   initLogging();
+  initWorkmanager();
   initPersistentLocalStorage();
 }
 

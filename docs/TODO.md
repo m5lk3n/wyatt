@@ -121,9 +121,11 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 - [ ] iOS flavor (v0.2.0)
   - [ ] Fix iOS config
   - [ ] Check submit button alignment
-  - [ ] Update documentation under wyatt.lttl.dev#permissions:
-    e.g. https://pub.dev/packages/permission_handler:
-    *The locationAlways permission can not be requested directly, the user has to request the locationWhenInUse permission first. Accepting this permission by clicking on the 'Allow While Using App' gives the user the possibility to request the locationAlways permission. This will then bring up another permission popup asking you to Keep Only While Using or to Change To Always Allow.*
+  - [ ] Update documentation
+        [ ] under "on iOS" in README
+        [ ] under wyatt.lttl.dev#permissions:
+        e.g., https://pub.dev/packages/permission_handler:
+        *The locationAlways permission can not be requested directly, the user has to request the locationWhenInUse permission first. Accepting this permission by clicking on the 'Allow While Using App' gives the user the possibility to request the locationAlways permission. This will then bring up another permission popup asking you to Keep Only While Using or to Change To Always Allow.*
 - [ ] Document connectivity to "Default Uris" (see https://pub.dev/packages/internet_connection_checker_plus)
 
 ## To-do

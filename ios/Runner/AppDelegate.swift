@@ -29,7 +29,7 @@ import GoogleMaps
     }
 
     // https://pub.dev/packages/google_maps_flutter#ios
-    GMSServices.provideAPIKey("WillBeReplacedAtRuntime")
+    // do NOT provide static key here, conflicts with google_map_dynamic_key: GMSServices.provideAPIKey("WillBeReplacedAtRuntime")
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)

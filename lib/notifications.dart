@@ -90,6 +90,9 @@ class NotificationService {
     required String body,
     required String payload,
   }) async {
+    dev.log('id: $id, title: $title, body: $body, payload: $payload',
+        name: 'showLocalNotification');
+
     final platformChannelSpecifics = await _notificationDetails();
     await _localNotifications.show(
       id,

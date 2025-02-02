@@ -2,7 +2,7 @@
 
 A location- and time-based reminder app for Android and iOS.
 
-![](assets/icon/icon-small.png)
+![](./wyatt.png)
 
 *W*hen *Y*ou *A*re *T*here, *T*hen ...
 

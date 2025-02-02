@@ -110,16 +110,21 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [x] Hint on successful reminder save about 15mins offset to (next) notification
 
-- [x] fix overflow in about dialog (iPhone 6s Plus)
+- [x] Fix overflow in about dialog (iPhone 6s Plus)
 
-- [x] add clear key field option
+- [x] Add clear key field option
 
+- [x] Fix text center alignment on iOS
+  
 ## Doing
 
 - [ ] iOS flavor (v0.2.0)
-  - [ ] fix text center alignment on iOS
-  - [ ] fix iOS config
-  - [ ] update documentation under wyatt.lttl.dev#permissions
+  - [ ] Fix iOS config
+  - [ ] Check submit button alignment
+  - [ ] Update documentation under wyatt.lttl.dev#permissions:
+    e.g. https://pub.dev/packages/permission_handler:
+    *The locationAlways permission can not be requested directly, the user has to request the locationWhenInUse permission first. Accepting this permission by clicking on the 'Allow While Using App' gives the user the possibility to request the locationAlways permission. This will then bring up another permission popup asking you to Keep Only While Using or to Change To Always Allow.*
+- [ ] Document connectivity to "Default Uris" (see https://pub.dev/packages/internet_connection_checker_plus)
 
 ## To-do
 

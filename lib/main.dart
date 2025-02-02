@@ -124,7 +124,6 @@ class WyattApp extends ConsumerWidget {
     final router = AppRoutes().createRouter(ref);
 
     return MaterialApp.router(
-        // TODO: CupertinoApp.router?
         title: Common.appName,
         theme: Style.theme,
         routerDelegate: router.routerDelegate,

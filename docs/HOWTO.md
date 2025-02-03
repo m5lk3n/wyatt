@@ -64,9 +64,3 @@ Plug in test iPhone.
 
 In Xcode, open `Runner.xcodeproj`, pick the connected iPhone as runner, and hit the play button to build the project.
 </details>
-
-<details>
-<summary>... trust a developer</summary>
-"Tap Settings > General > VPN & Device Management. In the ~~Enterprise~~Developer App section, tap the name of the app developer. Tap Trust '[developer name]' to continue." (derived from [this](https://support.apple.com/en-us/118254) source)
-
-</details>

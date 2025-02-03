@@ -122,9 +122,14 @@ build-ios-debug: clean
 	cd ios && pod install
 	flutter build ios --debug --dart-define=URL_KEY=${DEV_URL}
 
-# TODO: all-ios: regenerate dependencies for iOS and build the application in release mode
-#.PHONY: all-ios
-#all-ios-release: clean update upgrade
-#	cd ios && pod install
-#	flutter build ios --release --obfuscate?
-#   flutter install
+## all-ios-debug: same as build-ios-debug plus start the application on the device
+.PHONY: all-ios-debug
+all-ios-debug: build-ios-debug
+	flutter run
+
+# all-ios: regenerate dependencies for iOS, build the application in release mode and install on the device
+.PHONY: all-ios
+all-ios: clean update upgrade
+	cd ios && pod install
+	flutter build ios --release
+	flutter install

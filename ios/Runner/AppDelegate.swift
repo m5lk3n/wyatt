@@ -10,28 +10,42 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    // see 
+    // https://pub.dev/packages/flutter_local_notifications#-ios-setup
+    // https://github.com/fluttercommunity/flutter_workmanager/blob/main/example/ios/Runner/AppDelegate.swift
+
+    GeneratedPluginRegistrant.register(with: self)
+    UNUserNotificationCenter.current().delegate = self
+
+    WorkmanagerPlugin.setPluginRegistrantCallback { registry in
+      GeneratedPluginRegistrant.register(with: registry)
+    }
+
     // https://github.com/fluttercommunity/flutter_workmanager/blob/main/IOS_SETUP.md#enable-bgtaskscheduler
     // the following identifiers must match BGTaskSchedulerPermittedIdentifiers in Info.plist!
     WorkmanagerPlugin.registerBGProcessingTask(withIdentifier: "dev.lttl.wyatt.taskid")
     WorkmanagerPlugin.registerPeriodicTask(withIdentifier: "dev.lttl.wyatt", frequency: NSNumber(value: 15 * 60)) // initial delay is 5s by default
-    // https://stackoverflow.com/questions/73244206/flutterobservatorypublisher-error-on-ios-version-of-flutter-app
-    UIApplication.shared.setMinimumBackgroundFetchInterval(TimeInterval(15 * 60)) // 15 minutes
-    
-    // https://pub.dev/packages/flutter_local_notifications#-ios-setup
 
+    // https://pub.dev/packages/flutter_local_notifications#-ios-setup
+    // UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     // This is required to make any communication available in the action isolate.
     FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
         GeneratedPluginRegistrant.register(with: registry)
     }
 
-    if #available(iOS 10.0, *) {
-      UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
-    }
-
     // https://pub.dev/packages/google_maps_flutter#ios
     // do NOT provide static key here, conflicts with google_map_dynamic_key: GMSServices.provideAPIKey("WillBeReplacedAtRuntime")
 
-    GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+
+  // https://github.com/fluttercommunity/flutter_workmanager/blob/main/example/ios/Runner/AppDelegate.swift
+/*
+  override func userNotificationCenter(
+      _ center: UNUserNotificationCenter,
+      willPresent notification: UNNotification,
+      withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert) // shows banner even if app is in foreground
+  }
+*/
 }

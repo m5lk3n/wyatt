@@ -50,6 +50,8 @@ Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.de
 ## Known Bugs
 
 - Reordering of reminders is not yet persistent.
+- "Reset" on "Add Reminder" / "Edit Reminder" doesn't reset locaton and date fields.
+- The buttons in the permissions hint dialog ("Let's get started") are (strictly speaking) swapped - as per [Styleguide](docs/STYLEGUIDE.md) the affirmative button should be on the left while in this confirmation it is on the right. This is due to the used [3rd party package](https://pub.dev/packages/confirm_dialog) and would require an implementation change.
 
 ## Repo Structure
 
@@ -88,7 +90,12 @@ To do that, I use either my 2023 Mac mini M2 (8 GB) or my 2020 MacBook Pro M1 (1
 
 ### On iOS
 
-:construction_worker:
+**Important: You need an Apple developer identity with your own "development team" set up in Xcode to sign for iOS device deployment.**
+
+- Plug in your iPhone to your Mac.
+- Run `make all-ios`.
+- Trust the developer: "Tap Settings > General > VPN & Device Management. In the ~~Enterprise~~Developer App section, tap the name of the app developer. Tap Trust '[developer name]' to continue." (derived from [this](https://support.apple.com/en-us/118254) source)
+- Start the Wyatt app on the device.
 
 ## Wireframe
 
@@ -99,6 +106,10 @@ The mockup is [here](docs/wireframe.pdf).
 ## License
 
 This project is licensed under the GNU General Public License v3.0 (GPL-3.0) or later. See the [LICENSE](./LICENSE) file for details.
+
+## Misc.
+
+To check connectivity, the "Default Uris" listed [here](https://github.com/OutdatedGuy/internet_connection_checker_plus?tab=readme-ov-file#default-uris) are pinged. That's due to [this](https://pub.dev/packages/internet_connection_checker_plus) 3rd party package implementation, and where e.g. connections to https://one.one.one.one come from.
 
 ## Acknowledgements
 

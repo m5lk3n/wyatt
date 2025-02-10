@@ -123,3 +123,12 @@ To check connectivity, the "Default Uris" listed [here](https://github.com/Outda
 
 - [HTML5 UP](https://html5up.net/) for [Strongly Typed](https://html5up.net/strongly-typed)
 - [Font Awesome](https://fontawesome.com/) for icons and font
+---
+<p align="center">
+    <img alt="Howdy on Pebble" src="./device_screens/screenshots/pebble-notification.png"/>
+</p>
+
+---
+<p align="center">
+    <a href="https://lttl.dev/"><img alt="lttl.dev logo" src="./assets/images/logo.png" width="33%"/></a>
+</p>

@@ -129,8 +129,9 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 ## To-do
 
 - [ ] Search a location
-- [ ] Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
+- [ ] Add support for recurring schedules
 - [ ] End date notification widget init value should be set to start date (if any)
+- [ ] Add support to set time between notifications (currently hard-coded to 15mins (the minimum))
 - [ ] DRY
 - [ ] Recover from crash (e.g., by user revoking permissions during usage)
   - [ ] [Catcher 2](https://pub.dev/packages/catcher_2)

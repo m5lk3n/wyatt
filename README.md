@@ -125,7 +125,7 @@ To check connectivity, the "Default Uris" listed [here](https://github.com/Outda
 - [Font Awesome](https://fontawesome.com/) for icons and font
 ---
 <p align="center">
-    <img alt="Howdy on Pebble" src="./device_screens/screenshots/pebble-notification.png"/>
+    <a href="https://m5lk3n.medium.com/screenshotting-a-pebble-smartwatch-55a7e95f2f82"><img alt="Howdy on Pebble" src="./device_screens/screenshots/pebble-notification.png"/></a>
 </p>
 
 ---

@@ -81,12 +81,20 @@ class WelcomeScreen extends StatelessWidget {
                                   Theme.of(context).colorScheme.inversePrimary,
                             ),
                             onPressed: () async {
-                              if (await confirm(
+                              if (await wyattConfirm(
                                 context,
-                                title: const Text('Important'),
+                                title: 'Important',
                                 content: Column(
                                   children: [
-                                    const Text(
+                                    Text(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface,
+                                            ),
                                         'Wyatt needs permission to access your location and to send you notifications.\n\nPlease grant these permissions if asked next.'),
                                     SizedBox(height: Style.space),
                                     InkWell(
@@ -109,8 +117,7 @@ class WelcomeScreen extends StatelessWidget {
                                         onTap: () => browseTo(Url.permissions)),
                                   ],
                                 ),
-                                textOK: const Text('Continue'),
-                                textCancel: const Text('Cancel'),
+                                submitButtonLabel: 'Continue',
                               )) {
                                 Navigator.push(
                                   // ignore: use_build_context_synchronously

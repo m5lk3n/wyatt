@@ -9,7 +9,7 @@ String _getLegalese() {
   final prefix =
       (Common.appStartYear == currentYear) ? '' : '${Common.appStartYear}-';
 
-  return /* TODO: add (c)? '\u00a9 ' */ '$prefix$currentYear by';
+  return '\u00a9 $prefix$currentYear by';
 }
 
 void showWyattAboutDialog(BuildContext context) {
@@ -56,6 +56,42 @@ void showWyattAboutDialog(BuildContext context) {
           child: aboutDialog,
         );
       });
+}
+
+// adapted from flutter/material.dart's confirm() method
+Future<bool> wyattConfirm(
+  BuildContext context, {
+  required String title,
+  required Widget content,
+  String? submitButtonLabel,
+}) async {
+  final bool? isConfirm = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext ctx) {
+        return AlertDialog(
+          backgroundColor:
+              Theme.of(context).colorScheme.surfaceContainerHighest,
+          title: Text(
+            title,
+            style: Style.getDialogTitleStyle(context),
+          ),
+          content: SingleChildScrollView(
+            child: content,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(submitButtonLabel ??
+                  MaterialLocalizations.of(context).okButtonLabel),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+            TextButton(
+              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+          ],
+        );
+      });
+  return isConfirm ?? false;
 }
 
 Widget createBackground(context) {

@@ -45,7 +45,6 @@ install:
 	flutter pub add timezone
 	flutter pub add logging
 	flutter pub add path_provider
-	flutter pub add confirm_dialog
 
 ## clean: remove all dependencies and install them again
 .PHONY: clean
@@ -114,7 +113,7 @@ build-android-debug: clean
 .PHONY: all-android
 all-android: clean update upgrade
 	flutter build apk --release # --obfuscate --split-debug-info=build/app/outputs/flutter-apk/app-armeabi-v7a-release-obfuscation ?
-	flutter install
+	@echo "Installing will delete existing app data. OK to install? [y/N] " && read ans && if [ $${ans:-'N'} = 'y' ]; then flutter install; fi
 
 ## build-ios-debug: regenerate dependencies for iOS and build the application in debug mode
 .PHONY: build-ios-debug
@@ -132,4 +131,4 @@ all-ios-debug: build-ios-debug
 all-ios: clean update upgrade
 	cd ios && pod install
 	flutter build ios --release
-	flutter install
+	@echo "Installing will delete existing app data. OK to install? [y/N] " && read ans && if [ $${ans:-'N'} = 'y' ]; then flutter install; fi

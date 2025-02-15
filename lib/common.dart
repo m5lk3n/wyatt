@@ -9,7 +9,7 @@ abstract class Common {
 
   static const int appStartYear = 2024;
 
-  static const int magicalWaitTimeInSeconds = 2;
+  static const int magicalWaitTimeInMs = 1500;
 
   // Platform.isIOS doesn't allow overriding in tests
   static bool isIOS(context) =>

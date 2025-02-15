@@ -50,8 +50,7 @@ Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.de
 ## Known Bugs
 
 - Reordering of reminders is not yet persistent.
-- "Reset" on "Add Reminder" / "Edit Reminder" doesn't reset locaton and date fields.
-- The buttons in the permissions hint dialog ("Let's get started") are (strictly speaking) swapped - as per [Styleguide](docs/STYLEGUIDE.md) the affirmative button should be on the left while in this confirmation it is on the right. This is due to the used [3rd party package](https://pub.dev/packages/confirm_dialog) and would require an implementation change.
+- "Reset" on "Add Reminder" / "Edit Reminder" doesn't reset location and date fields.
 
 ## Repo Structure
 

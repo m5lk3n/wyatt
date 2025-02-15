@@ -151,34 +151,28 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
               return await showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return Theme(
-                    data: Theme.of(context)
-                        .copyWith(dialogBackgroundColor: Style.seedColor),
-                    child: AlertDialog(
-                      title: Text(
-                        'Confirmation needed',
-                        style: Style.getDialogTitleStyle(context),
-                      ),
-                      content: Text(
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                          'Are you sure to delete this reminder?'),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(true);
-                            },
-                            child: const Text('Delete')),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: const Text('Cancel'),
-                        ),
-                      ],
+                  return AlertDialog(
+                    // TODO: consolidate with wyattConfirm
+                    title: Text(
+                      'Confirmation needed',
+                      style: Style.getDialogTitleStyle(context),
                     ),
+                    content: Text(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                        'Are you sure to delete this reminder?'),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                          child: const Text('Delete')),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text('Cancel'),
+                      ),
+                    ],
                   );
                 },
               );

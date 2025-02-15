@@ -4,7 +4,7 @@ homepage: https://wyatt.lttl.dev
 repository: https://github.com/m5lk3n/wyatt
 publish_to: 'none'
 
-version: 0.2.0
+version: 0.2.1
 
 environment:
   sdk: ^3.5.3
@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  cupertino_icons: ^1.0.8 # silence warning for Flutter > 3.27
   google_fonts: ^6.2.1
   url_launcher: ^6.3.1
   flutter_secure_storage: ^9.2.4
@@ -35,7 +36,9 @@ dependencies:
   workmanager:
     git:
       url: https://github.com/fluttercommunity/flutter_workmanager.git
-      ref: b783000
+      path: workmanager
+      ref: main # main <= Flutter 3.27 > https://github.com/fluttercommunity/flutter_workmanager/issues/586
+      # main is de facto latest which is an anti-pattern, TODO/FIXME when workmanager is released
   shared_preferences: ^2.3.5
   flutter_local_notifications: ^18.0.1
   geolocator: ^13.0.2

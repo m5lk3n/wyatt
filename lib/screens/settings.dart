@@ -431,38 +431,35 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return Theme(
-            data: Theme.of(context)
-                .copyWith(dialogBackgroundColor: Style.seedColor),
-            child: AlertDialog(
-              title: Text(
-                'Confirmation needed',
-                style: Style.getDialogTitleStyle(context),
-              ),
-              content: Text(
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                  'Are you sure to reset the application?\n\nThis will set all settings back to their defaults and remove all data.\n\nThis action cannot be undone.\n\nAlso, the application will restart (reopen on iOS).'),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      _reset();
-                      Restart.restartApp(
-                        // customize restart notification message for iOS:
-                        notificationTitle: 'Restarting ${Common.appName}',
-                        notificationBody:
-                            'Please tap here to open the app again.',
-                      );
-                    },
-                    child: const Text('Reset')),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Cancel'))
-              ],
+          return AlertDialog(
+            // TODO: consolidate with wyattConfirm
+            title: Text(
+              'Confirmation needed',
+              style: Style.getDialogTitleStyle(context),
             ),
+            content: Text(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                'Are you sure to reset the application?\n\nThis will set all settings back to their defaults and remove all data.\n\nThis action cannot be undone.\n\nAlso, the application will restart (on iOS, you will be notified to reopen).'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    _reset();
+                    Restart.restartApp(
+                      // customize restart notification message for iOS:
+                      notificationTitle: 'Restarting ${Common.appName}',
+                      notificationBody:
+                          'Please tap here to open the app again.',
+                    );
+                  },
+                  child: const Text('Reset')),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cancel'))
+            ],
           );
         });
   }

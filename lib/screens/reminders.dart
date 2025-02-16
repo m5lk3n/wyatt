@@ -76,37 +76,34 @@ class _RemindersScreenState extends ConsumerState<RemindersScreen> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return Theme(
-                data: Theme.of(context)
-                    .copyWith(dialogBackgroundColor: Style.seedColor),
-                child: AlertDialog(
-                  title: Text(
-                    'Inspire me',
-                    style: Style.getDialogTitleStyle(context),
-                  ),
-                  content: Text(
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                      'Are you ok with a sample reminder list?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        log.debug('seeding ${seedReminders.length} reminders',
-                            name: '$runtimeType');
-                        ref
-                            .read(remindersNotifierProvider.notifier)
-                            .addAll(seedReminders);
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Seed'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Cancel'),
-                    ),
-                  ],
+              // TODO: consolidate with wyattConfirm
+              return AlertDialog(
+                title: Text(
+                  'Inspire me',
+                  style: Style.getDialogTitleStyle(context),
                 ),
+                content: Text(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                    'Are you ok with a sample reminder list?'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      log.debug('seeding ${seedReminders.length} reminders',
+                          name: '$runtimeType');
+                      ref
+                          .read(remindersNotifierProvider.notifier)
+                          .addAll(seedReminders);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Seed'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Cancel'),
+                  ),
+                ],
               );
             },
           );

@@ -128,6 +128,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 ## To-do
 
+- [ ] Add an optional URL field 
 - [ ] Search a location
 - [ ] Add support for recurring schedules
 - [ ] End date notification widget init value should be set to start date (if any)

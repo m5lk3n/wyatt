@@ -16,7 +16,7 @@ Below, I use a textual representation of a to-do list where I shift "doing" down
 
 - [ ] Home (default it there are no reminders)
   - [x] Intro text
-    - [ ] (?) Animate text (see `flutter_animate`)
+    - ~~[ ] (?) Animate text (see `flutter_animate`)~~
     - [x] Getting Started button at the bottom
   - [ ] (?) Add help/info button right upper corner
   - [x] Left drawer with

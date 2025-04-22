@@ -57,7 +57,7 @@ Future<String> get _localPath async {
 Future<File> get _localFile async {
   final path = await _localPath;
   final logFile =
-      '$path/wyatt-${kDebugMode ? 'debug' : 'release'}-log.txt'; // don't call it .log, as it's recognized as a bininary file on Android
+      '$path/wyatt-${kDebugMode ? 'debug' : 'release'}-log.txt'; // don't call it .log, as it's recognized as a binary file on Android
 
   dev.log('logging to $logFile', name: 'initLogging');
 

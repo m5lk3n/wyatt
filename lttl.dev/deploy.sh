@@ -7,4 +7,4 @@ if [ ! -f "wyatt/index.html" ]; then
     exit 1
 fi
 
-scp -r wyatt/* root@lttl.dev:/var/www/html/wyatt
+scp -r wyatt/* root@lttl.dev:/usr/share/caddy/wyatt.lttl.dev

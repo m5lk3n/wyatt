@@ -9,7 +9,7 @@ String _getLegalese() {
   final prefix =
       (Common.appStartYear == currentYear) ? '' : '${Common.appStartYear}-';
 
-  return '\u00a9 $prefix$currentYear by';
+  return '\u00a9 $prefix$currentYear by lttl.dev';
 }
 
 void showWyattAboutDialog(BuildContext context) {

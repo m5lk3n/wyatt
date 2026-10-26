@@ -2,7 +2,7 @@
 
 A location- and time-based reminder app for Android and iOS.
 
-![](./wyatt.png)
+![Logo](./wyatt.png)
 
 *W*hen *Y*ou *A*re *T*here, *T*hen ...
 
@@ -18,7 +18,9 @@ Wyatt helps you to remember things like:
 
 Here's how Wyatt looks like:
 
+<!-- markdownlint-disable MD033 -->
 <img alt="Wyatt screenrecording" src="device_screens/screenrecording.gif" width="50%"/>
+<!-- markdownlint-enable MD033 -->
 
 Screenshots can be found [here](device_screens/screenshots/APP.md).
 
@@ -34,8 +36,9 @@ Screenshots can be found [here](device_screens/screenshots/APP.md).
 - [Logging](docs/LOG.md)
 - [Styleguide](docs/STYLEGUIDE.md)
 - [To-do](docs/TODO.md)
+- [wyatt.lttl.dev as PDF](docs/wyatt.lttl.dev.pdf)
 
-Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.dev)
+~~Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.dev)~~
 
 ## Tips / Known Limitations / Known Issues
 
@@ -54,7 +57,7 @@ Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.de
 
 ## Repo Structure
 
-```
+```bash
 .
 ├── .vscode        # Wyatt: app launch configs
 ├── android        # Flutter
@@ -70,9 +73,10 @@ Please also see the accompanying webpage: [wyatt.lttl.dev](https://wyatt.lttl.de
 
 ## Get Started
 
-[Here's why](docs/FAQ.md), at least at this point, Wyatt is not available from an app store. 
+[Here's why](docs/FAQ.md), at least at this point, Wyatt is not available from an app store.
 
 Long story short, in a nutshell, you would need
+
 - to [get a Google Maps API key](https://wyatt.lttl.dev#key),
 - to build the app yourself,
 - to upload the built app to your device.
@@ -120,8 +124,10 @@ To check connectivity, the "Default Uris" listed [here](https://github.com/Outda
 
 ### [wyatt.lttl.dev](https://wyatt.lttl.dev)
 
+<!-- markdownlint-disable MD033 -->
 - [HTML5 UP](https://html5up.net/) for [Strongly Typed](https://html5up.net/strongly-typed)
 - [Font Awesome](https://fontawesome.com/) for icons and font
+
 ---
 <p align="center">
     <a href="https://m5lk3n.medium.com/screenshotting-a-pebble-smartwatch-55a7e95f2f82"><img alt="Howdy on Pebble" src="./device_screens/screenshots/pebble-notification.png"/></a>
